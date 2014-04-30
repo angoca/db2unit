@@ -30,4 +30,5 @@ if %ERRORLEVEL% NEQ 0 (
 :uninstall
  echo Uninstalling db2unit
  db2 -tf %SRC_MAIN_CODE_PATH%\Clean.sql
+ db2 -tf %SRC_MAIN_CODE_PATH%\CleanAdmin.sql
 goto:eof

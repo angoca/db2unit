@@ -25,5 +25,6 @@ if ( ${LastExitCode} -ne 0 ) {
  }
  echo "Uninstalling db2unit"
  db2 -tf ${SRC_MAIN_CODE_PATH}\Clean.sql
+ db2 -tf ${SRC_MAIN_CODE_PATH}\CleanAdmin.sql
 }
 

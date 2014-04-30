@@ -30,6 +30,8 @@ installScript() {
 install() {
  echo "Installing utility"
  [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/Objects.sql
+ [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/Headers.sql
+ [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/Body.sql
 
  echo "Please visit the wiki to learn how to use and configure this utility"
  echo "https://github.com/angoca/db2unit/wiki"
