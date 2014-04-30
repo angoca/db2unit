@@ -1,0 +1,165 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <!-- Copyright (c) 2014-2014 Andres Gomez Casanova (AngocA). -->
+ <!-- All rights reserved. This program and the accompanying materials are 
+  made available under the terms of the Eclipse Public License v1.0 which accompanies 
+  this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html -->
+ <!-- Contributors: -->
+ <!-- Andres Gomez Casanova - initial API and implementation -->
+
+ <modelVersion>4.0.0</modelVersion>
+
+ <!-- The Basics -->
+ <groupId>com.github.angoca</groupId>
+ <artifactId>db2unit</artifactId>
+ <version>1-Alpha-SNAPSHOT</version>
+ <packaging>pom</packaging>
+
+ <!-- Build Settings -->
+ <!-- "Project Build" contains more elements than just the BaseBuild set -->
+ <build>
+  <defaultGoal>clean assembly:single</defaultGoal>
+  <pluginManagement>
+   <plugins>
+
+    <!-- Cleans the target directory. -->
+    <!-- mvn clean -->
+    <plugin>
+     <artifactId>maven-clean-plugin</artifactId>
+     <version>2.5</version>
+     <executions>
+      <execution>
+       <id>auto-clean</id>
+       <phase>initialize</phase>
+       <goals>
+        <goal>clean</goal>
+       </goals>
+      </execution>
+     </executions>
+    </plugin>
+   </plugins>
+  </pluginManagement>
+  <plugins>
+
+   <!-- Packs all files in a tar. -->
+   <!-- mvn assembly:single -->
+   <plugin>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <version>2.4</version>
+    <configuration>
+     <appendAssemblyId>false</appendAssemblyId>
+     <finalName>db2unit</finalName>
+     <descriptors>
+      <descriptor>src/main/assembly/assembly.xml</descriptor>
+     </descriptors>
+    </configuration>
+    <!-- Creates the assembly as part of package -->
+    <executions>
+     <execution>
+      <id>make-assembly</id>
+      <phase>package</phase>
+      <goals>
+       <goal>single</goal>
+      </goals>
+     </execution>
+    </executions>
+   </plugin>
+
+   <!-- Creates the site -->
+   <!-- mvn site -->
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-site-plugin</artifactId>
+    <version>3.3</version>
+    <configuration>
+     <locales>en</locales>
+    </configuration>
+   </plugin>
+
+  </plugins>
+ </build>
+
+ <reporting>
+  <plugins>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-project-info-reports-plugin</artifactId>
+    <version>2.7</version>
+   </plugin>
+  </plugins>
+ </reporting>
+
+ <!-- More Project Information -->
+ <name>db2unit</name>
+ <description>
+  The unit testing framework for DB2.
+  </description>
+ <url>https://github.com/angoca/db2unit</url>
+ <!-- The first year. -->
+ <inceptionYear>2014</inceptionYear>
+ <licenses>
+  <license>
+   <name>Eclipse License v1.0</name>
+   <distribution>repo</distribution>
+   <comments>
+    The Eclipse Public License.
+   </comments>
+   <url>https://www.eclipse.org/org/documents/epl-v10.html</url>
+  </license>
+  <license>
+   <name>FreeBSD Documentation License</name>
+   <distribution>repo</distribution>
+   <comments>
+    This license is for the documentation, that is in the /doc directory and in
+    the Wiki.
+   </comments>
+  </license>
+ </licenses>
+
+ <developers>
+  <developer>
+   <id>angoca</id>
+   <name>Andres Gomez Casanova</name>
+   <email>angoca at yahoo dot com</email>
+   <timezone>-5</timezone>
+   <url>http://angoca.users.sourceforge.net/</url>
+   <roles>
+    <role>Designer</role>
+    <role>Developer</role>
+   </roles>
+   <properties>
+    <picUrl>
+     https://secure.gravatar.com/avatar/6998587ec6de0bab814c70777bcdd2ce.png
+    </picUrl>
+   </properties>
+  </developer>
+ </developers>
+
+ <!-- Environment Settings -->
+ <issueManagement>
+  <system>GitHub</system>
+  <url>https://github.com/angoca/db2unit/issues</url>
+ </issueManagement>
+
+ <scm>
+  <connection>scm:git:ssh://github.com/angoca/db2unit.git</connection>
+  <developerConnection>
+   scm:git:ssh://git@github.com/angoca/db2unit.git
+  </developerConnection>
+  <url>https://github.com/angoca/db2unit</url>
+  <tag>HEAD</tag>
+ </scm>
+
+ <distributionManagement>
+  <repository>
+   <id>internal.repo</id>
+   <name>Temporary Staging Repository</name>
+   <url>file://${project.build.directory}/mvn-repo</url>
+  </repository>
+ </distributionManagement>
+
+ <prerequisites>
+  <maven>3.1.1</maven>
+ </prerequisites>
+</project>
+
