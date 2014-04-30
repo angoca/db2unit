@@ -29,6 +29,7 @@ installScript() {
 
 install() {
  echo "Installing utility"
+ [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/ObjectsAdmin.sql
  [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/Objects.sql
  [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/Headers.sql
  [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/Body.sql
