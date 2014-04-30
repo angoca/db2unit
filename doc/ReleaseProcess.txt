@@ -1,0 +1,44 @@
+This documentation is licensed under the terms of the FreeBSD Documentation
+License.
+
+This is the procedure to do for each release.
+
+There are three sections:
+
+* BEFORE: To prepare the release.
+* PERFORM: Tasks that conform the release.
+* AFTER: Once the release has been done, some extra tasks to prepare the env.
+
+BEFORE
+
+* Run all tests to make sure there are not regressions.
+* To change the version constant in the code (AdminHeader.sql:VERSION):
+https://github.com/angoca/log4db2/blob/master/src/main/sql-pl/AdminHeader.sql
+* Change the version in the documentation (@version) of all source files.
+* Rename the XML schema for the new version if modified.
+* Make sure the schema reflects the version number to release (all files.)
+* Perform last commit and push.
+
+PERFORM
+
+* Execute mvn release:prepare providing a valid TAG (1-RC, 1) and a SNAPSHOT for
+  the next release
+* Once finished, execute mvn release:perform.
+  (If problems, mvn release:rollback)
+* Fill the code release in GitHub (https://github.com/angoca/log4db2/releases)
+* Create a directory in SourceForge with the version to release as name.
+* Execute mvn.
+* Publish the generated files in the target directory, into the just created
+  directory in SourceForge (change the button text) and in GitHub.
+* Delete the current README.txt from SourceForge. Upload the current version
+  of README.txt
+* Fill the ChangeLog page in the wiki with all changes. To review the changes
+  compare the tag (git diff previous-tag current-tag)
+
+AFTER
+
+* Change the current development status in source forge 
+* To change the schema name to the new version is all files.
+* Check that there are not references to the previous release.
+* Commit these changes and publish.
+
