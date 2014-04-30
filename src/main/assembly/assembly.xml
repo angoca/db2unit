@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- Copyright (c) 2014-2014 Andres Gomez Casanova (AngocA). -->
+<!-- All rights reserved. This program and the accompanying materials are 
+ made available under the terms of the Eclipse Public License v1.0 which accompanies 
+ this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html -->
+<!-- Contributors: -->
+<!-- Andres Gomez Casanova - initial API and implementation -->
+
+<assembly
+ xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+ <id>release</id>
+ <formats>
+  <format>zip</format>
+  <format>tar.gz</format>
+  <format>dir</format>
+ </formats>
+ <includeBaseDirectory>true</includeBaseDirectory>
+
+ <fileSets>
+  <!-- License and Readme files -->
+  <fileSet>
+   <directory>.</directory>
+   <includes>
+    <include>README.txt</include>
+    <include>LICENSE.txt</include>
+   </includes>
+   <fileMode>0444</fileMode>
+   <outputDirectory>/</outputDirectory>
+  </fileSet>
+  <!-- SQL PL code -->
+  <fileSet>
+   <directory>src/main/sql-pl</directory>
+   <includes>
+    <include>**/*</include>
+   </includes>
+   <fileMode>0666</fileMode>
+   <outputDirectory>sql-pl</outputDirectory>
+  </fileSet>
+  <!-- Scripts -->
+  <fileSet>
+   <directory>src/main/scripts</directory>
+   <includes>
+    <include>**/init</include>
+    <include>**/install</include>
+    <include>**/reinstall</include>
+    <include>**/uninstall</include>
+   </includes>
+   <fileMode>0777</fileMode>
+   <lineEnding>lf</lineEnding>
+   <outputDirectory>/</outputDirectory>
+  </fileSet>
+  <!-- Scripts -->
+  <fileSet>
+   <directory>src/main/scripts</directory>
+   <includes>
+    <include>**/*.bat</include>
+    <include>**/*.ps1</include>
+   </includes>
+   <fileMode>0666</fileMode>
+   <lineEnding>crlf</lineEnding>
+   <outputDirectory>/</outputDirectory>
+  </fileSet>
+  <!-- Documentation directory (with its license) -->
+  <fileSet>
+   <directory>doc</directory>
+   <includes>
+    <include>**/*</include>
+   </includes>
+   <outputDirectory>doc</outputDirectory>
+  </fileSet>
+ </fileSets>
+</assembly>
