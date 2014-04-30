@@ -12,8 +12,8 @@ There are three sections:
 BEFORE
 
 * Run all tests to make sure there are not regressions.
-* To change the version constant in the code (AdminHeader.sql:VERSION):
-https://github.com/angoca/log4db2/blob/master/src/main/sql-pl/AdminHeader.sql
+* To change the version constant in the code (Objects.sql:VERSION):
+https://github.com/angoca/db2unit/blob/master/src/main/sql-pl/Headers.sql
 * Change the version in the documentation (@version) of all source files.
 * Rename the XML schema for the new version if modified.
 * Make sure the schema reflects the version number to release (all files.)
@@ -21,11 +21,11 @@ https://github.com/angoca/log4db2/blob/master/src/main/sql-pl/AdminHeader.sql
 
 PERFORM
 
-* Execute mvn release:prepare providing a valid TAG (1-RC, 1) and a SNAPSHOT for
+* Execute mvn release:prepare providing a valid TAG (1-Beta, 1) and a SNAPSHOT for
   the next release
 * Once finished, execute mvn release:perform.
   (If problems, mvn release:rollback)
-* Fill the code release in GitHub (https://github.com/angoca/log4db2/releases)
+* Fill the code release in GitHub (https://github.com/angoca/db2unit/releases)
 * Create a directory in SourceForge with the version to release as name.
 * Execute mvn.
 * Publish the generated files in the target directory, into the just created
