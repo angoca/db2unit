@@ -222,6 +222,8 @@ ALTER MODULE DB2UNIT ADD
 
   -- Set the initial status
   SET CURRENT_STATUS = 'Initilization';
+  CALL LOGGER.INFO(LOGGER_ID, 'Execution for ' || COALESCE(SCHEMA_NAME,
+    'Empty schema'));
   CALL LOGGER.INFO(LOGGER_ID, CURRENT_STATUS);
 
   SET EXEC_ID = RAND () * 10000;
