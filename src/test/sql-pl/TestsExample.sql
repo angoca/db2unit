@@ -51,6 +51,6 @@ CREATE OR REPLACE PROCEDURE TEST_4 ()
 -- Test that asserts false with strings - Message.
 CREATE OR REPLACE PROCEDURE TEST_5 ()
  BEGIN
-  CALL DB2UNIT.ASSERT('A', 'B');
+  CALL DB2UNIT.ASSERT('A', 'AB');
  END @
 
