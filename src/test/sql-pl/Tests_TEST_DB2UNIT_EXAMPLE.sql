@@ -25,32 +25,44 @@ SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_1A, TEST_DB2UNIT_EXA
  */
 
 -- Test that passes correctly - Nothing.
-CREATE OR REPLACE PROCEDURE TEST_1 ()
+CREATE OR REPLACE PROCEDURE TEST_1()
  BEGIN
   -- Nothing.
  END @
 
 -- Test that rises a signal without text - Message.
-CREATE OR REPLACE PROCEDURE TEST_2 ()
+CREATE OR REPLACE PROCEDURE TEST_2()
  BEGIN
   SIGNAL SQLSTATE '12345';
  END @
 
 -- Test that rises a signal with text - Message.
-CREATE OR REPLACE PROCEDURE TEST_3 ()
+CREATE OR REPLACE PROCEDURE TEST_3()
  BEGIN
   SIGNAL SQLSTATE '12345' SET MESSAGE_TEXT = 'Test signal';
  END @
 
 -- Test that asserts true with strings - Nothing.
-CREATE OR REPLACE PROCEDURE TEST_4 ()
+CREATE OR REPLACE PROCEDURE TEST_4()
  BEGIN
   CALL DB2UNIT.ASSERT('A', 'A');
  END @
 
 -- Test that asserts false with strings - Message.
-CREATE OR REPLACE PROCEDURE TEST_5 ()
+CREATE OR REPLACE PROCEDURE TEST_5()
  BEGIN
   CALL DB2UNIT.ASSERT('A', 'AB');
+ END @
+
+-- Test a rollback.
+CREATE OR REPLACE PROCEDURE TEST_6()
+ BEGIN
+  ROLLBACK;
+ END @
+
+-- Test a commit.
+CREATE OR REPLACE PROCEDURE TEST_7()
+ BEGIN
+  COMMIT;
  END @
 
