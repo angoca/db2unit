@@ -14,7 +14,7 @@ Andres Gomez Casanova - initial API and implementation.
 
 SET CURRENT SCHEMA TEST_DB2UNIT_ASSERTIONS @
 
-SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_1A, TEST_DB2UNIT @
+SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_1A, TEST_DB2UNIT_ASSERTIONS @
 
 /**
  * Tests for assertions.
@@ -23,8 +23,6 @@ SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_1A, TEST_DB2UNIT @
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */
-
-CREATE SCHEMA TEST_DB2UNIT_ASSERTIONS @
 
 -- Tests that no message is inserted in the report when two strings are equals.
 CREATE OR REPLACE PROCEDURE TEST_1 ()
