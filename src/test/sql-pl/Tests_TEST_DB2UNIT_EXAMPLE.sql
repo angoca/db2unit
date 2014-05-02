@@ -24,6 +24,30 @@ SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_1A, TEST_DB2UNIT_EXA
  * Made in COLOMBIA.
  */
 
+-- Before all tests.
+CREATE OR REPLACE PROCEDURE BEFORE_SUITE()
+ BEGIN
+  -- Nothing.
+ END @
+
+-- Before each test.
+CREATE OR REPLACE PROCEDURE BEFORE()
+ BEGIN
+  -- Nothing.
+ END @
+
+-- After each test.
+CREATE OR REPLACE PROCEDURE AFTER()
+ BEGIN
+  -- Nothing.
+ END @
+
+-- After all tests.
+CREATE OR REPLACE PROCEDURE AFTER_SUITE()
+ BEGIN
+  -- Nothing.
+ END @
+
 -- Test that passes correctly - Nothing.
 CREATE OR REPLACE PROCEDURE TEST_1()
  BEGIN
