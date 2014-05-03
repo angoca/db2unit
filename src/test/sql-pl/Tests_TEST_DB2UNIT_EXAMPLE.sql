@@ -69,13 +69,13 @@ CREATE OR REPLACE PROCEDURE TEST_3()
 -- Test that asserts true with strings - Nothing.
 CREATE OR REPLACE PROCEDURE TEST_4()
  BEGIN
-  CALL DB2UNIT.ASSERT('A', 'A');
+  CALL DB2UNIT.ASSERT_EQUALS('A', 'A');
  END @
 
 -- Test that asserts false with strings - Message.
 CREATE OR REPLACE PROCEDURE TEST_5()
  BEGIN
-  CALL DB2UNIT.ASSERT('A', 'AB');
+  CALL DB2UNIT.ASSERT_EQUALS('A', 'AB');
  END @
 
 -- Test a rollback.
