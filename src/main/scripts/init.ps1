@@ -24,3 +24,4 @@ if ( ! ( Test-Path Variable:\SRC_MAIN_CODE_PATH ) ) {
  ${Global:SRC_MAIN_CODE_PATH}="${DB2UNIT_PATH}\sql-pl"
  ${Global:SRC_MAIN_SCRIPT_PATH}="${DB2UNIT_PATH}"
 }
+

@@ -19,3 +19,4 @@
  }
 & ${SRC_MAIN_SCRIPT_PATH}\uninstall.ps1
 & ${SRC_MAIN_SCRIPT_PATH}\install.ps1
+
