@@ -31,6 +31,7 @@ function install() {
  if ( ${Script:continue} ) { installScript ${SRC_MAIN_CODE_PATH}\Objects.sql }
  if ( ${Script:continue} ) { installScript ${SRC_MAIN_CODE_PATH}\Headers.sql }
  if ( ${Script:continue} ) { installScript ${SRC_MAIN_CODE_PATH}\Body.sql }
+ if ( ${Script:continue} ) { installScript ${SRC_MAIN_CODE_PATH}\Asserts.sql }
 
  echo "Please visit the wiki to learn how to use and configure this utility"
  echo "https://github.com/angoca/db2unit/wiki"
