@@ -267,7 +267,7 @@ ALTER MODULE DB2UNIT ADD
   -- Set the initial status
   SET CURRENT_STATUS = 'Initilization';
   CALL LOGGER.INFO(LOGGER_ID, 'Execution for ' || COALESCE(SCHEMA_NAME,
-    'Empty schema'));
+    'NULL schema'));
   CALL LOGGER.INFO(LOGGER_ID, CURRENT_STATUS);
 
   -- Check previous values (for self testing)
@@ -289,7 +289,8 @@ ALTER MODULE DB2UNIT ADD
   IF (CUR_SCHEMA IS NULL) THEN
    INSERT INTO EXECUTION_REPORTS (DATE, EXECUTION_ID, STATUS, MESSAGE_REPORT)
      VALUES (CURRENT TIMESTAMP, EXEC_ID, CURRENT_STATUS, SUBSTR(
-     'The given schema does not exists: ' || SCHEMA_NAME, 1, 128));
+     'The given schema does not exists: ' || COALESCE(SCHEMA_NAME, 'NULL'), 1,
+     128));
    CALL LOGGER.DEBUG(LOGGER_ID, 'The given schema does not exists');
    SET CONTINUE = FALSE;
   ELSE
