@@ -12,7 +12,7 @@ Contributors:
 Andres Gomez Casanova - initial API and implementation.
 */
 
-SET CURRENT SCHEMA DB2UNIT_1A ;
+SET CURRENT SCHEMA DB2UNIT_1A;
 
 /**
  * Creates the objects that require high priviles.
