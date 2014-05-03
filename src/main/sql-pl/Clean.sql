@@ -12,7 +12,7 @@ Contributors:
 Andres Gomez Casanova - initial API and implementation.
 */
 
-SET CURRENT SCHEMA DB2UNIT_1A ;
+SET CURRENT SCHEMA DB2UNIT_1A;
 
 /**
  * Removes db2unit from the database.
@@ -22,7 +22,7 @@ SET CURRENT SCHEMA DB2UNIT_1A ;
  * Made in COLOMBIA.
  */
 
-DROP PUBLIC ALIAS DB2UNIT FOR MODULE ;
+DROP PUBLIC ALIAS DB2UNIT FOR MODULE;
 
 DROP MODULE DB2UNIT;
 
