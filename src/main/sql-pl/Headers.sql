@@ -12,7 +12,7 @@ Contributors:
 Andres Gomez Casanova - initial API and implementation.
 */
 
-SET CURRENT SCHEMA DB2UNIT_1A ;
+SET CURRENT SCHEMA DB2UNIT_1A;
 
 /**
  * Creates the objects of the db2unit code.
@@ -46,9 +46,9 @@ ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE CLEAN (
   );
 
--- Assert two strings
+-- Assert equals two strings.
 ALTER MODULE DB2UNIT PUBLISH
-  PROCEDURE ASSERT (
+  PROCEDURE ASSERT_EQUALS (
   IN EXPECTED_MSG VARCHAR(512),
   IN ACTUAL_MSG VARCHAR(512)
   );

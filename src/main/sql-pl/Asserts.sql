@@ -23,7 +23,8 @@ SET CURRENT SCHEMA DB2UNIT_1A @
  */
 
 /**
- * Asserts if the given two strings are the same, in lenght and in content.
+ * Asserts if the given two strings are the same, in nullability, in length and
+ * in content.
  *
  * IN EXPECTED_STRING
  *   Expected string.
@@ -31,7 +32,7 @@ SET CURRENT SCHEMA DB2UNIT_1A @
  *   Actual string.
  */
 ALTER MODULE DB2UNIT ADD
-  PROCEDURE ASSERT (
+  PROCEDURE ASSERT_EQUALS (
   IN EXPECTED_STRING VARCHAR(512),
   IN ACTUAL_STRING VARCHAR(512)
   )
@@ -50,7 +51,7 @@ ALTER MODULE DB2UNIT ADD
    CALL WRITE_IN_REPORT ('Nullability difference');
    SET SHOW = TRUE;
   ELSEIF (LENGTH(EXPECTED_STRING) <> LENGTH(ACTUAL_STRING)) THEN
-   CALL WRITE_IN_REPORT ('Strings have different length');
+   CALL WRITE_IN_REPORT ('Strings have different lengths');
    SET SHOW = TRUE;
   ELSEIF (EXPECTED_STRING <> ACTUAL_STRING) THEN
    CALL WRITE_IN_REPORT ('The content of both strings is different');
