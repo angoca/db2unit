@@ -90,3 +90,9 @@ CREATE OR REPLACE PROCEDURE TEST_7()
   COMMIT;
  END @
 
+-- Test that asserts false with strings - Message.
+CREATE OR REPLACE PROCEDURE TEST_8()
+ BEGIN
+  CALL DB2UNIT.ASSERT_EQUALS('Different strings', 'A', 'B');
+ END @
+
