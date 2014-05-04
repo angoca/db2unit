@@ -165,10 +165,23 @@ ALTER MODULE DB2UNIT ADD
   DECLARE MSG_TEXT VARCHAR(32672); -- Message from signal.
   DECLARE SENTENCE VARCHAR(1024); -- Dynamic statement to execute.
   DECLARE INEXISTENT CONDITION FOR SQLSTATE '42884';
+  DECLARE TOO_LONG CONDITION FOR SQLSTATE '22001';
   DECLARE STMT STATEMENT; -- Statement to execute.
   -- If the procedure does not exist, then exist without any message.
   DECLARE EXIT HANDLER FOR INEXISTENT
     CALL LOGGER.INFO(LOGGER_ID, '<');
+  -- A string is too long to be processed.
+  DECLARE EXIT HANDLER FOR TOO_LONG
+    BEGIN
+     DECLARE COPY_SQLSTATE CHAR(5);
+     GET DIAGNOSTICS EXCEPTION 1 MSG_TEXT = MESSAGE_TEXT;
+     SET COPY_SQLSTATE = SQLSTATE;
+     CALL WRITE_IN_REPORT(SUBSTR('String too long: "' || COALESCE(MSG_TEXT,
+       'No message') || '"', 1, 512));
+     CALL LOGGER.INFO(LOGGER_ID, '< String too long ' || COALESCE(COPY_SQLSTATE,
+       'EMPTY') || '-' || COALESCE(MSG_TEXT, 'No message'));
+     COMMIT;
+    END;
   -- Logs any exception or warning.
   DECLARE EXIT HANDLER FOR SQLWARNING
     BEGIN
@@ -392,6 +405,7 @@ ALTER MODULE DB2UNIT ADD
 
     SET CURRENT_STATUS = 'Executing.BeforeSuite';
     CALL LOGGER.INFO(LOGGER_ID, CURRENT_STATUS);
+    SET TESTNAME = 'Before Suite';
     CALL WRITE_IN_REPORT('Starting execution');
     CALL EXEC_PROCEDURE('BEFORE_SUITE');
     COMMIT;
@@ -423,8 +437,10 @@ ALTER MODULE DB2UNIT ADD
     END WHILE;
 
     SET CURRENT_STATUS = 'Executing.AfterSuite';
+    SET TESTNAME = 'After Suite';
     CALL LOGGER.INFO(LOGGER_ID, CURRENT_STATUS);
     CALL EXEC_PROCEDURE('AFTER_SUITE');
+    SET TESTNAME = NULL;
     COMMIT;
    END;
   END IF;
