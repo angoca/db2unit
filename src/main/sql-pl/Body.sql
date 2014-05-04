@@ -23,18 +23,6 @@ SET CURRENT SCHEMA DB2UNIT_1A @
  */
 
 /**
- * Utility schema.
- */
-ALTER MODULE DB2UNIT ADD
-  VARIABLE UTILITY_SCHEMA VARCHAR(16) CONSTANT 'DB2UNIT_1A' @
-
-/**
- * Constant for the name of the report's table.
- */
-ALTER MODULE DB2UNIT ADD
-  VARIABLE REPORTS_TABLE VARCHAR(16) CONSTANT 'REPORT_TESTS' @
-
-/**
  * Max size for assertion messages.
  */
 ALTER MODULE DB2UNIT ADD
