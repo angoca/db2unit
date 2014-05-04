@@ -22,6 +22,18 @@ SET CURRENT SCHEMA DB2UNIT_1A;
  * Made in COLOMBIA.
  */
 
+-- Buffer pool for max values.
+CREATE BUFFERPOOL MAX_VALUES_BP
+  PAGESIZE 32K;
+
+-- Tablespace for logger utility.
+CREATE TABLESPACE MAX_VALUES_TS
+  PAGESIZE 32 K
+  BUFFERPOOL MAX_VALUES_BP;
+
+COMMENT ON TABLESPACE MAX_VALUES_TS IS
+  'TS just to store an empty table for max values. Could be changed.';
+
 -- Schema for logger tables.
 CREATE SCHEMA DB2UNIT_1A;
 

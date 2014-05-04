@@ -56,3 +56,38 @@ COMMENT ON REPORT_TESTS (
   MESSAGE IS 'Descriptive message about the currently executed test'
   );
 
+-- Table for max values (only for anchoring.)
+CREATE TABLE MAX_VALUES (
+  MESSAGE_ASSERT VARCHAR(64),
+  SENTENCE VARCHAR(1024)
+  );
+
+COMMENT ON TABLE MAX_VALUES IS 'Sizes for anchoring';
+
+COMMENT ON MAX_VALUES (
+  MESSAGE_ASSERT IS 'Max length for a message in an assertion (increasable)',
+  SENTENCE IS 'Max length for a dynamic sentence (increasable)'
+  );
+
+-- Max length for a string message (only for anchoring.)
+CREATE TABLE MAX_STRING (
+  STRING VARCHAR(32672)
+  );
+
+COMMENT ON TABLE MAX_STRING IS 'Sizes for anchoring';
+
+COMMENT ON MAX_STRING (
+  STRING IS 'Max length for a string value'
+  );
+
+-- Max lenght for a signal message (only for anchoring.)
+CREATE TABLE MAX_SIGNAL (
+  SIGNAL VARCHAR(32672)
+  );
+
+COMMENT ON TABLE MAX_SIGNAL IS 'Sizes for anchoring';
+
+COMMENT ON MAX_SIGNAL (
+  SIGNAL IS 'Max length for a signal message'
+  );
+
