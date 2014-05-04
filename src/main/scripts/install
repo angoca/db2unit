@@ -34,6 +34,7 @@ install() {
  [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/Headers.sql
  [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/Body.sql
  [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/Asserts.sql
+ [ ${continue} == true ] && installScript ${SRC_MAIN_CODE_PATH}/AssertsNoMessage.sql
 
  echo "Please visit the wiki to learn how to use and configure this utility"
  echo "https://github.com/angoca/db2unit/wiki"

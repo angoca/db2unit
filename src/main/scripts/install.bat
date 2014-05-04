@@ -43,6 +43,7 @@ goto:eof
  if %continue% EQU 1 call:installScript %SRC_MAIN_CODE_PATH%\Headers.sql
  if %continue% EQU 1 call:installScript %SRC_MAIN_CODE_PATH%\Body.sql
  if %continue% EQU 1 call:installScript %SRC_MAIN_CODE_PATH%\Asserts.sql
+ if %continue% EQU 1 call:installScript %SRC_MAIN_CODE_PATH%\AssertsNoMessage.sql
 
  echo Please visit the wiki to learn how to use and configure this utility
  echo https://github.com/angoca/db2unit/wiki
