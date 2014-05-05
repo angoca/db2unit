@@ -115,7 +115,7 @@ ALTER MODULE DB2UNIT ADD
  * Asserts if the given boolean is null.
  *
  * IN CONDITION
- *   Value to check against FALSE.
+ *   Value to check if it is null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_BOOLEAN_NULL (
@@ -142,7 +142,7 @@ ALTER MODULE DB2UNIT ADD
  * Asserts if the given boolean is not null.
  *
  * IN CONDITION
- *   Value to check against FALSE.
+ *   Value to check if it is not null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_BOOLEAN_NOT_NULL (
@@ -196,4 +196,31 @@ ALTER MODULE DB2UNIT ADD
 
   RETURN RET;
  END P_ASSERT_INT_EQUALS @
+
+/**
+ * Asserts if the given int is null.
+ *
+ * IN VALUE
+ *   Value to check if it is null.
+ */
+ALTER MODULE DB2UNIT ADD
+  PROCEDURE ASSERT_INT_NULL (
+  IN VALUE BIGINT
+  )
+  LANGUAGE SQL
+  SPECIFIC P_ASSERT_INT_NULL
+  DYNAMIC RESULT SETS 0
+  MODIFIES SQL DATA
+  NOT DETERMINISTIC
+  NO EXTERNAL ACTION
+  PARAMETER CCSID UNICODE
+ P_ASSERT_INT_NULL: BEGIN
+  DECLARE RET INT;
+
+  CALL ASSERT_INT_NULL(NULL, VALUE);
+
+  GET DIAGNOSTICS RET = DB2_RETURN_STATUS;
+
+  RETURN RET;
+ END P_ASSERT_INT_NULL @
 
