@@ -74,14 +74,14 @@ ALTER MODULE DB2UNIT PUBLISH
 
 -- STRING
 
--- Assert equals two strings.
+-- Asserts equals two strings.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_STRING_EQUALS (
   IN EXPECTED ANCHOR DB2UNIT_1A.MAX_STRING.STRING,
   IN ACTUAL ANCHOR DB2UNIT_1A.MAX_STRING.STRING
   );
 
--- Assert equals two strings with a given message.
+-- Asserts equals two strings with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_STRING_EQUALS (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
@@ -89,26 +89,26 @@ ALTER MODULE DB2UNIT PUBLISH
   IN ACTUAL ANCHOR DB2UNIT_1A.MAX_STRING.STRING
   );
 
--- Assert that the string is null.
+-- Asserts that the string is null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_STRING_NULL (
   IN STRING ANCHOR DB2UNIT_1A.MAX_STRING.STRING
   );
 
--- Assert that the string is null with a given message.
+-- Asserts that the string is null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_STRING_NULL (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
   IN STRING ANCHOR DB2UNIT_1A.MAX_STRING.STRING
   );
 
--- Assert that the string is not null.
+-- Asserts that the string is not null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_STRING_NOT_NULL (
   IN STRING ANCHOR DB2UNIT_1A.MAX_STRING.STRING
   );
 
--- Assert that the string is not null with a given message.
+-- Asserts that the string is not null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_STRING_NOT_NULL (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
@@ -117,14 +117,14 @@ ALTER MODULE DB2UNIT PUBLISH
 
 -- BOOLEAN
 
--- Assert equals two booleans.
+-- Asserts equals two booleans.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_EQUALS (
   IN EXPECTED BOOLEAN,
   IN ACTUAL BOOLEAN
   );
 
--- Assert equals two booleans with a given message.
+-- Asserts equals two booleans with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_EQUALS (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
@@ -132,52 +132,52 @@ ALTER MODULE DB2UNIT PUBLISH
   IN ACTUAL BOOLEAN
   );
 
--- Assert the true value.
+-- Asserts the true value.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_TRUE (
   IN VALUE BOOLEAN
   );
 
--- Assert the true value with a given message.
+-- Asserts the true value with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_TRUE (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
   IN VALUE BOOLEAN
   );
 
--- Assert the false value.
+-- Asserts the false value.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_FALSE (
   IN CONDITION BOOLEAN
   );
 
--- Assert the false value with a given message.
+-- Asserts the false value with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_FALSE (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
   IN CONDITION BOOLEAN
   );
 
--- Assert that the boolean is null.
+-- Asserts that the boolean is null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_NULL (
   IN CONDITION BOOLEAN
   );
 
--- Assert that the boolean is null with a given message.
+-- Asserts that the boolean is null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_NULL (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
   IN CONDITION BOOLEAN
   );
 
--- Assert that the boolean is not null.
+-- Asserts that the boolean is not null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_NOT_NULL (
   IN CONDITION BOOLEAN
   );
 
--- Assert that the boolean is not null with a given message.
+-- Asserts that the boolean is not null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_BOOLEAN_NOT_NULL (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
@@ -186,14 +186,14 @@ ALTER MODULE DB2UNIT PUBLISH
 
 -- INTEGER
 
--- Assert equals two integers.
+-- Asserts equals two integers.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_EQUALS (
   IN EXPECTED BIGINT,
   IN ACTUAL BIGINT
   );
 
--- Assert equals two integers with a given message.
+-- Asserts equals two integers with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_EQUALS (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
@@ -201,26 +201,26 @@ ALTER MODULE DB2UNIT PUBLISH
   IN ACTUAL BIGINT
   );
 
--- Assert that the int is null.
+-- Asserts that the int is null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_NULL (
   IN VALUE BIGINT
   );
 
--- Assert that the int is null with a given message.
+-- Asserts that the int is null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_NULL (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
   IN VALUE BIGINT
   );
 
--- Assert that the int is not null.
+-- Asserts that the int is not null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_NOT_NULL (
   IN VALUE BIGINT
   );
 
--- Assert that the int is not null with a given message.
+-- Asserts that the int is not null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_NOT_NULL (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
@@ -229,14 +229,14 @@ ALTER MODULE DB2UNIT PUBLISH
 
 -- DECIMAL
 
--- Assert equals two decimals.
+-- Asserts equals two decimals.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_DEC_EQUALS (
   IN EXPECTED DECFLOAT,
   IN ACTUAL DECFLOAT
   );
 
--- Assert equals two decimals with a given message.
+-- Asserts equals two decimals with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_DEC_EQUALS (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
@@ -244,29 +244,61 @@ ALTER MODULE DB2UNIT PUBLISH
   IN ACTUAL DECFLOAT
   );
 
--- Assert that the decimal is null.
+-- Asserts that the decimal is null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_DEC_NULL (
   IN VALUE DECFLOAT
   );
 
--- Assert that the decimal is null with a given message.
+-- Asserts that the decimal is null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_DEC_NULL (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
   IN VALUE DECFLOAT
   );
 
--- Assert that the decimal is not null.
+-- Asserts that the decimal is not null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_DEC_NOT_NULL (
   IN VALUE DECFLOAT
   );
 
--- Assert that the decimal is not null with a given message.
+-- Asserts that the decimal is not null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_DEC_NOT_NULL (
   IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
   IN VALUE DECFLOAT
+  );
+
+-- TABLES
+
+-- Asserts that the table is empty.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_TABLE_EMPTY (
+  IN SCHEMA ANCHOR SYSCAT.TABLES.TABSCHEMA,
+  IN TABLE_NAME ANCHOR SYSCAT.TABLES.TABNAME
+  );
+
+-- Asserts that the table is empty with a given message.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_TABLE_EMPTY (
+  IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
+  IN SCHEMA ANCHOR SYSCAT.TABLES.TABSCHEMA,
+  IN TABLE_NAME ANCHOR SYSCAT.TABLES.TABNAME
+  );
+
+-- Asserts that the table is not empty.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_TABLE_NON_EMPTY (
+  IN SCHEMA ANCHOR SYSCAT.TABLES.TABSCHEMA,
+  IN TABLE_NAME ANCHOR SYSCAT.TABLES.TABNAME
+  );
+
+-- Asserts that the table is not empty with a given message.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_TABLE_NON_EMPTY (
+  IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT,
+  IN SCHEMA ANCHOR SYSCAT.TABLES.TABSCHEMA,
+  IN TABLE_NAME ANCHOR SYSCAT.TABLES.TABNAME
   );
 
