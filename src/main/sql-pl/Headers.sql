@@ -59,6 +59,19 @@ ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE CLEAN_TEST_RESULT (
   );
 
+-- GENERAL
+
+-- Fails the current test.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE FAIL (
+  );
+
+-- Fails the current test with a given message.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE FAIL (
+  IN MESSAGE ANCHOR DB2UNIT_1A.MAX_VALUES.MESSAGE_ASSERT
+  );
+
 -- STRING
 
 -- Assert equals two strings.
