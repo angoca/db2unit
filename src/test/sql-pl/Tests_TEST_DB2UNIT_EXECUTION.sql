@@ -69,7 +69,7 @@ CREATE OR REPLACE PROCEDURE AFTER_SUITE()
  END @
 
 -- Creates the necessary schemas.
-CREATE OR REPLACE PROCEDURE BEFORE_SUITE()
+CREATE OR REPLACE PROCEDURE ONE_TIME_SETUP()
  BEGIN
   -- If a previous execution did not correclty finished.
   CALL AFTER_SUITE();
