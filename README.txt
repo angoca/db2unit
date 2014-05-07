@@ -48,7 +48,7 @@ established. If not, an error will be raised.
 
 Just follow these steps:
 
-    tar -zxvf db2unit.tar.gz
+    tar -zxf db2unit.tar.gz
     cd db2unit
     . ./install
 
@@ -85,16 +85,62 @@ https://github.com/angoca/db2unit/wiki/Install%20from%20sources
 -----------
 ## Usage ##
 
-### 1. Write the code ###
+### 1. Write the test suite ###
 
-This could be the structure of your routine's code (Procedure or function).
+Let's suppose you work on a schema called 'MY_SCHM'. From now on, the schema
+name will refer to the name of the test suite. It means, your test suite is
+also called 'MY_SCHM'.
 
-    CREATE ... HELLO_WORLD ()
-     MODIFIES SQL
+Your test suite could have the following fixtures that helps to prepare the
+environment:
 
-Check the _Usage_ section for more information about the levels, how to access
-the messages and configure the utility.
-https://github.com/angoca/db2unit/wiki/Usage
+    -- Test fixtures
+    CREATE OR REPLACE PROCEDURE BEFORE_SUITE()
+     BEGIN
+      -- Your code
+     END @
+
+    CREATE OR REPLACE PROCEDURE BEFORE()
+      BEGIN
+      -- Your code
+     END @
+
+    CREATE OR REPLACE PROCEDURE AFTER()
+     BEGIN
+      -- Your code
+     END @
+
+    CREATE OR REPLACE PROCEDURE AFTER_SUITE()
+     BEGIN
+      -- Your code
+     END @
+
+You create your tests in the same schema as your fixtures. All of these stored
+procedures will be your test suite. The name of our tests should starts by TEST_
+and they should not have any argument, like this:
+
+    CREATE OR REPLACE PROCEDURE TEST_my_first_test()
+     BEGIN
+      -- Your code using the test functions.
+      ASSERT_STRING_EQUALS(EXPECTED, ACTUALS);
+     END@
+
+In the previous test, you compared two strings. You can use other types of
+assertions. Please visit the API section:
+ https://github.com/angoca/db2unit/wiki/API
+
+The fixtures and the tests should be created under the same schema, in order to
+be part of the same suite.
+
+Once you have created your procedures in the database, you can run the test
+suite like this:
+
+    CALL DB2UNIT.RUN_SUITE('MY_SCHM')
+
+Once the execution is finished, you will see a report of the execution.
+
+Check the _Usage_ section for more information about the framework.
+ https://github.com/angoca/db2unit/wiki/Usage
 
 
 ---------------------------
