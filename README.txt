@@ -13,7 +13,7 @@ considered as a jUnit porting for DB2 SQL-PL.
 The licenses of this project are:
 
  * Source code: GNU General Public License v3.0
- * Documentation: FreeBSD Documentation license.
+ * Documentation: GNU Free Documentation License.
 
 These are some useful links:
 

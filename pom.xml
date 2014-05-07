@@ -1,9 +1,20 @@
-<!-- Copyright (c) 2014-2014 Andres Gomez Casanova (AngocA). -->
-<!-- All rights reserved. This program and the accompanying materials are
- made available under the terms of the Eclipse Public License v1.0 which accompanies
- this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html -->
-<!-- Contributors: -->
-<!-- Andres Gomez Casanova - initial API and implementation. -->
+<!-- This file is part of db2unit: A unit testing framework for DB2 LUW. -->
+<!-- Copyright (C) 2014 Andres Gomez Casanova (@AngocA) -->
+
+<!-- db2unit is free software: you can redistribute it and/or modify it under 
+ the terms of the GNU General Public License as published by the Free Software 
+ Foundation, either version 3 of the License, or (at your option) any later 
+ version. -->
+
+<!-- db2unit is distributed in the hope that it will be useful, but WITHOUT 
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!-- You should have received a copy of the GNU General Public License along 
+ with db2unit. If not, see <http://www.gnu.org/licenses/>. -->
+
+<!-- Andres Gomez Casanova <angocaATyahooDOTcom> -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -99,20 +110,21 @@
  <inceptionYear>2014</inceptionYear>
  <licenses>
   <license>
-   <name>Eclipse License v1.0</name>
+   <name>GNU General Public License</name>
    <distribution>repo</distribution>
    <comments>
-    The Eclipse Public License.
+    The GPL v3 license for the source code.
    </comments>
-   <url>https://www.eclipse.org/org/documents/epl-v10.html</url>
+   <url>https://www.gnu.org/licenses/gpl.txt</url>
   </license>
   <license>
-   <name>FreeBSD Documentation License</name>
+   <name>GNU Free Documentation License</name>
    <distribution>repo</distribution>
    <comments>
     This license is for the documentation, that is in the /doc directory and in
     the Wiki.
    </comments>
+   <url>https://www.gnu.org/licenses/fdl.txt</url>
   </license>
  </licenses>
 
