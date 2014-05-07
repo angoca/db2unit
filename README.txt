@@ -132,6 +132,8 @@ assertions. Please visit the API section:
 The fixtures and the tests should be created under the same schema, in order to
 be part of the same suite.
 
+### 2. Execute your test suite ###
+
 Once you have created your procedures in the database, you can run the test
 suite like this:
 
