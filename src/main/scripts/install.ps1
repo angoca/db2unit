@@ -35,6 +35,8 @@ function installScript($script) {
 }
 
 function install() {
+ echo "Checking prerequisites"
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Prereqs.sql }
  echo "Installing utility"
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\ObjectsAdmin.sql }
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Objects.sql }
@@ -60,7 +62,7 @@ function init() {
   .\init.ps1
  }
 
- echo "db2unit is licensed under the terms of the Eclipse license v1.0"
+ echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
 
  install
 }

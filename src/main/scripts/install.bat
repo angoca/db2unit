@@ -46,6 +46,8 @@ goto:eof
 goto:eof
 
 :install
+ echo Checking prerequisites
+ if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\Prereqs.sql
  echo Installing utility
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\ObjectsAdmin.sql
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\Objects.sql
@@ -71,7 +73,7 @@ goto:eof
   call init.bat
  )
 
- echo db2unit is licensed under the terms of the Eclipse license v1.0
+ echo db2unit is licensed under the terms of the GNU General Public License v3.0
 
  call:install
 goto:eof

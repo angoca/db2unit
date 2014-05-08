@@ -37,6 +37,8 @@ installScript() {
 }
 
 install() {
+ echo "Checking prerequisites"
+ [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Prereqs.sql
  echo "Installing utility"
  [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/ObjectsAdmin.sql
  [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Objects.sql
@@ -62,7 +64,7 @@ init() {
   . ./init
  fi
 
- echo "db2unit is licensed under the terms of the Eclipse license v1.0"
+ echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
 
  install
 }
