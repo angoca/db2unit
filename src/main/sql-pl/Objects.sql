@@ -47,7 +47,18 @@ COMMENT ON EXECUTION_REPORTS (
   MESSAGE_REPORT IS 'Descriptive message of the execution'
   );
 
--- Table for reports.
+-- Table for locking suites.
+CREATE TABLE SUITE_LOCKS (
+  NAME VARCHAR(128) NOT NULL PRIMARY KEY
+  );
+
+COMMENT ON TABLE SUITE_LOCKS IS 'Table for test suite locks';
+
+COMMENT ON SUITE_LOCKS (
+  NAME IS 'Name of the test suite (schema)'
+  );
+
+-- Table for reports (only for model in create like.)
 CREATE TABLE REPORT_TESTS (
   DATE TIMESTAMP NOT NULL,
   EXECUTION_ID INT NOT NULL,
