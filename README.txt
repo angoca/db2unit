@@ -170,6 +170,7 @@ These are the files included in the released version:
    * `Objects.sql` -- Tables for the reports and for data type anchoring.
    * `ObjectsAdmin.sql` -- Administrative objects like tablespaces,
     bufferpools and schemas to install the framework.
+   * `Prereqs.sql` -- Tests the prerequisites to install the framework.
 
 The * in the install-related files means that several files for each one of
 them can be found:
