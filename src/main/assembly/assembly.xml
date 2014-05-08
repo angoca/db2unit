@@ -80,5 +80,13 @@
    </includes>
    <outputDirectory>doc</outputDirectory>
   </fileSet>
+  <!-- Examples -->
+  <fileSet>
+   <directory>src/examples/sql-pl</directory>
+   <includes>
+    <include>**/*</include>
+   </includes>
+   <outputDirectory>examples</outputDirectory>
+  </fileSet>
  </fileSets>
 </assembly>

@@ -157,6 +157,7 @@ These are the files included in the released version:
  * `reinstall*` -- Reinstallation files.
  * `uninstall*` -- Uninstallation files.
  * `doc` directory -- Documentation directory.
+ * `examples` directory -- Examples ready to run.
  * `sql-pl` directory -- Directory for all objects: DDL, DML, routines
      definition.
    * `Asserts.sql` -- Set of assert procedures to perform tests.
