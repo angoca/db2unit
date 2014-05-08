@@ -23,7 +23,7 @@
 SET CURRENT SCHEMA DB2UNIT_1A;
 
 /**
- * Creates the objects of the db2unit code.
+ * Defines the headers of the public routines.
  *
  * Version: 2014-04-30 1-Alpha
  * Author: Andres Gomez Casanova (AngocA)

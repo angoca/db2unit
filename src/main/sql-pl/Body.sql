@@ -23,7 +23,7 @@
 SET CURRENT SCHEMA DB2UNIT_1A @
 
 /**
- * Adds the routine's implementation.
+ * Core implementation.
  *
  * Version: 2014-04-30 1-Alpha
  * Author: Andres Gomez Casanova (AngocA)

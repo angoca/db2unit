@@ -23,7 +23,7 @@
 SET CURRENT SCHEMA DB2UNIT_1A;
 
 /**
- * Removes db2unit from the database.
+ * Removes db2unit from the database (Administrative objects).
  *
  * Version: 2014-04-30 1-Alpha
  * Author: Andres Gomez Casanova (AngocA)

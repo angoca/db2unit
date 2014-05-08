@@ -23,7 +23,7 @@
 SET CURRENT SCHEMA DB2UNIT_1A @
 
 /**
- * Asserts implementation.
+ * Asserts implementation without message.
  *
  * Version: 2014-05-04 1-Alpha
  * Author: Andres Gomez Casanova (AngocA)
