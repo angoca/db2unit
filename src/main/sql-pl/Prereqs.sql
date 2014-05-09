@@ -37,9 +37,6 @@ BEGIN
  DECLARE CONT BOOLEAN DEFAULT TRUE;
  DECLARE SENTENCE VARCHAR(256); -- Dynamic statement to execute.
  DECLARE STMT STATEMENT; -- Statement to execute.
---  DECLARE EXIT HANDLER FOR SQLEXCEPTION
-----    RETURN 1;
---    SET EXIST = 0;
 
  SET STEP = 1;
  -- Checks log4db2 module in schema for Beta version.
@@ -106,15 +103,16 @@ BEGIN
  END IF;
  IF (CONT = TRUE) THEN
   SET STEP = 6;
-
+  -- Executes the logger methods in order to check them.
   SET SENTENCE = 'CALL LOGGER.GET_LOGGER(''DB2UNIT_1A'', ?)';
   PREPARE STMT FROM SENTENCE;
   EXECUTE STMT INTO LOGGER_ID;
 
-  SET SENTENCE = 'CALL LOGGER.FATAL(?, ''db2unit installation test'')';
+  SET SENTENCE = 'CALL LOGGER.DEBUG(?, ''db2unit installation test'')';
   PREPARE STMT FROM SENTENCE;
   EXECUTE STMT USING LOGGER_ID;
  END IF;
+ -- Checks if any step failed.
  IF (CONT = FALSE) THEN
   SET MESSAGE = 'log4db2 is not installed. Step ' || STEP;
   SIGNAL SQLSTATE 'DUIN1' SET MESSAGE_TEXT = MESSAGE;
