@@ -335,3 +335,13 @@ ALTER MODULE DB2UNIT PUBLISH
   IN TABLE_NAME ANCHOR SYSCAT.TABLES.TABNAME
   );
 
+-- Changes the transaction mode to non-autonomous
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE SET_NON_AUTONOMOUS (
+  );
+
+-- Changes the transaction mode to autonomous
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE SET_AUTONOMOUS (
+  );
+
