@@ -2,7 +2,7 @@
 
 /*
  This file is part of db2unit: A unit testing framework for DB2 LUW.
- Copyright (C)  2014  Andres Gomez Casanova (@AngocA@)
+ Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 
  db2unit is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -875,4 +875,25 @@ ALTER MODULE DB2UNIT ADD
  P_SET_AUTONOMOUS: BEGIN
  END P_SET_AUTONOMOUS @
 
+/**
+ * Shows the license of this framework.
+ */
+ALTER MODULE DB2UNIT ADD
+  PROCEDURE LICENSE (
+  )
+  LANGUAGE SQL
+  SPECIFIC P_LICENSE
+  DYNAMIC RESULT SETS 1
+  READS SQL DATA
+  NOT DETERMINISTIC
+  NO EXTERNAL ACTION
+  PARAMETER CCSID UNICODE
+ P_LICENSE: BEGIN
+  DECLARE LICENSE_CURSOR CURSOR
+    WITH RETURN FOR
+    SELECT LINE
+    FROM LICENSE
+    ORDER BY NUMBER;
+  OPEN LICENSE_CURSOR;
+ END P_LICENSE @
 

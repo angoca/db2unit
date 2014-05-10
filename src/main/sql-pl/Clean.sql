@@ -2,7 +2,7 @@
 
 /*
  This file is part of db2unit: A unit testing framework for DB2 LUW.
- Copyright (C)  2014  Andres Gomez Casanova (@AngocA@)
+ Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 
  db2unit is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -30,9 +30,13 @@ SET CURRENT SCHEMA DB2UNIT_1A;
  * Made in COLOMBIA.
  */
 
+COMMIT;
+
 DROP PUBLIC ALIAS DB2UNIT FOR MODULE;
 
 DROP MODULE DB2UNIT;
+
+DROP TABLE LICENSE;
 
 DROP TABLE MAX_SIGNAL;
 
@@ -45,4 +49,9 @@ DROP TABLE REPORT_TESTS;
 DROP TABLE SUITE_LOCKS;
 
 DROP TABLE EXECUTION_REPORTS;
+
+EXPORT TO PACKAGES_TO_DROP.sql OF DEL MODIFIED BY NOCHARDEL
+  SELECT 'DROP PACKAGE DB2UNIT_1A.' || TRIM(PKGNAME) || ';'
+  FROM SYSCAT.PACKAGES
+  WHERE PKGSCHEMA LIKE 'DB2UNIT_1A%' ;
 
