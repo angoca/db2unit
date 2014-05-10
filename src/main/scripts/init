@@ -29,8 +29,8 @@ if [ -z ${DB2UNIT_PATH} ] ; then
  DB2UNIT_PATH=$(echo ${PWD})
 fi
 
-if [ -z ${SRC_MAIN_CODE_PATH} ] ; then
- export SRC_MAIN_CODE_PATH=${DB2UNIT_PATH}/sql-pl
- export SRC_MAIN_SCRIPT_PATH=${DB2UNIT_PATH}
+if [ -z ${DB2UNIT_SRC_MAIN_CODE_PATH} ] ; then
+ export DB2UNIT_SRC_MAIN_CODE_PATH=${DB2UNIT_PATH}/sql-pl
+ export DB2UNIT_SRC_MAIN_SCRIPT_PATH=${DB2UNIT_PATH}
 fi
 
