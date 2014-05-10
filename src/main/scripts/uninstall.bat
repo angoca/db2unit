@@ -1,6 +1,6 @@
 @echo off
 ::  This file is part of db2unit: A unit testing framework for DB2 LUW.
-:: Copyright (C)  2014  Andres Gomez Casanova (@AngocA@)
+:: Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 ::
 :: db2unit is free software: you can redistribute it and/or modify
 :: it under the terms of the GNU General Public License as published by
@@ -39,5 +39,7 @@ if %ERRORLEVEL% NEQ 0 (
 :uninstall
  echo Uninstalling db2unit
  db2 -tf %DB2UNIT_SRC_MAIN_CODE_PATH%\Clean.sql
+ db2 -tf PACKAGES_TO_DROP.sql
  db2 -tf %DB2UNIT_SRC_MAIN_CODE_PATH%\CleanAdmin.sql
+ del PACKAGES_TO_DROP.sql
 goto:eof
