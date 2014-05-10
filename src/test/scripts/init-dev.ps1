@@ -16,7 +16,6 @@
 #
 # Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 # Initialize the environment values to run the scripts for development,
 # examples and tests.
 #
