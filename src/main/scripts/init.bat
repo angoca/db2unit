@@ -1,6 +1,6 @@
 @echo off
 ::  This file is part of db2unit: A unit testing framework for DB2 LUW.
-:: Copyright (C)  2014  Andres Gomez Casanova (@AngocA@)
+:: Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 ::
 :: db2unit is free software: you can redistribute it and/or modify
 :: it under the terms of the GNU General Public License as published by
