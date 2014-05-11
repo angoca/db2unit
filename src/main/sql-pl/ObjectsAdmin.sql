@@ -20,7 +20,7 @@
  Andres Gomez Casanova <angocaATyahooDOTcom>
 */
 
-SET CURRENT SCHEMA DB2UNIT_1A;
+SET CURRENT SCHEMA DB2UNIT_1B;
 
 /**
  * Creates the objects that require high priviles.
@@ -43,7 +43,7 @@ COMMENT ON TABLESPACE MAX_VALUES_TS IS
   'TS just to store an empty table for max values. Could be changed.';
 
 -- Schema for logger tables.
-CREATE SCHEMA DB2UNIT_1A;
+CREATE SCHEMA DB2UNIT_1B;
 
-COMMENT ON SCHEMA DB2UNIT_1A IS 'Schema for db2unit objects';
+COMMENT ON SCHEMA DB2UNIT_1B IS 'Schema for db2unit objects';
 
