@@ -42,6 +42,7 @@ if ( $LastExitCode -ne 0 ) {
   db2 "CALL SYSPROC.ADMIN_DROP_SCHEMA('${SCHEMA}', NULL, 'ERRORSCHEMA', 'ERRORTABLE')" | Out-Null
   db2 "SELECT VARCHAR(SUBSTR(DIAGTEXT, 1, 256), 256) AS ERROR FROM ERRORSCHEMA.ERRORTABLE" 2>&1 | Out-Null
   db2 "DROP TABLE ERRORSCHEMA.ERRORTABLE" | Out-Null
+  db2 "DROP SCHEMA ERRORSCHEMA RESTRICT" | Out-Null
 
   # Installs the tests.
   db2 -td@ -f ../sql-pl/Tests_${SCHEMA}.sql

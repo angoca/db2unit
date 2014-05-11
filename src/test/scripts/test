@@ -41,6 +41,7 @@ else
   db2 "CALL SYSPROC.ADMIN_DROP_SCHEMA('${SCHEMA}', NULL, 'ERRORSCHEMA', 'ERRORTABLE')" > /dev/null
   db2 "SELECT VARCHAR(SUBSTR(DIAGTEXT, 1, 256), 256) AS ERROR FROM ERRORSCHEMA.ERRORTABLE" 2> /dev/null
   db2 "DROP TABLE ERRORSCHEMA.ERRORTABLE" > /dev/null
+  db2 "DROP SCHEMA ERRORSCHEMA RESTRICT" > /dev/null
 
   # Installs the tests.
   db2 -td@ -f ../sql-pl/Tests_${SCHEMA}.sql
