@@ -352,6 +352,13 @@ ALTER MODULE DB2UNIT PUBLISH
 
 -- Show the license used in this program.
 ALTER MODULE DB2UNIT PUBLISH
-  PROCEDURE LICENSE(
+  PROCEDURE LICENSE (
   );
+
+-- Changes the sort type for the procedures.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE RANDOM_SORT (
+  IN RANDOM BOOLEAN
+  );
+
 
