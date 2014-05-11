@@ -58,6 +58,26 @@ COMMENT ON SUITE_LOCKS (
   NAME IS 'Name of the test suite (schema)'
   );
 
+-- Table for sorts.
+CREATE TABLE SORTS (
+  SUITE_NAME VARCHAR(128) NOT NULL,
+  EXECUTION_ID INT NOT NULL,
+  POSITION INT NOT NULL,
+  PROC_NAME VARCHAR(128) NOT NULL
+  );
+
+ALTER TABLE SORTS ADD CONSTRAINT PK_SORTS PRIMARY KEY (SUITE_NAME, EXECUTION_ID,
+  POSITION);
+
+COMMENT ON TABLE SORTS IS 'List of sorts for different executions';
+
+COMMENT ON SORTS (
+  SUITE_NAME IS 'Name of the related suite',
+  EXECUTION_ID IS 'Unique ID of the execution',
+  POSITION IS 'Position of the proc in the execution',
+  PROC_NAME IS 'Name of the stored procedure'
+  );
+
 -- Table for reports (only for model in create like.)
 CREATE TABLE REPORT_TESTS (
   DATE TIMESTAMP NOT NULL,
