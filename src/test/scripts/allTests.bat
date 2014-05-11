@@ -44,6 +44,7 @@ if %ERRORLEVEL% NEQ 0 (
   echo Error expanding variable
   exit /B -1
  )
+ call:executeTest TEST_DB2UNIT_EMPTY
  call:executeTest TEST_DB2UNIT_EXECUTION
  call:executeTest TEST_DB2UNIT_ASSERTIONS
 
@@ -64,7 +65,9 @@ goto:eof
  echo ====Next: %schema%
  if "!PAUSE!" == "true" (
   pause
+  call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat schema i x
+ ) else (
+  call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat schema x
  )
- call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat schema i x
 goto:eof
 

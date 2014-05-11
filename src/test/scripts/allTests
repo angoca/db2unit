@@ -28,8 +28,10 @@ executeTest() {
  echo "====>Next: ${schema}"
  if [ "${PAUSE}" == "true" ] ; then
   read -p "Press enter to continue"
- fi
  . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${schema} i x
+ else
+ . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${schema} x
+ fi
 }
 . ./init-dev
 
@@ -51,6 +53,7 @@ else
   echo "Executing all tests."
  fi
 
+ executeTest TEST_DB2UNIT_EMPTY
  executeTest TEST_DB2UNIT_EXECUTION
  executeTest TEST_DB2UNIT_ASSERTIONS
 
