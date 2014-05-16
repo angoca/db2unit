@@ -95,22 +95,22 @@ Your test suite could have the following fixtures that helps to prepare the
 environment:
 
     -- Test fixtures
-    CREATE OR REPLACE PROCEDURE BEFORE_SUITE()
+    CREATE OR REPLACE PROCEDURE ONE_TIME_SETUP()
      BEGIN
       -- Your code
      END @
 
-    CREATE OR REPLACE PROCEDURE BEFORE()
+    CREATE OR REPLACE PROCEDURE SETUP()
       BEGIN
       -- Your code
      END @
 
-    CREATE OR REPLACE PROCEDURE AFTER()
+    CREATE OR REPLACE PROCEDURE TEAR_DOWN()
      BEGIN
       -- Your code
      END @
 
-    CREATE OR REPLACE PROCEDURE AFTER_SUITE()
+    CREATE OR REPLACE PROCEDURE ONE_TIME_TEAR_DOWN()
      BEGIN
       -- Your code
      END @
