@@ -27,7 +27,7 @@ SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_1B, TEST_DB2UNIT_ASS
 /**
  * Tests for assertions.
  *
- * Version: 2014-05-01 1-Alpha
+ * Version: 2014-05-01 1-Beta
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

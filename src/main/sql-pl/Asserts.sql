@@ -41,7 +41,7 @@ SET CURRENT SCHEMA DB2UNIT_1B @
  * 13 - The quantity of different items is not the same in column.
  * 14 - Some of the entry values are null.
  *
- * Version: 2014-05-02 1-Alpha
+ * Version: 2014-05-02 1-Beta
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

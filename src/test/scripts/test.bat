@@ -19,7 +19,7 @@
 
 :: Install and/or execute a suite of tests.
 ::
-:: Version: 2014-05-01 1-Alpha
+:: Version: 2014-05-01 1-Beta
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 

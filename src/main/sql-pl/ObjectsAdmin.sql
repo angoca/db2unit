@@ -25,7 +25,7 @@ SET CURRENT SCHEMA DB2UNIT_1B;
 /**
  * Creates the objects that require high priviles.
  *
- * Version: 2014-04-30 1-Alpha
+ * Version: 2014-04-30 1-Beta
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

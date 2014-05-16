@@ -23,7 +23,7 @@
 /**
  * Checks prerequisites.
  *
- * Version: 2014-05-08 1-Alpha
+ * Version: 2014-05-08 1-Beta
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

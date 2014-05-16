@@ -25,7 +25,7 @@ SET CURRENT SCHEMA DB2UNIT_1B;
 /**
  * Defines the headers of the public routines.
  *
- * Version: 2014-04-30 1-Alpha
+ * Version: 2014-04-30 1-Beta
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */
@@ -41,7 +41,7 @@ COMMENT ON PUBLIC ALIAS DB2UNIT FOR MODULE IS 'Public objects of db2unit';
 
 -- Module version.
 ALTER MODULE DB2UNIT PUBLISH
-  VARIABLE VERSION VARCHAR(32) CONSTANT '2014-05-11 1-Alpha';
+  VARIABLE VERSION VARCHAR(32) CONSTANT '2014-05-11 1-Beta';
 
 -- Utility schema.
 ALTER MODULE DB2UNIT PUBLISH
