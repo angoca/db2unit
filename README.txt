@@ -101,7 +101,7 @@ environment:
      END @
 
     CREATE OR REPLACE PROCEDURE SETUP()
-      BEGIN
+     BEGIN
       -- Your code
      END @
 
@@ -123,7 +123,7 @@ and they should not have any argument, like this:
      BEGIN
       -- Your code using the test functions.
       ASSERT_STRING_EQUALS(EXPECTED, ACTUALS);
-     END@
+     END @
 
 In the previous test, you compared two strings. You can use other types of
 assertions. Please visit the API section:
