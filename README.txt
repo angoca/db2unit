@@ -122,7 +122,7 @@ and they should not have any argument, like this:
     CREATE OR REPLACE PROCEDURE TEST_my_first_test()
      BEGIN
       -- Your code using the test functions.
-      ASSERT_STRING_EQUALS(EXPECTED, ACTUALS);
+      ASSERT_STRING_EQUALS(EXPECTED, ACTUAL);
      END @
 
 In the previous test, you compared two strings. You can use other types of
