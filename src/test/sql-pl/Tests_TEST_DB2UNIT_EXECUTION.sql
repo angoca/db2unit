@@ -165,7 +165,7 @@ CREATE OR REPLACE PROCEDURE TEST_3()
 
   SET SCHEMA_NAME = 'TEST_DB2UNIT_EXECUTION_TEST_3';
   SET EXPECTED_MSG = 'The reports table already exist: ' || SCHEMA_NAME
-    || '.REPORT_TESTS                                                     ';
+    || '.REPORT_TESTS';
 
   CALL DB2UNIT_1B.DB2UNIT.RUN_SUITE(SCHEMA_NAME);
   COMMIT;
