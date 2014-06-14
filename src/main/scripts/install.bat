@@ -55,6 +55,7 @@ goto:eof
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\Body.sql
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\Asserts.sql
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\AssertsNoMessage.sql
+ if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\Version.sql
 
  echo Please visit the wiki to learn how to use and configure this utility
  echo https://github.com/angoca/db2unit/wiki
@@ -63,6 +64,7 @@ goto:eof
  echo.
  if %continue% EQU 1 (
   echo db2unit was successfully installed
+  db2 -x "values db2unit.version"
  ) else (
   echo "Check the error(s) and reinstall the utility"
  )

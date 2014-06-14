@@ -46,6 +46,7 @@ install() {
  [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Body.sql
  [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Asserts.sql
  [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/AssertsNoMessage.sql
+ [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Version.sql
 
  echo "Please visit the wiki to learn how to use and configure this utility"
  echo "https://github.com/angoca/db2unit/wiki"
@@ -54,6 +55,7 @@ install() {
  echo
  if [ ${continue} == true ] ; then
   echo "db2unit was successfully installed"
+  db2 -x "values db2unit.version"
  else
   echo "Check the error(s) and reinstall the utility"
  fi
