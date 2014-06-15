@@ -77,6 +77,12 @@ ALTER MODULE DB2UNIT PUBLISH
 
 -- GENERAL
 
+-- Registers the name. Useful for a failing test without assertions call.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE REGISTER_MESSAGE(
+  IN MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT
+  );
+
 -- Fails the current test.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE FAIL (
