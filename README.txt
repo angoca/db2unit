@@ -23,7 +23,7 @@ These are some useful links:
     https://github.com/angoca/db2unit/wiki
  * The released versions are published at:
     https://github.com/angoca/db2unit/releases
- * The issue tracked for bugs and comments is at:
+ * The issue tracker for bugs and comments is at:
     https://github.com/angoca/db2unit/issues
 
 Author:
