@@ -104,7 +104,7 @@ ALTER MODULE DB2UNIT ADD
 
 /**
  * Description of current test. This variable is useful when no assertions are
- * called, but the test fails.
+ * called, but the test fails. It is only used when an exception is catched.
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE TEST_MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT DEFAULT NULL @
@@ -226,7 +226,7 @@ ALTER MODULE DB2UNIT ADD
   CALL LOGGER.DEBUG(LOGGER_ID, 'Report ' || REPORTS_TABLE);
   CALL LOGGER.DEBUG(LOGGER_ID, 'ExecId ' || EXEC_ID);
   CALL LOGGER.DEBUG(LOGGER_ID, 'TestName ' || COALESCE(TESTNAME, 'NoTestName'));
-  CALL LOGGER.DEBUG(LOGGER_ID, 'Message ' || MSG);
+  CALL LOGGER.DEBUG(LOGGER_ID, 'Message "' || MSG || '"');
 
 
   IF (CUR_SCHEMA IS NULL OR REPORTS_TABLE IS NULL) THEN
