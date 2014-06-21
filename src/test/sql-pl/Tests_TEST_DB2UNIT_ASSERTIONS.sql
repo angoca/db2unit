@@ -662,8 +662,11 @@ CREATE OR REPLACE PROCEDURE TEST_STRING_14()
   DECLARE STR_1 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
   DECLARE STR_2 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
 
-  SET MSG = 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 tex3'
-    ;
+  SET MSG = 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3at';
   SET EXPECTED_MSG = MSG || 'The content of both strings is different';
   SET STR_1 = 'String1';
   SET STR_2 = 'String2';
@@ -701,8 +704,11 @@ CREATE OR REPLACE PROCEDURE TEST_STRING_15()
   DECLARE STR_1 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
   DECLARE STR_2 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
 
-  SET MSG = 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 tex'
-    ;
+  SET MSG = 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3a';
   SET EXPECTED_MSG = MSG || '.The content of both strings is different';
   SET STR_1 = 'String1';
   SET STR_2 = 'String2';
@@ -740,8 +746,11 @@ CREATE OR REPLACE PROCEDURE TEST_STRING_16()
   DECLARE STR_1 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
   DECLARE STR_2 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
 
-  SET MSG = 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 te'
-    ;
+  SET MSG = 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3';
   SET EXPECTED_MSG = MSG || '. The content of both strings is different';
   SET STR_1 = 'String1';
   SET STR_2 = 'String2';
@@ -779,8 +788,11 @@ CREATE OR REPLACE PROCEDURE TEST_STRING_17()
   DECLARE STR_1 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
   DECLARE STR_2 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
 
-  SET MSG = 'Tex'' tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 tex3'
-    ;
+  SET MSG = 'Tex'' tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3at';
   SET EXPECTED_MSG = MSG || 'The content of both strings is different';
   SET STR_1 = 'String1';
   SET STR_2 = 'String2';
@@ -818,8 +830,11 @@ CREATE OR REPLACE PROCEDURE TEST_STRING_18()
   DECLARE STR_1 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
   DECLARE STR_2 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
 
-  SET MSG = 'Tex'' tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 tex'
-    ;
+  SET MSG = 'Tex'' tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3a';
   SET EXPECTED_MSG = MSG || '.The content of both strings is different';
   SET STR_1 = 'String1';
   SET STR_2 = 'String2';
@@ -857,8 +872,11 @@ CREATE OR REPLACE PROCEDURE TEST_STRING_19()
   DECLARE STR_1 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
   DECLARE STR_2 ANCHOR DB2UNIT_1B.REPORT_TESTS.MESSAGE;
 
-  SET MSG = 'Tex'' tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 te'
-    ;
+  SET MSG = 'Tex'' tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3';
   SET EXPECTED_MSG = MSG || '. The content of both strings is different';
   SET STR_1 = 'String1';
   SET STR_2 = 'String2';
@@ -899,7 +917,11 @@ CREATE OR REPLACE PROCEDURE TEST_STRING_20()
     SET RAISED_433 = TRUE;
 
   CALL DB2UNIT.REGISTER_MESSAGE('String too long');
-  SET MSG = 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 tex3a';
+  SET MSG = 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3 tex4 tex5 tex6 tex7 tex8 tex9 tex0 tex1 tex2 '
+    || 'Tex1 tex2 tex3ate';
   SET EXPECTED_MSG = MSG || '. The content of both strings is different';
   SET STR_1 = 'String1';
   SET STR_2 = 'String2';
