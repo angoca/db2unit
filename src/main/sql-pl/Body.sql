@@ -798,13 +798,13 @@ ALTER MODULE DB2UNIT ADD
     BEGIN
      INSERT INTO EXECUTION_REPORTS (DATE, EXECUTION_ID, STATUS, MESSAGE_REPORT)
        VALUES (CURRENT TIMESTAMP, EXEC_ID, CURRENT_STATUS, 'There is another '
-       || 'execution of the same test suite concurrently.');
+       || 'concurrent execution on of the same test suite.');
      INSERT INTO EXECUTION_REPORTS (DATE, EXECUTION_ID, STATUS, MESSAGE_REPORT)
        VALUES (CURRENT TIMESTAMP, EXEC_ID, CURRENT_STATUS, 'If not, please '
        || 'execute CALL DB2UNIT.RELEASE_LOCK(''' || COALESCE(SCHEMA_NAME,
        'SUITE_NAME') || ''')');
-     CALL LOGGER.WARN(LOGGER_ID, 'There is another execution of the same '
-       || 'test suite concurrently');
+     CALL LOGGER.WARN(LOGGER_ID, 'There is another concurrent execution of the '
+       || 'same test suite');
      SET CONTINUE = FALSE;
     END;
   DECLARE EXIT HANDLER FOR SQLWARNING
