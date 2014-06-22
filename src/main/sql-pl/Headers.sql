@@ -87,6 +87,23 @@ ALTER MODULE DB2UNIT PUBLISH
   NAME ANCHOR SYSCAT.SCHEMATA.SCHEMANAME
   );
 
+-- Changes the transaction autonomus mode.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE SET_AUTONOMOUS (
+  IN AUTONOMOUS BOOLEAN
+  );
+
+-- Changes the sort type for the procedures.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE RANDOM_SORT (
+  IN RANDOM BOOLEAN
+  );
+
+-- Show the license used in this program.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE LICENSE (
+  );
+
 -- GENERAL
 
 -- Registers the name. Useful for a failing test without assertions call.
@@ -354,26 +371,4 @@ ALTER MODULE DB2UNIT PUBLISH
   IN SCHEMA ANCHOR SYSCAT.TABLES.TABSCHEMA,
   IN TABLE_NAME ANCHOR SYSCAT.TABLES.TABNAME
   );
-
--- Changes the transaction mode to non-autonomous
-ALTER MODULE DB2UNIT PUBLISH
-  PROCEDURE SET_NON_AUTONOMOUS (
-  );
-
--- Changes the transaction mode to autonomous
-ALTER MODULE DB2UNIT PUBLISH
-  PROCEDURE SET_AUTONOMOUS (
-  );
-
--- Show the license used in this program.
-ALTER MODULE DB2UNIT PUBLISH
-  PROCEDURE LICENSE (
-  );
-
--- Changes the sort type for the procedures.
-ALTER MODULE DB2UNIT PUBLISH
-  PROCEDURE RANDOM_SORT (
-  IN RANDOM BOOLEAN
-  );
-
 
