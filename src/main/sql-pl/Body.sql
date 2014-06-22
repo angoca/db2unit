@@ -953,6 +953,8 @@ ALTER MODULE DB2UNIT ADD
   ELSE
    -- Puts the lock for the current suite.
    INSERT INTO SUITE_LOCKS (NAME) VALUES (SCHEMA_NAME);
+   INSERT INTO SUITES_EXECUTIONS (SUITE_NAME, EXECUTION_ID)
+     VALUES (SCHEMA_NAME, EXEC_ID);
 
    -- If there is not another execution of the same test suite.
    IF (CONTINUE = TRUE) THEN
