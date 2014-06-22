@@ -798,13 +798,13 @@ ALTER MODULE DB2UNIT ADD
     BEGIN
      INSERT INTO EXECUTION_REPORTS (DATE, EXECUTION_ID, STATUS, MESSAGE_REPORT)
        VALUES (CURRENT TIMESTAMP, EXEC_ID, CURRENT_STATUS, 'There is another '
-       || 'execution of the same test suite concurrently.');
+       || 'concurrent execution on of the same test suite.');
      INSERT INTO EXECUTION_REPORTS (DATE, EXECUTION_ID, STATUS, MESSAGE_REPORT)
        VALUES (CURRENT TIMESTAMP, EXEC_ID, CURRENT_STATUS, 'If not, please '
        || 'execute CALL DB2UNIT.RELEASE_LOCK(''' || COALESCE(SCHEMA_NAME,
        'SUITE_NAME') || ''')');
-     CALL LOGGER.WARN(LOGGER_ID, 'There is another execution of the same '
-       || 'test suite concurrently');
+     CALL LOGGER.WARN(LOGGER_ID, 'There is another concurrent execution of the '
+       || 'same test suite');
      SET CONTINUE = FALSE;
     END;
   DECLARE EXIT HANDLER FOR SQLWARNING
@@ -1181,27 +1181,14 @@ ALTER MODULE DB2UNIT ADD
  END P_RELEASE_LOCK @
 
 /**
- * Changes the transaction mode to non-autonomous.
- */
-ALTER MODULE DB2UNIT ADD
-  PROCEDURE SET_NON_AUTONOMOUS (
-  )
-  LANGUAGE SQL
-  SPECIFIC P_SET_NON_AUTONOMOUS
-  DYNAMIC RESULT SETS 0
-  MODIFIES SQL DATA
-  NOT DETERMINISTIC
-  NO EXTERNAL ACTION
-  PARAMETER CCSID UNICODE
- P_SET_NON_AUTONOMOUS: BEGIN
-  SET AUTONOMOUS_EXEC = FALSE;
- END P_SET_NON_AUTONOMOUS @
-
-/**
- * Changes the transaction mode to autonomous.
+ * Changes the transaction autonomous mode.
+ *
+ * IN AUTONOMOUS
+ *   True if the procedure should be executed autnomously. False otherwise.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE SET_AUTONOMOUS (
+  IN AUTONOMOUS BOOLEAN
   )
   LANGUAGE SQL
   SPECIFIC P_SET_AUTONOMOUS
@@ -1211,8 +1198,29 @@ ALTER MODULE DB2UNIT ADD
   NO EXTERNAL ACTION
   PARAMETER CCSID UNICODE
  P_SET_AUTONOMOUS: BEGIN
-  SET AUTONOMOUS_EXEC = TRUE;
+  SET AUTONOMOUS_EXEC = AUTONOMOUS;
  END P_SET_AUTONOMOUS @
+
+/**
+ * Changes the sort type for the procedures.
+ *
+ * IN RANDOM
+ *   True if the sort should be random, false if the sort is alphabetical.
+ */
+ALTER MODULE DB2UNIT ADD
+  PROCEDURE RANDOM_SORT (
+  IN RANDOM BOOLEAN
+  )
+  LANGUAGE SQL
+  SPECIFIC P_RANDOM_SORT
+  DYNAMIC RESULT SETS 0
+  READS SQL DATA
+  NOT DETERMINISTIC
+  NO EXTERNAL ACTION
+  PARAMETER CCSID UNICODE
+ P_RANDOM_SORT: BEGIN
+  SET RANDOM_SORT = RANDOM;
+ END P_RANDOM_SORT @
 
 /**
  * Shows the license of this framework.
@@ -1235,25 +1243,4 @@ ALTER MODULE DB2UNIT ADD
     ORDER BY NUMBER;
   OPEN LICENSE_CURSOR;
  END P_LICENSE @
-
-/**
- * Changes the sort type for the procedures.
- *
- * IN RANDOM
- *   True if the sort should be random, false if the sort is alphabetical.
- */
-ALTER MODULE DB2UNIT ADD
-  PROCEDURE RANDOM_SORT (
-  IN RANDOM BOOLEAN
-  )
-  LANGUAGE SQL
-  SPECIFIC P_RANDOM_SORT
-  DYNAMIC RESULT SETS 0
-  READS SQL DATA
-  NOT DETERMINISTIC
-  NO EXTERNAL ACTION
-  PARAMETER CCSID UNICODE
- P_RANDOM_SORT: BEGIN
-  SET RANDOM_SORT = RANDOM;
- END P_RANDOM_SORT @
 
