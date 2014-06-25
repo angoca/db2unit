@@ -920,18 +920,23 @@ ALTER MODULE DB2UNIT ADD
    CALL LOGGER.INFO(LOGGER_ID, 'Self testing values');
   END IF;
 
+  SET EXEC_ID = GET_RANDOM_ID();
+  SET EXEC_ID_COPY = EXEC_ID;
+  CALL LOGGER.INFO(LOGGER_ID, 'EXEC_ID: ' || EXEC_ID);
+
   -- Check input values.
   IF (PREV_EXEC_ID IS NOT NULL AND PROC_NAME IS NOT NULL) THEN
-   CALL LOGGER.INFO(LOGGER_ID, 'Previous execution ID and a procname was '
-     || 'given');
+   INSERT INTO EXECUTION_REPORTS (DATE, EXECUTION_ID, STATUS, MESSAGE_REPORT)
+     VALUES (CURRENT TIMESTAMP, EXEC_ID, CURRENT_STATUS, SUBSTR('Previous '
+     || 'execution ID (PREV_EXEC_ID) and a test name (PROC_NAME) were given ('
+     || PREV_EXEC_ID || ', ' || PROC_NAME|| ')', 1, 128));
+   CALL LOGGER.INFO(LOGGER_ID, 'Previous execution ID (PREV_EXEC_ID) and a '
+     || 'test name (PROC_NAME) were given (' || PREV_EXEC_ID || ', '
+     || PROC_NAME|| ')');
    SET CONTINU = FALSE;
   END IF;
 
   IF (CONTINU = TRUE) THEN
-   SET EXEC_ID = GET_RANDOM_ID();
-   SET EXEC_ID_COPY = EXEC_ID;
-   CALL LOGGER.INFO(LOGGER_ID, 'EXEC_ID: ' || EXEC_ID);
-
    IF (SCHEMA_NAME IS NULL) THEN
     SET SCHEMA_NAME = CURRENT SCHEMA;
    END IF;
