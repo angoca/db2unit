@@ -794,6 +794,7 @@ ALTER MODULE DB2UNIT publish
 
 /**
  * Execute the tests defined in a set of stored procedure in the given schema.
+ * PREV_EXEC_ID and PROC_NAME cannot be passed at the same time.
  *
  * IN SCHEMA_NAME
  *   Name of the schema where the stored procedures for tests are stored.
