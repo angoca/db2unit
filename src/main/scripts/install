@@ -37,6 +37,8 @@ installScript() {
 }
 
 install() {
+ local  __retInstall=$1
+
  echo "Checking prerequisites"
  [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Prereqs.sql
  echo "Installing utility"
@@ -56,28 +58,42 @@ install() {
  if [ ${continue} == true ] ; then
   echo "db2unit was successfully installed"
   db2 -x "values db2unit.version"
+  retValue=0
  else
   echo "Check the error(s) and reinstall the utility"
+  unset continue
+  # Exit in execution.
+  retValue=1
  fi
+
+ local  myRetInstall=${retValue}
+ eval $__retInstall="'${myRetInstall}'"
 }
 
 init() {
+ local  __retInit=$1
+
  if [ -x init ] ; then
   . ./init
  fi
 
  echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
 
- install
+ install retInstall
+ local  myRetInit=${retInstall}
+ eval $__retInit="'${myRetInit}'"
 }
 
 # Checks if there is already a connection established
 db2 connect > /dev/null
 if [ ${?} -eq 0 ] ; then
- init
+ init ret
 else
  echo "Please connect to a database before the execution of the installation."
  echo "Remember that to call the script the command is '. ./install'"
+ ret=2
 fi
 unset continue
+
+return ${ret}
 
