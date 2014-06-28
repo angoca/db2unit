@@ -24,6 +24,7 @@
 # Made in COLOMBIA.
 
 ${Script:continue}=1
+${Script:retValue}=0
 
 # Installs a given script.
 function installScript($script) {
@@ -50,12 +51,16 @@ function install() {
  echo "https://github.com/angoca/db2unit/wiki"
  echo "To report an issue or provide feedback, please visit:"
  echo "https://github.com/angoca/db2unit/issues"
- Write-Object ' '
+ echo ' '
  if ( ${Script:continue} ) {
   echo "db2unit was successfully installed"
-  db2 -x "values db2unit.version"
+  db2 -x "values 'Database: ' || current server"
+  db2 -x "values 'Version: ' || db2unit.version"
+  db2 -x "select 'Schema: ' || base_moduleschema from syscat.modules where moduleschema = 'SYSPUBLIC' and modulename = 'DB2UNIT'"
+  ${Script:retValue}=0
  } else {
   echo "Check the error(s) and reinstall the utility"
+  ${Script:retValue}=1
  }
 }
 
@@ -76,5 +81,8 @@ if ( $LastExitCode -eq 0 ) {
 } else {
  echo "Please connect to a database before the execution of the installation."
  echo "Load the DB2 profile with: set-item -path env:DB2CLP -value `"**`$$**`""
+ ${Script:retValue}=2
 }
+
+exit ${Script:retValue}
 

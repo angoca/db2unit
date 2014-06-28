@@ -25,6 +25,7 @@
 :: Made in COLOMBIA.
 
 set continue=1
+set retValue=0
 
 :: Checks if there is already a connection established
 db2 connect > NUL
@@ -32,7 +33,9 @@ if %ERRORLEVEL% EQU 0 (
  call:init
 ) else (
  echo Please connect to a database before the execution of the installation.
+ set retValue=2
 )
+exit /B %retValue%
 goto:eof
 
 :: Installs a given script.
@@ -64,9 +67,13 @@ goto:eof
  echo.
  if %continue% EQU 1 (
   echo db2unit was successfully installed
-  db2 -x "values db2unit.version"
+  db2 -x "values 'Database: ' || current server"
+  db2 -x "values 'Version: ' || db2unit.version"
+  db2 -x "select 'Schema: ' || base_moduleschema from syscat.modules where moduleschema = 'SYSPUBLIC' and modulename = 'DB2UNIT'"
+  set retValue=0
  ) else (
   echo "Check the error(s) and reinstall the utility"
+  set retValue=1
  )
 goto:eof
 

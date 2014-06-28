@@ -64,7 +64,6 @@ install() {
  else
   echo "Check the error(s) and reinstall the utility"
   unset continue
-  # Exit in execution.
   retValue=1
  fi
 
