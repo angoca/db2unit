@@ -85,5 +85,9 @@ goto:eof
  echo db2unit is licensed under the terms of the GNU General Public License v3.0
 
  call:install
+
+ if EXIST uninit.bat (
+  call uninit.bat
+ )
 goto:eof
 
