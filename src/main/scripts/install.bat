@@ -64,6 +64,9 @@ goto:eof
  echo.
  if %continue% EQU 1 (
   echo db2unit was successfully installed
+  db2 -x "values 'Database: ' || current server"
+  db2 -x "values 'Version: ' || db2unit.version"
+  db2 -x "select 'Schema: ' || base_moduleschema from syscat.modules where moduleschema = 'SYSPUBLIC' and modulename = 'DB2UNIT'"
   db2 -x "values db2unit.version"
  ) else (
   echo "Check the error(s) and reinstall the utility"
