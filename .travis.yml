@@ -1,0 +1,44 @@
+env:
+  - ENV=release
+  - ENV=test
+
+before_install:
+  # Install the required libraries
+  - sudo apt-get update -qq
+  - sudo apt-get -y install libaio1 ksh libstdc++6-4.4-pic libstdc++6-4.4-dev libstdc++5 rpm
+  - sudo apt-get -y install libpam0g:i386
+  - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
+  - sudo apt-get install numactl
+  # Retrieves and extracts the DB2 binaries
+  - cd /tmp
+  - wget https://iwm.dhe.ibm.com/sdfdl/v2/regs2/db2pmopn/db2_v105/expc/Xa.2/Xb.aA_60_-idZcPt9tXWVNRLjP1JF9P_RkQwewJfoiVqA/Xc.db2_v105/expc/v10.5fp1_linuxx64_expc.tar.gz/Xd./Xf.LPr.D1vk/Xg.7575683/Xi.swg-db2expressc/XY.regsrvs/XZ.NakzBJGvGJqAVUI5kAxfrEDaJNc/v10.5fp1_linuxx64_expc.tar.gz
+  - tar zvxf v10.5fp1_linuxx64_expc.tar.gz
+  - cd expc
+  # Checks the prerequisites
+  - ./db2prereqcheck -i
+  # Install DB2 and creates an instance (Response file)
+  - sudo ./db2setup -r /home/travis/build/angoca/db2-travis/doc/db2expc.rsp || cat /tmp/db2setup.log
+  # Creates the database
+  - sudo su - db2inst1 -c "db2 create db db2unit"
+  - sudo su - db2inst1 -c "db2 connect to db2unit;db2 grant dbadm on database to user $USER"
+  # Retrieves and extract log4db2
+  - wget https://github.com/angoca/log4db2/releases/download/1-Beta-A/log4db2.tar.gz
+  - tar zxvf log4db2.tar.gz
+  # Install log4db2
+  - cd log4db2
+  - . ~db2unit/sqllib/db2profile
+  - db2 connect to db2unit
+  - . ./install
+
+install:
+  - cd
+  - db2 db2unit
+  - sh -c "if [ '$ENV' = 'release' ]; then mvn fi"
+  - sh -c "if [ '$ENV' = 'release' ]; then . ~db2unit/sqllib/db2profile ; db2 connect to db2unit ; cd target/db2unit/db2unit ; . ./install fi"
+  - sh -c "if [ '$ENV' = 'test' ]; then . ~db2unit/sqllib/db2profile ; db2 connect to db2unit ; cd src/test/scripts ; . ./init-dev ; cd ../../main/scripts ; . ./install if"
+  - cd src/test/scripts ; . ./init-dev
+  - . ./allTests i
+
+script:
+  - . ./allTests -np
+
