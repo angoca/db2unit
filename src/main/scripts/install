@@ -82,6 +82,11 @@ init() {
  echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
 
  install retInstall
+
+ if [ -x uninit ] ; then
+  . ./uninit
+ fi
+
  local  myRetInit=${retInstall}
  eval $__retInit="'${myRetInit}'"
 }

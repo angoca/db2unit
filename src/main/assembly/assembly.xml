@@ -55,6 +55,7 @@
     <include>**/init</include>
     <include>**/install</include>
     <include>**/reinstall</include>
+    <include>**/uninit</include>
     <include>**/uninstall</include>
    </includes>
    <fileMode>0777</fileMode>
