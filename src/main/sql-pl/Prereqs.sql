@@ -71,7 +71,7 @@ BEGIN
  END IF;
  IF (CONT = TRUE AND EXIST >= 1) THEN
   SET STEP = 4;
-  -- Checks log procedure in module.
+  -- Checks getLogger procedure in module.
   SELECT COUNT(1) INTO EXIST
     FROM SYSCAT.MODULEOBJECTS
     WHERE OBJECTSCHEMA LIKE 'LOGGER_%'
