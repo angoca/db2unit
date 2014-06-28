@@ -72,6 +72,10 @@ function init() {
  echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
 
  install
+
+ if ( Test-Path -Path uninit.ps1 -PathType Leaf ) {
+  .\uninit.ps1
+ }
 }
 
 # Checks if there is already a connection established
