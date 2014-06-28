@@ -22,6 +22,8 @@
 
 SET CURRENT SCHEMA DB2UNIT_1B;
 
+SET PATH = SYSTEM PATH, CURRENT USER;
+
 /**
  * Writes the version. This script is the last in order to validate the
  * installation for other components.

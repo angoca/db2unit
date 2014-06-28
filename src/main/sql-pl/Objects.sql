@@ -22,6 +22,8 @@
 
 SET CURRENT SCHEMA DB2UNIT_1B;
 
+SET PATH = SYSTEM PATH, CURRENT USER;
+
 /**
  * Creates the necessary objects to run the tests.
  *
