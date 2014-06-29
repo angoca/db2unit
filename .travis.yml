@@ -1,8 +1,7 @@
 env:
   - ENV=release
-  - ENV=test
-  - TESTS=script
-  - TESTS=manual
+  - ENV=test TESTS=script
+  - ENV=test TESTS=manual
 
 before_install:
   # Install the required libraries
