@@ -1,6 +1,8 @@
 env:
   - ENV=release
   - ENV=test
+  - TESTS=script
+  - TESTS=manual
 
 before_install:
   # Install the required libraries
@@ -43,8 +45,15 @@ install:
   - db2 "CREATE TABLESPACE SYSTOOLSPACE IN IBMCATGROUP MANAGED BY AUTOMATIC STORAGE USING STOGROUP IBMSTOGROUP EXTENTSIZE 4"
 
 script:
-  - . ./test TEST_DB2UNIT_EMPTY i
-  - . ./test TEST_DB2UNIT_EXECUTION i
-  - . ./test TEST_DB2UNIT_ASSERTIONS i
-  - . ./allTests -np
+  - sh -c "if [ '$TESTS' = 'script' ]; then . ./test TEST_DB2UNIT_EMPTY i ; fi"
+  - sh -c "if [ '$TESTS' = 'script' ]; then . ./test TEST_DB2UNIT_EXECUTION i ; fi"
+  - sh -c "if [ '$TESTS' = 'script' ]; then . ./test TEST_DB2UNIT_ASSERTIONS i ; fi"
+  - sh -c "if [ '$TESTS' = 'script' ]; then . ./allTests -np ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then cd ../sql-pl ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 -tf test TEST_DB2UNIT_EMPTY.sql ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 -tf test TEST_DB2UNIT_EXECUTION.sql ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 -tf test TEST_DB2UNIT_ASSERTIONS.sql ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 \"CALL DB2UNIT.RUN_TEST('TEST_DB2UNIT_EMPTY')\" ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 \"CALL DB2UNIT.RUN_TEST('TEST_DB2UNIT_EXECUTION')\" ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 \"CALL DB2UNIT.RUN_TEST('TEST_DB2UNIT_ASSERTIONS')\" ; fi"
 
