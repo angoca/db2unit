@@ -44,10 +44,13 @@ else
   PAUSE=false
   TIME_INI=$(date +"%T")
   MILLIS_INI=$(date +"%s")
-  echo "Executing all tests."
  else
   PAUSE=true
+ fi
+ if [ "${PAUSE}" == "true" ] ; then
   echo "Executing all tests with pauses in between."
+ else
+  echo "Executing all tests."
  fi
 
  executeTest TEST_DB2UNIT_EMPTY
