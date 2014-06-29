@@ -44,11 +44,11 @@ install:
   - db2 "CREATE TABLESPACE SYSTOOLSPACE IN IBMCATGROUP MANAGED BY AUTOMATIC STORAGE USING STOGROUP IBMSTOGROUP EXTENTSIZE 4"
 
 script:
-  - sh -c "if [ '$TESTS' = 'script' ]; then . ./test TEST_DB2UNIT_EMPTY i ; fi"
-  - sh -c "if [ '$TESTS' = 'script' ]; then . ./test TEST_DB2UNIT_EXECUTION i ; fi"
-  - sh -c "if [ '$TESTS' = 'script' ]; then . ./test TEST_DB2UNIT_ASSERTIONS i ; fi"
-  - sh -c "if [ '$TESTS' = 'script' ]; then . ./allTests -np ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then cd ../sql-pl ; fi"
+  - sh -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test TEST_DB2UNIT_EMPTY i ; fi"
+  - sh -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test TEST_DB2UNIT_EXECUTION i ; fi"
+  - sh -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test TEST_DB2UNIT_ASSERTIONS i ; fi"
+  - sh -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./allTests -np ; fi"
+  - cd ../sql-pl
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf TEST_DB2UNIT_EMPTY.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf TEST_DB2UNIT_EXECUTION.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf TEST_DB2UNIT_ASSERTIONS.sql ; fi"
