@@ -51,8 +51,8 @@ script:
   - sh -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./allTests -np ; fi"
   - cd ../sql-pl
   - pwd ; ls -l
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf TEST_DB2UNIT_EMPTY.sql ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf TEST_DB2UNIT_EXECUTION.sql ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; ls -l ; db2 -tf TEST_DB2UNIT_EMPTY.sql ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf ${TRAVIS_BUILD_DIR}/src/test/sql-pl/TEST_DB2UNIT_EXECUTION.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf TEST_DB2UNIT_ASSERTIONS.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EMPTY')\" ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EXECUTION')\" ; fi"
