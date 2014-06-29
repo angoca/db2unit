@@ -32,7 +32,7 @@ before_install:
 
 install:
   - cd
-  - db2 db2unit
+  - cd db2unit
   - sh -c "if [ '$ENV' = 'release' ]; then mvn fi"
   - sh -c "if [ '$ENV' = 'release' ]; then . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; cd target/db2unit/db2unit ; . ./install fi"
   - sh -c "if [ '$ENV' = 'test' ]; then . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; cd src/test/scripts ; . ./init-dev ; cd ../../main/scripts ; . ./install if"
