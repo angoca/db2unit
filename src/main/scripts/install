@@ -40,22 +40,22 @@ install() {
  local  __retInstall=$1
 
  echo "Checking prerequisites"
- [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Prereqs.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Prereqs.sql
  echo "Installing utility"
- [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/ObjectsAdmin.sql
- [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Objects.sql
- [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Headers.sql
- [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Body.sql
- [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Asserts.sql
- [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/AssertsNoMessage.sql
- [ ${continue} == true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Version.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/ObjectsAdmin.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Objects.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Headers.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Body.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Asserts.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/AssertsNoMessage.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Version.sql
 
  echo "Please visit the wiki to learn how to use and configure this utility"
  echo "https://github.com/angoca/db2unit/wiki"
  echo "To report an issue or provide feedback, please visit:"
  echo "https://github.com/angoca/db2unit/issues"
  echo
- if [ ${continue} == true ] ; then
+ if [ ${continue} = true ] ; then
   echo "db2unit was successfully installed"
   db2 -x "values 'Database: ' || current server"
   db2 -x "values 'Version: ' || db2unit.version"
