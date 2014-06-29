@@ -32,9 +32,9 @@ before_install:
 
 install:
   - cd ${TRAVIS_BUILD_DIR}
-  - sh -c "if [ '$ENV' = 'release' ]; then mvn ; fi"
-  - sh -c "if [ '$ENV' = 'release' ]; then . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; cd target/db2unit/db2unit ; . ./install ; fi"
-  - sh -c "if [ '$ENV' = 'test' ]; then . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; cd src/test/scripts ; . ./init-dev ; cd ../../main/scripts ; . ./install ; if"
+  - bash -c "if [ '$ENV' = 'release' ]; then mvn ; fi"
+  - bash -c "if [ '$ENV' = 'release' ]; then . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; cd target/db2unit/db2unit ; . ./install ; fi"
+  - bash -c "if [ '$ENV' = 'test' ]; then . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; cd src/test/scripts ; . ./init-dev ; cd ../../main/scripts ; . ./install ; fi"
   - cd src/test/scripts ; . ./init-dev
 
 script:
