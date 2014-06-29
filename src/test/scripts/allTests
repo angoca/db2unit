@@ -26,7 +26,7 @@
 executeTest() {
  schema=${1}
  echo "====>Next: ${schema}"
- if [ "${PAUSE}" == "true" ] ; then
+ if [ "${PAUSE}" = "true" ] ; then
   read -p "Press enter to continue"
  . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${schema} i x
  else
@@ -40,14 +40,14 @@ if [ ${?} -ne 0 ] ; then
  echo "Please connect to a database before the execution of the tests."
  echo "Remember that to call the script the command is '. ./allTests'"
 else
- if [ "${1}" == "-np" ] ; then
+ if [ "${1}" = "-np" ] ; then
   PAUSE=false
   TIME_INI=$(date +"%T")
   MILLIS_INI=$(date +"%s")
  else
   PAUSE=true
  fi
- if [ "${PAUSE}" == "true" ] ; then
+ if [ "${PAUSE}" = "true" ] ; then
   echo "Executing all tests with pauses in between."
  else
   echo "Executing all tests."
