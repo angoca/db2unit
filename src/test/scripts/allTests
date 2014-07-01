@@ -24,15 +24,17 @@
 
 # Execute a given test.
 executeTest() {
- schema=${1}
+ SCHEMA=${1}
+ PAUSE=${2}
  echo "====>Next: ${schema}"
  if [ "${PAUSE}" = "true" ] ; then
   read -p "Press enter to continue"
- . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${schema} i x
+ . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i x
  else
- . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${schema} x
+ . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} x
  fi
 }
+
 . ./init-dev
 
 db2 connect > /dev/null
@@ -53,9 +55,9 @@ else
   echo "Executing all tests."
  fi
 
- executeTest TEST_DB2UNIT_EMPTY
- executeTest TEST_DB2UNIT_EXECUTION
- executeTest TEST_DB2UNIT_ASSERTIONS
+ executeTest TEST_DB2UNIT_EMPTY ${PAUSE}
+ executeTest TEST_DB2UNIT_EXECUTION ${PAUSE}
+ executeTest TEST_DB2UNIT_ASSERTIONS ${PAUSE}
 
  if [ "${PAUSE}" != "true" ] ; then
   MILLIS_END=$(date +"%s")
