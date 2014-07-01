@@ -52,7 +52,7 @@ script:
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_EMPTY.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_EXECUTION.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_ASSERTIONS.sql ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EMPTY')\" | tee /tmp/db2unit.output ; travis/procSP ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EXECUTION')\" | tee /tmp/db2unit.output ; travis/procSP ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_ASSERTIONS')\" | tee /tmp/db2unit.output ; travis/procSP ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EMPTY')\" ; ../../../travis/procSP ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EXECUTION')\" ; ../../../travis/procSP ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_ASSERTIONS')\" ; ../../../travis/procSP ; fi"
 
