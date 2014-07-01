@@ -12,13 +12,13 @@ before_install:
   - sudo apt-get install numactl
   # Retrieves and extracts the DB2 binaries
   - cd /tmp
-  - wget https://iwm.dhe.ibm.com/sdfdl/v2/regs2/db2pmopn/db2_v105/expc/Xa.2/Xb.aA_60_-idYXzbnoM8mZxl0htcH_J1NxWKyIXr8lKMw/Xc.db2_v105/expc/v10.5fp1_linuxx64_expc.tar.gz/Xd./Xf.LPr.D1vk/Xg.7624550/Xi.swg-db2expressc/XY.regsrvs/XZ.3HAzQauILTDSayqvd3wXmAPcM40/v10.5fp1_linuxx64_expc.tar.gz
+  - wget https://iwm.dhe.ibm.com/sdfdl/v2/regs2/db2pmopn/db2_v105/expc/Xa.2/Xb.aA_60_-idYXz2bNIQrpIb5vgVlP5j5tiY3J6FuhlyA/Xc.db2_v105/expc/v10.5fp1_linuxx64_expc.tar.gz/Xd./Xf.LPr.D1vk/Xg.7627512/Xi.swg-db2expressc/XY.regsrvs/XZ.N781lmLu2D9w71ahgcSGz4MiBR4/v10.5fp1_linuxx64_expc.tar.gz
   - tar zvxf v10.5fp1_linuxx64_expc.tar.gz
   - cd expc
   # Checks the prerequisites
   - ./db2prereqcheck -i
   # Install DB2 and creates an instance (Response file)
-  - sudo ./db2setup -r /home/travis/build/angoca/db2unit/doc/db2expc.rsp || cat /tmp/db2setup.log
+  - sudo ./db2setup -r /home/travis/build/angoca/db2unit/travis/db2expc.rsp || cat /tmp/db2setup.log
   # Changes the security
   - id
   - sudo usermod -a -G db2iadm1 $USER
@@ -44,17 +44,15 @@ install:
   - db2 "CREATE TABLESPACE SYSTOOLSPACE IN IBMCATGROUP MANAGED BY AUTOMATIC STORAGE USING STOGROUP IBMSTOGROUP EXTENTSIZE 4"
 
 script:
-  - pwd ; ls -l
   - sh -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test ; fi" x TEST_DB2UNIT_EMPTY i
   - sh -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test ; fi" x TEST_DB2UNIT_EXECUTION i
   - sh -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test ; fi" x TEST_DB2UNIT_ASSERTIONS i
   - sh -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./allTests ; fi" x -np
   - cd ../sql-pl
-  - pwd ; ls -l
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_EMPTY.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_EXECUTION.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_ASSERTIONS.sql ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EMPTY')\" ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EXECUTION')\" ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_ASSERTIONS')\" ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EMPTY')\" | tee /tmp/db2unit.output ; travis/procSP ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EXECUTION')\" | tee /tmp/db2unit.output ; travis/procSP ; fi"
+  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_ASSERTIONS')\" | tee /tmp/db2unit.output ; travis/procSP ; fi"
 
