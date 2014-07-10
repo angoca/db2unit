@@ -22,6 +22,8 @@
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
+export RET=0
+
 # Execute a given test.
 executeTest() {
  SCHEMA=${1}
@@ -32,6 +34,7 @@ executeTest() {
   . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i x
  else
   . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} x
+  export RET=$(tail -1 /tmp/db2unit.output | awk '{print $4}')
  fi
 }
 
@@ -56,8 +59,13 @@ else
  fi
 
  executeTest TEST_DB2UNIT_EMPTY ${PAUSE}
+ SUM=${RET}
+ export RET=0
  executeTest TEST_DB2UNIT_EXECUTION ${PAUSE}
+ SUM=$((${SUM}+${RET}))
+ export RET=0
  executeTest TEST_DB2UNIT_ASSERTIONS ${PAUSE}
+ SUM=$((${SUM}+${RET}))
 
  if [ "${PAUSE}" != "true" ] ; then
   MILLIS_END=$(date +"%s")
@@ -68,4 +76,6 @@ else
   echo "$((${MILLIS_END}-${MILLIS_INI})) seconds"
  fi
 fi
+
+return ${SUM}
 

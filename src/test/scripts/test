@@ -44,7 +44,7 @@ else
   db2 "DROP SCHEMA ERRORSCHEMA RESTRICT" > /dev/null
 
   # Installs the tests.
-  db2 -td@ -f ../sql-pl/Tests_${SCHEMA}.sql
+  db2 -td@ -r /tmp/db2unit.output -f ../sql-pl/Tests_${SCHEMA}.sql
  fi
 
  # Execute the tests.
