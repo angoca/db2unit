@@ -29,9 +29,9 @@ executeTest() {
  echo "====>Next: ${schema}"
  if [ "${PAUSE}" = "true" ] ; then
   read -p "Press enter to continue"
- . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i x
+  . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i x
  else
- . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} x
+  . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} x
  fi
 }
 
