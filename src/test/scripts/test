@@ -44,13 +44,13 @@ else
   db2 "DROP SCHEMA ERRORSCHEMA RESTRICT" > /dev/null
 
   # Installs the tests.
-  db2 -td@ -r /tmp/db2unit.output -f ../sql-pl/Tests_${SCHEMA}.sql
+  db2 -td@ -f ../sql-pl/Tests_${SCHEMA}.sql
  fi
 
  # Execute the tests.
  if [ "${OPTION_1}" = "x" -o "${OPTION_2}" = "x" ] ; then
   db2 "CALL DB2UNIT.CLEAN()"
-  db2 "CALL DB2UNIT.RUN_SUITE('${SCHEMA}')"
+  db2 -r /tmp/db2unit.output "CALL DB2UNIT.RUN_SUITE('${SCHEMA}')"
   db2 "CALL DB2UNIT.CLEAN()"
  fi
 fi
