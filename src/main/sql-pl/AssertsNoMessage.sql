@@ -20,7 +20,7 @@
  Andres Gomez Casanova <angocaATyahooDOTcom>
 */
 
-SET CURRENT SCHEMA DB2UNIT_1B @
+SET CURRENT SCHEMA DB2UNIT_1 @
 
 /**
  * Asserts implementation without message.

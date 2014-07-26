@@ -20,7 +20,7 @@
  Andres Gomez Casanova <angocaATyahooDOTcom>
 */
 
-SET CURRENT SCHEMA DB2UNIT_1B;
+SET CURRENT SCHEMA DB2UNIT_1;
 
 /**
  * Removes db2unit from the database (Administrative objects).
@@ -30,7 +30,7 @@ SET CURRENT SCHEMA DB2UNIT_1B;
  * Made in COLOMBIA.
  */
 
-DROP SCHEMA DB2UNIT_1B RESTRICT;
+DROP SCHEMA DB2UNIT_1 RESTRICT;
 
 DROP TABLESPACE MAX_VALUES_TS;
 
