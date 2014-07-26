@@ -22,7 +22,7 @@
  <!-- The Basics -->
  <groupId>com.github.angoca</groupId>
  <artifactId>db2unit</artifactId>
- <version>1-Beta-SNAPSHOT</version>
+ <version>1-Beta</version>
  <packaging>pom</packaging>
 
  <!-- Build Settings -->
@@ -158,7 +158,7 @@
    scm:git:ssh://git@github.com/angoca/db2unit.git
   </developerConnection>
   <url>https://github.com/angoca/db2unit</url>
-  <tag>HEAD</tag>
+  <tag>db2unit-1-Beta</tag>
  </scm>
 
  <distributionManagement>
