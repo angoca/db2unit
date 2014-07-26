@@ -18,11 +18,11 @@ There are three sections:
 BEFORE
 
 * Run all tests to make sure there are not regressions.
-* To change the version constant in the code (Headers.sql:VERSION):
-https://github.com/angoca/db2unit/blob/master/src/main/sql-pl/Headers.sql
+* To change the version constant in the code (Version.sql:VERSION):
+https://github.com/angoca/db2unit/blob/master/src/main/sql-pl/Version.sql
 * Write the changes in the ChangeLog section of the wiki.
 * Update the Prerequisites table from the Install section of the wiki.
-* Change the version in the documentation (@version) of all source files.
+* Change the version in the documentation (Version:) of all source files.
 * Make sure the schema reflects the version number to release (all files.)
 * Perform last commit and push.
 
