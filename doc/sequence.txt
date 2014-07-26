@@ -1,4 +1,4 @@
-This is the "sources" of the sequence diagram.
+This is the "source" of the sequence diagram.
 To generate the sequence diagram, put this text in this site:
 https://www.websequencediagrams.com/#
 
