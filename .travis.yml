@@ -12,13 +12,14 @@ before_install:
   - sudo apt-get install numactl
   # Retrieves and extracts the DB2 binaries
   - cd /tmp
-  - wget https://iwm.dhe.ibm.com/sdfdl/v2/regs2/db2pmopn/db2_v105/expc/Xa.2/Xb.aA_60_-idYWQFQ2rwuaClViHoLaxBoqgss01NDH7xQ/Xc.db2_v105/expc/v10.5fp1_linuxx64_expc.tar.gz/Xd./Xf.LPr.D1vk/Xg.7641953/Xi.swg-db2expressc/XY.regsrvs/XZ.AUIn6n40I0Zu5fv_W89Hm5W-SNs/v10.5fp1_linuxx64_expc.tar.gz
-  - tar zvxf v10.5fp1_linuxx64_expc.tar.gz
-  - cd expc
+  # - wget https://iwm.dhe.ibm.com/sdfdl/v2/regs2/db2pmopn/db2_v105/expc/Xa.2/Xb.aA_60_-idYWQFQ2rwuaClViHoLaxBoqgss01NDH7xQ/Xc.db2_v105/expc/v10.5fp1_linuxx64_expc.tar.gz/Xd./Xf.LPr.D1vk/Xg.7641953/Xi.swg-db2expressc/XY.regsrvs/XZ.AUIn6n40I0Zu5fv_W89Hm5W-SNs/v10.5fp1_linuxx64_expc.tar.gz
+  # - tar zvxf v10.5fp1_linuxx64_expc.tar.gz
+  # - cd expc
+  - wget https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/04jdl/0/Xa.2/Xb.jusyLTSp44S03ZzHXWiLS32b1e23wbv6kF1tCDJAPkRERERERnijyifuPVo/Xc.CM/IM/04jdl/0/v10.5fp3a_linuxx64_server.tar.gz/Xd./Xf.LPR.D1vk/Xg.7681598/Xi.habanero/XY.habanero/XZ.JbRvkLE8TTv7J_Y3RP3k7E4qO_g/v10.5fp3a_linuxx64_server.tar.gz ; tar zxf v10.5fp3a_linuxx64_server.tar.gz ; cd server
   # Checks the prerequisites
   - ./db2prereqcheck -i
   # Install DB2 and creates an instance (Response file)
-  - sudo ./db2setup -r /home/travis/build/angoca/db2unit/travis/db2expc.rsp || cat /tmp/db2setup.log
+  - sudo ./db2setup -r /home/travis/build/angoca/db2unit/travis/db2.rsp || cat /tmp/db2setup.log
   # Changes the security
   - id
   - sudo usermod -a -G db2iadm1 $USER
