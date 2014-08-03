@@ -17,7 +17,6 @@
 ::
 :: Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 :: Installs all scripts of the utility.
 ::
 :: Version: 2014-04-30 1-Beta

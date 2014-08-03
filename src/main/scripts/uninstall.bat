@@ -43,3 +43,4 @@ if %ERRORLEVEL% NEQ 0 (
  db2 -tf %DB2UNIT_SRC_MAIN_CODE_PATH%\CleanAdmin.sql
  del PACKAGES_TO_DROP.sql
 goto:eof
+

@@ -16,7 +16,6 @@
 #
 # Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 # Cleans the environment variables.
 #
 # Version: 2014-06-28 1-Beta
@@ -29,3 +28,4 @@ if [ -z ${DB2UNIT_SRC_TEST_CODE_PATH} ] ; then
  unset DB2UNIT_SRC_MAIN_SCRIPT_PATH
  unset DB2UNIT_PATH
 fi
+
