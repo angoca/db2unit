@@ -1216,6 +1216,28 @@ ALTER MODULE DB2UNIT ADD
  END P_RUN_SUITE_ALL @
 
 /**
+ * Register a given suite in the framework. This helps to produce an output
+ * of all registered suites to execute all of them.
+ *
+ * IN SCHEMA_NAME
+ *   Name of the suite to register.
+ */
+ALTER MODULE DB2UNIT ADD
+  PROCEDURE REGISTER_SUITE (
+  IN SCHEMA_NAME ANCHOR SYSCAT.SCHEMATA.SCHEMANAME
+  )
+  LANGUAGE SQL
+  SPECIFIC P_REGISTER_SUITE
+  DYNAMIC RESULT SETS 0
+  MODIFIES SQL DATA
+  NOT DETERMINISTIC
+  NO EXTERNAL ACTION
+  PARAMETER CCSID UNICODE
+ P_REGISTER_SUITE: BEGIN
+  INSERT INTO DB2UNIT_1.SUITES (SUITE_NAME) VALUES (SCHEMA_NAME);
+ END P_REGISTER_SUITE @
+
+/**
  * Cleans the environment, if a previous execution did not finished correctly.
  */
 ALTER MODULE DB2UNIT ADD
