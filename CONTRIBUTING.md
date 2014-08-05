@@ -3,7 +3,7 @@ Welcome to _db2unit_ and thanks for contributing to this project.
 If you found a bug and you are creating an issue, please describe as much as
 possible the environment where you execute this framework:
 
- * Platform (OS, version, architecture (32/64))
+ * Platform (OS, version, architecture (32/64 bits))
  * DB2 (edition, version, fixpack)
  * Dependency (log4db2 version)
  * Utility (version)
