@@ -1421,6 +1421,32 @@ ALTER MODULE DB2UNIT ADD
  END P_RANDOM_SORT @
 
 /**
+ * Exports the list of registered tests into a file that can be executed
+ * directly from Linux.
+ */
+ALTER MODULE DB2UNIT ADD
+  PROCEDURE EXPORT_TESTS_LIST (
+  )
+  LANGUAGE SQL
+  SPECIFIC P_EXPORT_TESTS_LIST
+  DYNAMIC RESULT SETS 0
+  MODIFIES SQL DATA
+  NOT DETERMINISTIC
+  NO EXTERNAL ACTION
+  PARAMETER CCSID UNICODE
+ P_EXPORT_TESTS_LIST: BEGIN
+  CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/listOfTestSuites OF DEL MODIFIED BY NOCHARDEL '
+    || 'SELECT * FROM (SELECT ''db2 -r /tmp/db2unit.output '
+    || '"CALL DB2UNIT.RUN_SUITE('''''' || SUITE_NAME || '''''')" ; '
+    || 'touch /tmp/sum ; '
+    || 'SUM=$(cat /tmp/sum) ; '
+    || 'tail -1 /tmp/db2unit.output | awk ''''{print "echo "$4" > /tmp/sum"}'''' | source /dev/stdin '' '
+    || 'FROM DB2UNIT_1.SUITES) ORDER BY RAND()');
+  CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/returnCode OF DEL MODIFIED BY NOCHARDEL '
+    || 'SELECT ''exit $NUM'' FROM SYSIBM.SYSDUMMY1');
+ END P_EXPORT_TESTS_LIST@
+
+/**
  * Shows the license of this framework.
  */
 ALTER MODULE DB2UNIT ADD

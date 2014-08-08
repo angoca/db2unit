@@ -110,6 +110,11 @@ ALTER MODULE DB2UNIT PUBLISH
   IN RANDOM BOOLEAN
   );
 
+-- Export set of registered test in a file ready to execute in Linux
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE EXPORT_TESTS_LIST (
+  );
+
 -- Show the license used in this program.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE LICENSE (
