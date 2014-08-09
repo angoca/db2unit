@@ -68,9 +68,9 @@ function install() {
 }
 
 function checkParam($p1) {
- param1=$p1
+ $param1=$p1
  if ( ${param1} -eq "-A" ) {
-  ${Script:continue}=0
+  ${Script:adminInstall}=0
  }
 }
 
