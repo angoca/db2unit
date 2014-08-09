@@ -1435,15 +1435,25 @@ ALTER MODULE DB2UNIT ADD
   NO EXTERNAL ACTION
   PARAMETER CCSID UNICODE
  P_EXPORT_TESTS_LIST: BEGIN
-  CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/listOfTestSuites OF DEL MODIFIED BY NOCHARDEL '
-    || 'SELECT * FROM (SELECT ''db2 -r /tmp/db2unit.output '
-    || '"CALL DB2UNIT.RUN_SUITE('''''' || SUITE_NAME || '''''')" ; '
-    || 'touch /tmp/sum ; '
-    || 'SUM=$(cat /tmp/sum) ; '
-    || 'tail -1 /tmp/db2unit.output | awk ''''{print "echo "$4" > /tmp/sum"}'''' | source /dev/stdin '' '
-    || 'FROM DB2UNIT_1.SUITES) ORDER BY RAND()');
-  CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/returnCode OF DEL MODIFIED BY NOCHARDEL '
-    || 'SELECT ''exit $NUM'' FROM SYSIBM.SYSDUMMY1');
+  DECLARE VERSION VARCHAR(256);
+
+  SET VERSION = (SELECT OS_NAME from SYSIBMADM.ENV_SYS_INFO);
+  IF (SUBSTR(VERSION, 1, 3) = 'WIN') THEN
+   CALL SYSPROC.ADMIN_CMD('EXPORT TO %TMP%\listOfTestSuites OF DEL MODIFIED BY NOCHARDEL '
+     || 'SELECT * FROM (SELECT ''db2 -r %TMP%\db2unit.output '
+     || 'CALL DB2UNIT.RUN_SUITE('''''' || SUITE_NAME || '''''')'' '
+     || 'FROM DB2UNIT_1.SUITES) ORDER BY RAND()');
+  ELSE
+   CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/listOfTestSuites OF DEL MODIFIED BY NOCHARDEL '
+     || 'SELECT * FROM (SELECT ''db2 -r /tmp/db2unit.output '
+     || '"CALL DB2UNIT.RUN_SUITE('''''' || SUITE_NAME || '''''')" ; '
+     || 'touch /tmp/sum ; '
+     || 'SUM=$(cat /tmp/sum) ; '
+     || 'tail -1 /tmp/db2unit.output | awk ''''{print "echo "$4" > /tmp/sum"}'''' | source /dev/stdin '' '
+     || 'FROM DB2UNIT_1.SUITES) ORDER BY RAND()');
+   CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/returnCode OF DEL MODIFIED BY NOCHARDEL '
+     || 'SELECT ''exit $NUM'' FROM SYSIBM.SYSDUMMY1');
+  END IF;
  END P_EXPORT_TESTS_LIST@
 
 /**
