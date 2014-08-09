@@ -24,6 +24,7 @@
 # Made in COLOMBIA.
 
 ${Script:continue}=1
+${Script:adminInstall}=1
 ${Script:retValue}=0
 
 # Installs a given script.
@@ -39,7 +40,9 @@ function install() {
  echo "Checking prerequisites"
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Prereqs.sql }
  echo "Installing utility"
- if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\ObjectsAdmin.sql }
+ if ( ${Script:adminInstall} ) {
+  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\ObjectsAdmin.sql }
+ }
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Objects.sql }
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Headers.sql }
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Body.sql }
@@ -64,12 +67,21 @@ function install() {
  }
 }
 
-function init() {
+function checkParam($p1) {
+ param1=$p1
+ if ( ${param1} -eq "-A" ) {
+  ${Script:continue}=0
+ }
+}
+
+function init($p1) {
  if ( Test-Path -Path init.ps1 -PathType Leaf ) {
   .\init.ps1
  }
 
  echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
+
+ checkParam ${p1}
 
  install
 
@@ -81,7 +93,7 @@ function init() {
 # Checks if there is already a connection established
 db2 connect | Out-Null
 if ( $LastExitCode -eq 0 ) {
- init
+ init $Args[0]
 } else {
  echo "Please connect to a database before the execution of the installation."
  echo "Load the DB2 profile with: set-item -path env:DB2CLP -value `"**`$$**`""

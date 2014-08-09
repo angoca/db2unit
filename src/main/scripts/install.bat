@@ -17,6 +17,7 @@
 ::
 :: Andres Gomez Casanova <angocaATyahooDOTcom>
 
+
 :: Installs all scripts of the utility.
 ::
 :: Version: 2014-04-30 1-Beta
@@ -24,12 +25,13 @@
 :: Made in COLOMBIA.
 
 set continue=1
+set adminInstall=1
 set retValue=0
 
 :: Checks if there is already a connection established
 db2 connect > NUL
 if %ERRORLEVEL% EQU 0 (
- call:init
+ call:init %1
 ) else (
  echo Please connect to a database before the execution of the installation.
  set retValue=2
@@ -51,7 +53,9 @@ goto:eof
  echo Checking prerequisites
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\Prereqs.sql
  echo Installing utility
- if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\ObjectsAdmin.sql
+ if %adminInstall% EQU 1 (
+  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\ObjectsAdmin.sql
+ )
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\Objects.sql
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\Headers.sql
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\Body.sql
@@ -76,12 +80,21 @@ goto:eof
  )
 goto:eof
 
+:checkParam
+ set param1=%1
+ if /I "%param1%" == "-A" (
+  set adminInstall=0
+ )
+goto:eof
+
 :init
  if EXIST init.bat (
   call init.bat
  )
 
  echo db2unit is licensed under the terms of the GNU General Public License v3.0
+
+ call:checkParam %1
 
  call:install
 

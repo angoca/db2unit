@@ -43,7 +43,6 @@ install() {
  echo "Checking prerequisites"
  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Prereqs.sql
  echo "Installing utility"
- echo $adminInstall
  if [ ${adminInstall} = true ] ; then
   [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/ObjectsAdmin.sql
  fi
