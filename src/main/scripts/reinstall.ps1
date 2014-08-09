@@ -26,6 +26,6 @@
  if ( Test-Path -Path init.ps1 -PathType Leaf ) {
   .\init.ps1
  }
-& ${DB2UNIT_SRC_MAIN_SCRIPT_PATH}\uninstall.ps1
-& ${DB2UNIT_SRC_MAIN_SCRIPT_PATH}\install.ps1
+& ${DB2UNIT_SRC_MAIN_SCRIPT_PATH}\uninstall.ps1 $Args[0]
+& ${DB2UNIT_SRC_MAIN_SCRIPT_PATH}\install.ps1 $Args[0]
 

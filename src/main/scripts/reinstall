@@ -27,6 +27,6 @@ if [ -x init ] ; then
  . ./init
 fi
 
-. ${DB2UNIT_SRC_MAIN_SCRIPT_PATH}/uninstall
-. ${DB2UNIT_SRC_MAIN_SCRIPT_PATH}/install
+. ${DB2UNIT_SRC_MAIN_SCRIPT_PATH}/uninstall ${1}
+. ${DB2UNIT_SRC_MAIN_SCRIPT_PATH}/install ${1}
 

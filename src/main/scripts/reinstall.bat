@@ -28,6 +28,6 @@ if EXIST init.bat (
  call init.bat
 )
 
-call %DB2UNIT_SRC_MAIN_SCRIPT_PATH%\uninstall.bat
-call %DB2UNIT_SRC_MAIN_SCRIPT_PATH%\install.bat
+call %DB2UNIT_SRC_MAIN_SCRIPT_PATH%\uninstall.bat %1
+call %DB2UNIT_SRC_MAIN_SCRIPT_PATH%\install.bat %1
 
