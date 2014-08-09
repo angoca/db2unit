@@ -1449,7 +1449,7 @@ ALTER MODULE DB2UNIT ADD
      || '"CALL DB2UNIT.RUN_SUITE('''''' || SUITE_NAME || '''''')" ; '
      || 'touch /tmp/sum ; '
      || 'SUM=$(cat /tmp/sum) ; '
-     || 'tail -1 /tmp/db2unit.output | awk ''''/Return Status/ {print "echo "$4" > /tmp/sum"}'''' | source /dev/stdin ; '
+     || 'tail -1 /tmp/db2unit.output | awk ''''/Return Status/ {print "echo \$((\$SUM"$4")) > /tmp/sum"}'''' | source /dev/stdin ; '
      || 'cat /tmp/sum '' '
      || 'FROM DB2UNIT_1.SUITES) ORDER BY RAND()');
    CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/returnCode OF DEL MODIFIED BY NOCHARDEL '
