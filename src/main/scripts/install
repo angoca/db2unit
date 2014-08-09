@@ -24,6 +24,7 @@
 # Made in COLOMBIA.
 
 export continue=true
+export adminInstall=true
 
 # Installs a given script.
 installScript() {
@@ -42,7 +43,10 @@ install() {
  echo "Checking prerequisites"
  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Prereqs.sql
  echo "Installing utility"
- [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/ObjectsAdmin.sql
+ echo $adminInstall
+ if [ ${adminInstall} = true ] ; then
+  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/ObjectsAdmin.sql
+ fi
  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Objects.sql
  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Headers.sql
  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Body.sql
@@ -71,6 +75,13 @@ install() {
  eval $__retInstall="'${myRetInstall}'"
 }
 
+checkParam() {
+ param1=${1}
+ if [ "${param1}" = "-A" ] ; then
+  export adminInstall=false
+ fi
+}
+
 init() {
  local  __retInit=$1
 
@@ -79,6 +90,8 @@ init() {
  fi
 
  echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
+
+ checkParam ${2}
 
  install retInstall
 
@@ -93,7 +106,7 @@ init() {
 # Checks if there is already a connection established
 db2 connect > /dev/null
 if [ ${?} -eq 0 ] ; then
- init ret
+ init ret ${1}
 else
  echo "Please connect to a database before the execution of the installation."
  echo "Remember that to call the script the command is '. ./install'"
