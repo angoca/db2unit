@@ -26,11 +26,11 @@ SET CURRENT SCHEMA DB2UNIT_1 @
  * Asserts implementation.
  * Return codes:
  * 0 - OK.
- * 1 - Nullability difference.
+ * 1 - Null-ability difference.
  * 2 - Different values.
  * 3 - Different length.
  * 4 - Invalid value.
- * 5 - Opposite nullability.
+ * 5 - Opposite null-ability.
  * 6 - Fail.
  * 7 - Not empty table.
  * 8 - Empty table.
@@ -101,7 +101,7 @@ ALTER MODULE DB2UNIT ADD
  * IN VALUE
  *   Value to convert.
  * RETURN
- *   The corresponding represtation of the given boolean.
+ *   The corresponding representation of the given boolean.
  */
 ALTER MODULE DB2UNIT ADD
   FUNCTION BOOL_TO_CHAR(
@@ -165,8 +165,8 @@ ALTER MODULE DB2UNIT ADD
 -- STRING
 
 /**
- * Asserts if the given two strings are the same, in nullability, in length and
- * in content.
+ * Asserts if the given two strings are the same, in null-ability, in length
+ * and in content.
  *
  * IN MESSAGE
  *   Related message to the test.
@@ -352,7 +352,7 @@ ALTER MODULE DB2UNIT ADD
 -- BOOLEAN
 
 /**
- * Asserts if the given two booleans are the same, in nullability and in
+ * Asserts if the given two booleans are the same, in null-ability and in
  * content.
  *
  * IN MESSAGE
@@ -602,7 +602,7 @@ ALTER MODULE DB2UNIT ADD
 -- INTEGER
 
 /**
- * Asserts if the given two int are the same, in nullability and in content.
+ * Asserts if the given two int are the same, in null-ability and in content.
  *
  * IN MESSAGE
  *   Related message to the test.
@@ -763,7 +763,7 @@ ALTER MODULE DB2UNIT ADD
 -- DECIMAL
 
 /**
- * Asserts if the given two decimals are the same, in nullability and in
+ * Asserts if the given two decimals are the same, in null-ability and in
  * content.
  *
  * IN MESSAGE
@@ -1046,7 +1046,7 @@ ALTER MODULE DB2UNIT ADD
  * IN EXPECTED_SCHEMA
  *   Schema of the table as model.
  * IN EXPECTED_TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the table to analyse.
  * IN ACTUAL_SCHEMA
  *   Schema of the resulting table.
  * IN ACTUAL_TABLE_NAME
@@ -1151,7 +1151,7 @@ ALTER MODULE DB2UNIT ADD
  * IN SCHEMA
  *   Schema of the table.
  * IN TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the table to analyse.
  */
 ALTER MODULE DB2UNIT ADD
   FUNCTION CHECK_TABLE_EMPTYNESS (
@@ -1206,7 +1206,7 @@ ALTER MODULE DB2UNIT ADD
  * IN SCHEMA
  *   Schema of the table.
  * IN TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the table to analyse.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TABLE_EMPTY (
@@ -1265,7 +1265,7 @@ ALTER MODULE DB2UNIT ADD
  * IN SCHEMA
  *   Schema of the table.
  * IN TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the table to analyse.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TABLE_NON_EMPTY (
@@ -1318,7 +1318,7 @@ ALTER MODULE DB2UNIT ADD
 -- DATETIMES (TIMESTAMP)
 
 /**
- * Asserts if the given two timestamps are the same, in nullability and in
+ * Asserts if the given two timestamps are the same, in null-ability and in
  * content.
  *
  * IN MESSAGE
@@ -1481,7 +1481,7 @@ ALTER MODULE DB2UNIT ADD
 -- DATETIMES (DATE)
 
 /**
- * Asserts if the given two dates are the same, in nullability and in content.
+ * Asserts if the given two dates are the same, in null-ability and in content.
  *
  * IN MESSAGE
  *   Related message to the test.
@@ -1643,7 +1643,7 @@ ALTER MODULE DB2UNIT ADD
 -- DATETIMES (TIME)
 
 /**
- * Asserts if the given two times are the same, in nullability and in content.
+ * Asserts if the given two times are the same, in null-ability and in content.
  *
  * IN MESSAGE
  *   Related message to the test.

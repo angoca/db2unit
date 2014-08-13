@@ -58,8 +58,8 @@ ALTER MODULE DB2UNIT ADD
 -- STRING
 
 /**
- * Asserts if the given two strings are the same, in nullability, in length and
- * in content.
+ * Asserts if the given two strings are the same, in null-ability, in length
+ * and in content.
  *
  * IN EXPECTED
  *   Expected string.
@@ -462,7 +462,7 @@ ALTER MODULE DB2UNIT ADD
  * IN EXPECTED_SCHEMA
  *   Schema of the table as model.
  * IN EXPECTED_TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the table to analyse.
  * IN ACTUAL_SCHEMA
  *   Schema of the resulting table.
  * IN ACTUAL_TABLE_NAME
@@ -499,7 +499,7 @@ ALTER MODULE DB2UNIT ADD
  * IN SCHEMA
  *   Schema of the table.
  * IN TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the table to analyse.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TABLE_EMPTY (
@@ -529,7 +529,7 @@ ALTER MODULE DB2UNIT ADD
  * IN SCHEMA
  *   Schema of the table.
  * IN TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the table to analyse.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TABLE_NON_EMPTY (

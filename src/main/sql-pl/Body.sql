@@ -116,7 +116,7 @@ ALTER MODULE DB2UNIT ADD
 
 /**
  * Description of current test. This variable is useful when no assertions are
- * called, but the test fails. It is only used when an exception is catched.
+ * called, but the test fails. It is only used when an exception is caught.
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE TEST_MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT DEFAULT NULL @
@@ -144,7 +144,7 @@ ALTER MODULE DB2UNIT ADD
  * quotes.
  *
  * IN MSG
- *   Message to analyze.
+ *   Message to analyse.
  * RETURNS Same message with single quotes escaped.
  */
 ALTER MODULE DB2UNIT ADD
@@ -311,7 +311,7 @@ ALTER MODULE DB2UNIT ADD
  *
  * IN PREV_EXEC_ID
  *   Previous execution ID to run the tests in that same order. Useful when
- *   tests were executed randominly and generate an error.
+ *   tests were executed randomly and generate an error.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE SORT_PROC_NAMES (
@@ -416,6 +416,7 @@ ALTER MODULE DB2UNIT ADD
    SET TEST_MESSAGE = MESSAGE;
   END IF;
  END P_REGISTER_MESSAGE @
+
 /**
  * Execute a procedure without parameters. Implementation.
  *
@@ -731,7 +732,7 @@ ALTER MODULE DB2UNIT ADD
  * IN SCHEMA_NAME
  *   Name of the schema to process.
  * RETURN the same name of the schema with extra space in order to be at least
- *   8 chars lenght.
+ *   8 chars length.
  */
 ALTER MODULE DB2UNIT ADD
   FUNCTION PROCESS_SCHEMA (
@@ -810,7 +811,7 @@ ALTER MODULE DB2UNIT publish
  *   Name of the schema where the stored procedures for tests are stored.
  * IN PREV_EXEC_ID
  *   Previous execution ID to run the tests in that same order. Useful when
- *   tests were executed randominly and generate an error.
+ *   tests were executed randomly and generate an error.
  * IN PROC_NAME
  *   Procedure to execute. If null, all tests of the given schema are
  *   executed.
@@ -1178,7 +1179,7 @@ ALTER MODULE DB2UNIT ADD
  *   Name of the schema where the stored procedures for tests are stored.
  * IN PREV_EXEC_ID
  *   Previous execution ID to run the tests in that same order. Useful when
- *   tests were executed randominly and generate an error.
+ *   tests were executed randomly and generate an error.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE RUN_SUITE (
@@ -1382,7 +1383,7 @@ ALTER MODULE DB2UNIT ADD
  * Changes the transaction autonomous mode.
  *
  * IN AUTONOMOUS
- *   True if the procedure should be executed autnomously. False otherwise.
+ *   True if the procedure should be executed autonomously. False otherwise.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE SET_AUTONOMOUS (
