@@ -38,17 +38,17 @@ function installScript($script) {
 
 function install() {
  echo "Checking prerequisites"
- if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Prereqs.sql }
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\00-Prereqs.sql }
  echo "Installing utility"
  if ( ${Script:adminInstall} ) {
-  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\ObjectsAdmin.sql }
+  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\01-ObjectsAdmin.sql }
  }
- if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Objects.sql }
- if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Headers.sql }
- if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Body.sql }
- if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Asserts.sql }
- if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\AssertsNoMessage.sql }
- if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\Version.sql }
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\02-Objects.sql }
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\03-Headers.sql }
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\04-Body.sql }
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\05-Asserts.sql }
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\06-AssertsNoMessage.sql }
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\07-Version.sql }
 
  echo "Please visit the wiki to learn how to use and configure this utility"
  echo "https://github.com/angoca/db2unit/wiki"

@@ -32,9 +32,9 @@ if ( ${LastExitCode} -ne 0 ) {
   .\init.ps1
  }
  echo "Uninstalling db2unit"
- db2 -tf ${DB2UNIT_SRC_MAIN_CODE_PATH}\Clean.sql
+ db2 -tf ${DB2UNIT_SRC_MAIN_CODE_PATH}\98-Clean.sql
  db2 -tf PACKAGES_TO_DROP.sql
- db2 -tf ${DB2UNIT_SRC_MAIN_CODE_PATH}\CleanAdmin.sql
+ db2 -tf ${DB2UNIT_SRC_MAIN_CODE_PATH}\99-CleanAdmin.sql
  del PACKAGES_TO_DROP.sql
 }
 

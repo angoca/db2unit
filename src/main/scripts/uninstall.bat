@@ -38,9 +38,9 @@ if %ERRORLEVEL% NEQ 0 (
 :: There is a problem with global variables when calling the first time.
 :uninstall
  echo Uninstalling db2unit
- db2 -tf %DB2UNIT_SRC_MAIN_CODE_PATH%\Clean.sql
+ db2 -tf %DB2UNIT_SRC_MAIN_CODE_PATH%\98-Clean.sql
  db2 -tf PACKAGES_TO_DROP.sql
- db2 -tf %DB2UNIT_SRC_MAIN_CODE_PATH%\CleanAdmin.sql
+ db2 -tf %DB2UNIT_SRC_MAIN_CODE_PATH%\99-CleanAdmin.sql
  del PACKAGES_TO_DROP.sql
 goto:eof
 

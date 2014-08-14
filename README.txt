@@ -160,17 +160,18 @@ These are the files included in the released version:
  * `examples` directory -- Examples ready to run.
  * `sql-pl` directory -- Directory for all objects: DDL, DML, routines
      definition.
-   * `Asserts.sql` -- Set of assert procedures to perform tests.
-   * `AssertNoMessage.sql` -- Set of assert procedures to perform tests,
-    without passing messages to the test.
-   * `Body.sql` -- Core of the unit framework.
-   * `Clean.sql` -- Removes all db2unit objects. Used when uninstalling.
-   * `CleanAdmin.sql` -- Removes admin objects. Used when uninstalling.
-   * `Headers.sql` -- Definition of all public routines.
-   * `Objects.sql` -- Tables for the reports and for data type anchoring.
-   * `ObjectsAdmin.sql` -- Administrative objects like tablespaces,
-    bufferpools and schemas to install the framework.
-   * `Prereqs.sql` -- Tests the prerequisites to install the framework.
+   * `00-Prereqs.sql` -- Tests the prerequisites to install the framework.
+   * `01-ObjectsAdmin.sql` -- Administrative objects like tablespaces,
+       bufferpools and schemas to install the framework.
+   * `02-Objects.sql` -- Tables for the reports and for data type anchoring.
+   * `03-Headers.sql` -- Definition of all public routines.
+   * `04-Body.sql` -- Core of the unit framework.
+   * `05-Asserts.sql` -- Set of assert procedures to perform tests.
+   * `06-AssertNoMessage.sql` -- Set of assert procedures to perform tests,
+   * `07-Version.sql` -- Version of the framework.
+       without passing messages to the test.
+   * `98-Clean.sql` -- Removes all db2unit objects. Used when uninstalling.
+   * `99-CleanAdmin.sql` -- Removes admin objects. Used when uninstalling.
 
 The * in the install-related files means that several files for each one of
 them can be found:

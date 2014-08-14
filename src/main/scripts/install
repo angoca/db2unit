@@ -41,17 +41,17 @@ install() {
  local  __retInstall=$1
 
  echo "Checking prerequisites"
- [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Prereqs.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/00-Prereqs.sql
  echo "Installing utility"
  if [ ${adminInstall} = true ] ; then
-  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/ObjectsAdmin.sql
+  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/01-ObjectsAdmin.sql
  fi
- [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Objects.sql
- [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Headers.sql
- [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Body.sql
- [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Asserts.sql
- [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/AssertsNoMessage.sql
- [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/Version.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/02-Objects.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/03-Headers.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/04-Body.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/05-Asserts.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/06-AssertsNoMessage.sql
+ [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/07-Version.sql
 
  echo "Please visit the wiki to learn how to use and configure this utility"
  echo "https://github.com/angoca/db2unit/wiki"
