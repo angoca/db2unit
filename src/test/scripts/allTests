@@ -28,13 +28,13 @@ export RET=0
 executeTest() {
  SCHEMA=${1}
  PAUSE=${2}
- echo "====>Next: ${schema}"
+ echo "====>Next: ${SCHEMA}"
  if [ "${PAUSE}" = "true" ] ; then
   read -p "Press enter to continue"
   . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i x
  else
   . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} x
-  export RET=$(tail -1 /tmp/db2unit.output | awk '{print $4}')
+  export RET=$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')
  fi
 }
 
@@ -58,6 +58,7 @@ else
   echo "Executing all tests."
  fi
 
+ export RET=0
  executeTest TEST_DB2UNIT_EMPTY ${PAUSE}
  SUM=${RET}
  export RET=0
