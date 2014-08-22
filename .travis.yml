@@ -36,7 +36,7 @@ before_install:
   - . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit
 
   # Install log4db2
-  - cd log4db2 ; . ./install
+  - cd ; cd log4db2 ; . ./install
 
 install:
   - cd ${TRAVIS_BUILD_DIR}
