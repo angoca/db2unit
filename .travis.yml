@@ -4,39 +4,39 @@ env:
   - ENV=test TESTS=manual
 
 before_install:
+  # Parallel download
+  - mvn > /dev/null &
+  - sudo ./travis/update.sh > /dev/null &
+
+  # Retrieves and extracts the DB2 binaries
+  - cd /tmp ; wget https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/04jdl/0/Xa.2/Xb.jusyLTSp44S03Ud2hqNz8SvywlJcj6dHjPURNh0iCvzE79MnIkpREqrUv_U/Xc.CM/IM/04jdl/0/v10.5fp3a_linuxx64_server.tar.gz/Xd./Xf.LPR.D1vk/Xg.7708245/Xi.habanero/XY.habanero/XZ.6Ndokz98qNHthR6iSKORF6OAY0c/v10.5fp3a_linuxx64_server.tar.gz ; tar zxf v10.5fp3a_linuxx64_server.tar.gz
+
+  # Retrieves and extract log4db2
+  - cd ; wget https://github.com/angoca/log4db2/releases/download/1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
+
+
+  # INSTALL
+
   # Install the required libraries
   - sudo apt-get update -qq
   - sudo apt-get -y install libaio1 ksh libstdc++6-4.4-pic libstdc++6-4.4-dev libstdc++5 rpm
   - sudo apt-get -y install libpam0g:i386
   - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
   - sudo apt-get install numactl
-  # Retrieves and extracts the DB2 binaries
-  - cd /tmp
-  # - wget https://iwm.dhe.ibm.com/sdfdl/v2/regs2/db2pmopn/db2_v105/expc/Xa.2/Xb.aA_60_-idYWQFQ2rwuaClViHoLaxBoqgss01NDH7xQ/Xc.db2_v105/expc/v10.5fp1_linuxx64_expc.tar.gz/Xd./Xf.LPr.D1vk/Xg.7641953/Xi.swg-db2expressc/XY.regsrvs/XZ.AUIn6n40I0Zu5fv_W89Hm5W-SNs/v10.5fp1_linuxx64_expc.tar.gz
-  # - tar zvxf v10.5fp1_linuxx64_expc.tar.gz
-  # - cd expc
-  # TODO next is from IBM
-  - wget https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/04jdl/0/Xa.2/Xb.jusyLTSp44S03Ud2hqNz8SvywlJcj6dHjPURNh0iCvzE79MnIkpREqrUv_U/Xc.CM/IM/04jdl/0/v10.5fp3a_linuxx64_server.tar.gz/Xd./Xf.LPR.D1vk/Xg.7708245/Xi.habanero/XY.habanero/XZ.6Ndokz98qNHthR6iSKORF6OAY0c/v10.5fp3a_linuxx64_server.tar.gz ; tar zxf v10.5fp3a_linuxx64_server.tar.gz ; cd server
-  #- wget http://204.236.237.168/db2/v10.5fp3a_linuxx64_server.tar.gz ; tar zxf v10.5fp3a_linuxx64_server.tar.gz ; cd server
+
   # Checks the prerequisites
-  - ./db2prereqcheck -i
+  - cd /tmp/server ; ./db2prereqcheck -i
   # Install DB2 and creates an instance (Response file)
-  - sudo ./db2setup -r /home/travis/build/angoca/db2unit/travis/db2.rsp || cat /tmp/db2setup.log
+  - sudo ./db2setup -r ${TRAVIS_BUILD_DIR}/travis/db2.rsp || cat /tmp/db2setup.log
   # Changes the security
-  - id
   - sudo usermod -a -G db2iadm1 $USER
-  - id
   - sudo su - db2inst1 -c "db2 update dbm cfg using SYSADM_GROUP db2iadm1 ; db2stop ; db2start"
   # Creates the database
   - sudo su - db2inst1 -c "db2 create db db2unit ; db2 connect to db2unit ; db2 grant dbadm on database to user $USER"
-  # Retrieves and extract log4db2
-  - wget https://github.com/angoca/log4db2/releases/download/1-Beta-A/log4db2.tar.gz
-  - tar zxvf log4db2.tar.gz
+  - . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit
+
   # Install log4db2
-  - cd log4db2
-  - . ~db2inst1/sqllib/db2profile
-  - db2 connect to db2unit
-  - . ./install
+  - cd log4db2 ; . ./install
 
 install:
   - cd ${TRAVIS_BUILD_DIR}
@@ -45,17 +45,26 @@ install:
   - sh -c "if [ '$ENV' = 'test' ]; then . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; cd src/test/scripts ; . ./init-dev ; cd ../../main/scripts ; . ./install ; fi"
   - cd src/test/scripts ; . ./init-dev
   - db2 "CREATE TABLESPACE SYSTOOLSPACE IN IBMCATGROUP MANAGED BY AUTOMATIC STORAGE USING STOGROUP IBMSTOGROUP EXTENTSIZE 4"
-
-script:
   - bash -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test ; fi" x TEST_DB2UNIT_EMPTY i
   - bash -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test ; fi" x TEST_DB2UNIT_EXECUTION i
   - bash -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test ; fi" x TEST_DB2UNIT_ASSERTIONS i
-  - bash -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./allTests ; fi" x "-np"
-  - cd ../sql-pl
+  - sh -c "if [ '$TESTS' = 'manual' ]; then cd ../sql-pl ; fi"
+
+  # Install the tests
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_EMPTY.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_EXECUTION.sql ; fi"
   - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_ASSERTIONS.sql ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EMPTY')\" ; ../../../travis/procSP ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EXECUTION')\" ; ../../../travis/procSP ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_ASSERTIONS')\" ; ../../../travis/procSP ; fi"
+
+script:
+  - bash -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./allTests ; fi" x "-np"
+  - bash -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EMPTY')\"      ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EXECUTION')\"  ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_ASSERTIONS')\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
+
+after_failure:
+  # If there is any error, shows the logs
+  - cat /home/db2inst1/sqllib/db2dump/db2diag.log
+  - db2 "call logadmin.logs"
+  - db2 "select * from DB2UNIT_1.DB2UNIT_EXECUTION_REPORTS"
+  - db2 "select * from NSLOOKUP.REPORT_TESTS"
 

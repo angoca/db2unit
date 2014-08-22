@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exit $(tail -1 /tmp/db2unit.output | awk '{print $4}')
