@@ -44,9 +44,9 @@ if %ERRORLEVEL% NEQ 0 (
   echo Error expanding variable
   exit /B -1
  )
- call:executeTest TEST_DB2UNIT_EMPTY
- call:executeTest TEST_DB2UNIT_EXECUTION
- call:executeTest TEST_DB2UNIT_ASSERTIONS
+ call:executeTest DB2UNIT_EMPTY
+ call:executeTest DB2UNIT_EXECUTION
+ call:executeTest DB2UNIT_ASSERTIONS
 
  if not "!PAUSE!" == "true" (
   set TIME_END=echo !time!

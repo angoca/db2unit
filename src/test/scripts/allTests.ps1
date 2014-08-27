@@ -31,13 +31,13 @@ if ( $LastExitCode -ne 0 ) {
 } else {
  echo "Executing all tests with pauses in between."
 
- Write-Host "(next TEST_DB2UNIT_EMPTY)"
- & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 TEST_DB2UNIT_EMPTY i x
- Write-Host "Press enter to continue (next TEST_DB2UNIT_EXECUTION)"
+ Write-Host "(next DB2UNIT_EMPTY)"
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_EMPTY i x
+ Write-Host "Press enter to continue (next DB2UNIT_EXECUTION)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
- & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 TEST_DB2UNIT_EXECUTION i x
- Write-Host "Press enter to continue (next TEST_DB2UNIT_ASSERTIONS)"
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_EXECUTION i x
+ Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
- & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 TEST_DB2UNIT_ASSERTIONS i x
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS i x
 }
 

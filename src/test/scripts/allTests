@@ -59,13 +59,13 @@ else
  fi
 
  export RET=0
- executeTest TEST_DB2UNIT_EMPTY ${PAUSE}
+ executeTest DB2UNIT_EMPTY ${PAUSE}
  SUM=${RET}
  export RET=0
- executeTest TEST_DB2UNIT_EXECUTION ${PAUSE}
+ executeTest DB2UNIT_EXECUTION ${PAUSE}
  SUM=$((${SUM}+${RET}))
  export RET=0
- executeTest TEST_DB2UNIT_ASSERTIONS ${PAUSE}
+ executeTest DB2UNIT_ASSERTIONS ${PAUSE}
  SUM=$((${SUM}+${RET}))
 
  if [ "${PAUSE}" != "true" ] ; then
