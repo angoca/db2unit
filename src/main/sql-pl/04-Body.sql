@@ -325,7 +325,6 @@ ALTER MODULE DB2UNIT ADD
   END IF;
  END P_WRITE_IN_REPORT @
 
-
 /**
  * Sorts the procedures list.
  *
@@ -795,7 +794,6 @@ ALTER MODULE DB2UNIT ADD
   END WHILE;
   RETURN SCHEMA_NAME;
  END F_PROCESS_SCHEMA @
-  
 
 /**
  * Returns a random number for the execution ID.
