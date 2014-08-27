@@ -1,7 +1,7 @@
 env:
   - ENV=release
-#  - ENV=test TESTS=script
-#  - ENV=test TESTS=manual
+#  - ENV=test TESTS=seq
+#  - ENV=test TESTS=random
 
 before_install:
   # Parallel download
@@ -12,7 +12,7 @@ before_install:
   - cd /tmp ; wget https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/04jdl/0/Xa.2/Xb.jusyLTSp44S03Ud2hqNz8SvywlJcj6dHjPURNh0iCvzE79MnIkpREqrUv_U/Xc.CM/IM/04jdl/0/v10.5fp3a_linuxx64_server.tar.gz/Xd./Xf.LPR.D1vk/Xg.7708245/Xi.habanero/XY.habanero/XZ.6Ndokz98qNHthR6iSKORF6OAY0c/v10.5fp3a_linuxx64_server.tar.gz ; tar zxf v10.5fp3a_linuxx64_server.tar.gz
 
   # Retrieves and extract log4db2
-  - cd ; wget https://github.com/angoca/log4db2/releases/download/1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
+  - cd ; wget https://github.com/angoca/log4db2/releases/download/log4db2-1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
 
 
   # INSTALL
@@ -35,38 +35,41 @@ before_install:
   - sudo su - db2inst1 -c "db2 update dbm cfg using SYSADM_GROUP db2iadm1 ; db2stop ; db2start"
   # Creates the database
   - sudo su - db2inst1 -c "db2 create db db2unit ; db2 connect to db2unit ; db2 grant dbadm on database to user $USER"
-  - . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit
+  - . ~db2inst1/sqllib/db2profile
 
+install:
   # Install log4db2
   - cd ; cd log4db2 ; . ./install
 
-install:
+  # Install db2unit
   - cd ${TRAVIS_BUILD_DIR}
-  - sh -c "if [ '$ENV' = 'release' ]; then mvn ; fi"
-  - sh -c "if [ '$ENV' = 'release' ]; then . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; cd target/db2unit/db2unit ; . ./install ; fi"
-  - sh -c "if [ '$ENV' = 'test' ]; then . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; cd src/test/scripts ; . ./init-dev ; cd ../../main/scripts ; . ./install ; fi"
+  - bash -c "if [ '$ENV' = 'release' ]; then mvn ; db2 connect to db2unit ; cd target/db2unit/db2unit ; . ./install ; fi"
+  - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; cd src/test/scripts ; . ./init-dev ; cd ../../main/scripts ; . ./install ; fi"
   - cd src/test/scripts ; . ./init-dev
   - db2 "CREATE TABLESPACE SYSTOOLSPACE IN IBMCATGROUP MANAGED BY AUTOMATIC STORAGE USING STOGROUP IBMSTOGROUP EXTENTSIZE 4"
-  - bash -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test ; fi" x TEST_DB2UNIT_EMPTY i
-  - bash -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test ; fi" x TEST_DB2UNIT_EXECUTION i
-  - bash -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./test ; fi" x TEST_DB2UNIT_ASSERTIONS i
-  - sh -c "if [ '$TESTS' = 'manual' ]; then cd ../sql-pl ; fi"
+  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./test ; fi" x DB2UNIT_EMPTY i
+  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./test ; fi" x DB2UNIT_EXECUTION i
+  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./test ; fi" x DB2UNIT_ASSERTIONS i
+  - bash -c "if [ '$TESTS' = 'seq' ]; then cd ../sql-pl ; fi"
 
   # Install the tests
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_EMPTY.sql ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_EXECUTION.sql ; fi"
-  - sh -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -tf Tests_TEST_DB2UNIT_ASSERTIONS.sql ; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf Tests_DB2UNIT_EMPTY.sql ; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf Tests_DB2UNIT_EXECUTION.sql ; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf Tests_DB2UNIT_ASSERTIONS.sql ; fi"
 
 script:
-  - bash -c "if [ '$TESTS' = 'script' ]; then db2 connect to db2unit ; . ./allTests ; fi" x "-np"
-  - bash -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EMPTY')\"      ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
-  - bash -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_EXECUTION')\"  ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
-  - bash -c "if [ '$TESTS' = 'manual' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"CALL DB2UNIT.RUN_SUITE('TEST_DB2UNIT_ASSERTIONS')\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EMPTY')\"      ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EXECUTION')\"  ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_ASSERTIONS')\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
+
+  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./allTests ; fi" x "-np"
 
 after_failure:
   # If there is any error, shows the logs
   - cat /home/db2inst1/sqllib/db2dump/db2diag.log
   - db2 "call logadmin.logs"
   - db2 "select * from DB2UNIT_1.DB2UNIT_EXECUTION_REPORTS"
-  - db2 "select * from NSLOOKUP.REPORT_TESTS"
+  - db2 "select * from DB2UNIT_EMPTY.REPORT_TESTS"
+  - db2 "select * from DB2UNIT_EXECUTION.REPORT_TESTS"
+  - db2 "select * from DB2UNIT_ASSERTIONS.REPORT_TESTS"
 
