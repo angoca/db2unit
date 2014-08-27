@@ -1,7 +1,7 @@
 env:
   - ENV=release
-#  - ENV=test TESTS=seq
-#  - ENV=test TESTS=random
+  - ENV=test TESTS=seq
+  - ENV=test TESTS=random
 
 before_install:
   # Parallel download
