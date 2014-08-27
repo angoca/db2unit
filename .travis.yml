@@ -1,7 +1,7 @@
 env:
   - ENV=release
-  - ENV=test TESTS=script
-  - ENV=test TESTS=manual
+#  - ENV=test TESTS=script
+#  - ENV=test TESTS=manual
 
 before_install:
   # Parallel download
@@ -18,11 +18,13 @@ before_install:
   # INSTALL
 
   # Install the required libraries
+  - dpkg --add-architecture i386
   - sudo apt-get update -qq
-  - sudo apt-get -y install libaio1 ksh libstdc++6-4.4-pic libstdc++6-4.4-dev libstdc++5 rpm
-  - sudo apt-get -y install libpam0g:i386
-  - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
-  - sudo apt-get install numactl
+  - sudo apt-get -y install libaio1 ksh libstdc++6-4.4-dev libstdc++6-4.4-pic libstdc++5 rpm
+  - DEBIAN_FRONTEND=noninteractive apt-get install -qq libpam-ldap:i386
+#  - sudo apt-get -y install libpam0g:i386
+#  - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
+#  - sudo apt-get install numactl
 
   # Checks the prerequisites
   - cd /tmp/server ; ./db2prereqcheck -i
