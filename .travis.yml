@@ -7,7 +7,7 @@ before_install:
   # Parallel download
   - mvn > /dev/null &
   - sudo apt-get install aria2 -y
-  #- sudo ./travis/update.sh > /dev/null &
+  - sudo ./travis/update.sh > /dev/null &
 
   # Retrieves and extracts the DB2 binaries
   - cd /tmp ; aria2c -x 16 https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/04jdl/0/Xa.2/Xb.jusyLTSp44S03Ud2hqNz8SvywlJcj6dHjPURNh0iCvzE79MnIkpREqrUv_U/Xc.CM/IM/04jdl/0/v10.5fp3a_linuxx64_server.tar.gz/Xd./Xf.LPR.D1vk/Xg.7708245/Xi.habanero/XY.habanero/XZ.6Ndokz98qNHthR6iSKORF6OAY0c/v10.5fp3a_linuxx64_server.tar.gz ; tar zxf v10.5fp3a_linuxx64_server.tar.gz
@@ -20,17 +20,12 @@ before_install:
 
   # Install the required libraries
   - sudo apt-get update -qq
-  - sudo apt-get install lib32stdc++6 -y
-#  - sudo apt-get -y install libaio1 ksh libstdc++6-4.4-dev libstdc++6-4.4-pic libstdc++5 rpm
-#  - sudo apt-get install ia32-libs-multiarc ]
+  - sudo apt-get install libaio1 lib32stdc++6 -y
   - sudo apt-get install -qq libpam-ldap:i386
-#  - sudo apt-get install libpam-modules:i386
-#  - sudo apt-get -y install libpam0g:i386
   - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
-#  - sudo apt-get install numactl
 
   # Checks the prerequisites
-  - cd /tmp/server ; ./db2prereqcheck -i
+  - cd /tmp/server ; ./db2prereqcheck
   # Install DB2 and creates an instance (Response file)
   - sudo ./db2setup -r ${TRAVIS_BUILD_DIR}/travis/db2.rsp || cat /tmp/db2setup.log
   # Changes the security
