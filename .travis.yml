@@ -6,6 +6,7 @@ env:
 before_install:
   # Parallel download
   - mvn > /dev/null &
+  - sudo apt-get install aria2 -y
   #- sudo ./travis/update.sh > /dev/null &
 
   # Retrieves and extracts the DB2 binaries
@@ -19,7 +20,7 @@ before_install:
 
   # Install the required libraries
   - sudo apt-get update -qq
-  - sudo apt-get install aria2 lib32stdc++6 -y
+  - sudo apt-get install lib32stdc++6 -y
 #  - sudo apt-get -y install libaio1 ksh libstdc++6-4.4-dev libstdc++6-4.4-pic libstdc++5 rpm
 #  - sudo apt-get install ia32-libs-multiarc ]
 #  - sudo apt-get install -qq libpam-ldap:i386
