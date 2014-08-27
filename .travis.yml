@@ -24,9 +24,9 @@ before_install:
 #  - sudo apt-get -y install libaio1 ksh libstdc++6-4.4-dev libstdc++6-4.4-pic libstdc++5 rpm
 #  - sudo apt-get install ia32-libs-multiarc ]
   - sudo apt-get install -qq libpam-ldap:i386
-  - sudo apt-get install libpam-modules:i386
-  - sudo apt-get -y install libpam0g:i386
-#  - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
+#  - sudo apt-get install libpam-modules:i386
+#  - sudo apt-get -y install libpam0g:i386
+  - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
 #  - sudo apt-get install numactl
 
   # Checks the prerequisites
