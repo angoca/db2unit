@@ -25,7 +25,7 @@ before_install:
   - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
 
   # Checks the prerequisites
-  - cd /tmp/server ; ./db2prereqcheck
+  - cd /tmp/server ; ./db2prereqcheck -i
   # Install DB2 and creates an instance (Response file)
   - sudo ./db2setup -r ${TRAVIS_BUILD_DIR}/travis/db2.rsp || cat /tmp/db2setup.log
   # Changes the security
@@ -33,7 +33,7 @@ before_install:
   - sudo su - db2inst1 -c "db2 update dbm cfg using SYSADM_GROUP db2iadm1 ; db2stop ; db2start"
   # Creates the database
   - sudo su - db2inst1 -c "db2 create db db2unit ; db2 connect to db2unit ; db2 grant dbadm on database to user $USER"
-  - . ~db2inst1/sqllib/db2profile
+  - . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit
 
 install:
   # Install log4db2
