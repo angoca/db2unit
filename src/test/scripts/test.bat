@@ -23,21 +23,52 @@
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
+:: Global variables
+set install=0
+set execute=0
+
 db2 connect > NUL
 if %ERRORLEVEL% NEQ 0 (
  echo Please connect to a database before the execution of the test
- echo Remember that to call the script the command is 'test <TestSuite> {i} {x}'
- echo i for installing (by default)
+ echo Remember that to call the script the command is 'test ^<TestSuite^> {i} {x}'
+ echo i for installing by default
  echo x for executing
- echo The test file should have this structure: Test_<SCHEMA_NAME>.sql
+ echo The test file should have this structure: Test_^<SCHEMA_NAME^>.sql
 ) else (
  set SCHEMA=%1
- set OPTION_1=%2
- set OPTION_2=%3
- :: Execute the tests.
- :: if "%OPTION_1%" EQU "" -o "%OPTION_1%" EQU "i" -o "%OPTION_2%" EQU "i" (
- :: A OR B OR C = not [ not { not ( not A and not B ) } and not C ]
- if (not if (not if (not if (not "%OPTION_1%" EQU "") if (not "%OPTION_1%" EQU "i"))) if (not "%OPTION_2%" EQU "i")) (
+ call:checkParams %2 %3
+
+ call:process
+)
+goto:eof
+
+:: Checks if the script should install
+:checkParams
+ set param1=%1
+ set param2=%2
+ if "%param1%" == "" (
+  set install=1
+ )
+ if /I "%param1%" == "i" (
+  set install=1
+ )
+ if /I "%param2%" == "i" (
+  set install=1
+ )
+ if /I "%param1%" == "x" (
+  set execute=1
+ )
+ if /I "%param2%" == "x" (
+  set execute=1
+ )
+ set param1=
+ set param2=
+goto:eof
+
+:: Process the test file
+:process
+ :: Install the tests.
+ if %install% EQU 1 (
   :: Prepares the installation.
   db2 "DELETE FROM LOGS" > NUL
   db2 "DROP TABLE %1.REPORT_TESTS" > NUL
@@ -51,11 +82,10 @@ if %ERRORLEVEL% NEQ 0 (
  )
 
  :: Execute the tests.
- ::if "%OPTION_1%" EQU "x" -o "%OPTION_2%" EQU "x" (
- if (not "%OPTION_1%" EQU "x") if ("%OPTION_2%" EQU "x") (
+ if %execute% EQU 1 (
   db2 "CALL DB2UNIT.CLEAN()"
   db2 "CALL DB2UNIT.RUN_SUITE('%SCHEMA%')"
   db2 "CALL DB2UNIT.CLEAN()"
  )
-)
+goto:eof
 
