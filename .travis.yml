@@ -12,7 +12,7 @@ before_install:
   # Retrieves and extracts the DB2 binaries
   # If it does not work, change it according to the next page:
   # http://www.ibm.com/support/fixcentral/swg/quickorder?product=ibm/Information+Management/DB2&release=10.5.*&platform=Linux+64-bit,x86_64&function=fixId&fixids=DB2-linuxx64-server-10.5.0.3-FP003&includeRequisites=1&includeSupersedes=0&downloadMethod=http&source=fc
-  - cd /tmp ; aria2c -x 16 https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/0484i/3/Xa.2/Xb.jusyLTSp44S03Q8Z5M08cIZLaJXH8z2xBkBKgbDjYGFobHeGnvAz8g7gbmI/Xc.CM/IM/0484i/3/v10.5fp3_linuxx64_server.tar.gz/Xd./Xf.LPR.D1vk/Xg.7729444/Xi.habanero/XY.habanero/XZ.U5ksMLzXK5xzveXgiwTwqOkM9kE/v10.5fp3_linuxx64_server.tar.gz ; tar zxf v10.5fp3a_linuxx64_server.tar.gz
+  - cd /tmp ; aria2c -x 16 https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/0484i/3/Xa.2/Xb.jusyLTSp44S03Q8Z5M08cIZLaJXH8z2xBkBKgbDjYGFobHeGnvAz8g7gbmI/Xc.CM/IM/0484i/3/v10.5fp3_linuxx64_server.tar.gz/Xd./Xf.LPR.D1vk/Xg.7729444/Xi.habanero/XY.habanero/XZ.U5ksMLzXK5xzveXgiwTwqOkM9kE/v10.5fp3_linuxx64_server.tar.gz ; tar zxf v10.5fp3_linuxx64_server.tar.gz
 
   # Retrieves and extract log4db2
   - cd ; wget https://github.com/angoca/log4db2/releases/download/log4db2-1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
