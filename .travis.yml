@@ -10,8 +10,7 @@ before_install:
   - sudo ./travis/update.sh > /dev/null &
 
   # Retrieves and extracts the DB2 binaries
-  - cd /tmp ; aria2c -x 16 https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/04jdl/0/Xa.2/Xb.jusyLTSp44S03Ud2hqNz8SvywlJcj6dHjPURNh0iCvzE79MnIkpREqrUv_U/Xc.CM/IM/04jdl/0/v10.5fp3a_linuxx64_server.tar.gz/Xd./Xf.LPR.D1vk/Xg.7708245/Xi.habanero/XY.habanero/XZ.6Ndokz98qNHthR6iSKORF6OAY0c/v10.5fp3a_linuxx64_server.tar.gz ; tar zxf v10.5fp3a_linuxx64_server.tar.gz
-
+  - cd /tmp ; aria2c -x 16 https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/0484i/3/Xa.2/Xb.jusyLTSp44S03Q8Z5MM6PkOp5Z3MXWhvJFFbC9qWLiwVTNGu1QfhYGtidV4/Xc.CM/IM/0484i/3/v10.5fp3_linuxx64_server.tar.gz/Xd./Xf.LPR.D1vk/Xg.7729389/Xi.habanero/XY.habanero/XZ.uXePEWuzgmFxKayp75wOGJFJL-k/v10.5fp3_linuxx64_server.tar.gz ; tar zxf v10.5fp3a_linuxx64_server.tar.gz
   # Retrieves and extract log4db2
   - cd ; wget https://github.com/angoca/log4db2/releases/download/log4db2-1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
 
