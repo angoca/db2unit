@@ -16,8 +16,7 @@
 #
 # Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
-# Initialize the environment values to run the scripts.
+# Cleans the environment variables.
 #
 # Version: 2014-06-28 1-Beta
 # Author: Andres Gomez Casanova (AngocA)

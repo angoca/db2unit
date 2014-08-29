@@ -17,7 +17,6 @@
 ::
 :: Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 :: Cleans the environment variables.
 ::
 :: Version: 2014-06-28 1-Beta
