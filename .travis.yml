@@ -57,9 +57,9 @@ install:
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_ASSERTIONS.sql ; fi"
 
 script:
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EMPTY')\"      ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EXECUTION')\"  ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_ASSERTIONS')\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EMPTY')\"      ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EXECUTION')\"  ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_ASSERTIONS')\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
 
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./allTests ; fi" x "-np"
 
