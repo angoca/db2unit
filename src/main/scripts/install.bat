@@ -100,10 +100,10 @@ goto:eof
   db2 -x "values 'Database: ' || current server"
   db2 -x "values 'Version: ' || db2unit.version"
   db2 -x "select 'Schema: ' || base_moduleschema from syscat.modules where moduleschema = 'SYSPUBLIC' and modulename = 'DB2UNIT'"
-  retValue=0
+  set retValue=0
  ) else (
   echo "Check the error(s) and reinstall the utility"
-  retValue=1
+  set retValue=1
  )
 
  :: Clean environment.
