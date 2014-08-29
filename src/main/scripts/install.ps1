@@ -16,18 +16,19 @@
 #
 # Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 # Installs all scripts of the utility.
 #
 # Version: 2014-04-30 1-Beta
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
+# Global variables
 ${Script:continue}=1
 ${Script:adminInstall}=1
 ${Script:retValue}=0
 
-# Installs a given script.
+# Installs a given script in DB2.
+# It uses the continue global variable to stop the execution if an error occurs.
 function installScript($script) {
  echo $script
  db2 -tsf ${script}
@@ -36,6 +37,7 @@ function installScript($script) {
  }
 }
 
+# Function that installs the utility.
 function install() {
  echo "Checking prerequisites"
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\00-Prereqs.sql }
@@ -49,6 +51,28 @@ function install() {
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\05-Asserts.sql }
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\06-AssertsNoMessage.sql }
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\07-Version.sql }
+}
+
+# This function checks the parameter and assign it to a global variable.
+function checkParam($p1) {
+ $param1=${p1}
+ if ( "${param1}" -eq "-A" ) {
+  ${Script:adminInstall}=0
+ }
+}
+
+# Main function that starts the installation.
+function init($p1) {
+ if ( Test-Path -Path init.ps1 -PathType Leaf ) {
+  .\init.ps1
+ }
+
+ echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
+
+ # Check the given parameters.
+ checkParam ${p1}
+
+ install
 
  echo "Please visit the wiki to learn how to use and configure this utility"
  echo "https://github.com/angoca/db2unit/wiki"
@@ -61,30 +85,12 @@ function install() {
   db2 -x "values 'Version: ' || db2unit.version"
   db2 -x "select 'Schema: ' || base_moduleschema from syscat.modules where moduleschema = 'SYSPUBLIC' and modulename = 'DB2UNIT'"
   ${Script:retValue}=0
- } else {
+  } else {
   echo "Check the error(s) and reinstall the utility"
   ${Script:retValue}=1
- }
-}
+  }
 
-function checkParam($p1) {
- $param1=$p1
- if ( ${param1} -eq "-A" ) {
-  ${Script:adminInstall}=0
- }
-}
-
-function init($p1) {
- if ( Test-Path -Path init.ps1 -PathType Leaf ) {
-  .\init.ps1
- }
-
- echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
-
- checkParam ${p1}
-
- install
-
+ # Clean environment.
  if ( Test-Path -Path uninit.ps1 -PathType Leaf ) {
   .\uninit.ps1
  }
