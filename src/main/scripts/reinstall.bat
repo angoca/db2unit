@@ -17,7 +17,6 @@
 ::
 :: Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 :: Reinstall the utility. Calls the uninstall script and then the install one.
 ::
 :: Version: 2014-04-30 1-Beta
@@ -28,6 +27,6 @@ if EXIST init.bat (
  call init.bat
 )
 
-call %DB2UNIT_SRC_MAIN_SCRIPT_PATH%\uninstall.bat %1
+call %DB2UNIT_SRC_MAIN_SCRIPT_PATH%\uninstall.bat
 call %DB2UNIT_SRC_MAIN_SCRIPT_PATH%\install.bat %1
 
