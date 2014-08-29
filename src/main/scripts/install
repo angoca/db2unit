@@ -16,17 +16,18 @@
 #
 # Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 # Installs all scripts of the utility.
 #
 # Version: 2014-04-30 1-Beta
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
+# Global variables
 export continue=true
 export adminInstall=true
 
 # Installs a given script.
+# It uses the continue global variable to stop the execution if an error occurs.
 installScript() {
  script=${1}
  echo $script
@@ -37,10 +38,11 @@ installScript() {
  unset script
 }
 
+# Function that installs the utility.
 install() {
  local  __retInstall=$1
-
  echo "Checking prerequisites"
+
  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/00-Prereqs.sql
  echo "Installing utility"
  if [ ${adminInstall} = true ] ; then
@@ -53,27 +55,11 @@ install() {
  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/06-AssertsNoMessage.sql
  [ ${continue} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/07-Version.sql
 
- echo "Please visit the wiki to learn how to use and configure this utility"
- echo "https://github.com/angoca/db2unit/wiki"
- echo "To report an issue or provide feedback, please visit:"
- echo "https://github.com/angoca/db2unit/issues"
- echo
- if [ ${continue} = true ] ; then
-  echo "db2unit was successfully installed"
-  db2 -x "values 'Database: ' || current server"
-  db2 -x "values 'Version: ' || db2unit.version"
-  db2 -x "select 'Schema: ' || base_moduleschema from syscat.modules where moduleschema = 'SYSPUBLIC' and modulename = 'DB2UNIT'"
-  retValue=0
- else
-  echo "Check the error(s) and reinstall the utility"
-  unset continue
-  retValue=1
- fi
-
- local  myRetInstall=${retValue}
+ local  myRetInstall=${continue}
  eval $__retInstall="'${myRetInstall}'"
 }
 
+# This function checks the parameter and assign it to a global variable.
 checkParam() {
  param1=${1}
  if [ "${param1}" = "-A" ] ; then
@@ -81,19 +67,40 @@ checkParam() {
  fi
 }
 
+# Main function that starts the installation.
 init() {
  local  __retInit=$1
 
+ # Initialize the environment.
  if [ -x init ] ; then
   . ./init
  fi
 
  echo "db2unit is licensed under the terms of the GNU General Public License v3.0"
 
+ # Check the given parameters.
  checkParam ${2}
 
  install retInstall
 
+ echo "Please visit the wiki to learn how to use and configure this utility"
+ echo "https://github.com/angoca/db2unit/wiki"
+ echo "To report an issue or provide feedback, please visit:"
+ echo "https://github.com/angoca/db2unit/issues"
+ echo
+ if [ ${continue} = "true" ] ; then
+  echo "db2unit was successfully installed"
+  db2 -x "values 'Database: ' || current server"
+  db2 -x "values 'Version: ' || db2unit.version"
+  db2 -x "select 'Schema: ' || base_moduleschema from syscat.modules where moduleschema = 'SYSPUBLIC' and modulename = 'DB2UNIT'"
+  retValue=0
+ else
+  echo "Check the error(s) and reinstall the utility"
+  retValue=1
+ fi
+ unset continue
+
+ # Clean environment.
  if [ -x uninit ] ; then
   . ./uninit
  fi
