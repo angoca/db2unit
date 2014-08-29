@@ -50,12 +50,11 @@ install:
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./test ; fi" x DB2UNIT_EMPTY i
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./test ; fi" x DB2UNIT_EXECUTION i
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./test ; fi" x DB2UNIT_ASSERTIONS i
-  - bash -c "if [ '$TESTS' = 'seq' ]; then cd ../sql-pl ; fi"
 
   # Install the tests
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf Tests_DB2UNIT_EMPTY.sql ; fi"
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf Tests_DB2UNIT_EXECUTION.sql ; fi"
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf Tests_DB2UNIT_ASSERTIONS.sql ; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_EMPTY.sql ; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_EXECUTION.sql ; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_ASSERTIONS.sql ; fi"
 
 script:
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EMPTY')\"      ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')\"; fi"
