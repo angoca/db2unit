@@ -17,7 +17,6 @@
 ::
 :: Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 :: Initialize the environment values to run the scripts.
 ::
 :: Version: 2014-04-30 1-Beta
