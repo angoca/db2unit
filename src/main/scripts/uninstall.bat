@@ -17,7 +17,6 @@
 ::
 :: Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 :: Uninstalls all the components of this utility.
 ::
 :: Version: 2014-04-30 1-Beta
