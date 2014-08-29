@@ -17,17 +17,18 @@
 ::
 :: Andres Gomez Casanova <angocaATyahooDOTcom>
 
-
 :: Installs all scripts of the utility.
 ::
 :: Version: 2014-04-30 1-Beta
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
+:: Global variables
 set continue=1
 set adminInstall=1
 set retValue=0
 
+:: Main call.
 :: Checks if there is already a connection established
 db2 connect > NUL
 if %ERRORLEVEL% EQU 0 (
@@ -40,6 +41,7 @@ exit /B %retValue%
 goto:eof
 
 :: Installs a given script.
+:: It uses the continue global variable to stop the execution if an error occurs.
 :installScript
  set script=%~1
  echo %script%
@@ -47,8 +49,10 @@ goto:eof
  if %ERRORLEVEL% NEQ 0 (
   set continue=0
  )
+ set script=
 goto:eof
 
+:: Function that installs the utility.
 :install
  echo Checking prerequisites
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\00-Prereqs.sql
@@ -62,6 +66,29 @@ goto:eof
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\05-Asserts.sql
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\06-AssertsNoMessage.sql
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\07-Version.sql
+goto:eof
+
+:: This function checks the parameter and assign it to a global variable.
+:checkParam
+ set param1=%1
+ if /I "%param1%" == "-A" (
+  set adminInstall=0
+ )
+goto:eof
+
+:: Main function that starts the installation.
+:init
+ :: Initialize the environment.
+ if EXIST init.bat (
+  call init.bat
+ )
+
+ echo db2unit is licensed under the terms of the GNU General Public License v3.0
+
+ :: Check the given parameters.
+ call:checkParam %1
+
+ call:install
 
  echo Please visit the wiki to learn how to use and configure this utility
  echo https://github.com/angoca/db2unit/wiki
@@ -73,31 +100,14 @@ goto:eof
   db2 -x "values 'Database: ' || current server"
   db2 -x "values 'Version: ' || db2unit.version"
   db2 -x "select 'Schema: ' || base_moduleschema from syscat.modules where moduleschema = 'SYSPUBLIC' and modulename = 'DB2UNIT'"
-  set retValue=0
+  retValue=0
  ) else (
   echo "Check the error(s) and reinstall the utility"
-  set retValue=1
- )
-goto:eof
-
-:checkParam
- set param1=%1
- if /I "%param1%" == "-A" (
-  set adminInstall=0
- )
-goto:eof
-
-:init
- if EXIST init.bat (
-  call init.bat
+  retValue=1
  )
 
- echo db2unit is licensed under the terms of the GNU General Public License v3.0
-
- call:checkParam %1
-
- call:install
-
+ :: Clean environment.
+ set adminInstall=
  if EXIST uninit.bat (
   call uninit.bat
  )
