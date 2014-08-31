@@ -54,5 +54,12 @@ if ( $LastExitCode -ne 0 ) {
   db2 "CALL DB2UNIT.RUN_SUITE('${SCHEMA}')"
   db2 "CALL DB2UNIT.CLEAN()"
  }
+
+ if ( "${OPTION_1}" -eq "" -or "${OPTION_1}" -eq "i" -or "${OPTION_2}" -eq "i" ( {
+  db2 "CALL LOGADMIN.LOGS(min_level=>4)"
+  db2 "SELECT EXECUTION_ID EXEC_ID, VARCHAR(SUBSTR(TEST_NAME, 1, 32), 32) TEST,
+    FINAL_STATE STATE, TIME, VARCHAR(SUBSTR(MESSAGE, 1, 128), 128)
+    FROM ${SCHEMA}.REPORT_TESTS ORDER BY DATE"
+ }
 }
 
