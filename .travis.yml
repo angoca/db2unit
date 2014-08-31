@@ -56,7 +56,7 @@ install:
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_EMPTY.sql ; fi"
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_EXECUTION.sql ; fi"
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_ASSERTIONS.sql ; fi"
-  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; db2 \"call db2unit.export_tests_list\"; sudo chmod +x /tmp/listOfTestSuites ; sudo chmod +x /tmp/returnCode ; fi"
+  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; db2 \"call db2unit.export_tests_list\"; sudo chmod +x /tmp/listOfTestSuites ; sudo chmod +x /tmp/returnCode ; cat /tmp/listOfTestSuites ; fi"
 
 script:
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EMPTY')\"      ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
@@ -69,7 +69,7 @@ after_failure:
   # If there is any error, shows the logs
   - cat /home/db2inst1/sqllib/db2dump/db2diag.log
   - db2 "call logadmin.logs"
-  - db2 "select * from DB2UNIT_1.DB2UNIT_EXECUTION_REPORTS"
+  - db2 "select * from DB2UNIT_1.EXECUTION_REPORTS"
   - db2 "select * from DB2UNIT_EMPTY.REPORT_TESTS"
   - db2 "select * from DB2UNIT_EXECUTION.REPORT_TESTS"
   - db2 "select * from DB2UNIT_ASSERTIONS.REPORT_TESTS"
