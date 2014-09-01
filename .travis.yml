@@ -48,14 +48,11 @@ install:
   - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; cd src/test/scripts ; . ./init-dev ; cd ../../main/scripts ; . ./install ; fi"
   - cd src/test/scripts ; . ./init-dev
   - db2 "CREATE TABLESPACE SYSTOOLSPACE IN IBMCATGROUP MANAGED BY AUTOMATIC STORAGE USING STOGROUP IBMSTOGROUP EXTENTSIZE 4"
-  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./test ; fi" x DB2UNIT_EMPTY i
-  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./test ; fi" x DB2UNIT_EXECUTION i
-  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . ./test ; fi" x DB2UNIT_ASSERTIONS i
 
   # Install the tests
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_EMPTY.sql ; fi"
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_EXECUTION.sql ; fi"
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_ASSERTIONS.sql ; fi"
+  - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_EMPTY.sql ; fi"
+  - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_EXECUTION.sql ; fi"
+  - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_ASSERTIONS.sql ; fi"
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; db2 \"call db2unit.export_tests_list\"; sudo chmod +x /tmp/listOfTestSuites ; sudo chmod +x /tmp/returnCode ; cat /tmp/listOfTestSuites ; fi"
 
 script:
