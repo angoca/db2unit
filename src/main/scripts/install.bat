@@ -102,7 +102,11 @@ goto:eof
   db2 -x "select 'Schema: ' || base_moduleschema from syscat.modules where moduleschema = 'SYSPUBLIC' and modulename = 'DB2UNIT'"
   set retValue=0
  ) else (
-  echo "Check the error(s) and reinstall the utility"
+  echo Check the ERROR^(s^) and reinstall the utility
+  echo For more information visit check the FAQs:
+  echo https://github.com/angoca/db2unit/wiki/FAQs
+  echo You can also check the install guide:
+  echo https://github.com/angoca/db2unit/wiki/Install
   set retValue=1
  )
 
