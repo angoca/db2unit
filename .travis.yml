@@ -70,4 +70,5 @@ after_failure:
   - db2 "select * from DB2UNIT_EMPTY.REPORT_TESTS"
   - db2 "select * from DB2UNIT_EXECUTION.REPORT_TESTS"
   - db2 "select * from DB2UNIT_ASSERTIONS.REPORT_TESTS"
+  - db2 "export to /tmp/sorts.txt of del select * from db2unit_1.sorts" ; cat /tmp/sorts.txt
 
