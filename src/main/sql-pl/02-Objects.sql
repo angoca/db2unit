@@ -137,7 +137,7 @@ CREATE TABLE SORTS (
   SUITE_NAME VARCHAR(128) NOT NULL,
   EXECUTION_ID INT NOT NULL,
   POSITION INT NOT NULL,
-  PROC_NAME VARCHAR(128) NOT NULL
+  TEST_NAME VARCHAR(128) NOT NULL
   );
 
 ALTER TABLE SORTS ADD CONSTRAINT DB2UNIT_SORTS_PK PRIMARY KEY (SUITE_NAME,
@@ -154,7 +154,7 @@ COMMENT ON SORTS (
   SUITE_NAME IS 'Name of the related suite',
   EXECUTION_ID IS 'Unique ID of the execution',
   POSITION IS 'Position of the proc in the execution',
-  PROC_NAME IS 'Name of the stored procedure'
+  TEST_NAME IS 'Name of the test (stored procedure)'
   );
 
 -- Table for reports (only for model in create like.)
