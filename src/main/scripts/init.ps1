@@ -31,5 +31,7 @@ if ( ! ( Test-Path Variable:\DB2UNIT_PATH ) ) {
 if ( ! ( Test-Path Variable:\DB2UNIT_SRC_MAIN_CODE_PATH ) ) {
  ${Global:DB2UNIT_SRC_MAIN_CODE_PATH}="${DB2UNIT_PATH}\sql-pl"
  ${Global:DB2UNIT_SRC_MAIN_SCRIPT_PATH}="${DB2UNIT_PATH}"
+ ${Global:DB2UNIT_SRC_TEST_CODE_PATH}="${DB2UNIT_PATH}\sql-pl"
+ ${Global:DB2UNIT_SRC_TEST_SCRIPT_PATH}="${DB2UNIT_PATH}"
 }
 

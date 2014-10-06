@@ -25,10 +25,12 @@
 :: Made in COLOMBIA.
 
 :: This variable indicates the location of the sources.
-set DB2UNIT_PATH=%~dp0..\..\..
+if "%DB2UNIT_PATH%" EQU "" (
+ set DB2UNIT_PATH=%~dp0..\..\..
 
-set DB2UNIT_SRC_MAIN_CODE_PATH=%DB2UNIT_PATH%\src\main\sql-pl
-set DB2UNIT_SRC_MAIN_SCRIPT_PATH=%DB2UNIT_PATH%\src\main\scripts
-set DB2UNIT_SRC_TEST_CODE_PATH=%DB2UNIT_PATH%\src\test\sql-pl
-set DB2UNIT_SRC_TEST_SCRIPT_PATH=%DB2UNIT_PATH%\src\test\scripts
+ set DB2UNIT_SRC_MAIN_CODE_PATH=%DB2UNIT_PATH%\src\main\sql-pl
+ set DB2UNIT_SRC_MAIN_SCRIPT_PATH=%DB2UNIT_PATH%\src\main\scripts
+ set DB2UNIT_SRC_TEST_CODE_PATH=%DB2UNIT_PATH%\src\test\sql-pl
+ set DB2UNIT_SRC_TEST_SCRIPT_PATH=%DB2UNIT_PATH%\src\test\scripts
+)
 

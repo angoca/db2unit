@@ -45,7 +45,7 @@ if ( $LastExitCode -ne 0 ) {
   db2 "DROP SCHEMA ERRORSCHEMA RESTRICT" | Out-Null
 
   # Installs the tests.
-  db2 -td@ -f ../sql-pl/Tests_${SCHEMA}.sql
+  db2 -td@ -f ${DB2UNIT_SRC_TEST_CODE_PATH}/Tests_${SCHEMA}.sql
  }
 
  # Execute the tests.
