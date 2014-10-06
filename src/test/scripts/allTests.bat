@@ -1,4 +1,4 @@
-::@echo off
+@echo off
 ::  This file is part of db2unit: A unit testing framework for DB2 LUW.
 :: Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 ::
