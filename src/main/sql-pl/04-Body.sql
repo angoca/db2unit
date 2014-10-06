@@ -830,6 +830,9 @@ ALTER MODULE DB2UNIT publish
    SET TIME = CURRENT_TIMESTAMP;
    SET SEED = (BIGINT(MINUTE(TIME)) * 60 + SECOND(TIME)) * 1000000
       + MICROSECOND(time);
+   -- Next line does not work in DB2 9.7, however this prevents the problem
+   -- of concurrent simultaneous execution.
+   --SET SEED = BIGINT(MON_GET_APPLICATION_HANDLE() * 10000000000) + SEED;
    SET IGNORED = RAND(INTEGER(MOD(SEED, 2147483648)));
   END IF;
 
