@@ -31,9 +31,9 @@ if ( $LastExitCode -ne 0 ) {
  echo "x for executing"
  echo "The test file should have this structure: Test_<SCHEMA_NAME>.sql"
 } else {
- $SCHEMA=$Args[0]
- $OPTION_1=$Args[1]
- $OPTION_2=$Args[2]
+ ${SCHEMA}=$Args[0]
+ ${OPTION_1}=$Args[1]
+ ${OPTION_2}=$Args[2]
  # Execute the tests.
  if ( "${OPTION_1}" -eq "" -or "${OPTION_1}" -eq "i" -or "${OPTION_2}" -eq "i" ) {
   # Prepares the installation.
