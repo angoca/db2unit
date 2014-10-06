@@ -78,7 +78,7 @@ goto:eof
   db2 "DROP SCHEMA ERRORSCHEMA RESTRICT" > NUL
 
   :: Installs the tests.
-  db2 -td@ -f %DB2UNIT_SRC_TEST_CODE_PATH%/Tests_%SCHEMA%.sql
+  db2 -td@ -f %DB2UNIT_SRC_TEST_CODE_PATH%\Tests_%SCHEMA%.sql
  )
 
  :: Execute the tests.
