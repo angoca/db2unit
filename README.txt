@@ -1,9 +1,9 @@
 db2unit
 =======
 
-db2unit is a testing framework for IBM DB2 in SQL-PL language. It is xUnit
-framework, that takes the same design as the well-known jUnit. db2unit could be
-considered as a jUnit porting for DB2 SQL-PL.
+db2unit is a testing framework for IBM DB2 written in SQL-PL language. It is
+xUnit framework, that takes the same design as the well-known jUnit. db2unit could
+be considered as a jUnit porting for DB2 SQL-PL.
 
  * jUnit
     http://junit.org
