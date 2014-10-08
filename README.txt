@@ -32,7 +32,7 @@ Andres Gomez Casanova (@AngocA)
 
 
 ------------------
-## Installation ##
+## Installation from released file ##
 
 One variable needs to the specified in order to run the install and example
 scripts.
@@ -87,11 +87,11 @@ https://github.com/angoca/db2unit/wiki/Install%20from%20sources
 
 ### 1. Write the test suite ###
 
-Let's suppose you work on a schema called 'MY_SCHM'. From now on, the schema
+Let's suppose you work on a schema called `MY_SCHM`. From now on, the schema
 name will refer to the name of the test suite. It means, your test suite is
-also called 'MY_SCHM'.
+also called `MY_SCHM`.
 
-Your test suite could have the following fixtures that helps to prepare the
+Your tests suite could have the following fixtures that helps to prepare the
 environment:
 
     -- Test fixtures
@@ -116,7 +116,7 @@ environment:
      END @
 
 You create your tests in the same schema as your fixtures. All of these stored
-procedures will be your test suite. The name of our tests should starts by TEST_
+procedures will be your tests suite. The name of our tests should starts by TEST_
 and they should not have any argument, like this:
 
     CREATE OR REPLACE PROCEDURE TEST_my_first_test()
@@ -132,9 +132,9 @@ assertions. Please visit the API section:
 The fixtures and the tests should be created under the same schema, in order to
 be part of the same suite.
 
-### 2. Execute your test suite ###
+### 2. Execute your tests suite ###
 
-Once you have created your procedures in the database, you can run the test
+Once you have created your procedures in the database, you can run the tests
 suite like this:
 
     CALL DB2UNIT.RUN_SUITE('MY_SCHM')
@@ -173,8 +173,8 @@ These are the files included in the released version:
    * `98-Clean.sql` -- Removes all db2unit objects. Used when uninstalling.
    * `99-CleanAdmin.sql` -- Removes admin objects. Used when uninstalling.
 
-The * in the install-related files means that several files for each one of
-them can be found:
+The * in the install-related files means that several files for each name
+can be found:
 
  * `.bat` -- Windows Batch file for CMD.exe
  * `.ps1` -- Windows PowerShell
