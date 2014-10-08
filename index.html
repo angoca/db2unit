@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>db2unit by angoca</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>db2unit</h1>
+        <p>A testing framework for the SQL-PL language</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/angoca/db2unit" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/angoca/db2unit/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/angoca/db2unit/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="db2unit" class="anchor" href="#db2unit"><span class="octicon octicon-link"></span></a>db2unit</h1>
+
+<p>db2unit is a testing framework for IBM DB2 written in SQL-PL language. It is
+xUnit framework, that takes the same design as the well-known jUnit. db2unit could
+be considered as a jUnit porting for DB2 SQL-PL.</p>
+
+<ul>
+<li>jUnit
+<a href="http://junit.org">http://junit.org</a>
+</li>
+<li>xUnit
+<a href="https://en.wikipedia.org/wiki/XUnit">https://en.wikipedia.org/wiki/XUnit</a>
+</li>
+</ul><p>The licenses of this project are:</p>
+
+<ul>
+<li>Source code: GNU General Public License v3.0</li>
+<li>Documentation: GNU Free Documentation License.</li>
+</ul><p>These are some useful links:</p>
+
+<ul>
+<li>The source code and project is hosted in GitHub at:
+<a href="https://github.com/angoca/db2unit">https://github.com/angoca/db2unit</a>
+</li>
+<li>The Wiki is at:
+<a href="https://github.com/angoca/db2unit/wiki">https://github.com/angoca/db2unit/wiki</a>
+</li>
+<li>The released versions are published at:
+<a href="https://github.com/angoca/db2unit/releases">https://github.com/angoca/db2unit/releases</a>
+</li>
+<li>The issue tracker for bugs and comments is at:
+<a href="https://github.com/angoca/db2unit/issues">https://github.com/angoca/db2unit/issues</a>
+</li>
+</ul><p>Author:</p>
+
+<p>Andres Gomez Casanova (<a href="https://github.com/AngocA" class="user-mention">@AngocA</a>)</p>
+
+<hr><h2>
+<a name="installation-from-released-file" class="anchor" href="#installation-from-released-file"><span class="octicon octicon-link"></span></a>Installation from released file</h2>
+
+<p>One variable needs to the specified in order to run the install and example
+scripts.</p>
+
+<pre><code>DB2UNIT_PATH
+</code></pre>
+
+<p>This variable is initialized via the <code>init</code> script.</p>
+
+<p>Before installing the scripts in a database, a connection to it has to be
+established. If not, an error will be raised.</p>
+
+<p><strong>Linux/UNIX/MAC OS</strong>:</p>
+
+<p>Just follow these steps:</p>
+
+<pre><code>tar -zxf db2unit.tar.gz
+cd db2unit
+. ./install
+</code></pre>
+
+<p>Make sure to put the dot before the command. This will source the values and
+use the current connection.</p>
+
+<p><strong>Windows Terminal (CMD - db2clp)</strong>:</p>
+
+<p>First, unzip the file db2unit.zip, and then:</p>
+
+<pre><code>cd db2unit
+install.bat
+</code></pre>
+
+<p><strong>Windows PowerShell</strong>:</p>
+
+<p>First, unzip the file db2unit.zip, and then:</p>
+
+<pre><code>cd db2unit
+.\install.ps1
+</code></pre>
+
+<h1></h1>
+
+<p>After the install, all statements should have been successful.</p>
+
+<p>A more detailed guide to install the utility can be found in the <em>Install</em>
+section of the wiki:
+<a href="https://github.com/angoca/db2unit/wiki/Install">https://github.com/angoca/db2unit/wiki/Install</a></p>
+
+<p>You can also install the utility from the sources and run the examples and
+tests:
+<a href="https://github.com/angoca/db2unit/wiki/Install%20from%20sources">https://github.com/angoca/db2unit/wiki/Install%20from%20sources</a></p>
+
+<hr><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a name="1-write-the-test-suite" class="anchor" href="#1-write-the-test-suite"><span class="octicon octicon-link"></span></a>1. Write the test suite</h3>
+
+<p>Let's suppose you work on a schema called <code>MY_SCHM</code>. From now on, the schema
+name will refer to the name of the test suite. It means, your test suite is
+also called <code>MY_SCHM</code>.</p>
+
+<p>Your tests suite could have the following fixtures that helps to prepare the
+environment:</p>
+
+<pre><code>-- Test fixtures
+CREATE OR REPLACE PROCEDURE ONE_TIME_SETUP()
+ BEGIN
+  -- Your code
+ END @
+
+CREATE OR REPLACE PROCEDURE SETUP()
+ BEGIN
+  -- Your code
+ END @
+
+CREATE OR REPLACE PROCEDURE TEAR_DOWN()
+ BEGIN
+  -- Your code
+ END @
+
+CREATE OR REPLACE PROCEDURE ONE_TIME_TEAR_DOWN()
+ BEGIN
+  -- Your code
+ END @
+</code></pre>
+
+<p>You create your tests in the same schema as your fixtures. All of these stored
+procedures will be your tests suite. The name of our tests should starts by TEST_
+and they should not have any argument, like this:</p>
+
+<pre><code>CREATE OR REPLACE PROCEDURE TEST_my_first_test()
+ BEGIN
+  -- Your code using the test functions.
+  ASSERT_STRING_EQUALS(EXPECTED, ACTUAL);
+ END @
+</code></pre>
+
+<p>In the previous test, you compared two strings. You can use other types of
+assertions. Please visit the API section:
+ <a href="https://github.com/angoca/db2unit/wiki/API">https://github.com/angoca/db2unit/wiki/API</a></p>
+
+<p>The fixtures and the tests should be created under the same schema, in order to
+be part of the same suite.</p>
+
+<h3>
+<a name="2-execute-your-tests-suite" class="anchor" href="#2-execute-your-tests-suite"><span class="octicon octicon-link"></span></a>2. Execute your tests suite</h3>
+
+<p>Once you have created your procedures in the database, you can run the tests
+suite like this:</p>
+
+<pre><code>CALL DB2UNIT.RUN_SUITE('MY_SCHM')
+</code></pre>
+
+<p>Once the execution is finished, you will see a report of the execution.</p>
+
+<p>Check the <em>Usage</em> section for more information about the framework.
+ <a href="https://github.com/angoca/db2unit/wiki/Usage">https://github.com/angoca/db2unit/wiki/Usage</a></p>
+
+<hr><h2>
+<a name="files-and-directories" class="anchor" href="#files-and-directories"><span class="octicon octicon-link"></span></a>FILES AND DIRECTORIES</h2>
+
+<p>These are the files included in the released version:</p>
+
+<ul>
+<li>
+<code>COPYING.txt</code> -- License for the code (GPL license v3.0 - OpenSource).</li>
+<li>
+<code>init*</code> -- Environment configuration.</li>
+<li>
+<code>install*</code> -- Installation files.</li>
+<li>
+<code>README.txt</code> -- This file.</li>
+<li>
+<code>reinstall*</code> -- Reinstallation files.</li>
+<li>
+<code>uninstall*</code> -- Uninstallation files.</li>
+<li>
+<code>doc</code> directory -- Documentation directory.</li>
+<li>
+<code>examples</code> directory -- Examples ready to run.</li>
+<li>
+<code>sql-pl</code> directory -- Directory for all objects: DDL, DML, routines
+ definition.
+
+<ul>
+<li>
+<code>00-Prereqs.sql</code> -- Tests the prerequisites to install the framework.</li>
+<li>
+<code>01-ObjectsAdmin.sql</code> -- Administrative objects like tablespaces,
+bufferpools and schemas to install the framework.</li>
+<li>
+<code>02-Objects.sql</code> -- Tables for the reports and for data type anchoring.</li>
+<li>
+<code>03-Headers.sql</code> -- Definition of all public routines.</li>
+<li>
+<code>04-Body.sql</code> -- Core of the unit framework.</li>
+<li>
+<code>05-Asserts.sql</code> -- Set of assert procedures to perform tests.</li>
+<li>
+<code>06-AssertNoMessage.sql</code> -- Set of assert procedures to perform tests,</li>
+<li>
+<code>07-Version.sql</code> -- Version of the framework.
+without passing messages to the test.</li>
+<li>
+<code>98-Clean.sql</code> -- Removes all db2unit objects. Used when uninstalling.</li>
+<li>
+<code>99-CleanAdmin.sql</code> -- Removes admin objects. Used when uninstalling.</li>
+</ul>
+</li>
+</ul><p>The * in the install-related files means that several files for each name
+can be found:</p>
+
+<ul>
+<li>
+<code>.bat</code> -- Windows Batch file for CMD.exe</li>
+<li>
+<code>.ps1</code> -- Windows PowerShell</li>
+<li>
+<code>.sql</code> -- For DB2 CLPPlus.</li>
+<li>No extension -- For Linux/UNIX/Mac OS X.</li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/angoca">angoca</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
