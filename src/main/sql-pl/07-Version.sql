@@ -28,14 +28,14 @@ SET PATH = SYSTEM PATH, CURRENT USER;
  * Writes the version. This script is the last in order to validate the
  * installation for other components.
  *
- * Version: 2014-06-14 1-Beta
+ * Version: 2014-06-14 1
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */
 
 -- Module version.
 ALTER MODULE DB2UNIT PUBLISH
-  VARIABLE VERSION VARCHAR(32) CONSTANT '2014-07-26 1';
+  VARIABLE VERSION VARCHAR(32) CONSTANT '2014-10-13 1';
 
 -- Clean environment.
 SET PATH = SYSTEM PATH, CURRENT USER;

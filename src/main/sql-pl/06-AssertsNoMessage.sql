@@ -25,7 +25,7 @@ SET CURRENT SCHEMA DB2UNIT_1 @
 /**
  * Asserts implementation without message.
  *
- * Version: 2014-05-04 1-Beta
+ * Version: 2014-05-04 1
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

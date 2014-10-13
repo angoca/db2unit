@@ -25,7 +25,7 @@ SET CURRENT SCHEMA DB2UNIT_1;
 /**
  * Defines the headers of the public routines.
  *
- * Version: 2014-04-30 1-Beta
+ * Version: 2014-04-30 1
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

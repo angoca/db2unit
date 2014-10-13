@@ -39,7 +39,7 @@ SET CURRENT SCHEMA DB2UNIT_1 @
  * 11 - Some of the entry values are null.
  * 12 - The content of the tables is different.
  *
- * Version: 2014-05-02 1-Beta
+ * Version: 2014-05-02 1
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

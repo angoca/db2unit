@@ -19,7 +19,7 @@
 
 :: Cleans the environment variables.
 ::
-:: Version: 2014-06-28 1-Beta
+:: Version: 2014-06-28 1
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 

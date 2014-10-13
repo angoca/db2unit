@@ -18,7 +18,7 @@
 
 # Installs all scripts of the utility.
 #
-# Version: 2014-04-30 1-Beta
+# Version: 2014-04-30 1
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 

@@ -25,7 +25,7 @@ SET CURRENT SCHEMA DB2UNIT_1 @
 /**
  * Core implementation.
  *
- * Version: 2014-04-30 1-Beta
+ * Version: 2014-04-30 1
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */
@@ -597,7 +597,7 @@ ALTER MODULE DB2UNIT ADD
   CALL LOGGER.GET_LOGGER('DB2UNIT_1.DB2UNIT.EXEC_PROCEDURE', LOGGER_ID);
 
   IF (AUTONOMOUS_EXEC = TRUE) THEN
-   CALL LOGGER.WARN(LOGGER_ID, 'It will get into an autonomous transaction for '
+   CALL LOGGER.INFO(LOGGER_ID, 'It will get into an autonomous transaction for '
      || COALESCE(PROC_NAME, '?'));
    CALL EXEC_PROCEDURE_AUTONOMOUS(PROC_NAME);
   ELSE

@@ -18,7 +18,7 @@
 
 # Execute all tests.
 #
-# Version: 2014-05-10 1-Beta
+# Version: 2014-05-10 1
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 

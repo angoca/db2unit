@@ -27,7 +27,7 @@ SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_1, DB2UNIT_EXAMPLE @
 /**
  * Set of test examples.
  *
- * Version: 2014-05-01 1-Beta
+ * Version: 2014-05-01 1
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

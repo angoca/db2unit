@@ -27,7 +27,7 @@ SET PATH = SYSTEM PATH, CURRENT USER;
 /**
  * Creates the necessary objects to run the tests.
  *
- * Version: 2014-04-30 1-Beta
+ * Version: 2014-04-30 1
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */
