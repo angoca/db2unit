@@ -29,12 +29,13 @@ note left of db2unit: status: Executing
 
 db2unit->+suite: oneTimeSetup
 suite->-db2unit: return
-db2unit->+suite: setup
-suite->-db2unit: return
 
 loop execTest
 
 note over db2unit,suite: Execution of all tests
+
+db2unit->+suite: setup
+suite->-db2unit: return
 
 db2unit->+suite: test_X
 suite->+testedRoutine: execution
@@ -46,10 +47,11 @@ note right of suite: Exception controlled
 
 suite->-db2unit: return
 
-end
-
 db2unit->+suite: tearDown
 suite->-db2unit: return
+
+end
+
 db2unit->+suite: oneTimeTearDown
 suite->-db2unit: return
 
