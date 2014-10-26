@@ -160,6 +160,7 @@ ALTER MODULE DB2UNIT ADD
   IF (MESSAGE IS NULL) THEN
    SET MESSAGE = '';
   ELSEIF (MESSAGE = '') THEN
+   -- TODO check this again
    -- Do nothing. <> and != do not work.
   ELSE
    SET MESSAGE = MESSAGE || '. ';
