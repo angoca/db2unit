@@ -44,7 +44,8 @@ ALTER TABLE EXECUTIONS ADD CONSTRAINT DB2UNIT_EXECUTIONS_PK PRIMARY KEY
 COMMENT ON TABLE EXECUTIONS IS 'List of used execution IDs';
 
 COMMENT ON EXECUTIONS (
-  EXECUTION_ID IS 'Execution ID'
+  EXECUTION_ID IS 'Execution ID',
+  DATE IS 'Date when the execution was performed'
   );
 
 -- Table for suites
@@ -177,8 +178,11 @@ COMMENT ON TABLE REPORT_TESTS IS 'Model table for reports';
 
 COMMENT ON REPORT_TESTS (
   DATE IS 'Date when the message was generated',
+  SUITE_NAME IS 'Name of the test suite',
   EXECUTION_ID IS 'Unique ID of the execution',
   TEST_NAME IS 'Name of test being executed',
+  FINAL_STATE IS 'Final state of the report',
+  TIME IS 'Quantity of time the execution took',
   MESSAGE IS 'Descriptive message about the currently executed test'
   );
 
