@@ -18,7 +18,7 @@ There are three sections:
 BEFORE
 
 * Run all tests to make sure there are not regressions.
-* To change the version constant in the code (07-Version.sql:VERSION):
+* Change the version constant in the code (07-Version.sql:VERSION):
 https://github.com/angoca/db2unit/blob/master/src/main/sql-pl/07-Version.sql
 * Write the changes in the ChangeLog section of the wiki.
 * Update the Prerequisites table from the Install section of the wiki.
@@ -33,13 +33,17 @@ PERFORM
 * Once finished, execute mvn release:perform.
   (If problems, mvn release:rollback)
 * Fill the code release in GitHub (https://github.com/angoca/db2unit/releases)
+* Change the link in the sidebar of the wiki in GitHub.
 * Execute mvn.
+* Publish the generated files in GitHub Releases.
 * Fill the ChangeLog page in the wiki with all changes. To review the changes
   compare the tag (git diff previous-tag current-tag)
 
 AFTER
 
-* To change the schema name to the new version in all files.
+* Change the schema name to the new version in all files.
 * Check that there are not references to the previous release.
+* To change the version constant in the code (07-Version.sql:VERSION):
+https://github.com/angoca/db2unit/blob/master/src/main/sql-pl/07-Version.sql
 * Commit these changes and publish.
 
