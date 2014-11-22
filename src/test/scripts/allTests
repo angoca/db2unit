@@ -68,6 +68,8 @@ else
  executeTest DB2UNIT_ASSERTIONS ${PAUSE}
  SUM=$((${SUM}+${RET}))
 
+db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
+
  if [ "${PAUSE}" != "true" ] ; then
   MILLIS_END=$(date +"%s")
   TIME_END=$(date +"%T")
