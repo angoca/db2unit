@@ -51,6 +51,7 @@ else
  if [ "${OPTION_1}" = "x" -o "${OPTION_2}" = "x" ] ; then
   db2 "CALL DB2UNIT.CLEAN()"
   db2 -r /tmp/db2unit.output "CALL DB2UNIT.RUN_SUITE('${SCHEMA}')"
+  db2 "CALL DB2UNIT.GET_LAST_EXECUTION_ORDER()"
   db2 "CALL DB2UNIT.CLEAN()"
  fi
 
