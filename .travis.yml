@@ -36,7 +36,7 @@ before_install:
   - sudo su - db2inst1 -c "db2 update dbm cfg using SYSADM_GROUP db2iadm1 ; db2stop ; db2start"
   # Creates the database
   - sudo su - db2inst1 -c "db2 create db db2unit ; db2 connect to db2unit ; db2 grant dbadm on database to user $USER"
-  - . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit
+  - . ~db2inst1/sqllib/db2profile ; db2 connect to db2unit ; db2 update db cfg using CATALOGCACHE_SZ 2048
 
 install:
   # Install log4db2
@@ -62,13 +62,16 @@ script:
 
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . /tmp/listOfTestSuites ; /tmp/returnCode ; fi" 
 
+after_script
+  - . ~db2inst1/sqllib/db2profile ; db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
+
 after_failure:
   # If there is any error, shows the logs
-  - cat /home/db2inst1/sqllib/db2dump/db2diag.log
   - db2 "call logadmin.logs"
   - db2 "select * from DB2UNIT_1.EXECUTION_REPORTS"
   - db2 "select * from DB2UNIT_EMPTY.REPORT_TESTS"
   - db2 "select * from DB2UNIT_EXECUTION.REPORT_TESTS"
   - db2 "select * from DB2UNIT_ASSERTIONS.REPORT_TESTS"
   - db2 "export to /tmp/sorts.txt of del select * from db2unit_1.sorts" ; cat /tmp/sorts.txt
+  - cat /home/db2inst1/sqllib/db2dump/db2diag.log
 
