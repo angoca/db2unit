@@ -2,9 +2,9 @@ db2unit
 =======
 [![Danta](https://raw.githubusercontent.com/angoca/db2unit/master/doc/danta-128.png)](https://github.com/angoca/db2unit/wiki/logo)
 
-db2unit is a testing framework for IBM DB2 written in SQL-PL language. It is
-xUnit framework, that takes the same design as the well-known jUnit. db2unit could
-be considered as a jUnit porting for DB2 SQL-PL.
+db2unit is a testing framework for IBM DB2 written in SQL PL language.
+It is xUnit framework, that takes the same design as the well-known jUnit.
+db2unit could be considered as a jUnit porting for DB2 SQL-PL.
 
  * jUnit
     http://junit.org
@@ -144,7 +144,7 @@ suite like this:
 Once the execution is finished, you will see a report of the execution.
 
 Check the _Usage_ section for more information about the framework.
- https://github.com/angoca/db2unit/wiki/Usage
+https://github.com/angoca/db2unit/wiki/Usage
 
 
 ---------------------------
@@ -157,8 +157,9 @@ These are the files included in the released version:
  * `install*` -- Installation files.
  * `README.txt` -- This file.
  * `reinstall*` -- Reinstallation files.
+ * `uninit*` -- Clean environment.
  * `uninstall*` -- Uninstallation files.
- * `doc` directory -- Documentation directory.
+ * `doc` directory -- Documentation directory (ER diagram).
  * `examples` directory -- Examples ready to run.
  * `sql-pl` directory -- Directory for all objects: DDL, DML, routines
      definition.
