@@ -1,6 +1,6 @@
 db2unit
 =======
-![Danta](https://raw.githubusercontent.com/angoca/db2unit/master/doc/danta-128.png)
+[![Danta](https://raw.githubusercontent.com/angoca/db2unit/master/doc/danta-128.png)](https://github.com/angoca/db2unit/wiki/logo)
 
 db2unit is a testing framework for IBM DB2 written in SQL-PL language. It is
 xUnit framework, that takes the same design as the well-known jUnit. db2unit could
