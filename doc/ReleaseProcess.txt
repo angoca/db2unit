@@ -34,6 +34,7 @@ PERFORM
   (If problems, mvn release:rollback)
 * Fill the code release in GitHub (https://github.com/angoca/db2unit/releases)
 * Change the link in the sidebar of the wiki in GitHub.
+* Change the link in the README.txt.
 * Execute mvn.
 * Publish the generated files in GitHub Releases.
 * Fill the ChangeLog page in the wiki with all changes. To review the changes
