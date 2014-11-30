@@ -29,7 +29,8 @@ These are some useful links:
 
 Author:
 
-Andres Gomez Casanova (@AngocA)
+Andres Gomez Casanova
+([@AngocA](https://twitter.com/angoca))
 
 
 ------------------
