@@ -38,6 +38,7 @@ Author:
 
 
 ------------------
+
 # Installation #
 
 One variable needs to the specified in order to run the install and example
@@ -89,6 +90,7 @@ and run the examples and tests.
 
 
 -----------
+
 # Usage #
 
 ## 1. Write the test suite ##
