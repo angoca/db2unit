@@ -35,7 +35,11 @@ SET PATH = SYSTEM PATH, CURRENT USER;
 -- Table for execution IDs
 CREATE TABLE EXECUTIONS (
   EXECUTION_ID INT NOT NULL,
-  DATE TIMESTAMP NOT NULL WITH DEFAULT CURRENT TIMESTAMP
+  DATE TIMESTAMP NOT NULL WITH DEFAULT CURRENT TIMESTAMP,
+  TOTAL_TESTS SMALLINT,
+  PASSED_TESTS SMALLINT,
+  FAILED_TESTS SMALLINT,
+  ERROR_TESTS SMALLINT
   );
 
 ALTER TABLE EXECUTIONS ADD CONSTRAINT DB2UNIT_EXECUTIONS_PK PRIMARY KEY
@@ -45,7 +49,11 @@ COMMENT ON TABLE EXECUTIONS IS 'List of used execution IDs';
 
 COMMENT ON EXECUTIONS (
   EXECUTION_ID IS 'Execution ID',
-  DATE IS 'Date when the execution was performed'
+  DATE IS 'Date when the execution was performed',
+  TOTAL_TESTS IS 'Quantity of executed tests',
+  PASSED_TESTS IS 'Quantity of tests that passed',
+  FAILED_TESTS IS 'Quantity of tests that failed',
+  ERROR_TESTS IS 'Quantity of tests that hit errors'
   );
 
 -- Table for suites
