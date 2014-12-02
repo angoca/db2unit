@@ -794,7 +794,7 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_INT_NULL_MESSAGE @
 
 /**
- * Asserts if the given int is not null.
+ * Asserts if the given integer is not null.
  *
  * IN MESSAGE
  *   Related message to the test.
@@ -1009,7 +1009,7 @@ ALTER MODULE DB2UNIT ADD
  * IN EXPECTED_SCHEMA
  *   Schema of the table as model.
  * IN EXPECTED_TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the table to analyse.
  * IN ACTUAL_SCHEMA
  *   Schema of the resulting table.
  * IN ACTUAL_TABLE_NAME
@@ -1139,7 +1139,7 @@ ALTER MODULE DB2UNIT ADD
     SET RET = 14;
   END IF;
 
-  -- Checks qty of columns.
+  -- Checks quantity of columns.
   IF (RET = RET_OK) THEN
    SET SENTENCE = 'SET ? = (SELECT COLCOUNT '
      || 'FROM SYSCAT.TABLES '

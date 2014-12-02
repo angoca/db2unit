@@ -30,7 +30,7 @@ SET CURRENT SCHEMA DB2UNIT_1;
  * Made in COLOMBIA.
  */
 
--- Buffer pool for max values.
+-- Buffer pool for maximal values.
 CREATE BUFFERPOOL MAX_VALUES_BP
   PAGESIZE 32K;
 
