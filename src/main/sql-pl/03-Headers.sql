@@ -511,26 +511,26 @@ ALTER MODULE DB2UNIT PUBLISH
   IN ACTUAL TIME
   );
 
--- Asserts that the times is null.
+-- Asserts that the time is null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_TIME_NULL (
   IN VALUE TIME
   );
 
--- Asserts that the times is null with a given message.
+-- Asserts that the time is null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_TIME_NULL (
   IN MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT,
   IN VALUE TIME
   );
 
--- Asserts that the times is not null.
+-- Asserts that the time is not null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_TIME_NOT_NULL (
   IN VALUE TIME
   );
 
--- Asserts that the times is not null with a given message.
+-- Asserts that the time is not null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_TIME_NOT_NULL (
   IN MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT,
