@@ -76,6 +76,11 @@ ALTER MODULE DB2UNIT PUBLISH
   FUNCTION GET_LAST_EXEC_ID (
   ) RETURNS ANCHOR EXECUTIONS.EXECUTION_ID;
 
+-- Returns the Execution Id of the current execution.
+ALTER MODULE DB2UNIT PUBLISH
+  FUNCTION GET_CURRENT_EXEC_ID (
+  ) RETURNS ANCHOR EXECUTION_REPORTS.EXECUTION_ID;
+
 -- Returns the test order of the last execution.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE GET_LAST_EXECUTION_ORDER(
@@ -288,26 +293,26 @@ ALTER MODULE DB2UNIT PUBLISH
   IN ACTUAL BIGINT
   );
 
--- Asserts that the int is null.
+-- Asserts that the integer is null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_NULL (
   IN VALUE BIGINT
   );
 
--- Asserts that the int is null with a given message.
+-- Asserts that the integer is null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_NULL (
   IN MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT,
   IN VALUE BIGINT
   );
 
--- Asserts that the int is not null.
+-- Asserts that the integer is not null.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_NOT_NULL (
   IN VALUE BIGINT
   );
 
--- Asserts that the int is not null with a given message.
+-- Asserts that the integer is not null with a given message.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_INT_NOT_NULL (
   IN MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT,

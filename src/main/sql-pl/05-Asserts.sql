@@ -794,7 +794,7 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_INT_NULL_MESSAGE @
 
 /**
- * Asserts if the given int is not null.
+ * Asserts if the given integer is not null.
  *
  * IN MESSAGE
  *   Related message to the test.
@@ -1009,7 +1009,7 @@ ALTER MODULE DB2UNIT ADD
  * IN EXPECTED_SCHEMA
  *   Schema of the table as model.
  * IN EXPECTED_TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the table to analyse.
  * IN ACTUAL_SCHEMA
  *   Schema of the resulting table.
  * IN ACTUAL_TABLE_NAME
@@ -1139,7 +1139,7 @@ ALTER MODULE DB2UNIT ADD
     SET RET = 14;
   END IF;
 
-  -- Checks qty of columns.
+  -- Checks quantity of columns.
   IF (RET = RET_OK) THEN
    SET SENTENCE = 'SET ? = (SELECT COLCOUNT '
      || 'FROM SYSCAT.TABLES '
@@ -1535,6 +1535,7 @@ ALTER MODULE DB2UNIT ADD
   DECLARE SHOW BOOLEAN DEFAULT FALSE;
   DECLARE RET INT;
   DECLARE ASSERT_TYPE VARCHAR(16) CONSTANT 'DATE_EQUALS';
+  DECLARE DATE_FORMATTED VARCHAR(16);
 
   CALL LOGGER.GET_LOGGER('DB2UNIT_1.DB2UNIT.ASSERT_DATE_EQUALS_MESSAGE',
     LOGGER_ID);
@@ -1565,12 +1566,14 @@ ALTER MODULE DB2UNIT ADD
   -- Show problems.
   IF (SHOW = TRUE) THEN
    IF (EXPECTED IS NOT NULL) THEN
-    CALL WRITE_IN_REPORT ('Expected: "' || EXPECTED || '"');
+    SET DATE_FORMATTED = VARCHAR_FORMAT(EXPECTED, 'YYYY-MM-DD');
+    CALL WRITE_IN_REPORT ('Expected: "' || DATE_FORMATTED || '"');
    ELSE
     CALL WRITE_IN_REPORT ('Expected: NULL');
    END IF;
    IF (ACTUAL IS NOT NULL) THEN
-    CALL WRITE_IN_REPORT ('Actual  : "' || ACTUAL || '"');
+    SET DATE_FORMATTED = VARCHAR_FORMAT(ACTUAL, 'YYYY-MM-DD');
+    CALL WRITE_IN_REPORT ('Actual  : "' || DATE_FORMATTED || '"');
    ELSE
     CALL WRITE_IN_REPORT ('Actual  : NULL');
    END IF;

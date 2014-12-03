@@ -639,7 +639,7 @@ ALTER MODULE DB2UNIT ADD
 
   DECLARE LOGGER_ID SMALLINT;
   DECLARE CARD_PROCS INT; -- Quantity of procedures.
-  DECLARE INDEX INT; -- Index to scan the procs.
+  DECLARE INDEX INT; -- Index to scan the procedures.
   DECLARE START_TIME TIMESTAMP; -- Start time of the execution.
   DECLARE SECONDS ANCHOR REPORT_TESTS.TIME; -- To count the expended
     -- time.
@@ -727,11 +727,12 @@ ALTER MODULE DB2UNIT ADD
    SET START_TIME = CURRENT TIMESTAMP;
    CALL EXEC_PROCEDURE(TESTNAME);
    SET SECONDS = TIMESTAMPDIFF(1, CURRENT TIMESTAMP - START_TIME);
+   COMMIT;
 
    IF (TEST_RESULT IS NULL) THEN
     SET TEST_RESULT = RESULT_PASSED;
    END IF;
-   -- Update the stats
+   -- Update the statistics
    SET TESTS_EXEC = TESTS_EXEC + 1;
    IF (TEST_RESULT = RESULT_PASSED) THEN
     SET TESTS_PASSED = TESTS_PASSED + 1;
@@ -741,6 +742,13 @@ ALTER MODULE DB2UNIT ADD
     SET TESTS_ERROR = TESTS_ERROR + 1;
    END IF;
 
+   -- Insert result
+   CALL LOGGER.DEBUG(LOGGER_ID, CUR_SCHEMA || ':' || EXEC_ID || ':'
+     || TESTNAME || '=' || TEST_RESULT);
+   INSERT INTO RESULT_TESTS (SUITE_NAME, EXECUTION_ID, TEST_NAME, FINAL_STATE,
+     TIME) VALUES (CUR_SCHEMA, EXEC_ID, TESTNAME, TEST_RESULT, SECONDS);
+
+   -- Insert report
    SET SENTENCE = 'UPDATE ' || CUR_SCHEMA || '.' || REPORTS_TABLE || ' '
      || 'SET TIME = ' || SECONDS || ', '
      || 'FINAL_STATE = ''' || TEST_RESULT || ''' '
@@ -780,12 +788,15 @@ ALTER MODULE DB2UNIT ADD
   CALL WRITE_IN_REPORT (TESTS_PASSED || ' tests passed');
   CALL WRITE_IN_REPORT (TESTS_FAILED || ' tests failed');
   CALL WRITE_IN_REPORT (TESTS_ERROR || ' tests with errors');
-  UPDATE EXECUTIONS SET
+
+  -- Updates the suite execution
+  UPDATE SUITES_EXECUTIONS SET
     TOTAL_TESTS = TESTS_EXEC,
     PASSED_TESTS = TESTS_PASSED,
     FAILED_TESTS = TESTS_FAILED,
     ERROR_TESTS = TESTS_ERROR
-    WHERE EXECUTION_ID = EXEC_ID;
+    WHERE EXECUTION_ID = EXEC_ID
+    AND SUITE_NAME = CUR_SCHEMA;
 
   -- Return value
   IF (TESTS_ERROR > 0 OR TESTS_FAILED > 0) THEN
@@ -1326,7 +1337,7 @@ ALTER MODULE DB2UNIT ADD
 /**
  * Returns the Execution Id of the most recent execution.
  *
- * RETURNS ExecID of the execution Id.
+ * RETURNS ExecID of the most recent execution.
  */
 ALTER MODULE DB2UNIT ADD
   FUNCTION GET_LAST_EXEC_ID (
@@ -1404,6 +1415,18 @@ ALTER MODULE DB2UNIT ADD
     ORDER BY T1.SUITE_NAME;
   OPEN EXEC_CURSOR;
  END P_REPORT_RECENT_EXECUTIONS @
+
+/*
+ * Returns the Execution Id of the current execution.
+ *
+ * RETURNS ExecID of the current execution.
+ */
+ALTER MODULE DB2UNIT ADD
+  FUNCTION GET_CURRENT_EXEC_ID (
+  ) RETURNS ANCHOR EXECUTION_REPORTS.EXECUTION_ID
+ F_GET_CURRENT_EXEC_ID: BEGIN
+  RETURN EXEC_ID;
+ END F_GET_CURRENT_EXEC_ID @
 
 /**
  * Cleans the environment, if a previous execution did not finished correctly.
