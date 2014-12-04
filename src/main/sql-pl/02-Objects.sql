@@ -20,14 +20,14 @@
  Andres Gomez Casanova <angocaATyahooDOTcom>
 */
 
-SET CURRENT SCHEMA DB2UNIT_1;
+SET CURRENT SCHEMA DB2UNIT_2_BETA;
 
 SET PATH = SYSTEM PATH, CURRENT USER;
 
 /**
  * Creates the necessary objects to run the tests.
  *
- * Version: 2014-04-30 1
+ * Version: 2014-04-30 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

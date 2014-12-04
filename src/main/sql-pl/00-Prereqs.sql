@@ -23,7 +23,7 @@
 /**
  * Checks prerequisites.
  *
- * Version: 2014-05-08 1
+ * Version: 2014-05-08 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */
@@ -105,7 +105,7 @@ BEGIN
  IF (CONT = TRUE) THEN
   SET STEP = 6;
   -- Executes the logger methods in order to check them.
-  SET SENTENCE = 'CALL LOGGER.GET_LOGGER(''DB2UNIT_1'', ?)';
+  SET SENTENCE = 'CALL LOGGER.GET_LOGGER(''DB2UNIT_2_BETA'', ?)';
   PREPARE STMT FROM SENTENCE;
   EXECUTE STMT INTO LOGGER_ID;
 

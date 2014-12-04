@@ -22,12 +22,12 @@
 
 SET CURRENT SCHEMA DB2UNIT_EMPTY @
 
-SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_1, DB2UNIT_EMPTY @
+SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_2_BETA, DB2UNIT_EMPTY @
 
 /**
  * Tests for a empty schema.
  *
- * Version: 2014-05-01 1
+ * Version: 2014-05-01 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

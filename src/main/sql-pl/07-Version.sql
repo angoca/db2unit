@@ -20,7 +20,7 @@
  Andres Gomez Casanova <angocaATyahooDOTcom>
 */
 
-SET CURRENT SCHEMA DB2UNIT_1;
+SET CURRENT SCHEMA DB2UNIT_2_BETA;
 
 SET PATH = SYSTEM PATH, CURRENT USER;
 
@@ -28,7 +28,7 @@ SET PATH = SYSTEM PATH, CURRENT USER;
  * Writes the version. This script is the last in order to validate the
  * installation for other components.
  *
- * Version: 2014-06-14 1
+ * Version: 2014-06-14 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */
