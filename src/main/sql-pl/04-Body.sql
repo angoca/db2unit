@@ -1346,6 +1346,18 @@ ALTER MODULE DB2UNIT ADD
   RETURN LAST_EXEC_ID;
  END F_GET_LAST_EXEC_ID @
 
+/*
+ * Returns the Execution Id of the current execution.
+ *
+ * RETURNS ExecID of the current execution.
+ */
+ALTER MODULE DB2UNIT ADD
+  FUNCTION GET_CURRENT_EXEC_ID (
+  ) RETURNS ANCHOR EXECUTION_REPORTS.EXECUTION_ID
+ F_GET_CURRENT_EXEC_ID: BEGIN
+  RETURN EXEC_ID;
+ END F_GET_CURRENT_EXEC_ID @
+
 /**
  * Retrieves the order of the test of the most recent execution.
  */
@@ -1416,17 +1428,20 @@ ALTER MODULE DB2UNIT ADD
   OPEN EXEC_CURSOR;
  END P_REPORT_RECENT_EXECUTIONS @
 
-/*
- * Returns the Execution Id of the current execution.
- *
- * RETURNS ExecID of the current execution.
- */
+-- Creates a TAP (Test Anything Protocol) report.
 ALTER MODULE DB2UNIT ADD
-  FUNCTION GET_CURRENT_EXEC_ID (
-  ) RETURNS ANCHOR EXECUTION_REPORTS.EXECUTION_ID
- F_GET_CURRENT_EXEC_ID: BEGIN
-  RETURN EXEC_ID;
- END F_GET_CURRENT_EXEC_ID @
+  PROCEDURE CREATE_TAP_REPORT(
+  )
+  LANGUAGE SQL
+  SPECIFIC P_CREATE_TAP_REPORT
+  DYNAMIC RESULT SETS 1
+  READS SQL DATA
+  NOT DETERMINISTIC
+  NO EXTERNAL ACTION
+  PARAMETER CCSID UNICODE
+ P_REPORT_RECENT_EXECUTIONS: BEGIN
+  
+ END P_CREATE_TAP_REPORT @
 
 /**
  * Cleans the environment, if a previous execution did not finished correctly.
