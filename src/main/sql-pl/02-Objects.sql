@@ -172,7 +172,8 @@ CREATE TABLE RESULT_TESTS (
   EXECUTION_ID INT NOT NULL,
   TEST_NAME VARCHAR(128) NOT NULL,
   FINAL_STATE CHAR(8) NOT NULL,
-  TIME INT
+  DATE TIMESTAMP,
+  DURATION INT
   );
 
 ALTER TABLE RESULT_TESTS ADD CONSTRAINT DB2UNIT_RES_TSTS_PK PRIMARY KEY
@@ -190,7 +191,8 @@ COMMENT ON RESULT_TESTS (
   EXECUTION_ID IS 'Unique ID of the execution',
   TEST_NAME IS 'Name of the test (stored procedure)',
   FINAL_STATE IS 'Final state of the test',
-  TIME IS 'Quantity of time the execution took'
+  DATE IS 'Date when the test was executed',
+  DURATION IS 'Quantity of time the execution took'
   );
 
 -- Table for reports (only for model in create like.)
@@ -287,4 +289,10 @@ INSERT INTO LICENSE (NUMBER, LINE) VALUES
   (15, ' along with this program.  If not, see <http://www.gnu.org/licenses/>.'),
   (16, ' '),
   (17, ' Andres Gomez Casanova <angocaATyahooDOTcom>');
+
+-- Table for the TAP report.
+CREATE GLOBAL TEMPORARY TABLE TAP_REPORT (
+  NUMBER SMALLINT,
+  MESSAGE VARCHAR(256)
+  ) ON COMMIT PRESERVE ROWS;
 
