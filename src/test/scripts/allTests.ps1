@@ -42,5 +42,8 @@ if ( $LastExitCode -ne 0 ) {
  Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
  & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS i x
+ Write-Host "Press enter to continue (next DB2UNIT_TAP)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_TAP i x
 }
 

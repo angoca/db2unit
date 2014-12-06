@@ -48,6 +48,7 @@ if %ERRORLEVEL% NEQ 0 (
  call:executeTest DB2UNIT_EXECUTION
  call:executeTest DB2UNIT_EXECUTION_2
  call:executeTest DB2UNIT_ASSERTIONS
+ call:executeTest DB2UNIT_TAP
 
  if not "!PAUSE!" == "true" (
   set TIME_END=echo !time!
