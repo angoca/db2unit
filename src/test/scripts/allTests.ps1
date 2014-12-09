@@ -36,8 +36,23 @@ if ( $LastExitCode -ne 0 ) {
  Write-Host "Press enter to continue (next DB2UNIT_EXECUTION)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
  & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_EXECUTION i x
- Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS)"
+ Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_GENERAL)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
- & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS i x
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_GENERAL i x
+ Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_BOOLEAN)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_BOOLEAN i x
+ Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_DATETIME)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_DATETIME i x
+ Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_NUMBER)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_NUMBER i x
+ Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_STRING)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_STRING i x
+ Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_TABLE)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_TABLE i x
 }
 
