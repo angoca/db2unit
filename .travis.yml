@@ -57,10 +57,10 @@ install:
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; db2 \"call db2unit.export_tests_list\"; sudo chmod +x /tmp/listOfTestSuites ; sudo chmod +x /tmp/returnCode ; cat /tmp/listOfTestSuites ; fi"
 
 script:
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EMPTY')\"      ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EXECUTION')\"  ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EXECUTION_2')\"  ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
-  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_ASSERTIONS')\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EMPTY')\"        ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EXECUTION')\"    ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EXECUTION_2')\"  ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_ASSERTIONS')\"   ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
 
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . /tmp/listOfTestSuites ; /tmp/returnCode ; fi" 
 

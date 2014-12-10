@@ -1857,6 +1857,7 @@ ALTER MODULE DB2UNIT ADD
      || 'SELECT * FROM (SELECT ''db2 -r /tmp/db2unit.output -v '
      || '"CALL DB2UNIT.RUN_SUITE('''''' || SUITE_NAME || '''''')" ; '
      || 'touch /tmp/sum ; '
+     || 'db2 "call db2unit.get_last_execution_order()" ; '
      || 'SUM=$(cat /tmp/sum) ; '
      || 'tail -1 /tmp/db2unit.output | awk ''''/Return Status/ {print "echo $(($SUM+"$4")) > /tmp/sum"}'''' | source /dev/stdin ; '
      || 'cat /tmp/sum '' '
