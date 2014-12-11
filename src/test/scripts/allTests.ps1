@@ -18,7 +18,7 @@
 
 # Execute all tests.
 #
-# Version: 2014-05-10 1
+# Version: 2014-05-10 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
@@ -36,8 +36,14 @@ if ( $LastExitCode -ne 0 ) {
  Write-Host "Press enter to continue (next DB2UNIT_EXECUTION)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
  & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_EXECUTION i x
+ Write-Host "Press enter to continue (next DB2UNIT_EXECUTION_2)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_EXECUTION_2 i x
  Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
  & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS i x
+ Write-Host "Press enter to continue (next DB2UNIT_TAP)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_TAP i x
 }
 

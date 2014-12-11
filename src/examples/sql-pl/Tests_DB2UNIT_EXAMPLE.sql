@@ -22,12 +22,12 @@
 
 SET CURRENT SCHEMA DB2UNIT_EXAMPLE @
 
-SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_1, DB2UNIT_EXAMPLE @
+SET PATH = "SYSIBM","SYSFUN","SYSPROC","SYSIBMADM", DB2UNIT_2_BETA, DB2UNIT_EXAMPLE @
 
 /**
  * Set of test examples.
  *
- * Version: 2014-05-01 1
+ * Version: 2014-05-01 2_BETA
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

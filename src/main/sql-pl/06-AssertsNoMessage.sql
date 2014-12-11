@@ -20,12 +20,12 @@
  Andres Gomez Casanova <angocaATyahooDOTcom>
 */
 
-SET CURRENT SCHEMA DB2UNIT_1 @
+SET CURRENT SCHEMA DB2UNIT_2_BETA @
 
 /**
  * Asserts implementation without message.
  *
- * Version: 2014-05-04 1
+ * Version: 2014-05-04 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */

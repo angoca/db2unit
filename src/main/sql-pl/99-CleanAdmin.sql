@@ -20,17 +20,19 @@
  Andres Gomez Casanova <angocaATyahooDOTcom>
 */
 
-SET CURRENT SCHEMA DB2UNIT_1;
+SET CURRENT SCHEMA DB2UNIT_2_BETA;
 
 /**
  * Removes db2unit from the database (Administrative objects).
  *
- * Version: 2014-04-30 1
+ * Version: 2014-04-30 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */
 
-DROP SCHEMA DB2UNIT_1 RESTRICT;
+DROP SCHEMA DB2UNIT_2_BETA RESTRICT;
+
+DROP TABLESPACE TS_DB2UNIT_USR_TMP;
 
 DROP TABLESPACE MAX_VALUES_TS;
 

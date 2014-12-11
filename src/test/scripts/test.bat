@@ -19,7 +19,13 @@
 
 :: Install and/or execute a suite of tests.
 ::
-:: Version: 2014-05-01 1
+:: In order to run this script, it is necessary to define the environment
+:: variable DB2UNIT_SRC_TEST_CODE_PATH with the directory where the test suite
+:: file is.
+::
+::   set DB2UNIT_SRC_TEST_CODE_PATH=C:\DB2\MyTests
+::
+:: Version: 2014-05-01 V2_BETA
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
@@ -75,7 +81,7 @@ goto:eof
  if %install% EQU 1 (
   :: Prepares the installation.
   db2 "DELETE FROM LOGS" > NUL
-  db2 "DROP TABLE %1.REPORT_TESTS" > NUL
+  db2 "DROP TABLE %SCHEMA%.REPORT_TESTS" > NUL
   db2 "CALL SYSPROC.ADMIN_DROP_SCHEMA('%SCHEMA%', NULL, 'ERRORSCHEMA', 'ERRORTABLE')" > NUL
   db2 "SELECT VARCHAR(SUBSTR(DIAGTEXT, 1, 256), 256) AS ERROR FROM ERRORSCHEMA.ERRORTABLE" 2> NUL
   db2 "DROP TABLE ERRORSCHEMA.ERRORTABLE" > NUL
@@ -89,6 +95,7 @@ goto:eof
  if %execute% EQU 1 (
   db2 "CALL DB2UNIT.CLEAN()"
   db2 "CALL DB2UNIT.RUN_SUITE('%SCHEMA%')"
+  db2 "CALL DB2UNIT.GET_LAST_EXECUTION_ORDER()"
   db2 "CALL DB2UNIT.CLEAN()"
  )
 
@@ -96,7 +103,7 @@ goto:eof
   db2 "CALL LOGADMIN.LOGS(min_level=>5)"
   db2 "SELECT EXECUTION_ID EXEC_ID, " ^
     "VARCHAR(SUBSTR(TEST_NAME, 1, 32), 32) TEST, " ^
-    "FINAL_STATE STATE, TIME, VARCHAR(SUBSTR(MESSAGE, 1, 128), 128) " ^
+    "FINAL_STATE STATE, TIME, VARCHAR(SUBSTR(MESSAGE, 1, 128), 128) MESSAGE " ^
     "FROM %SCHEMA%.REPORT_TESTS ORDER BY DATE"
  )
 goto:eof

@@ -16,25 +16,32 @@
 #
 # Andres Gomez Casanova <angocaATyahooDOTcom>
 
-# Uninstalls all the components of this utility.
+# Installs all scripts of the utility.
 #
 # Version: 2014-04-30 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
+# Function that installs the utility.
+function install() {
+ # Generates the report (any previous report is deleted).
+ db2 "CALL DB2UNIT.CREATE_TAP_REPORT()" | Out-Null
+ # Exports the report to a file.
+ db2 "EXPORT TO $env:temp\tap.report OF DEL MODIFIED BY NOCHARDEL
+  SELECT MESSAGE
+  FROM DB2UNIT_2_BETA.TAP_REPORT
+  ORDER BY NUMBER" | Out-Null
+ # Shows the file.
+ Get-Content $env:temp\tap.report 
+}
+
 # Checks if there is already a connection established
 db2 connect | Out-Null
-if ( ${LastExitCode} -ne 0 ) {
- echo "Please connect to a database before the execution of the uninstallation."
- echo "Load the DB2 profile with: set-item -path env:DB2CLP -value `"**`$$**`""
+if ( $LastExitCode -eq 0 ) {
+ init $Args[0]
 } else {
- if ( Test-Path -Path init.ps1 -PathType Leaf ) {
-  .\init.ps1
- }
- echo "Uninstalling db2unit"
- db2 -tf ${DB2UNIT_SRC_MAIN_CODE_PATH}\98-Clean.sql
- db2 -tf PACKAGES_TO_DROP.sql
- db2 -tf ${DB2UNIT_SRC_MAIN_CODE_PATH}\99-CleanAdmin.sql
- del PACKAGES_TO_DROP.sql
+ echo "Please connect to a database before the execution of the installation."
+ echo "Load the DB2 profile with: set-item -path env:DB2CLP -value `"**`$$**`""
+ echo "This script generates a report only if a test suite has been executed"
 }
 

@@ -18,7 +18,7 @@
 
 # Execute all tests.
 #
-# Version: 2014-05-10 1
+# Version: 2014-05-10 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
@@ -65,7 +65,13 @@ else
  executeTest DB2UNIT_EXECUTION ${PAUSE}
  SUM=$((${SUM}+${RET}))
  export RET=0
+ executeTest DB2UNIT_EXECUTION_2 ${PAUSE}
+ SUM=$((${SUM}+${RET}))
+ export RET=0
  executeTest DB2UNIT_ASSERTIONS ${PAUSE}
+ SUM=$((${SUM}+${RET}))
+ export RET=0
+ executeTest DB2UNIT_TAP ${PAUSE}
  SUM=$((${SUM}+${RET}))
 
 db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"

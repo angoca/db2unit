@@ -48,7 +48,7 @@
    <fileMode>0666</fileMode>
    <outputDirectory>sql-pl</outputDirectory>
   </fileSet>
-  <!-- Scripts -->
+  <!-- Scripts Linux -->
   <fileSet>
    <directory>src/main/scripts</directory>
    <includes>
@@ -62,12 +62,20 @@
    <lineEnding>lf</lineEnding>
    <outputDirectory>/</outputDirectory>
   </fileSet>
-  <!-- Scripts -->
+  <!-- Scripts Windows (Bat and PowerShell)-->
   <fileSet>
    <directory>src/main/scripts</directory>
    <includes>
-    <include>**/*.bat</include>
-    <include>**/*.ps1</include>
+    <include>**/init.bat</include>
+    <include>**/install.bat</include>
+    <include>**/reinstall.bat</include>
+    <include>**/uninit.bat</include>
+    <include>**/uninstall.bat</include>
+    <include>**/init.ps1</include>
+    <include>**/install.ps1</include>
+    <include>**/reinstall.ps1</include>
+    <include>**/uninit.ps1</include>
+    <include>**/uninstall.ps1</include>
    </includes>
    <fileMode>0666</fileMode>
    <lineEnding>crlf</lineEnding>
@@ -81,6 +89,48 @@
    </includes>
    <outputDirectory>doc</outputDirectory>
   </fileSet>
+  <!-- Scripts -->
+  <!-- TAP report -->
+  <fileSet>
+   <directory>src/main/scripts</directory>
+   <includes>
+    <include>**/tap_report</include>
+   </includes>
+   <fileMode>0777</fileMode>
+   <lineEnding>lf</lineEnding>
+   <outputDirectory>bin</outputDirectory>
+  </fileSet>
+  <fileSet>
+   <directory>src/main/scripts</directory>
+   <includes>
+    <include>**/tap_report.bat</include>
+    <include>**/tap_report.ps1</include>
+   </includes>
+   <fileMode>0666</fileMode>
+   <lineEnding>crlf</lineEnding>
+   <outputDirectory>bin</outputDirectory>
+  </fileSet>
+  <!-- Tests -->
+  <fileSet>
+   <directory>src/test/scripts</directory>
+   <includes>
+    <include>**/test</include>
+   </includes>
+   <fileMode>0777</fileMode>
+   <lineEnding>lf</lineEnding>
+   <outputDirectory>bin</outputDirectory>
+  </fileSet>
+  <fileSet>
+   <directory>src/test/scripts</directory>
+   <includes>
+    <include>**/test.bat</include>
+    <include>**/test.ps1</include>
+   </includes>
+   <fileMode>0666</fileMode>
+   <lineEnding>crlf</lineEnding>
+   <outputDirectory>bin</outputDirectory>
+  </fileSet>
+
   <!-- Examples -->
   <fileSet>
    <directory>src/examples/sql-pl</directory>

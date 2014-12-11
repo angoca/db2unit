@@ -24,6 +24,9 @@ https://github.com/angoca/db2unit/blob/master/src/main/sql-pl/07-Version.sql
 * Update the Prerequisites table from the Install section of the wiki.
 * Change the version in the documentation (Version:) of all source files.
 * Make sure the schema reflects the version number to release (all files.)
+* Execute examples.
+* Read the code again.
+* Review the wiki (all pages).
 * Perform last commit and push.
 
 PERFORM
