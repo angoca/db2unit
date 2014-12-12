@@ -516,7 +516,10 @@ ALTER MODULE DB2UNIT ADD
   DECLARE STMT STATEMENT; -- Statement to execute.
   -- If the procedure does not exist, then exist without any message.
   DECLARE EXIT HANDLER FOR INEXISTENT
-    CALL LOGGER.INFO(LOGGER_ID, '<');
+    BEGIN
+     SET CONT = TRUE;
+     CALL LOGGER.INFO(LOGGER_ID, '<');
+    END;
   -- A string is too long to be processed.
   DECLARE EXIT HANDLER FOR TOO_LONG
     BEGIN
@@ -560,7 +563,9 @@ ALTER MODULE DB2UNIT ADD
      CALL LOGGER.INFO(LOGGER_ID, '< With exception(2) '
        || COALESCE(COPY_SQLSTATE, 'EMPTY') || '-'
        || COALESCE(COPY_SQLCODE, -1) || TEST_MESSAGE);
-     SET TEST_RESULT = RESULT_ERROR;
+     IF (TEST_RESULT = EXECUTING) THEN
+      SET TEST_RESULT = RESULT_ERROR;
+     END IF;
      SET CONT = FALSE;
      COMMIT;
     END;
