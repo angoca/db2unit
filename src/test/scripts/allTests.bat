@@ -46,6 +46,7 @@ if %ERRORLEVEL% NEQ 0 (
  )
  call:executeTest DB2UNIT_EMPTY
  call:executeTest DB2UNIT_EXECUTION
+ call:executeTest DB2UNIT_EXECUTION_2
  call:executeTest DB2UNIT_ASSERTIONS_GENERAL
  call:executeTest DB2UNIT_ASSERTIONS_BOOLEAN
  call:executeTest DB2UNIT_ASSERTIONS_DATETIME

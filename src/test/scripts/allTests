@@ -65,6 +65,9 @@ else
  executeTest DB2UNIT_EXECUTION ${PAUSE}
  SUM=$((${SUM}+${RET}))
  export RET=0
+ executeTest DB2UNIT_EXECUTION_2 ${PAUSE}
+ SUM=$((${SUM}+${RET}))
+ export RET=0
  executeTest DB2UNIT_ASSERTIONS_GENERAL ${PAUSE}
  SUM=$((${SUM}+${RET}))
  export RET=0
