@@ -39,9 +39,11 @@ SET CURRENT SCHEMA DB2UNIT_2_BETA @
  * 11 - Some of the entry values are null.
  * 12 - The content of the tables is different.
  *
+ * dib dob: XML assertions.
+ *
  * Version: 2014-05-02 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
- * Made in COLOMBIA.
+ * Author: Robert Mala (dib dob)
  */
 
 /**
@@ -1838,7 +1840,6 @@ ALTER MODULE DB2UNIT ADD
   RETURN RET;
  END P_ASSERT_TIME_NOT_NULL_MESSAGE @
 
-
 -- XML
 
 /**
@@ -1979,11 +1980,11 @@ _ELSE
 _END
 
   IF (DOCUMENT1 IS NOT NULL AND DOCUMENT2 IS NOT NULL) THEN
-    CALL QUERY_XML(DOCUMENT1, SEQUENCE1, PATH1);
-    CALL QUERY_XML(DOCUMENT2, SEQUENCE2, PATH2);
-    SET EQUAL = DEEP_EQUAL(SEQUENCE1, SEQUENCE2);
+   CALL QUERY_XML(DOCUMENT1, SEQUENCE1, PATH1);
+   CALL QUERY_XML(DOCUMENT2, SEQUENCE2, PATH2);
+   SET EQUAL = DEEP_EQUAL(SEQUENCE1, SEQUENCE2);
   END IF;
-END P_IS_XML_EQUAL @
+ END P_IS_XML_EQUAL @
 
 /**
  * Returns a character representation of the given XML document.
@@ -2012,7 +2013,6 @@ _END
   IF (VALUE IS NULL) THEN
     SET RET = 'NULL';
   ELSE
-   -- TODO Short representation of a XML document (less than 500 chars).
 _IF __SQLSTATE_429BB _THEN
    SET RET = LEFT(VALUE, 500);
 _ELSE
@@ -2198,4 +2198,5 @@ _END
 
   RETURN RET;
  END P_ASSERT_XML_NOT_NULL_MESSAGE @
+
 

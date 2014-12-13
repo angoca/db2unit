@@ -24,10 +24,11 @@ SET CURRENT SCHEMA DB2UNIT_2_BETA;
 
 /**
  * Defines the headers of the public routines.
+ * dib dob: XML assertions.
  *
  * Version: 2014-04-30 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
- * Made in COLOMBIA.
+ * Author: Robert Mala (dib dob)
  */
 
 -- Module for objects of the db2unit framework.
@@ -635,3 +636,5 @@ _ELSE
   IN VALUE XML
 _END
   );
+
+

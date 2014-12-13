@@ -24,10 +24,11 @@ SET CURRENT SCHEMA DB2UNIT_2_BETA @
 
 /**
  * Asserts implementation without message.
+ * dib dob: XML assertions.
  *
  * Version: 2014-05-04 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
- * Made in COLOMBIA.
+ * Author: Robert Mala (dib dob)
  */
 
 -- GENERAL
@@ -811,7 +812,6 @@ ALTER MODULE DB2UNIT ADD
   RETURN RET;
  END P_ASSERT_TIME_NOT_NULL @
 
-
 -- XML
 
 /**
@@ -910,4 +910,5 @@ _END
 
   RETURN RET;
  END P_ASSERT_XML_NOT_NULL @
+
 
