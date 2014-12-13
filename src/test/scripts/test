@@ -18,6 +18,12 @@
 
 # Install and/or execute a suite of tests.
 #
+# In order to run this script, it is necessary to define the environment
+# variable DB2UNIT_SRC_TEST_CODE_PATH with the directory where the test suite
+# file is.
+#
+#   export DB2UNIT_SRC_TEST_CODE_PATH=/home/db2inst1/mytests
+#
 # Version: 2014-05-01 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
