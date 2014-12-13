@@ -82,6 +82,9 @@ else
  executeTest DB2UNIT_ASSERTIONS_STRING_LONG ${PAUSE_INSTALL}
  SUM=$((${SUM}+${RET}))
  export RET=0
+ executeTest DB2UNIT_ASSERTIONS_XML ${PAUSE_INSTALL}
+ SUM=$((${SUM}+${RET}))
+ export RET=0
  executeTest DB2UNIT_TAP ${PAUSE_INSTALL}
  SUM=$((${SUM}+${RET}))
 

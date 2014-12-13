@@ -49,6 +49,7 @@ if %ERRORLEVEL% NEQ 0 (
  call:executeTest DB2UNIT_EXECUTION_2
  call:executeTest DB2UNIT_ASSERTIONS
  call:executeTest DB2UNIT_ASSERTIONS_STRING_LONG
+ call:executeTest DB2UNIT_ASSERTIONS_XML
  call:executeTest DB2UNIT_TAP
 
  if not "!PAUSE!" == "true" (

@@ -55,7 +55,8 @@ install:
   - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_EXECUTION_2.sql ; fi"
   - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_ASSERTIONS.sql ; fi"
   - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_ASSERTIONS_STRING_LONG.sql ; fi"
-  - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_ASSERTIONS_TAP.sql ; fi"
+  - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_ASSERTIONS_XML.sql ; fi"
+  - bash -c "if [ '$ENV' = 'test' ]; then db2 connect to db2unit ; db2 -tf ../sql-pl/Tests_DB2UNIT_TAP.sql ; fi"
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; db2 \"call db2unit.export_tests_list\"; sudo chmod +x /tmp/listOfTestSuites ; sudo chmod +x /tmp/returnCode ; cat /tmp/listOfTestSuites ; fi"
 
 script:
@@ -64,6 +65,7 @@ script:
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_EXECUTION_2')\"  ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_ASSERTIONS')\"   ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_ASSERTIONS_STRING_LONG')\"   ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
+  - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_ASSERTIONS_XML')\"   ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_TAP')\"   ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
 
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . /tmp/listOfTestSuites ; /tmp/returnCode ; fi" 
@@ -80,6 +82,7 @@ after_failure:
   - db2 "select * from DB2UNIT_EXECUTION_2.REPORT_TESTS"
   - db2 "select * from DB2UNIT_ASSERTIONS.REPORT_TESTS"
   - db2 "select * from DB2UNIT_ASSERTIONS_STRING_LONG.REPORT_TESTS"
+  - db2 "select * from DB2UNIT_ASSERTIONS_XML.REPORT_TESTS"
   - db2 "select * from DB2UNIT_TAP.REPORT_TESTS"
   - db2 "export to /tmp/sorts.txt of del select * from DB2UNIT_2_BETA.sorts" ; cat /tmp/sorts.txt
   - cat /home/db2inst1/sqllib/db2dump/db2diag.log
