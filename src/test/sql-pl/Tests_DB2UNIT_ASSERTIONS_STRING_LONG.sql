@@ -1,3 +1,4 @@
+--#SET TERMINATOR @
 
 /*
  This file is part of db2unit: A unit testing framework for DB2 LUW.
