@@ -578,4 +578,3 @@ _END
 -- Register the suite.
 CALL DB2UNIT.REGISTER_SUITE(CURRENT SCHEMA) @
 
-
