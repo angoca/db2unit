@@ -211,7 +211,7 @@ _ELSE
   SET DOC1 = XMLPARSE(DOCUMENT '<a type="greeting" lang="en">Hello World</a>');
   SET DOC2 = XMLPARSE(DOCUMENT '<a type="greeting" lang="en">Hello World</a>');
 _END
- 
+
   CALL DB2UNIT.ASSERT_XML_EQUALS(DOC1, DOC2);
 
   SELECT MESSAGE INTO ACTUAL_MSG
@@ -248,7 +248,7 @@ _ELSE
   SET DOC1 = XMLPARSE(DOCUMENT '<a type="greeting">Hello World</a>');
   SET DOC2 = XMLPARSE(DOCUMENT '<a lang="en">Hello World</a>');
 _END
- 
+
   CALL DB2UNIT.ASSERT_XML_EQUALS(DOC1, DOC2);
 
   -- Checks the reports table.
@@ -298,7 +298,7 @@ _ELSE
   SET DOC1 = XMLPARSE(DOCUMENT '<a type="greeting" lang="en">Hello World</a>');
   SET DOC2 = XMLPARSE(DOCUMENT '<a lang="en" type="greeting">Hello World</a>');
 _END
- 
+
   CALL DB2UNIT.ASSERT_XML_EQUALS(DOC1, DOC2);
 
   SELECT MESSAGE INTO ACTUAL_MSG
@@ -335,7 +335,7 @@ _ELSE
   SET DOC1 = XMLPARSE(DOCUMENT '<a type="grerting" lang="en">Hello World</a>');
   SET DOC2 = XMLPARSE(DOCUMENT '<a type="farewell" lang="it">Ciao Mondo</a>');
 _END
- 
+
   CALL DB2UNIT.ASSERT_XML_EQUALS(DOC1, DOC2);
 
   -- Checks the reports table.

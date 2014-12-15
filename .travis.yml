@@ -68,7 +68,7 @@ script:
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_ASSERTIONS_XML')\"        ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
   - bash -c "if [ '$TESTS' = 'seq' ]; then db2 connect to db2unit ; db2 -r /tmp/db2unit.output \"call db2unit.run_suite('DB2UNIT_TAP')\"                   ; db2 \"call db2unit.get_last_execution_order()\" ; bash -c \"exit \$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print \$4}')\"; fi"
 
-  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . /tmp/listOfTestSuites ; /tmp/returnCode ; fi" 
+  - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . /tmp/listOfTestSuites ; /tmp/returnCode ; fi"
 
 after_script:
   - . ~db2inst1/sqllib/db2profile ; db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
