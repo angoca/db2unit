@@ -31,14 +31,19 @@ if %ERRORLEVEL% NEQ 0 (
 ) else (
  Setlocal EnableDelayedExpansion
  if "%1" == "-np" (
-  set PAUSE=false
+  set PAUSE_INSTALL=false
   set TIME_INI=echo !time!
+ ) else if "%1" == "-ix" (
+  set PAUSE_INSTALL=install_false
  ) else (
-  set PAUSE=true
+   set PAUSE_INSTALL=true
  )
- if "!PAUSE!" == "true" (
+
+ if "!PAUSE_INSTALL!" == "true" (
   echo Executing all tests with pauses in between.
- ) else if "!PAUSE!" == "false" (
+ ) else if "!PAUSE_INSTALL!" == "install_false" (
+  echo Installing and executing all tests without pauses.
+ ) else if "!PAUSE_INSTALL!" == "false" (
   echo Executing all tests.
  ) else (
   echo Error expanding variable
@@ -59,14 +64,14 @@ if %ERRORLEVEL% NEQ 0 (
 
  db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
 
- if not "!PAUSE!" == "true" (
+ if not "!PAUSE_INSTALL!" == "true" (
   set TIME_END=echo !time!
   echo Difference:
   echo !TIME_INI! start
   echo !TIME_END! end
  )
  Setlocal DisableDelayedExpansion
- set PAUSE=
+ set PAUSE_INSTALL=
 )
 goto:eof
 
@@ -74,8 +79,10 @@ goto:eof
 :executeTest
  set schema=%~1
  echo ====Next: %schema%
- if "!PAUSE!" == "true" (
+ if "!PAUSE_INSTALL!" == "true" (
   pause
+  call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat %schema% i x
+ ) else if "!PAUSE_INSTALL!" == "install_false" (
   call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat %schema% i x
  ) else (
   call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat %schema% x
