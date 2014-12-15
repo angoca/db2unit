@@ -156,6 +156,11 @@ ALTER MODULE DB2UNIT PUBLISH
   IN AUTONOMOUS BOOLEAN
   );
 
+-- Retrieves the current value of autonomous execution.
+ALTER MODULE DB2UNIT PUBLISH
+  FUNCTION GET_AUTONOMOUS (
+  ) RETURNS BOOLEAN;
+
 -- Changes the sort type for the procedures.
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE RANDOM_SORT (
