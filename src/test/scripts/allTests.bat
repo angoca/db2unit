@@ -55,6 +55,8 @@ if %ERRORLEVEL% NEQ 0 (
  call:executeTest DB2UNIT_ASSERTIONS_TABLE
  call:executeTest DB2UNIT_TAP
 
+ db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
+
  if not "!PAUSE!" == "true" (
   set TIME_END=echo !time!
   echo Difference:
