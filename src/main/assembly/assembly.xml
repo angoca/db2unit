@@ -85,7 +85,13 @@
   <fileSet>
    <directory>doc</directory>
    <includes>
-    <include>**/*</include>
+    <include>danta.png</include>
+    <include>db2unit-Cheat-Sheet.pdf</include>
+    <include>db2unit-ER-diagram.png</include>
+    <include>db2unit-Sequence-diagram.png</include>
+    <include>db2unit-Test-states.png</include>
+    <include>ErrorCodes.txt</include>
+    <include>LICENSE.txt</include>
    </includes>
    <outputDirectory>doc</outputDirectory>
   </fileSet>

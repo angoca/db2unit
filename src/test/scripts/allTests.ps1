@@ -54,9 +54,15 @@ if ( $LastExitCode -ne 0 ) {
  Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_STRING)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
  & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_STRING i x
+ Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_STRING_LONG)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_STRING_LONG i x
  Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_TABLE)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
  & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_TABLE i x
+ Write-Host "Press enter to continue (next DB2UNIT_ASSERTIONS_XML)"
+ $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+ & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_ASSERTIONS_XML i x
  Write-Host "Press enter to continue (next DB2UNIT_TAP)"
  $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
  & .\${DB2UNIT_SRC_TEST_SCRIPT_PATH}\test.ps1 DB2UNIT_TAP i x

@@ -32,7 +32,7 @@ report() {
   FROM DB2UNIT_2_BETA.TAP_REPORT
   ORDER BY NUMBER" > /dev/null
  # Shows the file.
- cat /tmp/tap.report 
+ cat /tmp/tap.report
 }
 
 # Checks if there is already a connection established

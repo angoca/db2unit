@@ -27,10 +27,12 @@ export RET=0
 # Execute a given test.
 executeTest() {
  SCHEMA=${1}
- PAUSE=${2}
+ PAUSE_INSTALL=${2}
  echo "====>Next: ${SCHEMA}"
- if [ "${PAUSE}" = "true" ] ; then
+ if [ "${PAUSE_INSTALL}" = "true" ] ; then
   read -p "Press enter to continue"
+  . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i x
+ elif [ "${PAUSE_INSTALL}" = "install_false" ] ; then
   . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i x
  else
   . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} x
@@ -46,26 +48,32 @@ if [ ${?} -ne 0 ] ; then
  echo "Remember that to call the script the command is '. ./allTests'"
 else
  if [ "${1}" = "-np" ] ; then
-  PAUSE=false
+  PAUSE_INSTALL=false
+  TIME_INI=$(date +"%T")
+  MILLIS_INI=$(date +"%s")
+ elif [ "${1}" = "-ix" ] ; then
+  PAUSE_INSTALL=install_false
   TIME_INI=$(date +"%T")
   MILLIS_INI=$(date +"%s")
  else
-  PAUSE=true
+  PAUSE_INSTALL=true
  fi
- if [ "${PAUSE}" = "true" ] ; then
+ if [ "${PAUSE_INSTALL}" = "true" ] ; then
   echo "Executing all tests with pauses in between."
+ elif [ "${PAUSE_INSTALL}" = "install_false" ] ; then
+  echo "Installing and executing all tests without pauses."
  else
   echo "Executing all tests."
  fi
 
  export RET=0
- executeTest DB2UNIT_EMPTY ${PAUSE}
+ executeTest DB2UNIT_EMPTY ${PAUSE_INSTALL}
  SUM=${RET}
  export RET=0
- executeTest DB2UNIT_EXECUTION ${PAUSE}
+ executeTest DB2UNIT_EXECUTION ${PAUSE_INSTALL}
  SUM=$((${SUM}+${RET}))
  export RET=0
- executeTest DB2UNIT_EXECUTION_2 ${PAUSE}
+ executeTest DB2UNIT_EXECUTION_2 ${PAUSE_INSTALL}
  SUM=$((${SUM}+${RET}))
  export RET=0
  executeTest DB2UNIT_ASSERTIONS_GENERAL ${PAUSE}
@@ -83,15 +91,21 @@ else
  executeTest DB2UNIT_ASSERTIONS_STRING ${PAUSE}
  SUM=$((${SUM}+${RET}))
  export RET=0
+ executeTest DB2UNIT_ASSERTIONS_STRING_LONG ${PAUSE_INSTALL}
+ SUM=$((${SUM}+${RET}))
+ export RET=0
  executeTest DB2UNIT_ASSERTIONS_TABLE ${PAUSE}
  SUM=$((${SUM}+${RET}))
  export RET=0
- executeTest DB2UNIT_TAP ${PAUSE}
+ executeTest DB2UNIT_ASSERTIONS_XML ${PAUSE_INSTALL}
+ SUM=$((${SUM}+${RET}))
+ export RET=0
+ executeTest DB2UNIT_TAP ${PAUSE_INSTALL}
  SUM=$((${SUM}+${RET}))
 
 db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
 
- if [ "${PAUSE}" != "true" ] ; then
+ if [ "${PAUSE_INSTALL}" != "true" ] ; then
   MILLIS_END=$(date +"%s")
   TIME_END=$(date +"%T")
   echo "Difference:"

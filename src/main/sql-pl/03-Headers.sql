@@ -24,10 +24,11 @@ SET CURRENT SCHEMA DB2UNIT_2_BETA;
 
 /**
  * Defines the headers of the public routines.
+ * dib dob: XML assertions.
  *
  * Version: 2014-04-30 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
- * Made in COLOMBIA.
+ * Author: Robert Mala (dib dob)
  */
 
 -- Module for objects of the db2unit framework.
@@ -571,5 +572,74 @@ ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE ASSERT_TIME_NOT_NULL (
   IN MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT,
   IN VALUE TIME
+  );
+
+-- XML
+
+-- Asserts equals two XML documents.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_XML_EQUALS (
+_IF __SQLSTATE_429BB _THEN
+  IN EXPECTED CLOB,
+  IN ACTUAL CLOB
+_ELSE
+  IN EXPECTED XML,
+  IN ACTUAL XML
+_END
+  );
+
+-- Asserts equals two XML documents with a given message.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_XML_EQUALS (
+  IN MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT,
+_IF __SQLSTATE_429BB _THEN
+  IN EXPECTED CLOB,
+  IN ACTUAL CLOB
+_ELSE
+  IN EXPECTED XML,
+  IN ACTUAL XML
+_END
+  );
+
+-- Asserts that the XML document is null.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_XML_NULL (
+_IF __SQLSTATE_429BB _THEN
+  IN VALUE CLOB
+_ELSE
+  IN VALUE XML
+_END
+  );
+
+-- Asserts that the XML document is null with a given message.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_XML_NULL (
+  IN MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT,
+_IF __SQLSTATE_429BB _THEN
+  IN VALUE CLOB
+_ELSE
+  IN VALUE XML
+_END
+  );
+
+-- Asserts that the XML document is not null.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_XML_NOT_NULL (
+_IF __SQLSTATE_429BB _THEN
+  IN VALUE CLOB
+_ELSE
+  IN VALUE XML
+_END
+  );
+
+-- Asserts that the XML document is not null with a given message.
+ALTER MODULE DB2UNIT PUBLISH
+  PROCEDURE ASSERT_XML_NOT_NULL (
+  IN MESSAGE ANCHOR MAX_VALUES.MESSAGE_ASSERT,
+_IF __SQLSTATE_429BB _THEN
+  IN VALUE CLOB
+_ELSE
+  IN VALUE XML
+_END
   );
 

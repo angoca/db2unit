@@ -298,3 +298,24 @@ CREATE GLOBAL TEMPORARY TABLE TAP_REPORT (
   MESSAGE VARCHAR(256)
   ) ON COMMIT PRESERVE ROWS;
 
+COMMENT ON TABLE TAP_REPORT IS 'Temporal table for TAP report';
+
+COMMENT ON TAP_REPORT (
+  NUMBER IS 'Line number to generate a sorted putput',
+  MESSAGE IS 'Content of the TAP report'
+  );
+
+CREATE GLOBAL TEMPORARY TABLE TEMP_REPORT_TESTS (
+  MESSAGE VARCHAR(512)
+  ) ON COMMIT PRESERVE ROWS;
+
+COMMENT ON TABLE TEMP_REPORT_TESTS IS 'Temporal table for assertion''s output outside of a test suite';
+
+COMMENT ON TEMP_REPORT_TESTS (
+  MESSAGE IS 'Descriptive message about the executed test'
+  );
+
+-- Insert a mock executions for assertion calls outside test suite.
+INSERT INTO EXECUTIONS (EXECUTION_ID, DATE) VALUES
+  (-1, '1981-03-03');
+
