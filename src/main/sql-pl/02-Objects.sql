@@ -304,8 +304,8 @@ COMMENT ON TAP_REPORT (
   );
 
 CREATE GLOBAL TEMPORARY TABLE TEMP_REPORT_TESTS (
-  MESSAGE VARCHAR(512) NOT NULL
-  );
+  MESSAGE VARCHAR(512)
+  ) ON COMMIT PRESERVE ROWS;
 
 COMMENT ON TABLE TEMP_REPORT_TESTS IS 'Temporal table for assertion''s output outside of a test suite';
 
@@ -313,4 +313,7 @@ COMMENT ON TEMP_REPORT_TESTS (
   MESSAGE IS 'Descriptive message about the executed test'
   );
 
+-- Insert a mock executions for assertion calls outside test suite.
+INSERT INTO EXECUTIONS (EXECUTION_ID, DATE) VALUES
+  (-1, '1981-03-03');
 
