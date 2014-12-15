@@ -17,16 +17,31 @@
 ::
 :: Andres Gomez Casanova <angocaATyahooDOTcom>
 
-:: Cleans the environment variables.
+:: Generates the TAP report and shows it in the standard output.
 ::
-:: Version: 2014-06-28 V2_BETA
+:: Version: 2014-12-06 V2_BETA
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
-:: When testing, the variables are preserved.
-if "%DB2UNIT_SRC_TEST_CODE_PATH%" EQU "" (
- set DB2UNIT_SRC_MAIN_CODE_PATH=
- set DB2UNIT_SRC_MAIN_SCRIPT_PATH=
- set DB2UNIT_PATH=
+:: Main call.
+:: Checks if there is already a connection established
+db2 connect > NUL
+if %ERRORLEVEL% EQU 0 (
+ call:init %1
+) else (
+ echo Please connect to a database before the execution of the installation.
+ echo This script generates a report only if a test suite has been executed
 )
 
+:: Creates the report
+:install
+ # Generates the report (any previous report is deleted).
+ db2 "CALL DB2UNIT.CREATE_TAP_REPORT()" > NUL
+ # Exports the report to a file.
+ db2 "EXPORT TO %tmp%\tap.report OF DEL MODIFIED BY NOCHARDEL
+  SELECT MESSAGE
+  FROM DB2UNIT_2_BETA.TAP_REPORT
+  ORDER BY NUMBER" > NUL
+ # Shows the file.
+ type %tmp%\tap.report 
+goto:eof

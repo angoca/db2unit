@@ -19,7 +19,7 @@
 
 :: Reinstall the utility. Calls the uninstall script and then the install one.
 ::
-:: Version: 2014-04-30 1
+:: Version: 2014-04-30 V2_BETA
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 

@@ -19,7 +19,7 @@
 
 :: Execute all tests.
 ::
-:: Version: 2014-05-10 1
+:: Version: 2014-05-10 V2_BETA
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
@@ -53,6 +53,7 @@ if %ERRORLEVEL% NEQ 0 (
  call:executeTest DB2UNIT_ASSERTIONS_NUMBER
  call:executeTest DB2UNIT_ASSERTIONS_STRING
  call:executeTest DB2UNIT_ASSERTIONS_TABLE
+ call:executeTest DB2UNIT_TAP
 
  if not "!PAUSE!" == "true" (
   set TIME_END=echo !time!

@@ -20,12 +20,12 @@
  Andres Gomez Casanova <angocaATyahooDOTcom>
 */
 
-SET CURRENT SCHEMA DB2UNIT_1;
+SET CURRENT SCHEMA DB2UNIT_2_BETA;
 
 /**
  * Creates the objects that require high privileges.
  *
- * Version: 2014-04-30 1
+ * Version: 2014-04-30 V2_BETA
  * Author: Andres Gomez Casanova (AngocA)
  * Made in COLOMBIA.
  */
@@ -43,7 +43,15 @@ COMMENT ON TABLESPACE MAX_VALUES_TS IS
   'TS just to store an empty table for max values. Could be changed.';
 
 -- Schema for logger tables.
-CREATE SCHEMA DB2UNIT_1;
+CREATE SCHEMA DB2UNIT_2_BETA;
 
-COMMENT ON SCHEMA DB2UNIT_1 IS 'Schema for db2unit objects';
+COMMENT ON SCHEMA DB2UNIT_2_BETA IS 'Schema for db2unit objects';
+
+-- Tablespace for temporal tables: TAP report.
+CREATE USER TEMPORARY TABLESPACE TS_DB2UNIT_USR_TMP
+  PAGESIZE 32 K
+  PREFETCHSIZE AUTOMATIC
+  BUFFERPOOL MAX_VALUES_BP ;
+
+COMMENT ON TABLESPACE TS_DB2UNIT_USR_TMP IS 'Temporal tables: TAP report' ;
 

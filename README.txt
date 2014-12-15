@@ -155,14 +155,15 @@ https://github.com/angoca/db2unit/wiki/Usage
 
 These are the files included in the released version:
 
- * `COPYING.txt` -- License for the code (GPL license v3.0 - OpenSource).
  * `init*` -- Environment configuration.
  * `install*` -- Installation files.
+ * `LICENSE.txt` -- License for the code (GPL license v3.0 - OpenSource).
  * `README.txt` -- This file.
  * `reinstall*` -- Reinstallation files.
  * `uninit*` -- Clean environment.
  * `uninstall*` -- Uninstallation files.
- * `doc` directory -- Documentation directory (ER diagram).
+ * `bin` directory -- Scripts for TAP report and for executing tests.
+ * `doc` directory -- Documentation about the framework.
  * `examples` directory -- Examples ready to run.
  * `sql-pl` directory -- Directory for all objects: DDL, DML, routines
      definition.
@@ -184,6 +185,5 @@ can be found:
 
  * `.bat` -- Windows Batch file for CMD.exe
  * `.ps1` -- Windows PowerShell
- * `.sql` -- For DB2 CLPPlus.
  * No extension -- For Linux/UNIX/Mac OS X.
 
