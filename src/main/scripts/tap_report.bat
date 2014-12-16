@@ -27,21 +27,23 @@
 :: Checks if there is already a connection established
 db2 connect > NUL
 if %ERRORLEVEL% EQU 0 (
- call:init %1
+ call:report
 ) else (
  echo Please connect to a database before the execution of the installation.
  echo This script generates a report only if a test suite has been executed
 )
+goto:eof
 
 :: Creates the report
-:install
- # Generates the report (any previous report is deleted).
+:report
+ :: Generates the report (any previous report is deleted).
  db2 "CALL DB2UNIT.CREATE_TAP_REPORT()" > NUL
- # Exports the report to a file.
- db2 "EXPORT TO %tmp%\tap.report OF DEL MODIFIED BY NOCHARDEL
-  SELECT MESSAGE
-  FROM DB2UNIT_2_BETA.TAP_REPORT
-  ORDER BY NUMBER" > NUL
- # Shows the file.
+ :: Exports the report to a file.
+ db2 "EXPORT TO %tmp%\tap.report OF DEL MODIFIED BY NOCHARDEL " ^
+  "SELECT MESSAGE " ^
+  "FROM DB2UNIT_2_BETA.TAP_REPORT " ^
+  "ORDER BY NUMBER" > NUL
+  
+ :: Shows the file.
  type %tmp%\tap.report 
 goto:eof
