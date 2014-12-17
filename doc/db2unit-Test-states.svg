@@ -14,10 +14,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="test_states.svg"
-   inkscape:export-filename="/Users/angoca/github/db2unit/doc/test_states.png"
-   inkscape:export-xdpi="99.755066"
-   inkscape:export-ydpi="99.755066">
+   sodipodi:docname="db2unit-Test-states.svg"
+   inkscape:export-filename="/Users/angoca/github/db2unit/doc/db2unit-Test-states.png"
+   inkscape:export-xdpi="100"
+   inkscape:export-ydpi="100">
   <defs
      id="defs4">
     <marker
@@ -81,16 +81,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="149.28186"
-     inkscape:cy="121.87279"
+     inkscape:cx="101.29686"
+     inkscape:cy="125.27797"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1220"
-     inkscape:window-height="678"
+     inkscape:window-width="1440"
+     inkscape:window-height="789"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -275,7 +275,7 @@
        id="path3814"
        inkscape:connector-curvature="0" />
     <path
-       transform="translate(333.82748,82.48734)"
+       transform="matrix(1.0383116,0,0,1.1940583,332.1382,-74.404811)"
        d="m 63.639609,804.87482 a 8.1317282,7.0710678 0 1 1 -16.263456,0 8.1317282,7.0710678 0 1 1 16.263456,0 z"
        sodipodi:ry="7.0710678"
        sodipodi:rx="8.1317282"
@@ -285,8 +285,8 @@
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        sodipodi:type="arc" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.96947062px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 338.98473,836.59693 44.13037,42.88015"
+       style="fill:none;stroke:#000000;stroke-width:0.95394433px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 338.97697,836.58917 43.46522,42.15302"
        id="path4006"
        inkscape:connector-curvature="0" />
     <path
@@ -299,5 +299,15 @@
        d="m 339.74999,887.36219 39.00976,0"
        id="path4010"
        inkscape:connector-curvature="0" />
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path3137"
+       sodipodi:cx="417.54654"
+       sodipodi:cy="884.42432"
+       sodipodi:rx="22.273863"
+       sodipodi:ry="18.738329"
+       d="m 439.8204,884.42432 a 22.273863,18.738329 0 1 1 -44.54772,0 22.273863,18.738329 0 1 1 44.54772,0 z"
+       transform="matrix(0.48205452,0,0,0.57300821,188.49248,379.88025)" />
   </g>
 </svg>
