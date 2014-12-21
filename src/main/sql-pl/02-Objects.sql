@@ -51,7 +51,7 @@ COMMENT ON EXECUTIONS (
 -- Table for suites
 CREATE TABLE SUITES (
   SUITE_NAME VARCHAR(128) NOT NULL,
-  METADATA XML
+  PROPERTIES XML
   );
 
 ALTER TABLE SUITES ADD CONSTRAINT DB2UNIT_SUITES_PK PRIMARY KEY
@@ -61,7 +61,7 @@ COMMENT ON TABLE SUITES IS 'Executed suites';
 
 COMMENT ON SUITES (
   SUITE_NAME IS 'Name of the suite',
-  METADATA IS 'Description of the tests'
+  PROPERTIES IS 'Properties of the tests'
   );
 
 -- Table for general reporting.
