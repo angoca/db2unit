@@ -194,7 +194,7 @@ COMMENT ON RESULT_TESTS (
   TEST_NAME IS 'Name of the test (stored procedure)',
   FINAL_STATE IS 'Final state of the test',
   DATE IS 'Date when the test was executed',
-  DURATION IS 'Quantity of time the execution took'
+  DURATION IS 'Quantity of time the execution took (fraction of seconds)'
   );
 
 -- Table for reports (only for model in create like.)
