@@ -117,7 +117,8 @@ CREATE TABLE SUITES_EXECUTIONS (
   PASSED_TESTS INT,
   FAILED_TESTS INT,
   ERROR_TESTS INT,
-  UNEXEC_TESTS INT
+  UNEXEC_TESTS INT,
+  DURATION INT
   );
 
 ALTER TABLE SUITES_EXECUTIONS ADD CONSTRAINT DB2UNIT_SUITES_EXECS_PK PRIMARY KEY
@@ -140,7 +141,8 @@ COMMENT ON SUITES_EXECUTIONS (
   PASSED_TESTS IS 'Quantity of tests that passed',
   FAILED_TESTS IS 'Quantity of tests that failed',
   ERROR_TESTS IS 'Quantity of tests that hit errors',
-  UNEXEC_TESTS IS 'Quantity of unexecuted tests'
+  UNEXEC_TESTS IS 'Quantity of unexecuted tests',
+  DURATION IS 'Quantity of seconds the test suite lasts'
   );
 
 -- Table for sorts.
