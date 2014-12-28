@@ -65,7 +65,8 @@ goto:eof
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\04-Body.sql
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\05-Asserts.sql
  if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\06-AssertsNoMessage.sql
- if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\07-Version.sql
+ if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\07-XMLReport.sql
+ if %continue% EQU 1 call:installScript %DB2UNIT_SRC_MAIN_CODE_PATH%\08-Version.sql
 goto:eof
 
 :: This function checks the parameter and assign it to a global variable.
