@@ -59,7 +59,8 @@ ALTER MODULE DB2UNIT publish
     -- Error messages and type of error.
     ERRORS (SUITE_NAME, EXECUTION_ID, TEST_NAME, ERROR_MESSAGE, ERROR_TYPE) AS
     (SELECT
-      SUITE_NAME, EXECUTION_ID, TEST_NAME, SUBSTR(MESSAGE, 44),
+      SUITE_NAME, EXECUTION_ID, TEST_NAME,
+      SUBSTR(MESSAGE, 44),
       SUBSTR(MESSAGE, 15, 28)
      FROM DB2UNIT_EXAMPLE.REPORT_TESTS
      WHERE FINAL_STATE IS NULL
@@ -119,7 +120,7 @@ ALTER MODULE DB2UNIT publish
         TEST_NAME AS "name",
         '0' AS "assertions", -- TODO
         SUITE_NAME || '.' || TEST_NAME AS "classname",
-        DURATION/1000 AS "time"
+        DURATION/1000 AS "time" -- Milliseconds
        ),
        CASE
         WHEN FINAL_STATE = 'Unstarted'
@@ -178,7 +179,7 @@ ALTER MODULE DB2UNIT publish
         AND R2.TEST_NAME = R.TEST_NAME
        )
       ) XML
-     -- The schema changes for each test suite.
+     -- The schema changes for each test suite. -- TODO ???
      FROM DB2UNIT_2_BETA.RESULT_TESTS R
     ),
 
@@ -222,8 +223,8 @@ ALTER MODULE DB2UNIT publish
         UNEXEC_TESTS AS "disabled",
         ERROR_TESTS  AS "errors",
         FAILED_TESTS AS "failures",
-        'localhost' AS "hostname",
-        '0' AS "id",
+        'localhost' AS "hostname", -- TODO get hostname
+        '0' AS "id", -- TODO consecutive ID
         DURATION AS "time",
         DATE AS "timestamp"),
        XMLELEMENT(
@@ -277,13 +278,13 @@ ALTER MODULE DB2UNIT publish
          FAILURES
         FROM SUMMARY
        ) AS "failures",
-       'db' AS NAME,
+       'db' AS NAME, -- TODO get database name
        (
         SELECT
          TESTS
         FROM SUMMARY
        ) AS "tests",
-       '0' AS TIME
+       '0' AS TIME -- TODO sum time
       ),
       (
        SELECT
@@ -291,7 +292,6 @@ ALTER MODULE DB2UNIT publish
        FROM TEST_SUITES
       )
      )
-
     FROM SUMMARY;
 
   OPEN EXEC_CURSOR;
