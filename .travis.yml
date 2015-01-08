@@ -12,7 +12,7 @@ before_install:
   # Retrieves and extracts the DB2 binaries
   # If it does not work, change it according to the next page:
   # http://www.ibm.com/support/fixcentral/swg/quickorder?parent=ibm%7EInformation%2BManagement&product=ibm/Information+Management/DB2&release=10.5.*&platform=Linux+64-bit,x86_64&function=fixId&fixids=DB2-linuxx64-server_t-10.5.0.5-FP005&includeRequisites=1&includeSupersedes=0&downloadMethod=http&source=fc
-  - cd /tmp ; aria2c -x 16 https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/04yrx/0/Xa.2/Xb.jusyLTSp44S03sPo7dOkuuPNYPGduOKijQCAuicsFTCmcyTaVJLKXWtvJPQ/Xc.CM/IM/04yrx/0/v10.5fp5_linuxx64_server_t.tar.gz/Xd./Xf.LPR.D1vk/Xg.7883730/Xi.habanero/XY.habanero/XZ.grlA6AsFBIuMIQhgkuzeJ9ZAh-s/v10.5fp5_linuxx64_server_t.tar.gz ; tar zxvf v10.5fp5_linuxx64_server_t.tar.gz
+  - cd /tmp ; aria2c -x 16 $(curl --url https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-expc.md -s | tail -1) ; tar zxvf v10.5fp5_linuxx64_server_t.tar.gz
 
   # Retrieves and extract log4db2
   - cd ; wget https://github.com/angoca/log4db2/releases/download/log4db2-1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
