@@ -6,7 +6,7 @@ env:
 before_install:
   # Parallel download
   - mvn > /dev/null &
-  - sudo apt-get install aria2 -y
+  - sudo apt-get install aria2 curl -y
   - sudo ./src/test/travis/update.sh > /dev/null &
 
   # Retrieves and extracts the DB2 binaries
