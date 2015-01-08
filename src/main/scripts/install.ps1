@@ -50,7 +50,8 @@ function install() {
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\04-Body.sql }
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\05-Asserts.sql }
  if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\06-AssertsNoMessage.sql }
- if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\07-Version.sql }
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\07-XMLReport.sql }
+ if ( ${Script:continue} ) { installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}\08-Version.sql }
 }
 
 # This function checks the parameter and assign it to a global variable.
