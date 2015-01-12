@@ -103,7 +103,7 @@ ALTER MODULE DB2UNIT ADD
   VARIABLE ONE_TIME_TEAR_DOWN VARCHAR(20) CONSTANT 'ONE_TIME_TEAR_DOWN' @
 
 /**
- * Max size for assertion messages.
+ * Maximal size for assertion messages.
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE MAX_MESSAGE SMALLINT CONSTANT 400 @
@@ -175,7 +175,7 @@ ALTER MODULE DB2UNIT ADD
   VARIABLE AUTONOMOUS_EXEC BOOLEAN DEFAULT TRUE @
 
 /**
- * Order type to sort the proc names. False ordered by name; true random.
+ * Order type to sort the procedures names. False ordered by name; true random.
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RANDOM_SORT BOOLEAN DEFAULT TRUE @
@@ -2014,7 +2014,7 @@ ALTER MODULE DB2UNIT ADD
    CALL SYSPROC.ADMIN_CMD('EXPORT TO %TMP%\listOfTestSuites OF DEL MODIFIED BY NOCHARDEL '
      || 'SELECT * FROM (SELECT ''db2 -r %TMP%\db2unit.output -v '
      || 'CALL DB2UNIT.RUN_SUITE('''''' || SUITE_NAME || '''''')'' '
-     || 'FROM DB2UNIT_2_BETA.SUITES) ORDER BY RAND()');
+     || 'FROM ' || UTILITY_SCHEMA || '.SUITES) ORDER BY RAND()');
   ELSE
    CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/listOfTestSuites OF DEL MODIFIED BY NOCHARDEL '
      || 'SELECT * FROM (SELECT ''db2 -r /tmp/db2unit.output -v '
@@ -2024,7 +2024,7 @@ ALTER MODULE DB2UNIT ADD
      || 'SUM=$(cat /tmp/sum) ; '
      || 'tail -1 /tmp/db2unit.output | awk ''''/Return Status/ {print "echo $(($SUM+"$4")) > /tmp/sum"}'''' | source /dev/stdin ; '
      || 'cat /tmp/sum '' '
-     || 'FROM DB2UNIT_2_BETA.SUITES) ORDER BY RAND()');
+     || 'FROM ' || UTILITY_SCHEMA || '.SUITES) ORDER BY RAND()');
    CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/returnCode OF DEL MODIFIED BY NOCHARDEL '
      || 'SELECT ''exit $(cat /tmp/sum)'' FROM SYSIBM.SYSDUMMY1');
   END IF;
