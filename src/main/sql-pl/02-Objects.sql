@@ -227,7 +227,7 @@ COMMENT ON REPORT_TESTS (
   MESSAGE IS 'Descriptive message about the currently executed test'
   );
 
--- Table for max values (only for anchoring.)
+-- Table for maximal values (only for anchoring.)
 CREATE TABLE MAX_VALUES (
   MESSAGE_ASSERT VARCHAR(256),
   SENTENCE VARCHAR(1024)
@@ -240,7 +240,7 @@ COMMENT ON MAX_VALUES (
   SENTENCE IS 'Max length for a dynamic sentence (increasable)'
   );
 
--- Max length for a string message (only for anchoring.)
+-- Maximal length for a string message (only for anchoring.)
 CREATE TABLE MAX_STRING (
   STRING VARCHAR(32672)
   );
@@ -251,7 +251,7 @@ COMMENT ON MAX_STRING (
   STRING IS 'Max length for a string value'
   );
 
--- Max lenght for a signal message (only for anchoring.)
+-- Maximal length for a signal message (only for anchoring.)
 CREATE TABLE MAX_SIGNAL (
   SIGNAL VARCHAR(32672)
   );
@@ -307,6 +307,7 @@ COMMENT ON TAP_REPORT (
   MESSAGE IS 'Content of the TAP report'
   );
 
+-- Table for messages in assertions called outside a test suite.
 CREATE GLOBAL TEMPORARY TABLE TEMP_REPORT_TESTS (
   MESSAGE VARCHAR(512)
   ) ON COMMIT PRESERVE ROWS;
@@ -317,7 +318,24 @@ COMMENT ON TEMP_REPORT_TESTS (
   MESSAGE IS 'Descriptive message about the executed test'
   );
 
--- Insert a mock executions for assertion calls outside test suite.
+-- Tables to group all test reports for XML result.
+CREATE GLOBAL TEMPORARY TABLE TEMP_REPORT_TEST_XML
+  LIKE REPORT_TESTS
+  ON COMMIT PRESERVE ROWS;
+
+COMMENT ON TABLE TEMP_REPORT_TEST_XML IS 'Temporal table for XML report';
+
+COMMENT ON TEMP_REPORT_TEST_XML (
+  DATE IS 'Date when the message was generated',
+  SUITE_NAME IS 'Name of the test suite',
+  EXECUTION_ID IS 'Unique ID of the execution',
+  TEST_NAME IS 'Name of test being executed',
+  FINAL_STATE IS 'Final state of the test',
+  TIME IS 'Quantity of time the execution took',
+  MESSAGE IS 'Descriptive message about the currently executed test'
+  );
+
+-- Insert a mock execution for assertion calls outside test suite.
 INSERT INTO EXECUTIONS (EXECUTION_ID, DATE) VALUES
   (-1, '1981-03-03');
 
