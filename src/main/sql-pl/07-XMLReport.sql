@@ -31,6 +31,9 @@ SET CURRENT SCHEMA DB2UNIT_2_BETA @
  * Made in COLOMBIA.
  */
 
+/**
+ * Creates a XML report for a test suite.
+ */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE XML_REPORT (
   )
@@ -156,13 +159,15 @@ ALTER MODULE DB2UNIT ADD
             ON (F.SUITE_NAME = R.SUITE_NAME AND F.EXECUTION_ID = R.EXECUTION_ID
             AND F.TEST_NAME = R.TEST_NAME)
            ) AS "message",
-           (
-            SELECT
-             MIN(FAIL_TYPE)
-            FROM FAIL_TYPE F JOIN DB2UNIT_2_BETA.RESULT_TESTS R
-            ON (F.SUITE_NAME = R.SUITE_NAME AND F.EXECUTION_ID = R.EXECUTION_ID
-            AND F.TEST_NAME = R.TEST_NAME)
-           ) AS "type"
+           'AssertionError' AS "type"
+--           TODO
+--           (
+--            SELECT
+--             MIN(FAIL_TYPE)
+--            FROM FAIL_TYPE F JOIN DB2UNIT_2_BETA.RESULT_TESTS R
+--            ON (F.SUITE_NAME = R.SUITE_NAME AND F.EXECUTION_ID = R.EXECUTION_ID
+--            AND F.TEST_NAME = R.TEST_NAME)
+--           ) AS "type"
           )
          )
        END,
@@ -211,7 +216,7 @@ ALTER MODULE DB2UNIT ADD
      ON (R.SUITE_NAME = SE.SUITE_NAME AND R.DATE = E.DATE)
     ),
 
-    ---- Test suite
+    -- Test suite
     TEST_SUITES (SUITE_NAME, MESSAGE) AS
     (SELECT
       SUITE_NAME,
@@ -243,7 +248,7 @@ ALTER MODULE DB2UNIT ADD
          XMLAGG(XMLQUERY('$XML'))
         FROM TESTCASE T 
         WHERE T.SUITE_NAME = R.SUITE_NAME
-      )
+       )
       )
      FROM RECENT_EXEC R
      GROUP BY SUITE_NAME, TOTAL_TESTS, UNEXEC_TESTS, ERROR_TESTS, FAILED_TESTS,
@@ -296,5 +301,4 @@ ALTER MODULE DB2UNIT ADD
 
   OPEN EXEC_CURSOR;
  END P_XML_REPORT @
-
 
