@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+ <properties>
+  <title>Introduction</title>
+  <author email="angocaATyahooDOTcom">Andres Gomez</author>
+ </properties>
+ <head>
+  <title>db2unit</title>
+  <script src="scripts/index.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <section name="Welcome">
+   <p>
+    db2unit is a testing framework for the SQL PL language.
+   </p>
+   <div id="carousel-main">
+    <div id="main-carousel" class="carousel slide">
+     <div class="carousel-inner">
+      <div class="item active">
+       <div style="height:20em">
+        <pre class="prettyprint">
+         <![CDATA[
+         CREATE OR REPLACE PROCEDURE ONE_TIME_SETUP()
+         ... @
+         CREATE OR REPLACE PROCEDURE SETUP()
+         ... @
+         CREATE OR REPLACE
+         PROCEDURE TEAR_DOWN()
+         ... @
+         CREATE OR REPLACE PROCEDURE
+         ONE_TIME_TEAR_DOWN()
+         ... @
+         CREATE OR REPLACE PROCEDURE TEST_xxx()
+         BEGIN
+         ...
+         END @
+         ]]>
+        </pre>
+       </div>
+       <div class="carousel-caption">
+        <p>
+         <strong>Fixtures</strong>
+        </p>
+        <p>Configure the environment with the fixtures.</p>
+       </div>
+      </div>
+      <div class="item">
+       <div style="height:20em">
+        <pre class="prettyprint">
+         <![CDATA[
+         db2 "CALL DB2UNIT.RUN_SUITE('DB2UNIT_EXAMPLE')"
+         ...
+         Result set 2
+         --------------
+         TIME     EXECUTION_ID STATUS                MESSAGE
+         -------- ------------ --------------------- --------------------------------------------------------------
+         17:15:24 30405 Initialization db2unit is licensed under the terms of the GPL v3
+         17:15:24 30405 Initialization Execution of DB2UNIT_EXAMPLE with ID 30405
+         17:15:24 30405 Prepare Report The reports table created: DB2UNIT_EXAMPLE.REPORT_TESTS
+         17:15:30 30405 Calculating time Total execution time is: 5 seconds
+
+         4 record(s) selected.
+         ]]>
+        </pre>
+       </div>
+       <div class="carousel-caption">
+        <p>
+         <strong>Suite name is the schema</strong>
+        </p>
+        <p>Execute a test suite by calling RUN_SUITE and providing the
+         schema name.
+        </p>
+       </div>
+      </div>
+     </div>
+     <a id="main-carousel-prev" class="carousel-control left" name="main-carousel-prev"
+      data-slide="prev">&#8249;</a>
+     <a id="main-carousel-next" class="carousel-control right" name="main-carousel-next"
+      data-slide="next">&#8250;</a>
+    </div>
+   </div>
+  </section>
+  <section name="Description">
+   <p>
+    db2unit is a testing framework for IBM DB2 written in SQL PL
+    language. It is
+    <a href="https://en.wikipedia.org/wiki/XUnit">xUnit</a>
+    framework, that takes the same design as the
+    well-known
+    <a href="http://junit.org/">jUnit.</a>
+    db2unit could be considered as a jUnit porting for
+    DB2 SQL-PL.
+   </p>
+  </section>
+  <section name="Resources">
+   <div class="container">
+    <div class="row">
+     <div class="span4" id="welcome-section">
+      <p>
+       <b>Welcome</b>
+      </p>
+      <ul>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/Install">Download and install</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/Usage">Getting started</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/Change-log">Change log</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/FAQs">Frequently asked questions</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki">Wiki</a>
+       </li>
+      </ul>
+      <p>
+       <b>Links</b>
+      </p>
+      <ul>
+       <li>
+        <a href="https://github.com/angoca/db2unit/releases">Released versions</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/issues">Issue tracker</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit">Source code</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit">Source code</a>
+       </li>
+      </ul>
+     </div>
+     <div class="span4" id="concepts-section">
+      <p>
+       <b>Usage and Idioms</b>
+      </p>
+      <ul>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/API">Assertions (API)</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/Error-codes">Error codes</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/Architecture">Architecture</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/Examples">Example</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/Custom-assert">Custom assertions</a>
+       </li>
+      </ul>
+      <p>
+       <b>Integration</b>
+      </p>
+      <ul>
+       <li>
+        <a
+         href="https://github.com/angoca/db2unit/wiki/Reports#v2-xml-report">XML report</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit/wiki/TAP-report">TAP report</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/log4db2">log4db2 user this project</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2-travis">Empty project for Travis-CI</a>
+       </li>
+      </ul>
+     </div>
+     <div class="span4" id="thirdparty-section">
+      <p>
+       <b>Other resources</b>
+      </p>
+      <ul>
+       <li>
+        <a
+         href="http://www.ibm.com/developerworks/data/library/techarticle/dm-1501unittest-sql-db2/index.html">Article in IBM developerWorks</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/log4db2">log4db2 user this project</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2-travis">Empty project for Travis-CI</a>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </section>
+ </body>
+</document>
