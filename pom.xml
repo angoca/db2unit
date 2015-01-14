@@ -88,30 +88,6 @@
     </configuration>
    </plugin>
 
-   <plugin>
-    <!-- Deploy the web site -->
-    <!-- mvn site -->
-    <groupId>com.github.github</groupId>
-    <artifactId>site-maven-plugin</artifactId>
-    <version>0.9</version>
-    <executions>
-     <execution>
-      <goals>
-       <goal>site</goal>
-      </goals>
-      <phase>site</phase>
-      <configuration>
-       <repositoryName>db2unit</repositoryName>
-       <repositoryOwner>angoca</repositoryOwner>
-       <server>github</server>
-       <message>Building site for my project</message>
-       <path>${site.path}</path>
-       <merge>true</merge>
-      </configuration>
-     </execution>
-    </executions>
-   </plugin>
-
   </plugins>
 
  </build>
@@ -205,6 +181,10 @@
  </scm>
 
  <distributionManagement>
+  <site>
+   <id>db2unit</id>
+   <url>scp://mock-address/</url>
+  </site>
   <repository>
    <id>my.git.server</id>
    <url>scm:git:ssh://git@github.com/angoca/db2unit.git</url>
