@@ -34,6 +34,8 @@ executeTest() {
   . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i x
  elif [ "${PAUSE_INSTALL}" = "install_false" ] ; then
   . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i x
+ elif [ "${PAUSE_INSTALL}" = "install" ] ; then
+  . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} i
  else
   . ${DB2UNIT_SRC_TEST_SCRIPT_PATH}/test ${SCHEMA} x
   export RET=$(tail -1 /tmp/db2unit.output | awk '/Return Status/ {print $4}')
@@ -55,6 +57,8 @@ else
   PAUSE_INSTALL=install_false
   TIME_INI=$(date +"%T")
   MILLIS_INI=$(date +"%s")
+ elif [ "${1}" = "-i" ] ; then
+  PAUSE_INSTALL=install
  else
   PAUSE_INSTALL=true
  fi
@@ -107,7 +111,7 @@ else
 
 db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
 
- if [ "${PAUSE_INSTALL}" != "true" ] ; then
+ if [ "${PAUSE_INSTALL}" != "true" -a "${PAUSE_INSTALL}" != "install" ] ; then
   MILLIS_END=$(date +"%s")
   TIME_END=$(date +"%T")
   echo "Difference:"

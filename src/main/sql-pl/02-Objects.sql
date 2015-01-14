@@ -335,6 +335,17 @@ COMMENT ON TEMP_REPORT_TEST_XML (
   MESSAGE IS 'Descriptive message about the currently executed test'
   );
 
+-- Temporal table for XML report.
+CREATE GLOBAL TEMPORARY TABLE XML_REPORT (
+  DOCUMENT VARCHAR(32672)
+  ) ON COMMIT PRESERVE ROWS;
+
+COMMENT ON TABLE XML_REPORT IS 'Temporal XML report';
+
+COMMENT ON XML_REPORT (
+  DOCUMENT IS 'Content of the XML report'
+  );
+
 -- Insert a mock execution for assertion calls outside test suite.
 INSERT INTO EXECUTIONS (EXECUTION_ID, DATE) VALUES
   (-1, '1981-03-03');

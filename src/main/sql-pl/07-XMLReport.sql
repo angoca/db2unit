@@ -38,7 +38,14 @@ SET CURRENT SCHEMA DB2UNIT_2_BETA @
 ALTER MODULE DB2UNIT ADD
   PROCEDURE REFILL_REPORT_TESTS_TABLE (
   )
- BEGIN
+  LANGUAGE SQL
+  SPECIFIC P_REFILL_REPORT_TESTS_TABLE
+  DYNAMIC RESULT SETS 0
+  MODIFIES SQL DATA
+  NOT DETERMINISTIC
+  NO EXTERNAL ACTION
+  PARAMETER CCSID UNICODE
+ P_REFILL_REPORT_TESTS_TABLE: BEGIN
   DECLARE LOGGER_ID SMALLINT;
   DECLARE STATEMENT VARCHAR(256);
   DECLARE SUITENAME VARCHAR(128);
@@ -97,25 +104,30 @@ ALTER MODULE DB2UNIT ADD
   CALL LOGGER.DEBUG(LOGGER_ID, 'next suite');
   END WHILE;
 
- END @
+ END P_REFILL_REPORT_TESTS_TABLE @
 
  /**
-  * Creates a XML report of the execution of the tests.
+  * Creates a XML report of the execution of the tests in the temporal table
+  * XML_REPORT.
+  *
+  * IN SCHEMA_NAME
+  *   Name of the schema to retrieve the XML.
   */
 ALTER MODULE DB2UNIT ADD
-  PROCEDURE XML_REPORT (
+  PROCEDURE XML_REPORT_ONE (
+  IN SCHEMANAME ANCHOR SYSCAT.SCHEMATA.SCHEMANAME
   )
   LANGUAGE SQL
-  SPECIFIC P_XML_REPORT
-  DYNAMIC RESULT SETS 1
+  SPECIFIC P_XML_REPORT_ONE
+  DYNAMIC RESULT SETS 0
   MODIFIES SQL DATA
   NOT DETERMINISTIC
   NO EXTERNAL ACTION
   PARAMETER CCSID UNICODE
- P_XML_REPORT: BEGIN
+ P_XML_REPORT_ONE: BEGIN
 
-  DECLARE EXEC_CURSOR CURSOR
-    WITH RETURN TO CALLER FOR
+  DECLARE DOC XML;
+  DECLARE EXEC_CURSOR CURSOR FOR
     WITH
 
     -- Error messages and type of error.
@@ -198,13 +210,14 @@ ALTER MODULE DB2UNIT ADD
             ON (E.SUITE_NAME = R.SUITE_NAME AND E.EXECUTION_ID = R.EXECUTION_ID
             AND E.TEST_NAME = R.TEST_NAME)
            ) AS "message",
-           (
-            SELECT
-             MIN(ERROR_TYPE)
-            FROM ERRORS E JOIN DB2UNIT_2_BETA.RESULT_TESTS R
-            ON (E.SUITE_NAME = R.SUITE_NAME AND E.EXECUTION_ID = R.EXECUTION_ID
-            AND E.TEST_NAME = R.TEST_NAME)
-           ) AS "type"
+           'SQLError' AS "type"
+--           (
+--            SELECT
+--             MIN(ERROR_TYPE)
+--            FROM ERRORS E JOIN DB2UNIT_2_BETA.RESULT_TESTS R
+--            ON (E.SUITE_NAME = R.SUITE_NAME AND E.EXECUTION_ID = R.EXECUTION_ID
+--            AND E.TEST_NAME = R.TEST_NAME)
+--           ) AS "type"
           )
          )
         WHEN FINAL_STATE = 'Failed'
@@ -248,7 +261,7 @@ ALTER MODULE DB2UNIT ADD
     ),
 
     -- Execution properties.
-    PROPERTIES(SUITE_NAME, PROPERTIES) AS
+    PROPERTIES (SUITE_NAME, PROPERTIES) AS
     (SELECT
       SUITE_NAME,
       PROPERTIES -- TODO the XML schema for properties has not been defined.
@@ -256,7 +269,7 @@ ALTER MODULE DB2UNIT ADD
     ),
 
     -- Most recent execution date of each test suite.
-    RECENT_DATE_EXEC(SUITE_NAME, DATE) AS
+    RECENT_DATE_EXEC (SUITE_NAME, DATE) AS
     (SELECT
       SUITE_NAME, MAX(DATE)
      FROM DB2UNIT_2_BETA.SUITES_EXECUTIONS SE JOIN DB2UNIT_2_BETA.EXECUTIONS E
@@ -273,91 +286,50 @@ ALTER MODULE DB2UNIT ADD
      FROM DB2UNIT_2_BETA.SUITES_EXECUTIONS SE JOIN DB2UNIT_2_BETA.EXECUTIONS E
      ON (E.EXECUTION_ID = SE.EXECUTION_ID) JOIN RECENT_DATE_EXEC R
      ON (R.SUITE_NAME = SE.SUITE_NAME AND R.DATE = E.DATE)
-    ),
-
-    -- Test suite
-    TEST_SUITES (SUITE_NAME, MESSAGE) AS
-    (SELECT
-      SUITE_NAME,
-      XMLELEMENT(
-       NAME "testsuite",
-       XMLATTRIBUTES(
-        SUITE_NAME AS "name",
-        TOTAL_TESTS AS "tests",
-        UNEXEC_TESTS AS "disabled",
-        ERROR_TESTS  AS "errors",
-        FAILED_TESTS AS "failures",
-        'localhost' AS "hostname", -- TODO get hostname
-        '0' AS "id", -- TODO consecutive ID
-        DURATION AS "time",
-        DATE AS "timestamp"),
-       XMLELEMENT(
-        NAME "properties"
-        ,
-        (
-         SELECT
-          XMLQUERY('$PROPERTIES')
-         FROM PROPERTIES P
-         WHERE P.SUITE_NAME = R.SUITE_NAME
-        )
-        OPTION NULL ON NULL
-       ),
-       (
-        SELECT
-         XMLAGG(XMLQUERY('$XML'))
-        FROM TESTCASE T 
-        WHERE T.SUITE_NAME = R.SUITE_NAME
-       )
-      )
-     FROM RECENT_EXEC R
-     GROUP BY SUITE_NAME, TOTAL_TESTS, UNEXEC_TESTS, ERROR_TESTS, FAILED_TESTS,
-      DURATION, DATE
-    ),
-
-    -- Summary of the execution.
-    SUMMARY (TESTS, FAILURES, ERRORS, DISABLED) AS
-    (SELECT
-      SUM(TOTAL_TESTS) TESTS, SUM(FAILED_TESTS) FAILURES,
-      SUM(ERROR_TESTS) ERRORS, SUM(UNEXEC_TESTS) DISABLED
-     FROM RECENT_EXEC R
     )
 
-    -- Complete XML document.
     SELECT
+    -- SUITE_NAME,
      XMLELEMENT(
-      NAME "testsuites",
+      NAME "testsuite",
       XMLATTRIBUTES(
+       SUITE_NAME AS "name",
+       TOTAL_TESTS AS "tests",
+       UNEXEC_TESTS AS "disabled",
+       ERROR_TESTS  AS "errors",
+       FAILED_TESTS AS "failures",
+       'localhost' AS "hostname", -- TODO get hostname
+       '0' AS "id", -- TODO consecutive ID
+       DURATION AS "time",
+       DATE AS "timestamp"),
+      XMLELEMENT(
+       NAME "properties"
+       ,
        (
         SELECT
-         DISABLED
-        FROM SUMMARY
-       ) AS "disabled",
-       (
-        SELECT
-         ERRORS
-        FROM SUMMARY
-       ) AS "errors",
-       (
-        SELECT
-         FAILURES
-        FROM SUMMARY
-       ) AS "failures",
-       'db' AS NAME, -- TODO get database name
-       (
-        SELECT
-         TESTS
-        FROM SUMMARY
-       ) AS "tests",
-       '0' AS TIME -- TODO sum time
+         XMLQUERY('$PROPERTIES')
+        FROM PROPERTIES P
+        WHERE P.SUITE_NAME = R.SUITE_NAME
+       )
+       OPTION NULL ON NULL
       ),
       (
        SELECT
-        XMLAGG(XMLQUERY('$MESSAGE'))
-       FROM TEST_SUITES
+        XMLAGG(XMLQUERY('$XML'))
+       FROM TESTCASE T 
+       WHERE T.SUITE_NAME = R.SUITE_NAME
       )
      )
-    FROM SUMMARY;
+    FROM RECENT_EXEC R
+    WHERE SUITE_NAME = SCHEMANAME
+    GROUP BY SUITE_NAME, TOTAL_TESTS, UNEXEC_TESTS, ERROR_TESTS, FAILED_TESTS,
+     DURATION, DATE;
 
+  DELETE FROM XML_REPORT;
   OPEN EXEC_CURSOR;
- END P_XML_REPORT @
+  FETCH EXEC_CURSOR INTO DOC;
+  INSERT INTO XML_REPORT (DOCUMENT)
+    VALUES (XMLSERIALIZE(DOC AS VARCHAR(32672)));
+
+ END P_XML_REPORT_ONE @
 

@@ -117,11 +117,7 @@ ALTER MODULE DB2UNIT PUBLISH
 -- Creates a XML report for one test suite. TODO pass the name
 ALTER MODULE DB2UNIT PUBLISH
   PROCEDURE XML_REPORT_ONE (
-  );
-
--- Creates a XML report.
-ALTER MODULE DB2UNIT PUBLISH
-  PROCEDURE XML_REPORT (
+  IN SCHEMA_NAME ANCHOR SYSCAT.SCHEMATA.SCHEMANAME
   );
 
 -- Recreates the temporal table for the XML report.
