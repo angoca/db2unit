@@ -99,7 +99,7 @@
       <goals>
        <goal>site</goal>
       </goals>
-      <phase>site-deploy</phase>
+      <phase>site</phase>
       <configuration>
        <repositoryName>db2unit</repositoryName>
        <repositoryOwner>angoca</repositoryOwner>
