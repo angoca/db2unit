@@ -17,14 +17,16 @@
 #
 # Andres Gomez Casanova <angocaATyahooDOTcom>
 
-# Compile the object by installing in the database.
+# Installs DB2, creates an instance and a database.
 #
 # Version: 2015-01-14 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
-echo "Creating objects"
-db2 connect to db2unit
-cd src/test/scripts/
-. ./init-dev
-. ./allTests -i
+DIR=$(/var/db2/global.reg | grep -s '^\/' | sort | uniq | grep -v sqllib | grep -v das | head -1)
+
+if [ -x ${DIR}/bin/db2 ] ; then
+ echo "installed"
+else
+ echo "non installed"
+fi
