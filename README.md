@@ -21,6 +21,8 @@ The licenses of this project are:
 
 These are some useful links:
 
+ * Main page:
+    https://angoca.github.io/db2unit/
  * The source code and project is hosted in GitHub at:
     https://github.com/angoca/db2unit
  * The Wiki is at:
