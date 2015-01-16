@@ -142,29 +142,30 @@ CREATE OR REPLACE PROCEDURE DB2UNIT.DB_VERSION(
   MODIFIES SQL DATA
   DETERMINISTIC
  P_DB_VERSION: BEGIN
-  DECLARE VERSION, COMPATIBILITY VARCHAR(1024);--
-  DECLARE STRING VARCHAR(8) DEFAULT '';--
-  DECLARE P, PP INTEGER DEFAULT 0;--
+  DECLARE VERSION, COMPATIBILITY VARCHAR(1024);
+  DECLARE STRING VARCHAR(8) DEFAULT '';
+  DECLARE P, PP INTEGER DEFAULT 0;
 
-  DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN END;-- mask exceptions
+  DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN END; -- Mask exceptions
 
-  PREPARE S1 FROM 'CALL DBMS_UTILITY.DB_VERSION(?, ?)';-- prepare call
-  EXECUTE S1 INTO VERSION, COMPATIBILITY;-- get version
+  PREPARE S1 FROM 'CALL DBMS_UTILITY.DB_VERSION(?, ?)'; -- Prepare call
+  EXECUTE S1 INTO VERSION, COMPATIBILITY; -- Get version
 
-  SET VERSION = UPPER(VERSION);--
+  SET VERSION = UPPER(VERSION);
 
-  IF VERSION LIKE 'DB2 V%.%.%.%' THEN
-    SET VERSION = SUBSTR(VERSION, LOCATE_IN_STRING(VERSION, 'V', 1) + 1);-- remove leading characters
-    SET P = LOCATE_IN_STRING(VERSION, '.', 1);-- find first period
-    WHILE P > 0 DO
-      SET STRING = STRING || RIGHT('0' || SUBSTR( VERSION, (PP + 1), (P - PP - 1) ), 2);-- extract current element
-      SET PP = P;-- reset pp
-      SET P = LOCATE_IN_STRING(VERSION, '.', P + 1);-- find next period
-    END WHILE;-- elements remain
-    SET STRING = STRING || RIGHT('0' || SUBSTR(VERSION, (PP + 1) ), 2);-- extract last element
-  END IF ;-- valid format
+  IF (VERSION LIKE 'DB2 V%.%.%.%') THEN
+    SET VERSION = SUBSTR(VERSION, LOCATE_IN_STRING(VERSION, 'V', 1) + 1); -- Remove leading characters
+    SET P = LOCATE_IN_STRING(VERSION, '.', 1); -- Find first period
+    WHILE (P > 0) DO
+      SET STRING = STRING || RIGHT('0'
+        || SUBSTR( VERSION, (PP + 1), (P - PP - 1) ), 2); -- Extract current element
+      SET PP = P; -- Reset pp
+      SET P = LOCATE_IN_STRING(VERSION, '.', P + 1); -- Find next period
+    END WHILE; -- Elements remain
+    SET STRING = STRING || RIGHT('0' || SUBSTR(VERSION, (PP + 1) ), 2); -- Extract last element
+  END IF ; -- Valid format
 
-  SET VERSION_NUMBER = INTEGER(STRING);-- cast to integer
+  SET VERSION_NUMBER = INTEGER(STRING); -- cast to integer
  END P_DB_VERSION @
 
 -- Set current SQL_CCFLAGS register.
