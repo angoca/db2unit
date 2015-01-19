@@ -23,18 +23,16 @@
          <![CDATA[
          CREATE OR REPLACE PROCEDURE ONE_TIME_SETUP()
          ... @
+
          CREATE OR REPLACE PROCEDURE SETUP()
          ... @
-         CREATE OR REPLACE
-         PROCEDURE TEAR_DOWN()
+
+         CREATE OR REPLACE PROCEDURE TEAR_DOWN()
          ... @
-         CREATE OR REPLACE PROCEDURE
-         ONE_TIME_TEAR_DOWN()
+
+         CREATE OR REPLACE PROCEDURE ONE_TIME_TEAR_DOWN()
          ... @
-         CREATE OR REPLACE PROCEDURE TEST_xxx()
-         BEGIN
-         ...
-         END @
+
          ]]>
         </pre>
        </div>
@@ -43,6 +41,32 @@
          <strong>Fixtures</strong>
         </p>
         <p>Configure the environment with the fixtures.</p>
+       </div>
+      </div>
+      <div class="item">
+       <div style="height:20em">
+        <pre class="prettyprint">
+         <![CDATA[
+         CREATE OR REPLACE PROCEDURE TEST_MY_TEST()
+          BEGIN
+           DECLARE EXPECTED INTEGER;
+           DECLARE ACTUAL INTEGER;
+           CALL DB2UNIT.REGISTER_MESSAGE('My first test');
+           ...
+           SET EXPECTED = 2;
+           SET ACTUAL = ...;
+           CALL DB2UNIT.ASSERT_INT_EQUALS('Same value', EXPECTED, ACTUAL);
+          END @
+         ]]>
+        </pre>
+       </div>
+       <div class="carousel-caption">
+        <p>
+         <strong>Suite name is the schema</strong>
+        </p>
+        <p>Execute a test suite by calling RUN_SUITE and providing the
+         schema name.
+        </p>
        </div>
       </div>
       <div class="item">
@@ -189,6 +213,12 @@
        </li>
        <li>
         <a href="https://github.com/angoca/db2-travis">Empty project for Travis-CI</a>
+       </li>
+       <li>
+        <a href="https://github.com/angoca/db2unit">Continuous integration in Travis-CI</a>
+       </li>
+       <li>
+        <a href="https://www.openhub.net/p/db2unit">Code analysis in OpenHub</a>
        </li>
       </ul>
      </div>
