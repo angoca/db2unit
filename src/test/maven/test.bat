@@ -29,7 +29,7 @@ echo Testing objects
 db2 connect to db2unit
 cd src\test\scripts\
 call init-dev
-::call allTests -np
+call allTests -np
 cd ..\..\..\
 md target 2> NUL
 md target\surefire-reports 2> NUL
