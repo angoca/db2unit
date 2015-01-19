@@ -122,26 +122,19 @@ BEGIN
 END @
 
 /**
- * Set compilation environment for compiled sql/pl routines.
- *
- * Version: 2014-05-08 V2_BETA
- * Author: Robert Mala.
- */
-
-/**
  * Returns the version of db2 as an integer.
  *
  * OUT VERSION_NUMBER
  *   Version of db2 as an integer.
  */
-CREATE OR REPLACE PROCEDURE DB2UNIT.DB_VERSION(
+CREATE OR REPLACE PROCEDURE DB2TOOLS.DB2_VERSION(
   OUT VERSION_NUMBER INTEGER
-)
+ )
   LANGUAGE SQL
-  SPECIFIC P_DB_VERSION
+  SPECIFIC P_DB2_VERSION
   MODIFIES SQL DATA
   DETERMINISTIC
- P_DB_VERSION: BEGIN
+ P_DB2_VERSION: BEGIN
   DECLARE VERSION, COMPATIBILITY VARCHAR(1024);
   DECLARE STRING VARCHAR(8) DEFAULT '';
   DECLARE P, PP INTEGER DEFAULT 0;
@@ -158,15 +151,17 @@ CREATE OR REPLACE PROCEDURE DB2UNIT.DB_VERSION(
     SET P = LOCATE_IN_STRING(VERSION, '.', 1); -- Find first period
     WHILE (P > 0) DO
       SET STRING = STRING || RIGHT('0'
-        || SUBSTR( VERSION, (PP + 1), (P - PP - 1) ), 2); -- Extract current element
+        || SUBSTR(VERSION, (PP + 1), (P - PP - 1)), 2); -- Extract current element
       SET PP = P; -- Reset pp
       SET P = LOCATE_IN_STRING(VERSION, '.', P + 1); -- Find next period
     END WHILE; -- Elements remain
-    SET STRING = STRING || RIGHT('0' || SUBSTR(VERSION, (PP + 1) ), 2); -- Extract last element
+    SET STRING = STRING || RIGHT('0' || SUBSTR(VERSION, (PP + 1)), 2); -- Extract last element
   END IF ; -- Valid format
 
   SET VERSION_NUMBER = INTEGER(STRING); -- cast to integer
- END P_DB_VERSION @
+ END P_DB2_VERSION @
+
+GRANT CREATEIN, ALTERIN, DROPIN ON SCHEMA DB2TOOLS TO PUBLIC @
 
 -- Set current SQL_CCFLAGS register.
 BEGIN
@@ -175,7 +170,7 @@ BEGIN
 
  SET CURRENT_SQL_CCFLAGS = CURRENT SQL_CCFLAGS;
 
- CALL DB2UNIT.DB_VERSION(VERSION_NUMBER);
+ CALL DB2TOOLS.DB2_VERSION(VERSION_NUMBER);
 
  IF (CURRENT_SQL_CCFLAGS NOT LIKE '%VERSION:%') THEN
   SET CURRENT_SQL_CCFLAGS = CURRENT_SQL_CCFLAGS || ',VERSION:'
@@ -195,5 +190,5 @@ BEGIN
  END IF;
 
  SET CURRENT SQL_CCFLAGS = CURRENT_SQL_CCFLAGS;
-END@
+END @
 
