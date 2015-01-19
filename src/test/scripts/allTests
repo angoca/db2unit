@@ -64,6 +64,8 @@ else
  fi
  if [ "${PAUSE_INSTALL}" = "true" ] ; then
   echo "Executing all tests with pauses in between."
+ elif [ "${PAUSE_INSTALL}" = "install" ] ; then
+  echo "Installing all tests without pauses."
  elif [ "${PAUSE_INSTALL}" = "install_false" ] ; then
   echo "Installing and executing all tests without pauses."
  elif [ "${PAUSE_INSTALL}" = "false" ] ; then

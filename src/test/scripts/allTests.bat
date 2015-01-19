@@ -35,12 +35,16 @@ if %ERRORLEVEL% NEQ 0 (
   set TIME_INI=echo !time!
  ) else if "%1" == "-ix" (
   set PAUSE_INSTALL=install_false
+ ) else if "%1" == "-i" (
+  set PAUSE_INSTALL=install
  ) else (
    set PAUSE_INSTALL=true
  )
 
  if "!PAUSE_INSTALL!" == "true" (
   echo Executing all tests with pauses in between.
+ ) else if "!PAUSE_INSTALL!" == "install" (
+  echo Installing all tests without pauses.
  ) else if "!PAUSE_INSTALL!" == "install_false" (
   echo Installing and executing all tests without pauses.
  ) else if "!PAUSE_INSTALL!" == "false" (
@@ -84,6 +88,8 @@ goto:eof
   call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat %schema% i x
  ) else if "!PAUSE_INSTALL!" == "install_false" (
   call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat %schema% i x
+ ) else if "!PAUSE_INSTALL!" == "install" (
+  call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat %schema% i
  ) else (
   call %DB2UNIT_SRC_TEST_SCRIPT_PATH%\test.bat %schema% x
  )
