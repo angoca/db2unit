@@ -31,13 +31,14 @@ cd src\test\scripts\
 call init-dev
 call allTests -np
 cd ..\..\..\
-md target
-md target\surefire-reports
+md target 2> NUL
+md target\surefire-reports 2> NUL
 db2 -x "VALUES DB2UNIT.UTILITY_SCHEMA" > %SCHEMA_FILE% && for /f %%a in ('type %SCHEMA_FILE%') do set SCHEMA=%%a
 db2 EXPORT TO %FILE% OF DEL MODIFIED BY NOCHARDEL ^
   SELECT SUITE_NAME FROM %SCHEMA%.SUITES
 for /f %%i in ('TYPE %FILE%') do (
- db2 "CALL %SCHEMA%.DB2UNIT.XML_REPORT_ONE('%%i')"
+ echo Exporting report for %%i
+ db2 "CALL DB2UNIT.XML_REPORT_ONE('%%i')" > NUL
  db2 EXPORT TO target\surefire-reports\TEST-%%i.Tests.xml ^
   OF DEL MODIFIED BY NOCHARDEL ^
   SELECT DOCUMENT ^

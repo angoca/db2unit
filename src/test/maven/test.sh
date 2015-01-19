@@ -42,3 +42,4 @@ for i in $(cat ${FILE}) ; do
   SELECT DOCUMENT
   FROM ${SCHEMA}.XML_REPORT" > /dev/null
 done
+

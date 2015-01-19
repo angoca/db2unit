@@ -57,4 +57,3 @@ su -c "db2 create db db2unit" - db2inst1
 
 echo "Environment was configured"
 
-

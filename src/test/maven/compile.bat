@@ -27,5 +27,9 @@ echo Creating objects
 db2 connect to db2unit
 cd src\test\scripts
 call init-dev
+cd ..\..\main\scripts
+call uninstall
+call install -A
+cd ..\..\test\scripts
 call allTests -i
 cd ..\..\..
