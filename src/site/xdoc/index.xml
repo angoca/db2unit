@@ -154,9 +154,6 @@
        <li>
         <a href="https://github.com/angoca/db2unit">Source code</a>
        </li>
-       <li>
-        <a href="https://github.com/angoca/db2unit">Source code</a>
-       </li>
       </ul>
      </div>
      <div class="span4" id="concepts-section">
@@ -192,9 +189,6 @@
         <a href="https://github.com/angoca/db2unit/wiki/TAP-report">TAP report</a>
        </li>
        <li>
-        <a href="https://github.com/angoca/log4db2">log4db2 user this project</a>
-       </li>
-       <li>
         <a href="https://github.com/angoca/db2-travis">Empty project for Travis-CI</a>
        </li>
       </ul>
@@ -209,13 +203,10 @@
          href="http://www.ibm.com/developerworks/data/library/techarticle/dm-1501unittest-sql-db2/index.html">Article in IBM developerWorks</a>
        </li>
        <li>
-        <a href="https://github.com/angoca/log4db2">log4db2 user this project</a>
+        <a href="https://github.com/angoca/log4db2">log4db2 used in this project</a>
        </li>
        <li>
-        <a href="https://github.com/angoca/db2-travis">Empty project for Travis-CI</a>
-       </li>
-       <li>
-        <a href="https://github.com/angoca/db2unit">Continuous integration in Travis-CI</a>
+        <a href="https://travis-ci.org/angoca/db2unit">Continuous integration in Travis-CI</a>
        </li>
        <li>
         <a href="https://www.openhub.net/p/db2unit">Code analysis in OpenHub</a>

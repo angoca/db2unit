@@ -20,10 +20,15 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd">
 
- <bannerRight>
+ <bannerLeft>
   <name>db2unit</name>
-  <src>images/danta-64.png</src>
+  <src>images/db2unit-banner.png</src>
   <href>index.html</href>
+ </bannerLeft>
+ <bannerRight>
+  <name>danta</name>
+  <src>images/danta-128.png</src>
+  <href>https://github.com/angoca/db2unit/wiki/logo</href>
  </bannerRight>
  <publishDate format="yyyy-MM-dd" position="right" />
  <version position="right" />
