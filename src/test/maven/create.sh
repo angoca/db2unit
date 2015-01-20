@@ -35,6 +35,8 @@ echo $DIR
 if [ ! -x ${DIR}/bin/db2 ] ; then
  echo "DB2 non installed"
 
+ cat /etc/issue
+ uname -a
  # Install libraries
  sudo dpkg --add-architecture i386 && \
   apt-get update && \
