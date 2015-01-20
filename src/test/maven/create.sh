@@ -22,7 +22,7 @@
 # Version: 2015-01-14 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
-
+set -xv
 TEMP_WIKI_DOC=~/db2-wiki
 DB2_INSTALLER=v10.5fp5_linuxx64_server_t.tar.gz
 DB2_RSP_FILE_INSTALL=https://raw.githubusercontent.com/angoca/db2-docker/master/install/10.5/server_t/db2server_t.rsp
