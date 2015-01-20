@@ -38,7 +38,7 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  # Install libraries
  sudo apt-get update
  sudo apt-get install libaio1 lib32stdc++6 -y
- sudo apt-get install -qq libpam-ldap:i386
+# sudo apt-get install -qq libpam-ldap:i386
  sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
  sudo apt-get install -y aria2 curl
 
