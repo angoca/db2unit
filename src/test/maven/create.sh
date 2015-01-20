@@ -22,7 +22,7 @@
 # Version: 2015-01-14 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
-set -xv
+
 TEMP_WIKI_DOC=db2-link-server_t.md
 DB2_INSTALLER=v10.5fp5_linuxx64_server_t.tar.gz
 DB2_RSP_FILE_INSTALL=https://raw.githubusercontent.com/angoca/db2-docker/master/install/10.5/server_t/db2server_t.rsp
@@ -34,21 +34,13 @@ DIR=$(strings /var/db2/global.reg 2> /dev/null | grep -s '^\/' | sort | uniq | g
 echo $DIR
 if [ ! -x ${DIR}/bin/db2 ] ; then
  echo "DB2 non installed"
- pwd
- ls -l
  rm ${TEMP_WIKI_DOC}
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md
- ls -l
- ls -1rt
- ls -1rt | tail -1
- cat ${TEMP_WIKI_DOC}
- cat $(ls -1rt | tail -1)
  URL=$(cat $(ls -1rt | tail -1) | tail -1)
  echo "URL: ${URL}"
- echo "URL: $(cat $(ls -1rt | tail -1) | tail -1)"
  wget ${URL}
  tar -zvxf ${DB2_INSTALLER}
- wget ${DB2_RSP_FILE_INSTALL}
+ wget ${DB2_RSP_FILE_INSTALL} > /dev/null
  cd server_t
  ./db2setup -r /tmp/${DB2_RESP_FILE_INSTALL}
 else
