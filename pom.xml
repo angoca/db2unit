@@ -169,7 +169,7 @@
  <description>
   The unit testing framework for DB2.
   </description>
- <url>https://github.com/angoca/db2unit</url>
+ <url>https://angoca.github.io/db2unit/</url>
  <!-- The first year. -->
  <inceptionYear>2014</inceptionYear>
  <licenses>
