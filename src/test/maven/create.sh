@@ -34,14 +34,28 @@ DIR=$(strings /var/db2/global.reg 2> /dev/null | grep -s '^\/' | sort | uniq | g
 echo $DIR
 if [ ! -x ${DIR}/bin/db2 ] ; then
  echo "DB2 non installed"
+
+ # Install libraries
+ sudo dpkg --add-architecture i386 && \
+  apt-get update && \
+  apt-get install -y \
+    aria2 \
+    curl \
+    libaio1 \
+    libpam-ldap:i386 \
+    libstdc++6-4.4-pic \
+    lib32stdc++6
+
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md
  URL=$(cat $(ls -1rt | tail -1) | tail -1)
  echo "URL: ${URL}"
- wget -q ${URL}
- tar -zvxf ${DB2_INSTALLER}
+ #wget -q ${URL}
+ aria2c -x 16  ${URL}
+ tar -zxf ${DB2_INSTALLER}
  wget ${DB2_RSP_FILE_INSTALL}
  cd server_t
- ./db2setup -r /tmp/${DB2_RESP_FILE_INSTALL}
+
+ ./db2setup -r ${DB2_RESP_FILE_INSTALL}
 else
  echo "Installed"
 fi
