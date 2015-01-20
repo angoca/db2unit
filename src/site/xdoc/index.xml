@@ -23,15 +23,15 @@
          <![CDATA[
          CREATE OR REPLACE PROCEDURE ONE_TIME_SETUP()
          ... @
-
          CREATE OR REPLACE PROCEDURE SETUP()
          ... @
-
          CREATE OR REPLACE PROCEDURE TEAR_DOWN()
          ... @
-
          CREATE OR REPLACE PROCEDURE ONE_TIME_TEAR_DOWN()
          ... @
+
+
+
 
          ]]>
         </pre>
@@ -107,13 +107,13 @@
   </section>
   <section name="Description">
    <p>
-    db2unit is a testing framework for IBM DB2 written in SQL PL
+    This is a testing framework for IBM DB2 written in SQL PL
     language. It is
     <a href="https://en.wikipedia.org/wiki/XUnit">xUnit</a>
     framework, that takes the same design as the
     well-known
     <a href="http://junit.org/">jUnit.</a>
-    db2unit could be considered as a jUnit porting for
+    The framework could be considered as a jUnit porting for
     DB2 SQL-PL.
    </p>
   </section>
