@@ -25,8 +25,9 @@
 
 TEMP_WIKI_DOC=db2-link-server_t.md
 DB2_INSTALLER=v10.5fp5_linuxx64_server_t.tar.gz
-DB2_RSP_FILE_INSTALL=https://raw.githubusercontent.com/angoca/db2-docker/master/install/10.5/server_t/db2server_t.rsp
-DB2_RSP_FILE_INSTANCE=https://raw.githubusercontent.com/angoca/db2-docker/master/instance/server_t/db2server_t.rsp
+DB2_RSP_FILE_INSTALL_URL=https://raw.githubusercontent.com/angoca/db2-docker/master/install/10.5/server_t/db2server_t.rsp
+DB2_RSP_FILE=db2server_t.rsp
+DB2_RSP_FILE_INSTANCE_URL=https://raw.githubusercontent.com/angoca/db2-docker/master/instance/server_t/db2server_t.rsp
 INSTANCE_NAME=db2inst1
 DB2_DIR=/opt/ibm/db2/V10.5
 
@@ -45,13 +46,12 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md
  URL=$(cat $(ls -1rt | tail -1) | tail -1)
  echo "URL: ${URL}"
- #wget -q ${URL}
  aria2c -x 16  ${URL}
  tar -zxf ${DB2_INSTALLER}
- wget ${DB2_RSP_FILE_INSTALL}
+ wget ${DB2_RSP_FILE_INSTALL_URL}
  cd server_t
 
- ./db2setup -r ${DB2_RESP_FILE_INSTALL}
+ ./db2setup -r ${DB2_RESP_FILE}
 else
  echo "Installed"
 fi
@@ -59,7 +59,8 @@ fi
 INSTANCE_NAME=$(${DIR}/instance/db2ilist | grep db2inst1)
 if [ "${INSTANCE_NAME}" != "db2inst1" ] ; then
  echo "Instance ${INSTANCE_NAME} does not exist"
- ${DB2_DIR}/instance/db2isetup -r /tmp/${DB2_RESP_FILE}
+ wget ${DB2_RSP_FILE_INSTANCE_URL}
+ ${DB2_DIR}/instance/db2isetup -r ${DB2_RESP_FILE}
  su -c "db2start" - db2inst1
 fi
 
