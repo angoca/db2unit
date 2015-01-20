@@ -37,6 +37,8 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  ls -l
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md -o ${TEMP_WIKI_DOC}
  ls -l
+ ls -1rt
+ ls -1rt | tail -1
  cat ${TEMP_WIKI_DOC}
  cat $(ls -1rt | tail -1)
  URL=$(cat $(ls -1rt | tail -1) | tail -1)
