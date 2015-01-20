@@ -38,9 +38,9 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  cat /etc/issue
  uname -a
  # Install libraries
- sudo dpkg --add-architecture i386 && \
-  apt-get update && \
-  apt-get install -y \
+ sudo dpkg --add-architecture i386
+ sudo apt-get update
+ sudo apt-get install -y \
     aria2 \
     curl \
     libaio1 \
