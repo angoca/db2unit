@@ -37,9 +37,9 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md
  URL=$(cat $(ls -1rt | tail -1) | tail -1)
  echo "URL: ${URL}"
- wget ${URL}
+ wget -q ${URL}
  tar -zvxf ${DB2_INSTALLER}
- wget -q ${DB2_RSP_FILE_INSTALL} > /dev/null
+ wget ${DB2_RSP_FILE_INSTALL}
  cd server_t
  ./db2setup -r /tmp/${DB2_RESP_FILE_INSTALL}
 else
