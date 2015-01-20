@@ -23,7 +23,7 @@
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 set -xv
-TEMP_WIKI_DOC=db2-link
+TEMP_WIKI_DOC=db2-link-server_t.md
 DB2_INSTALLER=v10.5fp5_linuxx64_server_t.tar.gz
 DB2_RSP_FILE_INSTALL=https://raw.githubusercontent.com/angoca/db2-docker/master/install/10.5/server_t/db2server_t.rsp
 DB2_RSP_FILE_INSTANCE=https://raw.githubusercontent.com/angoca/db2-docker/master/instance/server_t/db2server_t.rsp
@@ -37,7 +37,7 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  pwd
  ls -l
  rm ${TEMP_WIKI_DOC}
- wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md -o ${TEMP_WIKI_DOC}
+ wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md
  ls -l
  ls -1rt
  ls -1rt | tail -1
