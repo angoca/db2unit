@@ -45,6 +45,7 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  cat $(ls -1rt | tail -1)
  URL=$(cat $(ls -1rt | tail -1) | tail -1)
  echo "URL: ${URL}"
+ echo "URL: $(cat $(ls -1rt | tail -1) | tail -1)"
  wget ${URL}
  tar -zvxf ${DB2_INSTALLER}
  wget ${DB2_RSP_FILE_INSTALL}
