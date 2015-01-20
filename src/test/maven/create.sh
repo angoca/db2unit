@@ -34,9 +34,10 @@ DIR=$(strings /var/db2/global.reg > /dev/null | grep -s '^\/' | sort | uniq | gr
 echo $DIR
 if [ ! -x ${DIR}/bin/db2 ] ; then
  echo "DB2 non installed"
+ ls -l
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md -o ${TEMP_WIKI_DOC}
  cat ${TEMP_WIKI_DOC}
- URL=$(cat ${TEMP_WIKI_DOC} | tail -1)
+ URL=`cat ${TEMP_WIKI_DOC} | tail -1`
  echo "URL: ${URL}"
  wget ${URL}
  tar -zvxf ${DB2_INSTALLER}
