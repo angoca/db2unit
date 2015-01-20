@@ -38,7 +38,8 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md -o ${TEMP_WIKI_DOC}
  ls -l
  cat ${TEMP_WIKI_DOC}
- URL=`cat ${TEMP_WIKI_DOC} | tail -1`
+ cat $(ls -1rt | tail -1)
+ URL=$(cat $(ls -1rt | tail -1) | tail -1)
  echo "URL: ${URL}"
  wget ${URL}
  tar -zvxf ${DB2_INSTALLER}
