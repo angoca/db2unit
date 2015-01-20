@@ -34,13 +34,12 @@ DIR=$(strings /var/db2/global.reg 2> /dev/null | grep -s '^\/' | sort | uniq | g
 echo $DIR
 if [ ! -x ${DIR}/bin/db2 ] ; then
  echo "DB2 non installed"
- rm ${TEMP_WIKI_DOC}
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md
  URL=$(cat $(ls -1rt | tail -1) | tail -1)
  echo "URL: ${URL}"
  wget ${URL}
  tar -zvxf ${DB2_INSTALLER}
- wget ${DB2_RSP_FILE_INSTALL} > /dev/null
+ wget -q ${DB2_RSP_FILE_INSTALL} > /dev/null
  cd server_t
  ./db2setup -r /tmp/${DB2_RESP_FILE_INSTALL}
 else
