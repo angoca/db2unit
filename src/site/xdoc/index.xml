@@ -203,7 +203,7 @@
          href="http://www.ibm.com/developerworks/data/library/techarticle/dm-1501unittest-sql-db2/index.html">Article in IBM developerWorks</a>
        </li>
        <li>
-        <a href="https://github.com/angoca/log4db2">log4db2 used in this project</a>
+        <a href="https://github.com/angoca/log4db2">log4db2 uses in this project</a>
        </li>
        <li>
         <a href="https://travis-ci.org/angoca/db2unit">Continuous integration in Travis-CI</a>
