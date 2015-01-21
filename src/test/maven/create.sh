@@ -26,13 +26,13 @@
 TEMP_WIKI_DOC=db2-link-server_t.md
 DB2_INSTALLER=v10.5fp5_linuxx64_server_t.tar.gz
 DB2_RSP_FILE_INSTALL_URL=https://raw.githubusercontent.com/angoca/db2-docker/master/install/10.5/server_t/db2server_t.rsp
-DB2_RSP_FILE=db2server_t.rsp
 DB2_RSP_FILE_INSTANCE_URL=https://raw.githubusercontent.com/angoca/db2-docker/master/instance/server_t/db2server_t.rsp
+DB2_RSP_FILE=db2server_t.rsp
 INSTANCE_NAME=db2inst1
 DB2_DIR=/opt/ibm/db2/V10.5
 
 DIR=$(strings /var/db2/global.reg 2> /dev/null | grep -s '^\/' | sort | uniq | grep -v sqllib | grep -v das | head -1)
-echo $DIR
+echo "Directory $DIR"
 if [ ! -x ${DIR}/bin/db2 ] ; then
  echo "DB2 non installed"
 
@@ -46,15 +46,18 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md
  URL=$(cat $(ls -1rt | tail -1) | tail -1)
  echo "URL: ${URL}"
- aria2c -x 16  ${URL}
+ # aria2c -x 16  ${URL}
  tar -zxf ${DB2_INSTALLER}
+ rm ${DB2_INSTALLER}
  wget ${DB2_RSP_FILE_INSTALL_URL}
 
  ls -l
  RSP=$(cat $(ls -1rt | tail -1) | tail -1)
- echo ${RSP}
+ echo "Response file ${DB2_RSP_FILE} old"
+ echo "Response file ${RSP}"
  cat ${RSP}
  cd server_t
+ ls -l
  ./db2setup -r ../${RSP}
 else
  echo "Installed"
