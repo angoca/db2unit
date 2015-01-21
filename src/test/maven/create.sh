@@ -37,11 +37,11 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  echo "DB2 non installed"
 
  # Install libraries
- sudo apt-get update
- sudo apt-get install libaio1 lib32stdc++6 -y
- sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq libpam-ldap:i386
- sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
- sudo apt-get install -y aria2 curl
+ #sudo apt-get update
+ #sudo apt-get install libaio1 lib32stdc++6 -y
+ #sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq libpam-ldap:i386
+ #sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
+ #sudo apt-get install -y aria2 curl
 
  wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md
  URL=$(cat $(ls -1rt | tail -1) | tail -1)
