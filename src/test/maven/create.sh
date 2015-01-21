@@ -49,12 +49,12 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  aria2c -x 16  ${URL}
  tar -zxf ${DB2_INSTALLER}
  wget ${DB2_RSP_FILE_INSTALL_URL}
- cd server_t
 
  ls -l
  echo ${DB2_RESP_FILE}
  cat ${DB2_RESP_FILE}
- ./db2setup -r ${DB2_RESP_FILE}
+ cd server_t
+ ./db2setup -r ../${DB2_RESP_FILE}
 else
  echo "Installed"
 fi
