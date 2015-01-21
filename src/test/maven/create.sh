@@ -51,10 +51,11 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  wget ${DB2_RSP_FILE_INSTALL_URL}
 
  ls -l
- echo ${DB2_RESP_FILE}
- cat ${DB2_RESP_FILE}
+ RSP=$(cat $(ls -1rt | tail -1) | tail -1)
+ echo ${RSP}
+ cat ${RSP}
  cd server_t
- ./db2setup -r ../${DB2_RESP_FILE}
+ ./db2setup -r ../${RSP}
 else
  echo "Installed"
 fi
