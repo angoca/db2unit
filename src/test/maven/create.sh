@@ -25,9 +25,8 @@
 
 TEMP_WIKI_DOC=db2-link-server_t.md
 DB2_INSTALLER=v10.5fp5_linuxx64_server_t.tar.gz
-DB2_RSP_FILE_INSTALL_URL=https://raw.githubusercontent.com/angoca/db2-docker/master/install/10.5/server_t/db2server_t.rsp
 DB2_RSP_FILE_INSTANCE_URL=https://raw.githubusercontent.com/angoca/db2-docker/master/instance/server_t/db2server_t.rsp
-DB2_RSP_FILE=db2server_t.rsp
+DB2_RSP_FILE=src/test/maven/db2-noroot.rsp
 INSTANCE_NAME=db2inst1
 DB2_DIR=/opt/ibm/db2/V10.5
 
@@ -38,7 +37,7 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
 
  # Install libraries
  sudo apt-get update > /dev/null
- sudo apt-get install libaio1 lib32stdc++6 -y > /dev/null
+ sudo apt-get install libaio1 lib32stdc++6 libstdc++6-4.4-pic -y > /dev/null
  sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq libpam-ldap:i386 > /dev/null
  sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0 > /dev/null
  sudo apt-get install -y aria2 curl > /dev/null
@@ -49,27 +48,20 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  aria2c -x 16  ${URL}
  tar -zxf ${DB2_INSTALLER}
  rm ${DB2_INSTALLER}
- wget ${DB2_RSP_FILE_INSTALL_URL}
 
- ls -l
- echo "Response file ${DB2_RSP_FILE} old"
+ echo "Response file ${DB2_RSP_FILE}"
  cat ${DB2_RSP_FILE}
  cd server_t
- ls -l
  ./db2setup -r ../${DB2_RSP_FILE}
+ cat /tmp/db2setup_ubuntu.log
+ . $HOME/sqllib/db2profile
+ db2start
 else
- echo "Installed"
+ echo "DB2 Installed and configured"
 fi
 
-INSTANCE_NAME=$(${DIR}/instance/db2ilist | grep db2inst1)
-if [ "${INSTANCE_NAME}" != "db2inst1" ] ; then
- echo "Instance ${INSTANCE_NAME} does not exist"
- wget ${DB2_RSP_FILE_INSTANCE_URL}
- ${DB2_DIR}/instance/db2isetup -r ${DB2_RESP_FILE}
- su -c "db2start" - db2inst1
-fi
-
-su -c "db2 create db db2unit" - db2inst1
+db2 drop db db2unit
+db2 create db db2unit
 
 echo "Environment was configured"
 
