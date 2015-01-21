@@ -60,6 +60,9 @@ else
  echo "DB2 Installed and configured"
 fi
 
+if [ -z ${DB2INSTANCE} ] ; then
+ . $HOME/sqllib/db2profile
+fi
 db2 drop db db2unit
 db2 create db db2unit
 

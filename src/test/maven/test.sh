@@ -23,6 +23,9 @@
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
+if [ -z ${DB2INSTANCE} ] ; then
+ . $HOME/sqllib/db2profile
+fi
 FILE=/tmp/suites.txt
 echo "Testing objects"
 db2 connect to db2unit
