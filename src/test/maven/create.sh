@@ -55,7 +55,7 @@ if [ ! -x ${DIR}/bin/db2 ] ; then
  RSP=$(cat $(ls -1rt | tail -1) | tail -1)
  echo "Response file ${DB2_RSP_FILE} old"
  echo "Response file ${RSP}"
- cat ${RSP}
+ #cat ${RSP}
  cd server_t
  ls -l
  ./db2setup -r ../${RSP}
