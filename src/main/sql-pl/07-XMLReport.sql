@@ -127,209 +127,217 @@ ALTER MODULE DB2UNIT ADD
  P_XML_REPORT_ONE: BEGIN
 
   DECLARE DOC XML;
-  DECLARE EXEC_CURSOR CURSOR FOR
-    WITH
+  DECLARE SENTENCE VARCHAR(256);
+  DECLARE STMT STATEMENT;
 
-    -- Error messages and type of error.
-    ERRORS (SUITE_NAME, EXECUTION_ID, TEST_NAME, ERROR_MESSAGE, ERROR_TYPE) AS
-    (SELECT
-      SUITE_NAME, EXECUTION_ID, TEST_NAME,
-      SUBSTR(MESSAGE, 44),
-      SUBSTR(MESSAGE, 15, 28)
-     FROM TEMP_REPORT_TEST_XML
-     WHERE FINAL_STATE IS NULL
-     AND TEST_NAME IN (
-      SELECT
-       TEST_NAME
+  SET SENTENCE = 'SET CURRENT SCHEMA ' || UTILITY_SCHEMA;
+  PREPARE STMT FROM SENTENCE;
+  EXECUTE STMT;
+
+  BEGIN
+   DECLARE EXEC_CURSOR CURSOR FOR
+     WITH
+
+     -- Error messages and type of error.
+     ERRORS (SUITE_NAME, EXECUTION_ID, TEST_NAME, ERROR_MESSAGE, ERROR_TYPE) AS
+     (SELECT
+       SUITE_NAME, EXECUTION_ID, TEST_NAME,
+       SUBSTR(MESSAGE, 44),
+       SUBSTR(MESSAGE, 15, 28)
       FROM TEMP_REPORT_TEST_XML
-      WHERE FINAL_STATE = 'Error'
-     )
-     AND MESSAGE IS NOT NULL AND MESSAGE <> ''
-    ),
-
-    -- Date and name of the failed tests.
-    FAIL_INFO (SUITE_NAME, EXECUTION_ID, TEST_NAME, DATE) AS
-    (SELECT
-      SUITE_NAME, EXECUTION_ID, TEST_NAME, DATE
-     FROM TEMP_REPORT_TEST_XML
-     WHERE FINAL_STATE = 'Failed'
-    ),
-
-    -- Ordered messages from failed tests.
-    FAIL_ROWS (SUITE_NAME, EXECUTION_ID, TEST_NAME, MESSAGE, RANK) AS
-    (SELECT
-      R.SUITE_NAME, R.EXECUTION_ID, R.TEST_NAME, MESSAGE,
-      ROW_NUMBER() OVER(PARTITION BY R.TEST_NAME)
-     FROM TEMP_REPORT_TEST_XML R JOIN FAIL_INFO I
-     ON (R.SUITE_NAME = I.SUITE_NAME AND R.EXECUTION_ID = I.EXECUTION_ID
-      AND R.TEST_NAME = I.TEST_NAME)
-     WHERE FINAL_STATE IS NULL
-     AND MESSAGE IS NOT NULL AND MESSAGE <> ''
-    ),
-
-    -- Type of failed tests.
-    FAIL_TYPE (SUITE_NAME, EXECUTION_ID, TEST_NAME, FAIL_TYPE) AS
-    (SELECT
-      SUITE_NAME, EXECUTION_ID, TEST_NAME, MESSAGE
-     FROM FAIL_ROWS
-     WHERE RANK = 1
-    ),
-
-    -- Messages of failed tests.
-    FAIL_MESSAGE (SUITE_NAME, EXECUTION_ID, TEST_NAME, FAIL_MESSAGE) AS
-    (SELECT
-      SUITE_NAME, EXECUTION_ID, TEST_NAME,
-      LISTAGG(MESSAGE, '\n')
-     FROM FAIL_ROWS
-     WHERE RANK <> 1
-     GROUP BY SUITE_NAME, EXECUTION_ID, TEST_NAME
-    ),
-
-    -- Complete description of test cases.
-    TESTCASE (SUITE_NAME, EXECUTION_ID, TEST_NAME, XML) AS
-    (SELECT
-      SUITE_NAME, EXECUTION_ID, TEST_NAME,
-      XMLELEMENT(NAME "testcase",
-       XMLATTRIBUTES(
-        TEST_NAME AS "name",
-        '0' AS "assertions", -- TODO
-        SUITE_NAME || '.' || TEST_NAME AS "classname",
-        DURATION/1000 AS "time" -- Milliseconds
-       ),
-       CASE
-        WHEN FINAL_STATE = 'Unstarted'
-         THEN XMLELEMENT(NAME "skipped")
-        WHEN FINAL_STATE = 'Error'
-         THEN XMLELEMENT(
-          NAME "error",
-          XMLATTRIBUTES(
-           (
-            SELECT
-             MIN(ERROR_MESSAGE)
-            FROM ERRORS E JOIN DB2UNIT_2_BETA.RESULT_TESTS R
-            ON (E.SUITE_NAME = R.SUITE_NAME AND E.EXECUTION_ID = R.EXECUTION_ID
-            AND E.TEST_NAME = R.TEST_NAME)
-           ) AS "message",
-           'SQLError' AS "type"
---           (
---            SELECT
---             MIN(ERROR_TYPE)
---            FROM ERRORS E JOIN DB2UNIT_2_BETA.RESULT_TESTS R
---            ON (E.SUITE_NAME = R.SUITE_NAME AND E.EXECUTION_ID = R.EXECUTION_ID
---            AND E.TEST_NAME = R.TEST_NAME)
---           ) AS "type"
-          )
-         )
-        WHEN FINAL_STATE = 'Failed'
-         THEN XMLELEMENT(
-          NAME "failure",
-          XMLATTRIBUTES(
-           (
-            SELECT
-             MIN(FAIL_MESSAGE)
-            FROM FAIL_MESSAGE F JOIN DB2UNIT_2_BETA.RESULT_TESTS R
-            ON (F.SUITE_NAME = R.SUITE_NAME AND F.EXECUTION_ID = R.EXECUTION_ID
-            AND F.TEST_NAME = R.TEST_NAME)
-           ) AS "message",
-           'AssertionError' AS "type"
---           TODO
---           (
---            SELECT
---             MIN(FAIL_TYPE)
---            FROM FAIL_TYPE F JOIN DB2UNIT_2_BETA.RESULT_TESTS R
---            ON (F.SUITE_NAME = R.SUITE_NAME AND F.EXECUTION_ID = R.EXECUTION_ID
---            AND F.TEST_NAME = R.TEST_NAME)
---           ) AS "type"
-          )
-         )
-       END,
-       (
-        SELECT
-         XMLELEMENT(NAME "system-out",
-          XMLAGG(
-            XMLTEXT(MESSAGE || '\n')
-          )
-         )
-        FROM TEMP_REPORT_TEST_XML R2
-        WHERE R2.SUITE_NAME = R.SUITE_NAME
-        AND R2.EXECUTION_ID = R.EXECUTION_ID
-        AND R2.TEST_NAME = R.TEST_NAME
-       )
-      ) XML
-     -- The schema changes for each test suite. -- TODO ???
-     FROM DB2UNIT_2_BETA.RESULT_TESTS R
-    ),
-
-    -- Execution properties.
-    PROPERTIES (SUITE_NAME, PROPERTIES) AS
-    (SELECT
-      SUITE_NAME,
-      PROPERTIES -- TODO the XML schema for properties has not been defined.
-     FROM DB2UNIT_2_BETA.SUITES
-    ),
-
-    -- Most recent execution date of each test suite.
-    RECENT_DATE_EXEC (SUITE_NAME, DATE) AS
-    (SELECT
-      SUITE_NAME, MAX(DATE)
-     FROM DB2UNIT_2_BETA.SUITES_EXECUTIONS SE JOIN DB2UNIT_2_BETA.EXECUTIONS E
-     ON (E.EXECUTION_ID = SE.EXECUTION_ID)
-     GROUP BY SE.SUITE_NAME
-    ),
-
-    -- Complete information of the most recent exeuction of each test suite.
-    RECENT_EXEC (SUITE_NAME, EXECUTION_ID, DATE, TOTAL_TESTS, PASSED_TESTS,
-      FAILED_TESTS, ERROR_TESTS, UNEXEC_TESTS, DURATION) AS
-    (SELECT
-      SE.SUITE_NAME, SE.EXECUTION_ID, R.DATE, TOTAL_TESTS, PASSED_TESTS,
-      FAILED_TESTS, ERROR_TESTS, UNEXEC_TESTS, DURATION
-     FROM DB2UNIT_2_BETA.SUITES_EXECUTIONS SE JOIN DB2UNIT_2_BETA.EXECUTIONS E
-     ON (E.EXECUTION_ID = SE.EXECUTION_ID) JOIN RECENT_DATE_EXEC R
-     ON (R.SUITE_NAME = SE.SUITE_NAME AND R.DATE = E.DATE)
-    )
-
-    SELECT
-    -- SUITE_NAME,
-     XMLELEMENT(
-      NAME "testsuite",
-      XMLATTRIBUTES(
-       SUITE_NAME AS "name",
-       TOTAL_TESTS AS "tests",
-       UNEXEC_TESTS AS "disabled",
-       ERROR_TESTS  AS "errors",
-       FAILED_TESTS AS "failures",
-       'localhost' AS "hostname", -- TODO get hostname
-       '0' AS "id", -- TODO consecutive ID
-       DURATION AS "time",
-       DATE AS "timestamp"),
-      XMLELEMENT(
-       NAME "properties"
-       ,
-       (
-        SELECT
-         XMLQUERY('$PROPERTIES')
-        FROM PROPERTIES P
-        WHERE P.SUITE_NAME = R.SUITE_NAME
-       )
-       OPTION NULL ON NULL
-      ),
-      (
+      WHERE FINAL_STATE IS NULL
+      AND TEST_NAME IN (
        SELECT
-        XMLAGG(XMLQUERY('$XML'))
-       FROM TESTCASE T 
-       WHERE T.SUITE_NAME = R.SUITE_NAME
+        TEST_NAME
+       FROM TEMP_REPORT_TEST_XML
+       WHERE FINAL_STATE = 'Error'
       )
-     )
-    FROM RECENT_EXEC R
-    WHERE SUITE_NAME = SCHEMANAME
-    GROUP BY SUITE_NAME, TOTAL_TESTS, UNEXEC_TESTS, ERROR_TESTS, FAILED_TESTS,
-     DURATION, DATE;
+      AND MESSAGE IS NOT NULL AND MESSAGE <> ''
+     ),
 
-  DELETE FROM XML_REPORT;
-  OPEN EXEC_CURSOR;
-  FETCH EXEC_CURSOR INTO DOC;
-  INSERT INTO XML_REPORT (DOCUMENT)
-    VALUES (XMLSERIALIZE(DOC AS VARCHAR(32672)));
+     -- Date and name of the failed tests.
+     FAIL_INFO (SUITE_NAME, EXECUTION_ID, TEST_NAME, DATE) AS
+     (SELECT
+       SUITE_NAME, EXECUTION_ID, TEST_NAME, DATE
+      FROM TEMP_REPORT_TEST_XML
+      WHERE FINAL_STATE = 'Failed'
+     ),
+
+     -- Ordered messages from failed tests.
+     FAIL_ROWS (SUITE_NAME, EXECUTION_ID, TEST_NAME, MESSAGE, RANK) AS
+     (SELECT
+       R.SUITE_NAME, R.EXECUTION_ID, R.TEST_NAME, MESSAGE,
+       ROW_NUMBER() OVER(PARTITION BY R.TEST_NAME)
+      FROM TEMP_REPORT_TEST_XML R JOIN FAIL_INFO I
+      ON (R.SUITE_NAME = I.SUITE_NAME AND R.EXECUTION_ID = I.EXECUTION_ID
+       AND R.TEST_NAME = I.TEST_NAME)
+      WHERE FINAL_STATE IS NULL
+      AND MESSAGE IS NOT NULL AND MESSAGE <> ''
+     ),
+
+     -- Type of failed tests.
+     FAIL_TYPE (SUITE_NAME, EXECUTION_ID, TEST_NAME, FAIL_TYPE) AS
+     (SELECT
+       SUITE_NAME, EXECUTION_ID, TEST_NAME, MESSAGE
+      FROM FAIL_ROWS
+      WHERE RANK = 1
+     ),
+
+     -- Messages of failed tests.
+     FAIL_MESSAGE (SUITE_NAME, EXECUTION_ID, TEST_NAME, FAIL_MESSAGE) AS
+     (SELECT
+       SUITE_NAME, EXECUTION_ID, TEST_NAME,
+       LISTAGG(MESSAGE, '\n')
+      FROM FAIL_ROWS
+      WHERE RANK <> 1
+      GROUP BY SUITE_NAME, EXECUTION_ID, TEST_NAME
+     ),
+
+     -- Complete description of test cases.
+     TESTCASE (SUITE_NAME, EXECUTION_ID, TEST_NAME, XML) AS
+     (SELECT
+       SUITE_NAME, EXECUTION_ID, TEST_NAME,
+       XMLELEMENT(NAME "testcase",
+        XMLATTRIBUTES(
+         TEST_NAME AS "name",
+         '0' AS "assertions", -- TODO
+         SUITE_NAME || '.' || TEST_NAME AS "classname",
+         DURATION/1000 AS "time" -- Milliseconds
+        ),
+        CASE
+         WHEN FINAL_STATE = 'Unstarted'
+          THEN XMLELEMENT(NAME "skipped")
+         WHEN FINAL_STATE = 'Error'
+          THEN XMLELEMENT(
+           NAME "error",
+           XMLATTRIBUTES(
+            (
+             SELECT
+              MIN(ERROR_MESSAGE)
+             FROM ERRORS E JOIN RESULT_TESTS R
+             ON (E.SUITE_NAME = R.SUITE_NAME AND E.EXECUTION_ID = R.EXECUTION_ID
+             AND E.TEST_NAME = R.TEST_NAME)
+            ) AS "message",
+            'SQLError' AS "type"
+--            (
+--             SELECT
+--              MIN(ERROR_TYPE)
+--             FROM ERRORS E JOIN RESULT_TESTS R
+--             ON (E.SUITE_NAME = R.SUITE_NAME AND E.EXECUTION_ID = R.EXECUTION_ID
+--             AND E.TEST_NAME = R.TEST_NAME)
+--            ) AS "type"
+           )
+          )
+         WHEN FINAL_STATE = 'Failed'
+          THEN XMLELEMENT(
+           NAME "failure",
+           XMLATTRIBUTES(
+            (
+             SELECT
+              MIN(FAIL_MESSAGE)
+             FROM FAIL_MESSAGE F JOIN RESULT_TESTS R
+             ON (F.SUITE_NAME = R.SUITE_NAME AND F.EXECUTION_ID = R.EXECUTION_ID
+             AND F.TEST_NAME = R.TEST_NAME)
+            ) AS "message",
+            'AssertionError' AS "type"
+--            TODO
+--            (
+--             SELECT
+--              MIN(FAIL_TYPE)
+--             FROM FAIL_TYPE F JOIN RESULT_TESTS R
+--             ON (F.SUITE_NAME = R.SUITE_NAME AND F.EXECUTION_ID = R.EXECUTION_ID
+--             AND F.TEST_NAME = R.TEST_NAME)
+--            ) AS "type"
+           )
+          )
+        END,
+        (
+         SELECT
+          XMLELEMENT(NAME "system-out",
+           XMLAGG(
+             XMLTEXT(MESSAGE || '\n')
+           )
+          )
+         FROM TEMP_REPORT_TEST_XML R2
+         WHERE R2.SUITE_NAME = R.SUITE_NAME
+         AND R2.EXECUTION_ID = R.EXECUTION_ID
+         AND R2.TEST_NAME = R.TEST_NAME
+        )
+       ) XML
+      -- The schema changes for each test suite. -- TODO ???
+      FROM RESULT_TESTS R
+     ),
+
+     -- Execution properties.
+     PROPERTIES (SUITE_NAME, PROPERTIES) AS
+     (SELECT
+       SUITE_NAME,
+       PROPERTIES -- TODO the XML schema for properties has not been defined.
+      FROM SUITES
+     ),
+
+     -- Most recent execution date of each test suite.
+     RECENT_DATE_EXEC (SUITE_NAME, DATE) AS
+     (SELECT
+       SUITE_NAME, MAX(DATE)
+      FROM SUITES_EXECUTIONS SE JOIN EXECUTIONS E
+      ON (E.EXECUTION_ID = SE.EXECUTION_ID)
+      GROUP BY SE.SUITE_NAME
+     ),
+
+     -- Complete information of the most recent exeuction of each test suite.
+     RECENT_EXEC (SUITE_NAME, EXECUTION_ID, DATE, TOTAL_TESTS, PASSED_TESTS,
+       FAILED_TESTS, ERROR_TESTS, UNEXEC_TESTS, DURATION) AS
+     (SELECT
+       SE.SUITE_NAME, SE.EXECUTION_ID, R.DATE, TOTAL_TESTS, PASSED_TESTS,
+       FAILED_TESTS, ERROR_TESTS, UNEXEC_TESTS, DURATION
+      FROM SUITES_EXECUTIONS SE JOIN EXECUTIONS E
+      ON (E.EXECUTION_ID = SE.EXECUTION_ID) JOIN RECENT_DATE_EXEC R
+      ON (R.SUITE_NAME = SE.SUITE_NAME AND R.DATE = E.DATE)
+     )
+
+     SELECT
+     -- SUITE_NAME,
+      XMLELEMENT(
+       NAME "testsuite",
+       XMLATTRIBUTES(
+        SUITE_NAME AS "name",
+        TOTAL_TESTS AS "tests",
+        UNEXEC_TESTS AS "disabled",
+        ERROR_TESTS  AS "errors",
+        FAILED_TESTS AS "failures",
+        'localhost' AS "hostname", -- TODO get hostname
+        '0' AS "id", -- TODO consecutive ID
+        DURATION AS "time",
+        DATE AS "timestamp"),
+       XMLELEMENT(
+        NAME "properties"
+        ,
+        (
+         SELECT
+          XMLQUERY('$PROPERTIES')
+         FROM PROPERTIES P
+         WHERE P.SUITE_NAME = R.SUITE_NAME
+        )
+        OPTION NULL ON NULL
+       ),
+       (
+        SELECT
+         XMLAGG(XMLQUERY('$XML'))
+        FROM TESTCASE T 
+        WHERE T.SUITE_NAME = R.SUITE_NAME
+       )
+      )
+     FROM RECENT_EXEC R
+     WHERE SUITE_NAME = SCHEMANAME
+     GROUP BY SUITE_NAME, TOTAL_TESTS, UNEXEC_TESTS, ERROR_TESTS, FAILED_TESTS,
+      DURATION, DATE;
+   DELETE FROM XML_REPORT;
+   OPEN EXEC_CURSOR;
+   FETCH EXEC_CURSOR INTO DOC;
+   INSERT INTO XML_REPORT (DOCUMENT)
+     VALUES (XMLSERIALIZE(DOC AS VARCHAR(32672)));
+  END;
 
  END P_XML_REPORT_ONE @
 
