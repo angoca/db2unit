@@ -32,7 +32,7 @@
 
 ** Only one product can be specified for the following PROD keyword. Specifying
 ** multiple products in an installation is not supported.
-PROD                      = DB2_SERVER_EDITION
+PROD                      = EXPRESS_C
 
 ** The FILE keyword determines the base installation path. If you specify a
 ** path that does not yet have this product, this will install a new copy.  If
