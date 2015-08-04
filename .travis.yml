@@ -6,13 +6,14 @@ env:
 before_install:
   # Parallel download
   - mvn > /dev/null &
-  - sudo apt-get install aria2 -y
+  - sudo apt-get install aria2 curl -y
   - sudo ./src/test/travis/update.sh > /dev/null &
 
   # Retrieves and extracts the DB2 binaries
   # If it does not work, change it according to the next page:
   # http://www.ibm.com/support/fixcentral/swg/quickorder?product=ibm/Information+Management/DB2&release=10.5.*&platform=Linux+64-bit,x86_64&function=fixId&fixids=DB2-linuxx64-server_t-10.5.0.4-FP004&includeRequisites=1&includeSupersedes=0&downloadMethod=http&source=fc
-  - cd /tmp ; aria2c -x 16 https://delivery04.dhe.ibm.com/sdfdl/v2/sar/CM/IM/04qts/0/Xa.2/Xb.jusyLTSp44S03cP1xPUOGQrgZo7fnL4RUy42UXULIBzG8ISIo_iRp9AndF4/Xc.CM/IM/04qts/0/v10.5fp4_linuxx64_server_t.tar.gz/Xd./Xf.LPR.D1vk/Xg.7781797/Xi.habanero/XY.habanero/XZ.V5N7_g0_K6UiAEpv1_rLD2hhaQw/v10.5fp4_linuxx64_server_t.tar.gz ; tar zxvf v10.5fp4_linuxx64_server_t.tar.gz
+  - curl --url https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-expc.md -s > link ; cat link | tail -1 > link2 ; cat link2
+  - cd /tmp ; aria2c -x 16 `cat link2` ; tar zxvf v10.5_linuxx64_expc.tar.gz
 
   # Retrieves and extract log4db2
   - cd ; wget https://github.com/angoca/log4db2/releases/download/log4db2-1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
@@ -27,7 +28,7 @@ before_install:
   - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
 
   # Checks the prerequisites
-  - cd /tmp/server_t ; ./db2prereqcheck -l
+  - cd /tmp/server_t ; ./db2prereqcheck -l -i
   # Install DB2 and creates an instance (Response file)
   - sudo ./db2setup -r ${TRAVIS_BUILD_DIR}/src/test/travis/db2.rsp || cat /tmp/db2setup.log
   # Changes the security
