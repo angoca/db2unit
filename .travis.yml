@@ -12,7 +12,7 @@ before_install:
 
   # Retrieves and extracts the DB2 binaries
   # If it does not work, change it according to the next page:
-  # http://www.ibm.com/support/fixcentral/swg/quickorder?product=ibm/Information+Management/DB2&release=10.5.*&platform=Linux+64-bit,x86_64&function=fixId&fixids=DB2-linuxx64-server_t-10.5.0.4-FP004&includeRequisites=1&includeSupersedes=0&downloadMethod=http&source=fc
+  # https://github.com/angoca/db2-docker/wiki/db2-link-expc
   - curl --url https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-expc.md -s > /tmp/link ; cat /tmp/link | tail -1 > /tmp/link2 ; cat /tmp/link2
   - cd /tmp ; aria2c -x 16 `cat /tmp/link2` ; tar zxvf v10.5_linuxx64_expc.tar.gz
 
