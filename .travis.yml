@@ -13,7 +13,7 @@ before_install:
   # Retrieves and extracts the DB2 binaries
   # If it does not work, change the wiki https://github.com/angoca/log4db2/wiki/DB2-Express-C-Download-link
   - LINK=$(curl --url https://raw.githubusercontent.com/wiki/angoca/log4db2/DB2-Express-C-Download-link.md -s | tail -1)
-  - cd /tmp ; aria2c -x 16 ${LINK} ; tar zxvf v10.5fp5_linuxx64_server_t.tar.gz
+  - cd /tmp ; aria2c -x 16 ${LINK} ; tar zxvf *.tar.gz
 
   # Retrieves and extract log4db2
   - cd ; wget https://github.com/angoca/log4db2/releases/download/log4db2-1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
