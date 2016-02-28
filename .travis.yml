@@ -11,10 +11,9 @@ before_install:
   - sudo ./src/test/travis/update.sh > /dev/null &
 
   # Retrieves and extracts the DB2 binaries
-  # If it does not work, change it according to the next page:
-  # https://github.com/angoca/db2-docker/wiki/db2-link-expc
-  - curl --url https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-expc.md -s > /tmp/link ; cat /tmp/link | tail -1 > /tmp/link2 ; cat /tmp/link2
-  - cd /tmp ; aria2c -x 16 `cat /tmp/link2` ; tar zxvf v10.5_linuxx64_expc.tar.gz
+  # If it does not work, change the wiki https://github.com/angoca/log4db2/wiki/DB2-Express-C-Download-link
+  - LINK=$(curl --url https://raw.githubusercontent.com/wiki/angoca/log4db2/DB2-Express-C-Download-link.md -s | tail -1)
+  - cd /tmp ; aria2c -x 16 ${LINK} ; tar zxvf v10.5fp5_linuxx64_server_t.tar.gz
 
   # Retrieves and extract log4db2
   - cd ; wget https://github.com/angoca/log4db2/releases/download/log4db2-1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
