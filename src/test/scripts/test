@@ -24,7 +24,7 @@
 #
 #   export DB2UNIT_SRC_TEST_CODE_PATH=/home/db2inst1/mytests
 #
-# Version: 2014-05-01 V2_BETA
+# Version: 2018-05-01 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
@@ -39,7 +39,8 @@ else
  SCHEMA=${1}
  OPTION_1=${2}
  OPTION_2=${3}
- # Execute the tests.
+
+ # Installs the tests.
  if [ "${OPTION_1}" = "" -o "${OPTION_1}" = "i" -o "${OPTION_2}" = "i" ] ; then
   # Prepares the installation.
   db2 "DELETE FROM LOGS" > /dev/null
@@ -61,7 +62,8 @@ else
   db2 "CALL DB2UNIT.CLEAN()"
  fi
 
- if [ ! '(' "${OPTION_1}" = "x" -a "${OPTION_2}" = "" ')' ] ; then
+ # When only execution, the report is presented.
+ if [ "${OPTION_1}" = "x" -a "${OPTION_2}" = "" ] ; then
   db2 "CALL LOGADMIN.LOGS(min_level=>5)"
   db2 "SELECT EXECUTION_ID EXEC_ID, VARCHAR(SUBSTR(TEST_NAME, 1, 32), 32) TEST,
     FINAL_STATE STATE, TIME, VARCHAR(SUBSTR(MESSAGE, 1, 128), 128) MESSAGE
