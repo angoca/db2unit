@@ -25,6 +25,7 @@
 
 DB=$(db2 list db directory | awk '/alias/ && /DB2UNIT/ {print $4}')
 if [ -n "${DB}" ] ; then
+ echo "Dropping current db2unit database..."
  db2 drop db db2unit
 fi
 echo "Creating database..."
