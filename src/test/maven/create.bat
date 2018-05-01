@@ -23,4 +23,15 @@
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
-echo DB2 should be installed with an existent instance currently attached to.
+db2 drop db db2unit
+
+echo Creating database...
+db2 create db db2unit
+
+echo Installing log4db2
+cd ../../../../log4db2
+db2 connect to db2unit
+install
+
+echo Environment was configured
+

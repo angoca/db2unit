@@ -17,58 +17,28 @@
 #
 # Andres Gomez Casanova <angocaATyahooDOTcom>
 
-# Installs DB2, creates an instance and a database.
+# Creates a database.
 #
-# Version: 2015-01-14 V2_BETA
+# Version: 2018-01-14 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
-TEMP_WIKI_DOC=db2-link-server_t.md
-DB2_INSTALLER=v10.5fp5_linuxx64_server_t.tar.gz
-DB2_RSP_FILE_INSTANCE_URL=https://raw.githubusercontent.com/angoca/db2-docker/master/instance/server_t/db2server_t.rsp
-DB2_RSP_FILE=src/test/maven/db2-noroot.rsp
-INSTANCE_NAME=db2inst1
-DB2_DIR=/opt/ibm/db2/V10.5
-
-DIR=$(strings /var/db2/global.reg 2> /dev/null | grep -s '^\/' | sort | uniq | grep -v sqllib | grep -v das | head -1)
-echo "Directory $DIR"
-if [ ! -x ${DIR}/bin/db2 ] ; then
- echo "DB2 non installed"
-
- # Install libraries
- sudo apt-get update > /dev/null
- sudo apt-get install libaio1 lib32stdc++6 libstdc++6-4.4-pic -y > /dev/null
- sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq libpam-ldap:i386 > /dev/null
- sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0 > /dev/null
- sudo apt-get install -y aria2 curl > /dev/null
-
- wget https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md
- URL=$(cat $(ls -1rt | tail -1) | tail -1)
- echo "URL: ${URL}"
- aria2c -x 16  ${URL}
- tar -zxf ${DB2_INSTALLER}
- rm ${DB2_INSTALLER}
-
- echo "Response file ${DB2_RSP_FILE}"
- cat ${DB2_RSP_FILE}
- cd server_t
- ./db2setup -r ../${DB2_RSP_FILE}
- cat /tmp/db2setup_ubuntu.log
- . $HOME/sqllib/db2profile
- db2start
-else
- echo "DB2 Installed and configured"
-fi
-
-if [ -z ${DB2INSTANCE} ] ; then
- . $HOME/sqllib/db2profile
-fi
 DB=$(db2 list db directory | awk '/alias/ && /DB2UNIT/ {print $4}')
 if [ -n "${DB}" ] ; then
  db2 drop db db2unit
 fi
-echo "Creating database"
+echo "Creating database..."
 db2 create db db2unit
 
-echo "Environment was configured"
+echo "Installing log4db2"
+cd /tmp
+if [ -r  log4db2.tar.gz ] ; then
+ tar -xf log4db2.tar.gz
+ cd log4db2
+ db2 connect to db2unit
+ . ./install
+else
+ echo "Please put the log4db2 (log4db2.tar.gz) installer in the /tmp directory."
+fi
 
+echo "Environment was configured."
