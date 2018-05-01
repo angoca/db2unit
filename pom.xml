@@ -92,6 +92,16 @@
       </configuration>
      </execution>
      <execution>
+      <id>compiletests</id>
+      <phase>test-compile</phase>
+      <goals>
+       <goal>exec</goal>
+      </goals>
+      <configuration>
+       <executable>src/test/maven/test-compile.sh</executable>
+      </configuration>
+     </execution>
+     <execution>
       <id>tests</id>
       <phase>test</phase>
       <goals>
