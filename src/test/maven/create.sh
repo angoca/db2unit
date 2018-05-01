@@ -23,6 +23,9 @@
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
+echo "Killing all aplications"
+db2 force applications all
+
 DB=$(db2 list db directory | awk '/alias/ && /DB2UNIT/ {print $4}')
 if [ -n "${DB}" ] ; then
  echo "Dropping current db2unit database..."
@@ -30,16 +33,18 @@ if [ -n "${DB}" ] ; then
 fi
 echo "Creating database..."
 db2 create db db2unit
+db2 connect to db2unit
+db2 create tablespace systoolspace
 
 echo "Installing log4db2"
 cd /tmp
 if [ -r  log4db2.tar.gz ] ; then
  tar -xf log4db2.tar.gz
  cd log4db2
- db2 connect to db2unit
  . ./install
 else
  echo "Please put the log4db2 (log4db2.tar.gz) installer in the /tmp directory."
 fi
 
 echo "Environment was configured."
+
