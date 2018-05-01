@@ -39,7 +39,7 @@ before_install:
   # Retrieves and extracts the DB2 binaries
   # If it does not work, change it according to the next page:
   # https://github.com/angoca/db2-docker/wiki/db2-link-server_t
-  - DOWNLOAD_LINK=$(curl --url https://raw.githubusercontent.com/wiki/angoca/db2-docker/db2-link-server_t.md -s | tail -1) ; echo ${DOWNLOAD_LINK} ; cd /tmp ; aria2c -x 16 ${DOWNLOAD_LINK} ; tar zxvf v10.5fp5_linuxx64_server_t.tar.gz
+  - DOWNLOAD_LINK=$(curl --url https://raw.githubusercontent.com/wiki/angoca/db2unit/DB2-Download-link.md -s | tail -1) ; echo ${DOWNLOAD_LINK} ; cd /tmp ; aria2c -x 16 ${DOWNLOAD_LINK} ; tar zxvf v10.5fp7_linuxx64_server_t.tar.gz
 
   # Retrieves and extract log4db2
   - cd ; wget https://github.com/angoca/log4db2/releases/download/log4db2-1-Beta-A/log4db2.tar.gz ; tar zxvf log4db2.tar.gz
