@@ -48,6 +48,12 @@ db2 connect > /dev/null
 if [ ${?} -ne 0 ] ; then
  echo "Please connect to a database before the execution of the tests."
  echo "Remember that to call the script the command is '. ./allTests'"
+ echo
+ echo "Options for this script"
+ echo "-np : Do not install tests. Just execute test without pauses between them. Shows time."
+ echo "-ix : Install tests and run them without pauses. Shows time."
+ echo "-i  : Just install tests. Do no run tests."
+ echo "No option: Install and execute all tests with pauses between them (Any other option is processed like this)."
 else
  if [ "${1}" = "-np" ] ; then
   PAUSE_INSTALL=false
@@ -111,9 +117,9 @@ else
  executeTest DB2UNIT_TAP ${PAUSE_INSTALL}
  SUM=$((${SUM}+${RET}))
 
-db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
-
  if [ "${PAUSE_INSTALL}" != "true" -a "${PAUSE_INSTALL}" != "install" ] ; then
+  db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
+
   MILLIS_END=$(date +"%s")
   TIME_END=$(date +"%T")
   echo "Difference:"
