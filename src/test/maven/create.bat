@@ -23,14 +23,16 @@
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
+db2 force applications all
 db2 drop db db2unit
 
 echo Creating database...
 db2 create db db2unit
+db2 connect to db2unit
+db2 create tablespace systoolspace
 
 echo Installing log4db2
 cd ../../../../log4db2
-db2 connect to db2unit
 install
 
 echo Environment was configured
