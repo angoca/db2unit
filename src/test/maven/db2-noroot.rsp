@@ -1,4 +1,0 @@
-PROD                      = DB2_SERVER_EDITION
-LIC_AGREEMENT             = ACCEPT
-INSTALL_TYPE              = COMPACT
-COMP                      = APPLICATION_DEVELOPMENT_TOOLS
