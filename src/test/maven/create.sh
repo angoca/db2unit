@@ -63,7 +63,11 @@ fi
 if [ -z ${DB2INSTANCE} ] ; then
  . $HOME/sqllib/db2profile
 fi
-db2 drop db db2unit
+DB=$(db2 list db directory | awk '/alias/ && /DB2UNIT/ {print $4}')
+if [ -n "${DB}" ] ; then
+ db2 drop db db2unit
+fi
+echo "Creating database"
 db2 create db db2unit
 
 echo "Environment was configured"
