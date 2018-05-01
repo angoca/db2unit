@@ -27,6 +27,10 @@ echo Creating objects
 if [ -z ${DB2INSTANCE} ] ; then
  . $HOME/sqllib/db2profile
 fi
+
+echo Killing all aplications
+db2 force applications all
+
 db2 connect to db2unit
 cd src\test\scripts
 call init-dev
