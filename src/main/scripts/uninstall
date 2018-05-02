@@ -23,7 +23,7 @@
 # Made in COLOMBIA.
 
 # Checks if there is already a connection established
-db2 connect > /dev/null
+db2 values current date > /dev/null
 if [[ ${?} -ne 0 ]] ; then
  echo "Please connect to a database before the execution of the uninstallation."
  echo "Remember that to call the script the command is '. ./uninstall'"
