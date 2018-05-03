@@ -189,3 +189,8 @@ can be found:
  * `.ps1` -- Windows PowerShell
  * No extension -- For Linux/UNIX/Mac OS X.
 
+For more information please visit:
+
+ * [Wiki](https://github.com/angoca/db2unit/wiki)
+ * [Read the docs](http://db2unit.readthedocs.io/en/latest/)
+
