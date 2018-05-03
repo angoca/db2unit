@@ -47,7 +47,10 @@ before_install:
 
   # INSTALL
 
-  # Install the required libraries
+  # Waits for the update to finish
+  - while [ ! -r /tmp/finished_update ] ; do sleep 1 ; done
+
+  # Installs the required libraries
   - sudo apt-get install libaio1 lib32stdc++6 -y
   - sudo apt-get install -qq libpam-ldap:i386
   - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
