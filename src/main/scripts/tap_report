@@ -18,7 +18,7 @@
 
 # Generates the TAP report and shows it in the standard output.
 #
-# Version: 2014-12-06 V2_BETA
+# Version: 2018-05-06 V2_BETA
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
@@ -36,12 +36,12 @@ report() {
 }
 
 # Checks if there is already a connection established
-db2 connect > /dev/null
+db2 values current date > /dev/null
 if [ ${?} -eq 0 ] ; then
  report
 else
  echo "Please connect to a database before the creation of the report."
  echo "Remember that to call the script the command is '. ./tap_report'"
- echo "This script generates a report only if a test suite has been executed"
+ echo "This script generates a report only if a test suite has been executed."
 fi
 
