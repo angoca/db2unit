@@ -23,8 +23,14 @@
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
-echo "Creating testing objects"
+# Attach to an instance to work with db2unit.
+# User and password should be db2unit.
+# TODO db2 attach to db2unit user db2unit using db2unit
+
+echo "Creating objects"
 db2 connect to db2unit
 cd src/test/scripts/
 . ./init-dev
-. ./allTests -i
+cd ../../main/scripts
+. ./install
+

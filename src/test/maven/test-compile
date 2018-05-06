@@ -23,10 +23,9 @@
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
-echo "Creating objects"
+echo "Creating testing objects"
 db2 connect to db2unit
 cd src/test/scripts/
 . ./init-dev
-cd ../../main/scripts
-. ./install
+. ./allTests -i
 
