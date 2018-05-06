@@ -68,7 +68,7 @@
        <goal>exec</goal>
       </goals>
       <configuration>
-       <executable>src/test/maven/validate.sh</executable>
+       <executable>src/test/maven/validate</executable>
       </configuration>
      </execution>
      <execution>
@@ -78,7 +78,7 @@
        <goal>exec</goal>
       </goals>
       <configuration>
-       <executable>src/test/maven/create.sh</executable>
+       <executable>src/test/maven/create</executable>
       </configuration>
      </execution>
      <execution>
@@ -88,7 +88,7 @@
        <goal>exec</goal>
       </goals>
       <configuration>
-       <executable>src/test/maven/compile.sh</executable>
+       <executable>src/test/maven/compile</executable>
       </configuration>
      </execution>
      <execution>
@@ -98,7 +98,7 @@
        <goal>exec</goal>
       </goals>
       <configuration>
-       <executable>src/test/maven/test-compile.sh</executable>
+       <executable>src/test/maven/test-compile</executable>
       </configuration>
      </execution>
      <execution>
@@ -108,7 +108,7 @@
        <goal>exec</goal>
       </goals>
       <configuration>
-       <executable>src/test/maven/test.sh</executable>
+       <executable>src/test/maven/test</executable>
       </configuration>
      </execution>
     </executions>
