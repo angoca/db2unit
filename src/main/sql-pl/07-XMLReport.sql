@@ -219,6 +219,7 @@ ALTER MODULE DB2UNIT ADD
              AND E.TEST_NAME = R.TEST_NAME)
             ) AS "message",
             'SQLError' AS "type"
+-- TODO Fix the following lines
 --            (
 --             SELECT
 --              MIN(ERROR_TYPE)
@@ -240,7 +241,7 @@ ALTER MODULE DB2UNIT ADD
              AND F.TEST_NAME = R.TEST_NAME)
             ) AS "message",
             'AssertionError' AS "type"
---            TODO
+--            TODO Fix the following lines
 --            (
 --             SELECT
 --              MIN(FAIL_TYPE)
@@ -297,6 +298,7 @@ ALTER MODULE DB2UNIT ADD
      )
 
      SELECT
+-- TODO the following column goes or not?
      -- SUITE_NAME,
       XMLELEMENT(
        NAME "testsuite",
