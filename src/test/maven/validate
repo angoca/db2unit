@@ -38,6 +38,7 @@ case $(uname -s) in
 esac
 
 # Checks if DB2 server or client is installed.
+# It does not work if non-root installation is being used.
 DIR=$(strings /var/db2/global.reg 2> /dev/null | grep -s '^\/' | sort | uniq | grep -v sqllib | grep -v das | head -1)
 echo "Directory $DIR"
 if [ ! -x ${DIR}/bin/db2 ] ; then
@@ -53,8 +54,7 @@ else
   # Terminates current process to have the environment clean.
   db2 terminate
   # Attach to an instance to work with db2unit.
-  # User and password should be db2unit.
-  #TODO db2 attach to db2unit user db2unit using db2unit
+  db2 attach to db2unit
 
   # TODO if the current node is not an instance, then do not check this.
   DB2_UP=$(db2pd - | grep Up)

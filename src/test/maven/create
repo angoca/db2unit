@@ -24,8 +24,7 @@
 # Made in COLOMBIA.
 
 # Attach to an instance to work with db2unit.
-# User and password should be db2unit.
-# TODO db2 attach to db2unit user db2unit using db2unit
+db2 attach to db2unit
 
 echo "Killing all aplications"
 db2 force applications all
