@@ -16,18 +16,68 @@ To develop db2unit you need:
 The code is divided in two parts, the main code that produces the released
 version and the tests that checks the code works correctly.
 
-## Main
+* Main: The necessary code to produce the released package.
+* Tests: The necessary code to test the main code.
+
+# Directories
+
+## Main (src/main directory)
 
 The code here produces the delivrable code.
 
-## Test
+### Assembly (src/main/assembly directory)
+
+This file contains the mechanism to create the release package.
+
+### sql-pl
+
+Code of db2unit. This is the main part of this project.
+
+### scripts
+
+Scripts to install and uninstall db2unit in multiple platforms.
+
+## Test (src/test directory)
 
 The code under this directory has everything to test the main code.
 
-# Examples
+### Maven (src/test/maven directory)
+
+Scripts for the diffentes phases of the lifecycle.
+
+### scripts
+
+Scripts to develop in db2unit, without using Maven.
+These scripts are used to retest each time something is modified in the files.
+
+### sql-pl
+
+Set of tests to test db2unit itself.
+Each file tests a data type independently.
+If you are changing for a specific data type, you can run its corresponding assertions file.
+Instead, if something general is begin modified, a execution file could be run.
+
+### Travis-CI (src/test/travis directory)
+
+Files to be used by Travis-CI. These are the Db2 response files and a Linux Ubuntu update in parallel.
+
+## Examples (src/examples directory)
 
 There is an examples directories that contains scripts with many possible
 situations for tests.
+
+## Website (src/site directory)
+
+This directory contains everything for the website published in db2unit.github.io.
+
+## Documentation (doc directory)
+
+This directory contains everything you need to know to use or to develop in db2unit.
+
+# Examples
+
+There are a couple of examples in db2unit, that you could install and execute that helps
+you understand how this project works.
 
 * Tests_DB2UNIT_EXAMPLE.sql
 
@@ -54,19 +104,33 @@ db2 "CALL DB2UNIT.RUN_SUITE('DB2UNIT_EXAMPLE_FAIL_ALL')"
 
 With Maven, in the root directory
 
+  # Cleans the environment.
   mvn clean
+  # Verifies if the environment is correctly configured to install db2unit.
   mvn validate
+  # Creates the database to install db2unit and its prerequisites.
+  # It needs log4db2.tar.gz in /tmp to be installed dynamically.
   mvn create
+  # Installs db2unit in the database.
   mvn compile
+  # Installs the tests to test db2unit (itself).
   mvn test-compile
+  # Executes the set of Tests Suites to test db2unit. This takes several minutes.
   mvn test
+  # Creates the package to be released.
   mvn
+  # Creates the db2unit site.
   mvn site
+  # Deploys the db2unit site in GitHub pages.
   mvn site-deploy
 
 You can catalog a remote node as db2unit, and then create the database in another instance.
+For this, you need to execute this:
 
  db2 catalog tcpip node docker remote ServerName server PortNumer
+
+Where ServerName is the Name or IP address your remote server and PortNumber is the port
+where Db2 is listening.
 
 ## Scripts
 
