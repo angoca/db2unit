@@ -187,7 +187,8 @@ can be found:
 
  * `.bat` -- Windows Batch file for CMD.exe
  * `.ps1` -- Windows PowerShell
- * No extension -- For Linux/UNIX/Mac OS X.
+ * `.ksh` -- In Korn, mainly for AIX but also for Linux and Mac OS.
+ * No extension -- For Linux/UNIX/Mac OS X in Bash.
 
 For more information please visit:
 
