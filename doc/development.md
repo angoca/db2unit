@@ -134,6 +134,13 @@ where Db2 is listening.
 
 ## Scripts
 
+The same script with different extensions works for different platforms:
+
+* No extension in Bash for Linux and Mac OS.
+* .bat in CMD for Windows.
+* .ps1 in PowerShell for Windows.
+* .ksh in Korn mainly for AIX.
+
 ### Main
 
 init
