@@ -27,10 +27,10 @@
 db2 values current date > /dev/null
 if [[ ${?} -ne 0 ]] ; then
  echo "Please connect to a database before the execution of the uninstallation."
- echo "Remember that to call the script the command is '. ./uninstall'"
+ echo "Remember that to call the script the command is '. ./uninstall.ksh'"
 else
- if [[ -x init ]] ; then
-  . ./init
+ if [[ -x init.ksh ]] ; then
+  . ./init.ksh
  fi
  echo Uninstalling db2unit
  db2 -tf ${DB2UNIT_SRC_MAIN_CODE_PATH}/98-Clean.sql

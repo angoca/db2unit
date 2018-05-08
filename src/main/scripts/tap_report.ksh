@@ -42,7 +42,7 @@ if [ ${?} -eq 0 ] ; then
  report
 else
  echo "Please connect to a database before the creation of the report."
- echo "Remember that to call the script the command is '. ./tap_report'"
+ echo "Remember that to call the script the command is '. ./tap_report.ksh'"
  echo "This script generates a report only if a test suite has been executed."
 fi
 
