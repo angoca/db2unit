@@ -50,15 +50,20 @@
    <fileMode>0666</fileMode>
    <outputDirectory>sql-pl</outputDirectory>
   </fileSet>
-  <!-- Scripts Linux -->
+  <!-- Scripts Linux and UNIX -->
   <fileSet>
    <directory>src/main/scripts</directory>
    <includes>
     <include>**/init</include>
+    <include>**/init.ksh</include>
     <include>**/install</include>
+    <include>**/install.ksh</include>
     <include>**/reinstall</include>
+    <include>**/reinstall.ksh</include>
     <include>**/uninit</include>
+    <include>**/uninit.ksh</include>
     <include>**/uninstall</include>
+    <include>**/uninstall.ksh</include>
    </includes>
    <fileMode>0777</fileMode>
    <lineEnding>lf</lineEnding>
