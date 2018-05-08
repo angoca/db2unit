@@ -1,5 +1,5 @@
 @echo off
-::  This file is part of db2unit: A unit testing framework for DB2 LUW.
+::  This file is part of db2unit: A unit testing framework for Db2 LUW.
 :: Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 ::
 :: db2unit is free software: you can redistribute it and/or modify

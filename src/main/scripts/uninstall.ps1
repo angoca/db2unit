@@ -1,4 +1,4 @@
-# This file is part of db2unit: A unit testing framework for DB2 LUW.
+# This file is part of db2unit: A unit testing framework for Db2 LUW.
 # Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 #
 # db2unit is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@
 db2 connect | Out-Null
 if ( ${LastExitCode} -ne 0 ) {
  echo "Please connect to a database before the execution of the uninstallation."
- echo "Load the DB2 profile with: set-item -path env:DB2CLP -value `"**`$$**`""
+ echo "Load the Db2 profile with: set-item -path env:DB2CLP -value `"**`$$**`""
 } else {
  if ( Test-Path -Path init.ps1 -PathType Leaf ) {
   .\init.ps1

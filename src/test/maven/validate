@@ -1,5 +1,5 @@
 #!/bin/bash
-# This file is part of db2unit: A unit testing framework for DB2 LUW.
+# This file is part of db2unit: A unit testing framework for Db2 LUW.
 # Copyright (C)  2014, 2015, 2018  Andres Gomez Casanova (@AngocA)
 #
 # db2unit is free software: you can redistribute it and/or modify
@@ -37,19 +37,19 @@ case $(uname -s) in
   ;;
 esac
 
-# Checks if DB2 server or client is installed.
+# Checks if Db2 server or client is installed.
 # It does not work if non-root installation is being used.
 DIR=$(strings /var/db2/global.reg 2> /dev/null | grep -s '^\/' | sort | uniq | grep -v sqllib | grep -v das | head -1)
 echo "Directory $DIR"
 if [ ! -x ${DIR}/bin/db2 ] ; then
- echo "DB2 non installed."
+ echo "Db2 non installed."
  exit 1
 else
- echo "DB2 is installed."
+ echo "Db2 is installed."
 
  DB2_CONF=$(db2level | grep tokens | wc -l)
  if [ ${DB2_CONF} -ne 0 ] ; then
-  echo "DB2 is configured."
+  echo "Db2 is configured."
 
   # Terminates current process to have the environment clean.
   db2 terminate

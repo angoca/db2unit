@@ -1,7 +1,7 @@
 --#SET TERMINATOR ;
 
 /*
- This file is part of db2unit: A unit testing framework for DB2 LUW.
+ This file is part of db2unit: A unit testing framework for Db2 LUW.
  Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 
  db2unit is free software: you can redistribute it and/or modify
@@ -276,7 +276,7 @@ COMMENT ON LICENSE (
   );
 
 INSERT INTO LICENSE (NUMBER, LINE) VALUES
-  (1, ' db2unit: A unit testing framework for DB2 LUW.'),
+  (1, ' db2unit: A unit testing framework for Dn2 LUW.'),
   (2, ' Copyright (C)  2014  Andres Gomez Casanova (@AngocA)'),
   (3, ' '),
   (4, ' db2unit is free software: you can redistribute it and/or modify'),

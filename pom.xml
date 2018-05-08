@@ -1,4 +1,4 @@
-<!-- This file is part of db2unit: A unit testing framework for DB2 LUW. -->
+<!-- This file is part of db2unit: A unit testing framework for Db2 LUW. -->
 <!-- Copyright (C) 2014 Andres Gomez Casanova (@AngocA) -->
 
 <!-- db2unit is free software: you can redistribute it and/or modify it under 
@@ -187,7 +187,7 @@
  <!-- More Project Information -->
  <name>db2unit</name>
  <description>
-  The unit testing framework for DB2.
+  The unit testing framework for Db2 written in SQL PL.
   </description>
  <url>https://angoca.github.io/db2unit/</url>
  <!-- The first year. -->

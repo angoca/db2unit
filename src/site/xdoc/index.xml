@@ -107,14 +107,14 @@
   </section>
   <section name="Description">
    <p>
-    This is a testing framework for IBM DB2 written in SQL PL
+    This is a testing framework for IBM Db2 written in SQL PL
     language. It is
     <a href="https://en.wikipedia.org/wiki/XUnit">xUnit</a>
     framework, that takes the same design as the
     well-known
     <a href="http://junit.org/">jUnit.</a>
     The framework could be considered as a jUnit porting for
-    DB2 SQL-PL.
+    Db2 SQL-PL.
    </p>
   </section>
   <section name="Resources">

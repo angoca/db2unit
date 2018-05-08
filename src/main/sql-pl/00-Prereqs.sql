@@ -1,7 +1,7 @@
 --#SET TERMINATOR @
 
 /*
- This file is part of db2unit: A unit testing framework for DB2 LUW.
+ This file is part of db2unit: A unit testing framework for Db2 LUW.
  Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 
  db2unit is free software: you can redistribute it and/or modify
@@ -146,6 +146,7 @@ CREATE OR REPLACE PROCEDURE DB2TOOLS.DB2_VERSION(
 
   SET VERSION = UPPER(VERSION);
 
+  -- TODO Did it change with the global rename?
   IF (VERSION LIKE 'DB2 V%.%.%.%') THEN
     SET VERSION = SUBSTR(VERSION, LOCATE_IN_STRING(VERSION, 'V', 1) + 1); -- Remove leading characters
     SET P = LOCATE_IN_STRING(VERSION, '.', 1); -- Find first period

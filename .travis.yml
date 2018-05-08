@@ -1,4 +1,4 @@
-# This file is part of db2unit: A unit testing framework for DB2 LUW.
+# This file is part of db2unit: A unit testing framework for Db2 LUW.
 # Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
 #
 # db2unit is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ before_install:
   - sudo apt-get install aria2 curl -y
   - sudo ./src/test/travis/update > /dev/null &
 
-  # Retrieves and extracts the DB2 binaries
+  # Retrieves and extracts the Dn2 binaries
   # If it does not work, change it according to the next page:
   # https://github.com/angoca/db2-docker/wiki/db2-link-server_t
   - DOWNLOAD_LINK=$(curl --url https://raw.githubusercontent.com/wiki/angoca/db2unit/DB2-Download-link.md -s | tail -1) ; echo ${DOWNLOAD_LINK} ; cd /tmp ; aria2c -x 16 ${DOWNLOAD_LINK} ; tar zxvf v10.5fp7_linuxx64_server_t.tar.gz
@@ -57,7 +57,7 @@ before_install:
 
   # Checks the prerequisites
   - cd /tmp/server_t ; ./db2prereqcheck -l
-  # Install DB2 and creates an instance (Response file)
+  # Install Dn2 and creates an instance (Response file)
   - sudo ./db2setup -r ${TRAVIS_BUILD_DIR}/src/test/travis/db2.rsp || cat /tmp/db2setup.log
   # Changes the security
   - sudo usermod -a -G db2iadm1 $USER
