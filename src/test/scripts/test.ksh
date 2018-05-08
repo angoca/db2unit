@@ -1,0 +1,74 @@
+#!/usr/bin/env ksh
+# This file is part of db2unit: A unit testing framework for DB2 LUW.
+# Copyright (C)  2014  Andres Gomez Casanova (@AngocA)
+#
+# db2unit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# db2unit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Andres Gomez Casanova <angocaATyahooDOTcom>
+
+# Install and/or execute a suite of tests.
+#
+# In order to run this script, it is necessary to define the environment
+# variable DB2UNIT_SRC_TEST_CODE_PATH with the directory where the test suite
+# file is.
+#
+#   export DB2UNIT_SRC_TEST_CODE_PATH=/home/db2inst1/mytests
+#
+# Version: 2018-05-07 V2_BETA
+# Author: Andres Gomez Casanova (AngocA)
+# Made in COLOMBIA.
+
+db2 values current date > /dev/null
+if [ ${?} -ne 0 ] ; then
+ echo "Please connect to a database before the execution of the test."
+ echo "Remember that to call the script the command is '. ./test.ksh <TestSuite> {i} {x}'"
+ echo "i for installing (by default)"
+ echo "x for executing"
+ echo "The test file should have this structure: Test_<SCHEMA_NAME>.sql"
+else
+ SCHEMA=${1}
+ OPTION_1=${2}
+ OPTION_2=${3}
+
+ # Installs the tests.
+ if [ "${OPTION_1}" = "" -o "${OPTION_1}" = "i" -o "${OPTION_2}" = "i" ] ; then
+  # Prepares the installation.
+  db2 "DELETE FROM LOGS" > /dev/null
+  db2 "DROP TABLE ${SCHEMA}.REPORT_TESTS" > /dev/null
+  db2 "CALL SYSPROC.ADMIN_DROP_SCHEMA('${SCHEMA}', NULL, 'ERRORSCHEMA', 'ERRORTABLE')" > /dev/null
+  db2 "SELECT VARCHAR(SUBSTR(DIAGTEXT, 1, 256), 256) AS ERROR FROM ERRORSCHEMA.ERRORTABLE" 2> /dev/null
+  db2 "DROP TABLE ERRORSCHEMA.ERRORTABLE" > /dev/null
+  db2 "DROP SCHEMA ERRORSCHEMA RESTRICT" > /dev/null
+
+  # Installs the tests.
+  db2 -td@ -f ${DB2UNIT_SRC_TEST_CODE_PATH}/Tests_${SCHEMA}.sql
+ fi
+
+ # Execute the tests.
+ if [ "${OPTION_1}" = "x" -o "${OPTION_2}" = "x" ] ; then
+  db2 "CALL DB2UNIT.CLEAN()"
+  db2 -r /tmp/db2unit.output "CALL DB2UNIT.RUN_SUITE('${SCHEMA}')"
+  db2 "CALL DB2UNIT.GET_LAST_EXECUTION_ORDER()"
+  db2 "CALL DB2UNIT.CLEAN()"
+ fi
+
+ # When only execution, the report is presented.
+ if [ "${OPTION_1}" = "x" -a "${OPTION_2}" = "" ] ; then
+  db2 "CALL LOGADMIN.LOGS(min_level=>5)"
+  db2 "SELECT EXECUTION_ID EXEC_ID, VARCHAR(SUBSTR(TEST_NAME, 1, 32), 32) TEST,
+    FINAL_STATE STATE, TIME, VARCHAR(SUBSTR(MESSAGE, 1, 128), 128) MESSAGE
+    FROM ${SCHEMA}.REPORT_TESTS ORDER BY DATE"
+ fi
+fi
+
