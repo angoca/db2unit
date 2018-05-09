@@ -48,7 +48,7 @@ executeTest() {
 . ./init-dev.ksh
 
 db2 values current date > /dev/null
-if [ ${?} -ne 0 ] ; then
+if [[ ${?} -ne 0 ]] ; then
  echo "Please connect to a database before the execution of the tests."
  echo "Remember that to call the script the command is '. ./allTests.ksh'"
  echo
@@ -58,26 +58,26 @@ if [ ${?} -ne 0 ] ; then
  echo "-i  : Just install tests. Do no run tests."
  echo "No option: Install and execute all tests with pauses between them (Any other option is processed like this)."
 else
- if [ "${1}" = "-np" ] ; then
+ if [[ "${1}" = "-np" ]] ; then
   PAUSE_INSTALL=false
   TIME_INI=$(date +"%T")
   MILLIS_INI=$(date +"%s")
- elif [ "${1}" = "-ix" ] ; then
+ elif [[ "${1}" = "-ix" ]] ; then
   PAUSE_INSTALL=install_false
   TIME_INI=$(date +"%T")
   MILLIS_INI=$(date +"%s")
- elif [ "${1}" = "-i" ] ; then
+ elif [[ "${1}" = "-i" ]] ; then
   PAUSE_INSTALL=install
  else
   PAUSE_INSTALL=true
  fi
- if [ "${PAUSE_INSTALL}" = "true" ] ; then
+ if [[ "${PAUSE_INSTALL}" = "true" ]] ; then
   echo "Executing all tests with pauses in between."
- elif [ "${PAUSE_INSTALL}" = "install" ] ; then
+ elif [[ "${PAUSE_INSTALL}" = "install" ]] ; then
   echo "Installing all tests without pauses."
- elif [ "${PAUSE_INSTALL}" = "install_false" ] ; then
+ elif [[ "${PAUSE_INSTALL}" = "install_false" ] ; then
   echo "Installing and executing all tests without pauses."
- elif [ "${PAUSE_INSTALL}" = "false" ] ; then
+ elif [[ "${PAUSE_INSTALL}" = "false" ]] ; then
   echo "Executing all tests."
  else
   echo "Error"
@@ -120,7 +120,7 @@ else
  executeTest DB2UNIT_TAP ${PAUSE_INSTALL}
  SUM=$((${SUM}+${RET}))
 
- if [ "${PAUSE_INSTALL}" != "true" -a "${PAUSE_INSTALL}" != "install" ] ; then
+ if [[ "${PAUSE_INSTALL}" != "true" -a "${PAUSE_INSTALL}" != "install" ]] ; then
   db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
 
   MILLIS_END=$(date +"%s")

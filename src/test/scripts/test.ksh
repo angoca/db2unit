@@ -30,7 +30,7 @@
 # Made in COLOMBIA.
 
 db2 values current date > /dev/null
-if [ ${?} -ne 0 ] ; then
+if [[ ${?} -ne 0 ]] ; then
  echo "Please connect to a database before the execution of the test."
  echo "Remember that to call the script the command is '. ./test.ksh <TestSuite> {i} {x}'"
  echo "i for installing (by default)"
@@ -42,7 +42,7 @@ else
  OPTION_2=${3}
 
  # Installs the tests.
- if [ "${OPTION_1}" = "" -o "${OPTION_1}" = "i" -o "${OPTION_2}" = "i" ] ; then
+ if [[ "${OPTION_1}" = "" -o "${OPTION_1}" = "i" -o "${OPTION_2}" = "i" ]] ; then
   # Prepares the installation.
   db2 "DELETE FROM LOGS" > /dev/null
   db2 "DROP TABLE ${SCHEMA}.REPORT_TESTS" > /dev/null
@@ -56,7 +56,7 @@ else
  fi
 
  # Execute the tests.
- if [ "${OPTION_1}" = "x" -o "${OPTION_2}" = "x" ] ; then
+ if [[ "${OPTION_1}" = "x" -o "${OPTION_2}" = "x" ]] ; then
   db2 "CALL DB2UNIT.CLEAN()"
   db2 -r /tmp/db2unit.output "CALL DB2UNIT.RUN_SUITE('${SCHEMA}')"
   db2 "CALL DB2UNIT.GET_LAST_EXECUTION_ORDER()"
@@ -64,7 +64,7 @@ else
  fi
 
  # When only execution, the report is presented.
- if [ "${OPTION_1}" = "x" -a "${OPTION_2}" = "" ] ; then
+ if [[ "${OPTION_1}" = "x" -a "${OPTION_2}" = "" ]] ; then
   db2 "CALL LOGADMIN.LOGS(min_level=>5)"
   db2 "SELECT EXECUTION_ID EXEC_ID, VARCHAR(SUBSTR(TEST_NAME, 1, 32), 32) TEST,
     FINAL_STATE STATE, TIME, VARCHAR(SUBSTR(MESSAGE, 1, 128), 128) MESSAGE

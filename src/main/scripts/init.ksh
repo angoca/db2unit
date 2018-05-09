@@ -25,11 +25,11 @@
 
 # This variable indicates the location of the sources, if it has not
 # defined before.
-if [ -z ${DB2UNIT_PATH} ] ; then
+if [[ -z ${DB2UNIT_PATH} ]] ; then
  DB2UNIT_PATH=$(echo ${PWD})
 fi
 
-if [ -z ${DB2UNIT_SRC_MAIN_CODE_PATH} ] ; then
+if [[ -z ${DB2UNIT_SRC_MAIN_CODE_PATH} ]] ; then
  DB2UNIT_SRC_MAIN_CODE_PATH=${DB2UNIT_PATH}/sql-pl
  DB2UNIT_SRC_MAIN_SCRIPT_PATH=${DB2UNIT_PATH}
  DB2UNIT_SRC_TEST_CODE_PATH=${DB2UNIT_PATH}/sql-pl

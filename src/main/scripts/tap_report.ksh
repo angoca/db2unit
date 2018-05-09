@@ -38,7 +38,7 @@ report() {
 
 # Checks if there is already a connection established
 db2 values current date > /dev/null
-if [ ${?} -eq 0 ] ; then
+if [[ ${?} -eq 0 ]] ; then
  report
 else
  echo "Please connect to a database before the creation of the report."

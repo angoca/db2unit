@@ -25,7 +25,7 @@
 # Made in COLOMBIA.
 
 # This variable indicates the location of the sources.
-if [ -z ${DB2UNIT_PATH} ] ; then
+if [[ -z ${DB2UNIT_PATH} ]] ; then
  DB2UNIT_PATH=$(cd ../../.. ; echo "${PWD}")
 
  DB2UNIT_SRC_MAIN_CODE_PATH=${DB2UNIT_PATH}/src/main/sql-pl

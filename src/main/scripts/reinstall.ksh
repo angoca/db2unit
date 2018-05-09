@@ -23,7 +23,7 @@
 # Author: Andres Gomez Casanova (AngocA)
 # Made in COLOMBIA.
 
-if [ -x init.ksh ] ; then
+if [[ -x init.ksh ]] ; then
  . ./init.ksh
 fi
 

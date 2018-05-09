@@ -34,12 +34,12 @@ export ADMIN_INSTALL=true
 installScript() {
  SCRIPT=${1}
  echo $SCRIPT
- if [ -z ${DEVELOPMENT} ] ; then
+ if [[ -z ${DEVELOPMENT} ]] ; then
   db2 -tsf ${SCRIPT}
  else
   db2 -tvsf ${SCRIPT}
  fi
- if [ ${?} -ne 0 ] ; then
+ if [[ ${?} -ne 0 ]] ; then
   export CONTINUE=false
  fi
  unset SCRIPT
@@ -49,18 +49,18 @@ installScript() {
 install() {
  echo "Checking prerequisites"
 
- [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/00-Prereqs.sql
+ [[ ${CONTINUE} = true ]] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/00-Prereqs.sql
  echo "Installing utility"
- if [ ${ADMIN_INSTALL} = true ] ; then
-  [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/01-ObjectsAdmin.sql
+ if [[ ${ADMIN_INSTALL} = true ]] ; then
+  [[ ${CONTINUE} = true ]] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/01-ObjectsAdmin.sql
  fi
- [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/02-Objects.sql
- [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/03-Headers.sql
- [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/04-Body.sql
- [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/05-Asserts.sql
- [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/06-AssertsNoMessage.sql
- [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/07-XMLReport.sql
- [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/08-Version.sql
+ [[ ${CONTINUE} = true ]] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/02-Objects.sql
+ [[ ${CONTINUE} = true ]] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/03-Headers.sql
+ [[ ${CONTINUE} = true ]] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/04-Body.sql
+ [[ ${CONTINUE} = true ]] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/05-Asserts.sql
+ [[ ${CONTINUE} = true ]] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/06-AssertsNoMessage.sql
+ [[ ${CONTINUE} = true ]] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/07-XMLReport.sql
+ [[ ${CONTINUE} = true ]] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/08-Version.sql
 
  RET_VALUE=${CONTINUE}
 }
@@ -68,7 +68,7 @@ install() {
 # This function checks the parameter and assign it to a global variable.
 checkParam() {
  PARAM1=${1}
- if [ "${PARAM1}" = "-A" ] ; then
+ if [[ "${PARAM1}" = "-A" ]] ; then
   export ADMIN_INSTALL=false
  fi
 }
@@ -76,7 +76,7 @@ checkParam() {
 # Main function that starts the installation.
 init() {
  # Initialize the environment.
- if [ -x init.ksh ] ; then
+ if [[ -x init.ksh ]] ; then
   . ./init.ksh
  fi
 
@@ -92,7 +92,7 @@ init() {
  echo "To report an issue or provide feedback, please visit:"
  echo "https://github.com/angoca/db2unit/issues"
  echo
- if [ "${RET_VALUE}" = "true" ] ; then
+ if [[ "${RET_VALUE}" = "true" ]] ; then
   echo "db2unit was successfully installed"
   db2 -x "values 'Database: ' || current server"
   db2 -x "values 'Version: ' || db2unit.version"
@@ -109,14 +109,14 @@ init() {
  unset CONTINUE
 
  # Clean environment.
- if [ -x uninit.ksh ] ; then
+ if [[ -x uninit.ksh ]] ; then
   . ./uninit.ksh
  fi
 }
 
 # Checks if there is already a connection established
 db2 values current date > /dev/null
-if [ ${?} -eq 0 ] ; then
+if [[ ${?} -eq 0 ]] ; then
  init ${1}
 else
  echo "Please connect to a database before the execution of the installation."

@@ -24,7 +24,7 @@
 # Made in COLOMBIA.
 
 # When testing, the variables are preserved.
-if [ -z ${DB2UNIT_SRC_TEST_CODE_PATH} ] ; then
+if [[ -z ${DB2UNIT_SRC_TEST_CODE_PATH} ]] ; then
  unset DB2UNIT_SRC_MAIN_CODE_PATH
  unset DB2UNIT_SRC_MAIN_SCRIPT_PATH
  unset DB2UNIT_PATH
