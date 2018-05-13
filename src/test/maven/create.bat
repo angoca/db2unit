@@ -19,11 +19,17 @@
 
 :: Installs Db2, creates an instance and a database.
 ::
-:: Version: 2015-01-14 V2_BETA
+:: Version: 2018-05-12 V2_BETA
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
+:: Attach to an instance to work with db2unit.
+db2 attach to db2unit
+
+echo Killing all aplications
 db2 force applications all
+
+echo Dropping current db2unit database...
 db2 drop db db2unit
 
 echo Creating database...
@@ -32,7 +38,7 @@ db2 connect to db2unit
 db2 create tablespace systoolspace
 
 echo Installing log4db2
-cd ../../../../log4db2
+cd %HOMEPATH%\Downloads\log4db2
 install
 
 echo Environment was configured

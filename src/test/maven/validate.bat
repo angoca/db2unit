@@ -19,11 +19,22 @@
 
 :: Installs Db2, creates an instance and a database.
 ::
-:: Version: 2015-01-14 V2_BETA
+:: Version: 2018-05-12 V2_BETA
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
-echo Db2 should be installed.
-echo Db2 should be configured.
-echo A Db2 instance should be running.
+db2 get instance > NUL 2>&1
+if %ERRORLEVEL% NEQ 0 (
+ echo Db2 is not installed or db2cmd is not initialized
+ exit /b 1
+) else (
+ echo Db2 is configured.
+
+ :: Terminates current process to have the environment clean.
+ db2 terminate
+ :: Attach to an instance to work with db2unit.
+ db2 attach to db2unit
+
+ echo A Db2 instance should be running.
+)
 

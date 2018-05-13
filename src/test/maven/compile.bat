@@ -19,24 +19,18 @@
 
 :: Compile the object by installing in the database.
 ::
-:: Version: 2015-01-14 V2_BETA
+:: Version: 2018-05-12 V2_BETA
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
+:: Attach to an instance to work with db2unit.
+db2 attach to db2unit
+
 echo Creating objects
-if [ -z ${DB2INSTANCE} ] ; then
- . $HOME/sqllib/db2profile
-fi
-
-echo Killing all aplications
-db2 force applications all
-
 db2 connect to db2unit
 cd src\test\scripts
 call init-dev
 cd ..\..\main\scripts
-call uninstall
-call install -A
-cd ..\..\test\scripts
-call allTests -i
-cd ..\..\..
+set DEVELOPMENT=yes
+call install
+

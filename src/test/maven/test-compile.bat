@@ -19,7 +19,7 @@
 
 :: Tests the object of the database.
 ::
-:: Version: 2015-01-14 V2_BETA
+:: Version: 2018-05-12 V2_BETA
 :: Author: Andres Gomez Casanova (AngocA)
 :: Made in COLOMBIA.
 
