@@ -26,7 +26,7 @@
 db2 get instance > NUL 2>&1
 if %ERRORLEVEL% NEQ 0 (
  echo Db2 is not installed or db2cmd is not initialized
- exit /b 1
+ exit /B 1
 ) else (
  echo Db2 is configured.
 
@@ -35,6 +35,13 @@ if %ERRORLEVEL% NEQ 0 (
  :: Attach to an instance to work with db2unit.
  db2 attach to db2unit
 
- echo A Db2 instance should be running.
+ :: FIXME this is now working
+ db2 list applications > NUL 2>&1
+ if %ERRORLEVEL% EQU 0 (
+  echo A Db2 instance is running.
+  ) else (
+   echo Please start the Db2 instance.
+   exit /B 3
+  )
 )
 
