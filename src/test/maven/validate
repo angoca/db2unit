@@ -60,6 +60,12 @@ else
   DB2_UP=$(db2pd - | grep Up)
   if [ -n "${DB2_UP}" ] ; then
    echo "A Db2 instance is running."
+   if [ -r /tmp/log4db2.tar.gz ] ; then
+    echo "log4db2 is ready to be installed."
+   else
+    echo "log4db2 installer is not in /tmp directory."
+	exit 4
+   fi
   else
    echo "Please start the Db2 instance."
    exit 3
