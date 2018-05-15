@@ -135,7 +135,7 @@ With Maven, in the root directory
 If you cannot have a Db2 server in your own machine, and you need to use a remote one, you can catalog a remote node called _db2unit_, and then create the database in another instance.
 For this, you need to execute this:
 
-  db2 catalog tcpip node db2unit remote ServerName server PortNumer
+    db2 catalog tcpip node db2unit remote ServerName server PortNumer
 
 Where ServerName is the Name or IP address your remote server and, PortNumber is the port where Db2 is listening.
 
@@ -145,9 +145,9 @@ You can use the set of scripts to recreate/reinstall _db2unit_ and tests all or 
 The same script with different extensions works for different platforms:
 
 * No extension in Bash for Linux and Mac OS.
-* .bat in CMD for Windows.
-* .ps1 in PowerShell for Windows.
-* .ksh in Korn mainly for AIX.
+* `.bat` in CMD for Windows.
+* `.ps1` in PowerShell for Windows.
+* `.ksh` in Korn mainly for AIX.
 
 ### Main
 
@@ -159,7 +159,7 @@ It is overrided by `init-dev` when running the installer for tests.
 Executes the installation scripts.
 To execute, a connection has to be already established to the database.
 It receives the following parameters:
-  * -A does NOT create the administrative objects, like bufferpool and tablespaces (01-ObjectsAdmin.sql).
+  * `-A` does NOT create the administrative objects, like bufferpool and tablespaces (`01-ObjectsAdmin.sql`).
 
 If the global variable `DEVELOPMENT` is set, then the execution is verbose when running Db2 commands.
 The execution is with the dot command (source):
@@ -187,12 +187,12 @@ These are a set of scripts to develop _db2unit_, without recreating the database
 * `allTests`:
 Processes all tests suite when developing.
 Options are:
-  * -np : Do not install the tests, just execute them without pauses.
+  * `-np` : Do not install the tests, just execute them without pauses.
 They should have been already installed.
 Shows the enlapsed time.
-  * -ix : Install and execute the tests.
+  * `-ix` : Install and execute the tests.
 Shows the enlapsed time.
-  * -i : Just install the tests.
+  * `-i` : Just install the tests.
 Do not execute them.
 Wihtout options: Install and execute the tests with pauses between them.
 
@@ -204,20 +204,23 @@ It overrides init when running the installer for tests.
 Executes a single given test.
 The parameter is the name of the tests suite.
 The parameters could be:
-  * i : to install the test.
-  * x : to execute the test.
+  * `i` : to install the test.
+  * `x` : to execute the test.
 An example is:
 
+    # Example to run test in Linux / UNIX.
     . ./test mySuite i x
 
 This installs and executes the `mySuite` tests suite.
+
+In Windows, you do not need the `.` command.
 
 #### Maven
 
 These are a set of scripts used for Maven.
 
 * `compile`:
-Sets the init-dev environment and then perform the installation.
+Sets the `init-dev` environment and then perform the installation.
 It connects to a database called `db2unit`.
 It should be created before execution, and for this, the create script could be used.
 It uses the `DEVELOPMENT` flag to do a verbose execution of the install.
@@ -243,7 +246,7 @@ Compiles all tests in the database (`allTests` script).
 * `validate`:
 Validates if the current environment is correctly configured to execute _db2unit_.
 It attaches to a node called `db2unit`.
-If it does not exist, then the local node will be used and a SQL1097N will appear.
+If it does not exist, then the local node will be used and a `SQL1097N` will appear.
 If remote instance is used, then `AUTHENTICATION` should be in `CLIENT` mode.
 And the current user should exist in the remote node with the appropiate grants.
 
