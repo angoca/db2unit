@@ -145,9 +145,11 @@ You can use the set of scripts to recreate/reinstall _db2unit_ and tests all or 
 The same script with different extensions works for different platforms:
 
 * No extension in Bash for Linux and Mac OS.
+Many scripts in Bash requires the `.` command before the name of the script in order to reuse the connection.
 * `.bat` in CMD for Windows.
 * `.ps1` in PowerShell for Windows.
 * `.ksh` in Korn mainly for AIX.
+It also needs the `.` command to run many of the commands.
 
 ### Main
 
