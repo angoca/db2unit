@@ -206,9 +206,9 @@ The parameter is the name of the tests suite.
 The parameters could be:
   * `i` : to install the test.
   * `x` : to execute the test.
+
 An example is:
 
-    # Example to run test in Linux / UNIX.
     . ./test mySuite i x
 
 This installs and executes the `mySuite` tests suite.
