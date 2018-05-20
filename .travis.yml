@@ -51,12 +51,12 @@ before_install:
   - while [ ! -r /tmp/finished_update ] ; do sleep 1 ; done
 
   # Installs the required libraries
-  - sudo apt-get install binutils libaio1 lib32stdc++6 -y
+  - sudo apt-get install rpm binutils libaio1 lib32stdc++6 -y
   - sudo apt-get install -qq libpam-ldap:i386
   - sudo ln -s /lib/i386-linux-gnu/libpam.so.0 /lib/libpam.so.0
 
   # Checks the prerequisites
-  - cd /tmp/server_t ; ./db2prereqcheck -l
+  - cd /tmp/server_t ; ./db2prereqcheck -l -i
   # Install Dn2 and creates an instance (Response file)
   - sudo ./db2setup -r ${TRAVIS_BUILD_DIR}/src/test/travis/db2.rsp || cat /tmp/db2setup.log
   # Changes the security
