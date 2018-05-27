@@ -60,7 +60,8 @@ install() {
  [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/05-Asserts.sql
  [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/06-AssertsNoMessage.sql
  [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/07-XMLReport.sql
- [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/08-Version.sql
+ [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/08-ExportTools.sql
+ [ ${CONTINUE} = true ] && installScript ${DB2UNIT_SRC_MAIN_CODE_PATH}/09-Version.sql
 
  local  myRetInstall=${CONTINUE}
  eval $__RET_INSTALL="'${myRetInstall}'"
