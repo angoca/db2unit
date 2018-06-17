@@ -14,6 +14,6 @@
   },
   "homepage": "https://angoca.github.io/db2unit",
   "dependencies": {
-    "log4db2": "^1.0.0"
+    "angoca/log4db2": "1.0.0-beta"
   }
 }
