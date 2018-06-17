@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/angoca/db2unit.git"
   },
-  "keywords": [db2, unit, testing],
+  "keywords": ["db2", "unit", "testing"],
   "author": "Andres Gomez Casanova",
   "license": "GPL 3.0",
   "bugs": {
