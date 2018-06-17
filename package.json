@@ -1,13 +1,16 @@
 {
   "name": "db2unit",
   "description": "",
-  "version": "1",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/angoca/db2unit.git"
   },
-  "keywords": ["db2", "unit", "testing"],
-  "author": "Andres Gomez Casanova",
+  "keywords": ["database", "db2", "db2luw", "unit-testing", "sql-pl", "ibm", "test-runner", "testing-tool", "testing", "tap", "rdbms"],
+  "author": {
+    "name": "Andres Gomez Casanova",
+    "email": "angoca@yahoo.com"
+  },
   "license": "GPL 3.0",
   "bugs": {
     "url": "https://github.com/angoca/db2unit/issues"
