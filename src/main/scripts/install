@@ -33,7 +33,7 @@ export ADMIN_INSTALL=true
 installScript() {
  SCRIPT=${1}
  echo $SCRIPT
- if [ -n ${DEVELOPMENT} ] ; then
+ if [ -n ${DEVELOPMENT} -a ${DEVELOPMENT} == "true" ] ; then
   db2 -tvsf ${SCRIPT}
  else
   db2 -tsf ${SCRIPT}
