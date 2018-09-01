@@ -39,7 +39,7 @@
     <include>LICENSE.txt</include>
    </includes>
    <fileMode>0444</fileMode>
-   <outputDirectory>/</outputDirectory>
+   <outputDirectory>.</outputDirectory>
   </fileSet>
   <!-- SQL PL code -->
   <fileSet>
@@ -67,7 +67,7 @@
    </includes>
    <fileMode>0777</fileMode>
    <lineEnding>lf</lineEnding>
-   <outputDirectory>/</outputDirectory>
+   <outputDirectory>.</outputDirectory>
   </fileSet>
   <!-- Scripts Windows (Bat and PowerShell)-->
   <fileSet>
@@ -86,7 +86,7 @@
    </includes>
    <fileMode>0666</fileMode>
    <lineEnding>crlf</lineEnding>
-   <outputDirectory>/</outputDirectory>
+   <outputDirectory>.</outputDirectory>
   </fileSet>
   <!-- Documentation directory (with its license) -->
   <fileSet>

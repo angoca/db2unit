@@ -23,9 +23,6 @@
 ** For more information on how to perform a response file installation, see 
 ** "Response file considerations" in the DB2 Information Center.
 **
-** Refer to the DB2 Information Center at:
-** http://publib.boulder.ibm.com/infocenter/db2luw/v10r5
-**
 ** ============================================================================
 ** General Options
 ** ---------------
@@ -42,7 +39,7 @@ PROD                      = DB2_SERVER_EDITION
 ** installation. If not removed, its value must be $HOME/sqllib where $HOME
 ** represents the HOME directory of the non-root user ID that owns the non-root
 ** installation.
-FILE                      = /opt/ibm/db2/V10.5
+FILE                      = /opt/ibm/db2/Vx
 
 ** Modify the value of the following LIC_AGREEMENT keyword to indicate that you
 ** have read and agreed to the license agreement file in the db2/license
