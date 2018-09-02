@@ -1,3 +1,10 @@
+---
+title: Release process
+summary: Description of the software release process
+authors: Andres Gomez
+date: 2018-09-02
+---
+
 Copyright (C)  2014  Andres Gomez Casanova (@AngocA) <angocaATyahooDOTcom>.
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3

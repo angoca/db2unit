@@ -1,3 +1,10 @@
+---
+title: Error codes
+summary: List of error codes in db2unit with its description
+authors: Andres Gomez
+date: 2018-09-02
+---
+
 This documentation is licensed under the terms of the FreeBSD Documentation
 License.
 
