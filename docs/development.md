@@ -76,7 +76,7 @@ When a new feature needs to be explained, this is the place to put that.
 
 This directory contains everything for the website published in https://db2unit.github.io.
 
-## Documentation (`doc` directory)
+## Documentation (`docs` directory)
 
 This directory contains everything you need to know to use or to develop in _db2unit_.
 
