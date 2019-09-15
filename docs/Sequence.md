@@ -1,7 +1,15 @@
+---
+title: Sequence diagram
+summary: Description about how the sequence diagram were made
+authors: Andres Gomez
+date: 2018-09-02
+---
+
 This is the "source" of the sequence diagram.
 To generate the sequence diagram, put this text in this site:
 https://www.websequencediagrams.com/#
 
+```
 # db2unit execution
 
 note left of db2unit: status: Initialization
@@ -62,4 +70,4 @@ note left of db2unit: status: Generating report
 db2unit->db2unit :writeReport
 
 note left of db2unit: status: Clean environment
-
+```

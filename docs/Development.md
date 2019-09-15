@@ -1,3 +1,10 @@
+---
+title: Develop the code of db2unit
+summary: These are the guidelines to develop db2unit.
+authors: Andres Gomez
+date: 2018-09-02
+---
+
 # Environment
 
 To develop _db2unit_ you need:
@@ -76,7 +83,7 @@ When a new feature needs to be explained, this is the place to put that.
 
 This directory contains everything for the website published in https://db2unit.github.io.
 
-## Documentation (`doc` directory)
+## Documentation (`docs` directory)
 
 This directory contains everything you need to know to use or to develop in _db2unit_.
 
