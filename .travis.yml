@@ -63,9 +63,11 @@ script:
 
   - bash -c "if [ '$TESTS' = 'random' ]; then db2 connect to db2unit ; . /tmp/listOfTestSuites ; /tmp/returnCode ; fi" 
 
+after_script:
+  - cat /home/db2inst1/sqllib/db2dump/db2diag.log
+
 after_failure:
   # If there is any error, shows the logs
-  - cat /home/db2inst1/sqllib/db2dump/db2diag.log
   - db2 "call logadmin.logs"
   - db2 "select * from DB2UNIT_1.EXECUTION_REPORTS"
   - db2 "select * from DB2UNIT_EMPTY.REPORT_TESTS"
