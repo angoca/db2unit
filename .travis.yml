@@ -112,7 +112,7 @@ script:
 
 after_script:
   - . ~db2inst1/sqllib/db2profile ; db2 "CALL DB2UNIT.REPORT_RECENT_EXECUTIONS"
-  - cat /home/db2inst1/sqllib/db2dump/db2diag.log
+  - cat $(db2 get dbm cfg | awk '/\(DIAGPATH\)/ {print $7}')
 
 after_failure:
   # If there is any error, shows the logs
