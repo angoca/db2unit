@@ -146,7 +146,7 @@ Check the _Usage_ section for more information about the framework.
 
 
 ---------------------------
-## FILES AND DIRECTORIES ##
+## Files and Directories ##
 
 These are the files included in the released version:
 
