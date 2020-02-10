@@ -18,17 +18,21 @@
     <div id="main-carousel" class="carousel slide">
      <div class="carousel-inner">
       <div class="item active">
-       <div style="height:20em">
+       <div style="height:25em">
         <pre class="prettyprint">
          <![CDATA[
          CREATE OR REPLACE PROCEDURE ONE_TIME_SETUP()
-         ... @
+          -- Your code... 
+         @
          CREATE OR REPLACE PROCEDURE SETUP()
-         ... @
+          -- Your code... 
+         @
          CREATE OR REPLACE PROCEDURE TEAR_DOWN()
-         ... @
+          -- Your code... 
+         @
          CREATE OR REPLACE PROCEDURE ONE_TIME_TEAR_DOWN()
-         ... @
+          -- Your code... 
+         @
 
 
 
@@ -47,14 +51,14 @@
        <div style="height:20em">
         <pre class="prettyprint">
          <![CDATA[
-         CREATE OR REPLACE PROCEDURE TEST_MY_TEST()
+         CREATE OR REPLACE PROCEDURE MYSCHEMA.TEST_MY_TEST()
           BEGIN
            DECLARE EXPECTED INTEGER;
            DECLARE ACTUAL INTEGER;
            CALL DB2UNIT.REGISTER_MESSAGE('My first test');
-           ...
+           -- Your code ...
            SET EXPECTED = 2;
-           SET ACTUAL = ...;
+           SET ACTUAL = 1+1;
            CALL DB2UNIT.ASSERT_INT_EQUALS('Same value', EXPECTED, ACTUAL);
           END @
          ]]>
@@ -62,11 +66,9 @@
        </div>
        <div class="carousel-caption">
         <p>
-         <strong>Suite name is the schema</strong>
+         <strong>Definition of tests</strong>
         </p>
-        <p>Execute a test suite by calling RUN_SUITE and providing the
-         schema name.
-        </p>
+        <p>Procedures with TEST_ prefix are part of the same Tests Suite.</p>
        </div>
       </div>
       <div class="item">
@@ -90,10 +92,9 @@
        </div>
        <div class="carousel-caption">
         <p>
-         <strong>Suite name is the schema</strong>
+         <strong>Results of a execution</strong>
         </p>
-        <p>Execute a test suite by calling RUN_SUITE and providing the
-         schema name.
+        <p>Execute a Tests Suite by calling RUN_SUITE and providing the schema name.
         </p>
        </div>
       </div>
@@ -108,13 +109,13 @@
   <section name="Description">
    <p>
     This is a testing framework for IBM Db2 written in SQL PL
-    language. It is
+    language. It is a
     <a href="https://en.wikipedia.org/wiki/XUnit">xUnit</a>
     framework, that takes the same design as the
     well-known
     <a href="http://junit.org/">jUnit.</a>
     The framework could be considered as a jUnit porting for
-    Db2 SQL-PL.
+    Db2's SQL-PL.
    </p>
   </section>
   <section name="Resources">
@@ -126,10 +127,13 @@
       </p>
       <ul>
        <li>
+        <a href="https://github.com/angoca/db2unit/wiki/Getting-started">Getting started in 5 minutes</a>
+       </li>
+       <li>
         <a href="https://github.com/angoca/db2unit/wiki/Install">Download and install</a>
        </li>
        <li>
-        <a href="https://github.com/angoca/db2unit/wiki/Usage">Getting started</a>
+        <a href="https://github.com/angoca/db2unit/wiki/Usage">Usage</a>
        </li>
        <li>
         <a href="https://github.com/angoca/db2unit/wiki/Change-log">Change log</a>
@@ -171,7 +175,7 @@
         <a href="https://github.com/angoca/db2unit/wiki/Architecture">Architecture</a>
        </li>
        <li>
-        <a href="https://github.com/angoca/db2unit/wiki/Examples">Example</a>
+        <a href="https://github.com/angoca/db2unit/wiki/Examples">Examples</a>
        </li>
        <li>
         <a href="https://github.com/angoca/db2unit/wiki/Custom-assert">Custom assertions</a>
