@@ -168,6 +168,15 @@
    </properties>
   </developer>
  </developers>
+ <contributors>
+  <contributor>
+   <id>ditdotdob</id>
+   <name>Robert Mala</name>
+   <roles>
+    <role>Developer XML routines</role>
+   </roles>
+  </contributor>
+ </contributors>
 
  <!-- Environment Settings -->
  <issueManagement>
