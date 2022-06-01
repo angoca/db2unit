@@ -1060,7 +1060,7 @@ ALTER MODULE DB2UNIT ADD
      -- Probably not the last one if other concurrent app inserts in between.
      SET SENTENCE = 'SELECT MESSAGE '
        || 'FROM LOGS '
-       || 'WHERE DATE = (SELECT MAX(DATE) FROM LOGS)';
+       || 'WHERE DATE_UNIQ = (SELECT MAX(DATE_UNIQ) FROM LOGS)';
      PREPARE LOGS_RS FROM SENTENCE;
      CALL LOGGER.WARN(LOGGER_ID, '< with exception(4) SQLCode'
        || COALESCE(COPY_SQLCODE, -1) || '-SQLState' || COALESCE(COPY_SQLSTATE,
