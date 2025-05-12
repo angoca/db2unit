@@ -25,19 +25,19 @@ SET CURRENT SCHEMA DB2UNIT_1 @
 /**
  * Asserts implementation.
  * Return codes:
- * 0 - OK.
- * 1 - Null-ability difference.
- * 2 - Different values.
- * 3 - Different length.
- * 4 - Invalid value.
- * 5 - Opposite null-ability.
- * 6 - Fail.
- * 7 - Not empty table.
- * 8 - Empty table.
- * 9 - Object does not exist.
- * 10 - Different quantity of columns.
- * 11 - Some of the entry values are null.
- * 12 - The content of the tables is different.
+ * 0 - Success
+ * 1 - Nullability difference
+ * 2 - Different values
+ * 3 - Different length
+ * 4 - Invalid value
+ * 5 - Opposite nullability
+ * 6 - Failure
+ * 7 - Table is not empty
+ * 8 - Table is empty
+ * 9 - Object does not exist
+ * 10 - Different number of columns
+ * 11 - Some input values are null
+ * 12 - Table contents are different
  *
  * Version: 2014-05-02 1
  * Author: Andres Gomez Casanova (AngocA)
@@ -45,97 +45,97 @@ SET CURRENT SCHEMA DB2UNIT_1 @
  */
 
 /**
- * Return code: 0 - OK.
+ * Return code: 0 - Success
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_OK INT CONSTANT 0 @
 
 /**
- * Return code: 1 - Null-ability difference.
+ * Return code: 1 - Nullability difference
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_NULL_DIFF INT CONSTANT 1 @
 
 /**
- * Return code: 2 - Different values.
+ * Return code: 2 - Different values
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_DIFF_VALUE INT CONSTANT 2 @
 
 /**
- * Return code: 3 - Different length.
+ * Return code: 3 - Different length
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_DIFF_LENGTH INT CONSTANT 3 @
 
 /**
- * Return code: 4 - Invalid value.
+ * Return code: 4 - Invalid value
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_INVALID_VALUE INT CONSTANT 4 @
 
 /**
- * Return code: 5 - Opposite null-ability.
+ * Return code: 5 - Opposite nullability
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_OPPOSITE_NULL INT CONSTANT 5 @
 
 /**
- * Return code: 6 - Fail.
+ * Return code: 6 - Failure
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_FAIL INT CONSTANT 6 @
 
 /**
- * Return code: 7 - Not empty table.
+ * Return code: 7 - Table is not empty
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_NOT_EMPTY_TABLE INT CONSTANT 7 @
 
 /**
- * Return code: 8 - Empty table.
+ * Return code: 8 - Table is empty
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_EMPTY_TABLE INT CONSTANT 8 @
 
 /**
- * Return code: 9 - Object does not exist.
+ * Return code: 9 - Object does not exist
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_OBJECT_NON_EXIST INT CONSTANT 9 @
 
 /**
- * Return code: 10 - Different quantity of columns.
+ * Return code: 10 - Different number of columns
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_DIFF_QTY_COLS INT CONSTANT 10 @
 
 /**
- * Return code: 11 - Some of the entry values are null.
+ * Return code: 11 - Some input values are null
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_NULL_ENTRY INT CONSTANT 11 @
 
 /**
- * Return code: 12 - The content of the tables is different.
+ * Return code: 12 - Table contents are different
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE RET_DIFF_TABLES_CONTENT INT CONSTANT 12 @
 
 /**
- * Max size for assertion messages.
+ * Maximum size for assertion messages
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE MESSAGE_OVERHEAD SMALLINT CONSTANT 50 @
 
 /**
- * Size of the chunk of a truncated string.
+ * Size of a truncated string chunk
  */
 ALTER MODULE DB2UNIT ADD
   VARIABLE MESSAGE_CHUNK SMALLINT CONSTANT 100 @
 
 /**
- * Processes the given message.
+ * Processes the given message
  */
 ALTER MODULE DB2UNIT ADD
   FUNCTION PROC_MESSAGE(
@@ -171,12 +171,12 @@ ALTER MODULE DB2UNIT ADD
  END F_PROC_MESSAGE @
 
 /**
- * Returns a character representation of the given boolean.
+ * Returns a character representation of the given boolean value
  *
  * IN VALUE
- *   Value to convert.
+ *   Boolean value to convert
  * RETURN
- *   The corresponding representation of the given boolean.
+ *   Character representation of the boolean value
  */
 ALTER MODULE DB2UNIT ADD
   FUNCTION BOOL_TO_CHAR(
@@ -238,15 +238,14 @@ ALTER MODULE DB2UNIT ADD
 -- STRING
 
 /**
- * Asserts if the given two strings are the same, in null-ability, in length
- * and in content.
+ * Asserts if two strings are equal in nullability, length, and content.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN EXPECTED
- *   Expected boolean.
+ *   Expected string value.
  * IN ACTUAL
- *   Actual boolean.
+ *   Actual string value.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_STRING_EQUALS (
@@ -337,9 +336,9 @@ ALTER MODULE DB2UNIT ADD
  * Asserts if the given string is null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN STRING
- *   Value to check if it is null.
+ *   String value to check for null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_STRING_NULL (
@@ -380,9 +379,9 @@ ALTER MODULE DB2UNIT ADD
  * Asserts if the given string is not null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN STRING
- *   Value to check if it is not null.
+ *   String value to check for non-null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_STRING_NOT_NULL (
@@ -422,15 +421,14 @@ ALTER MODULE DB2UNIT ADD
 -- BOOLEAN
 
 /**
- * Asserts if the given two booleans are the same, in null-ability and in
- * content.
+ * Asserts if the given two booleans are equal in nullability and value.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN EXPECTED
- *   Expected boolean.
+ *   Expected boolean value.
  * IN ACTUAL
- *   Actual boolean.
+ *   Actual boolean value.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_BOOLEAN_EQUALS (
@@ -493,12 +491,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_BOOLEAN_EQUALS_MESSAGE @
 
 /**
- * Asserts if the given value is true.
+ * Asserts if the given boolean value is true.
  *
  * IN MESSAGE
- *   Related message to the test.
- * IN CONDITION
- *   Value to check against TRUE.
+ *   Message related to the test.
+ * IN VALUE
+ *   Boolean value to check against true.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_BOOLEAN_TRUE (
@@ -536,12 +534,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_BOOLEAN_TRUE_MESSAGE @
 
 /**
- * Asserts if the given value is false.
+ * Asserts if the given boolean value is false.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN CONDITION
- *   Value to check against FALSE.
+ *   Boolean value to check against false.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_BOOLEAN_FALSE (
@@ -579,12 +577,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_BOOLEAN_FALSE_MESSAGE @
 
 /**
- * Asserts if the given boolean is null.
+ * Asserts if the given boolean value is null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN CONDITION
- *   Value to check if it is null.
+ *   Boolean value to check for null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_BOOLEAN_NULL (
@@ -622,12 +620,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_BOOLEAN_NULL_MESSAGE @
 
 /**
- * Asserts if the given boolean is not null.
+ * Asserts if the given boolean value is not null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN CONDITION
- *   Value to check if it is not null.
+ *   Boolean value to check for non-null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_BOOLEAN_NOT_NULL (
@@ -667,14 +665,14 @@ ALTER MODULE DB2UNIT ADD
 -- INTEGER
 
 /**
- * Asserts if the given two int are the same, in null-ability and in content.
+ * Asserts if the given two integers are equal in nullability and value.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN EXPECTED
- *   Expected int.
+ *   Expected integer value.
  * IN ACTUAL
- *   Actual int.
+ *   Actual integer value.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_INT_EQUALS (
@@ -737,12 +735,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_INT_EQUALS_MESSAGE @
 
 /**
- * Asserts if the given value is null.
+ * Asserts if the given integer value is null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is null.
+ *   Integer value to check for null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_INT_NULL (
@@ -780,12 +778,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_INT_NULL_MESSAGE @
 
 /**
- * Asserts if the given int is not null.
+ * Asserts if the given integer value is not null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is not null.
+ *   Integer value to check for non-null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_INT_NOT_NULL (
@@ -825,15 +823,14 @@ ALTER MODULE DB2UNIT ADD
 -- DECIMAL
 
 /**
- * Asserts if the given two decimals are the same, in null-ability and in
- * content.
+ * Asserts if the given two decimal values are equal in nullability and value.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN EXPECTED
- *   Expected decimal.
+ *   Expected decimal value.
  * IN ACTUAL
- *   Actual decimal.
+ *   Actual decimal value.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_DEC_EQUALS (
@@ -896,12 +893,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_DEC_EQUALS_MESSAGE @
 
 /**
- * Asserts if the given value is null.
+ * Asserts if the given decimal value is null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is null.
+ *   Decimal value to check for null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_DEC_NULL (
@@ -939,12 +936,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_DEC_NULL_MESSAGE @
 
 /**
- * Asserts if the given decimal is not null.
+ * Asserts if the given decimal value is not null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is not null.
+ *   Decimal value to check for non-null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_DEC_NOT_NULL (
@@ -984,18 +981,18 @@ ALTER MODULE DB2UNIT ADD
 -- TABLES
 
 /**
- * Checks the content difference between two tables.
+ * Checks if two tables have different content.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN EXPECTED_SCHEMA
- *   Schema of the table as model.
+ *   Schema of the expected table.
  * IN EXPECTED_TABLE_NAME
- *   Name of the table to analyze.
+ *   Name of the expected table.
  * IN ACTUAL_SCHEMA
- *   Schema of the resulting table.
+ *   Schema of the actual table.
  * IN ACTUAL_TABLE_NAME
- *   Name of the resulting table.
+ *   Name of the actual table.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE CHECK_TABLE_CONTENT (
@@ -1060,18 +1057,18 @@ ALTER MODULE DB2UNIT ADD
  END P_CHECK_TABLE_CONTENT @
 
 /**
- * Asserts if the given two tables are equal in structure and content.
+ * Asserts if two tables are equal in structure and content.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN EXPECTED_SCHEMA
- *   Schema of the table as model.
+ *   Schema of the expected table.
  * IN EXPECTED_TABLE_NAME
- *   Name of the table to analyse.
+ *   Name of the expected table.
  * IN ACTUAL_SCHEMA
- *   Schema of the resulting table.
+ *   Schema of the actual table.
  * IN ACTUAL_TABLE_NAME
- *   Name of the resulting table.
+ *   Name of the actual table.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TABLE_EQUALS (
@@ -1152,13 +1149,13 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_TABLE_EQUALS_MESSAGE @
 
 /**
- * Checks if the table is empty. Returns TRUE if the table is empty, false
- * otherwise.
+ * Checks if a table is empty.
+ * Returns TRUE if empty, FALSE otherwise.
  *
  * IN SCHEMA
  *   Schema of the table.
  * IN TABLE_NAME
- *   Name of the table to analyse.
+ *   Name of the table to check.
  */
 ALTER MODULE DB2UNIT ADD
   FUNCTION CHECK_TABLE_EMPTYNESS (
@@ -1204,15 +1201,14 @@ ALTER MODULE DB2UNIT ADD
  END F_CHECK_TABLE_EMPTYNESS @
 
 /**
- * Asserts that the given name corresponds to an empty table with a related
- * test message.
+ * Asserts if the given table is empty.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN SCHEMA
  *   Schema of the table.
  * IN TABLE_NAME
- *   Name of the table to analyse.
+ *   Name of the table to check.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TABLE_EMPTY (
@@ -1262,15 +1258,14 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_TABLE_EMPTY_MESSAGE @
 
 /**
- * Asserts that the given name corresponds to a non empty table with a related
- * test message.
+ * Asserts if the given table is not empty.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN SCHEMA
  *   Schema of the table.
  * IN TABLE_NAME
- *   Name of the table to analyse.
+ *   Name of the table to check.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TABLE_NON_EMPTY (
@@ -1322,15 +1317,14 @@ ALTER MODULE DB2UNIT ADD
 -- DATETIMES (TIMESTAMP)
 
 /**
- * Asserts if the given two timestamps are the same, in null-ability and in
- * content.
+ * Asserts if two timestamps are equal in nullability and value.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN EXPECTED
- *   Expected timestamp.
+ *   Expected timestamp value.
  * IN ACTUAL
- *   Actual timestamp.
+ *   Actual timestamp value.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TIMESTAMP_EQUALS (
@@ -1394,12 +1388,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_TIMESTAMP_EQUALS_MESSAGE @
 
 /**
- * Asserts if the given timestamp is null.
+ * Asserts if the given timestamp value is null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is null.
+ *   Timestamp value to check for null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TIMESTAMP_NULL (
@@ -1437,12 +1431,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_TIMESTAMP_NULL_MESSAGE @
 
 /**
- * Asserts if the given timestamp is not null.
+ * Asserts if the given timestamp value is not null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is not null.
+ *   Timestamp value to check for non-null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TIMESTAMP_NOT_NULL (
@@ -1482,14 +1476,14 @@ ALTER MODULE DB2UNIT ADD
 -- DATETIMES (DATE)
 
 /**
- * Asserts if the given two dates are the same, in null-ability and in content.
+ * Asserts if two dates are equal in nullability and value.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN EXPECTED
- *   Expected date.
+ *   Expected date value.
  * IN ACTUAL
- *   Actual date.
+ *   Actual date value.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_DATE_EQUALS (
@@ -1553,12 +1547,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_DATE_EQUALS_MESSAGE @
 
 /**
- * Asserts if the given date is null.
+ * Asserts if the given date value is null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is null.
+ *   Date value to check for null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_DATE_NULL (
@@ -1596,12 +1590,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_DATE_NULL_MESSAGE @
 
 /**
- * Asserts if the given date is not null.
+ * Asserts if the given date value is not null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is not null.
+ *   Date value to check for non-null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_DATE_NOT_NULL (
@@ -1641,14 +1635,14 @@ ALTER MODULE DB2UNIT ADD
 -- DATETIMES (TIME)
 
 /**
- * Asserts if the given two times are the same, in null-ability and in content.
+ * Asserts if two times are equal in nullability and value.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN EXPECTED
- *   Expected time.
+ *   Expected time value.
  * IN ACTUAL
- *   Actual time.
+ *   Actual time value.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TIME_EQUALS (
@@ -1712,12 +1706,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_TIME_EQUALS_MESSAGE @
 
 /**
- * Asserts if the given time is null.
+ * Asserts if the given time value is null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is null.
+ *   Time value to check for null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TIME_NULL (
@@ -1755,12 +1749,12 @@ ALTER MODULE DB2UNIT ADD
  END P_ASSERT_TIME_NULL_MESSAGE @
 
 /**
- * Asserts if the given time is not null.
+ * Asserts if the given time value is not null.
  *
  * IN MESSAGE
- *   Related message to the test.
+ *   Message related to the test.
  * IN VALUE
- *   Value to check if it is not null.
+ *   Time value to check for non-null.
  */
 ALTER MODULE DB2UNIT ADD
   PROCEDURE ASSERT_TIME_NOT_NULL (

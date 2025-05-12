@@ -2,8 +2,8 @@ db2unit
 =======
 
 db2unit is a testing framework for IBM DB2 written in SQL-PL language. It is
-xUnit framework, that takes the same design as the well-known jUnit. db2unit could
-be considered as a jUnit porting for DB2 SQL-PL.
+an xUnit framework that takes the same design as the well-known jUnit. db2unit can
+be considered as a jUnit port for DB2 SQL-PL.
 
  * jUnit
     http://junit.org
@@ -34,15 +34,15 @@ Andres Gomez Casanova (@AngocA)
 ------------------
 ## Installation from released file ##
 
-One variable needs to the specified in order to run the install and example
+One variable needs to be specified in order to run the install and example
 scripts.
 
     DB2UNIT_PATH
 
 This variable is initialized via the `init` script.
 
-Before installing the scripts in a database, a connection to it has to be
-established. If not, an error will be raised.
+Before installing the scripts in a database, you must establish a connection to it.
+If not, an error will be raised.
 
 **Linux/UNIX/MAC OS**:
 
@@ -88,10 +88,10 @@ https://github.com/angoca/db2unit/wiki/Install%20from%20sources
 ### 1. Write the test suite ###
 
 Let's suppose you work on a schema called `MY_SCHM`. From now on, the schema
-name will refer to the name of the test suite. It means, your test suite is
+name will refer to the name of the test suite. This means your test suite is
 also called `MY_SCHM`.
 
-Your tests suite could have the following fixtures that helps to prepare the
+Your test suite can have the following fixtures that help prepare the
 environment:
 
     -- Test fixtures
@@ -116,8 +116,8 @@ environment:
      END @
 
 You create your tests in the same schema as your fixtures. All of these stored
-procedures will be your tests suite. The name of our tests should starts by TEST_
-and they should not have any argument, like this:
+procedures will be your test suite. The names of your tests should start with TEST_
+and they should not have any arguments, like this:
 
     CREATE OR REPLACE PROCEDURE TEST_my_first_test()
      BEGIN
@@ -158,8 +158,8 @@ These are the files included in the released version:
  * `uninstall*` -- Uninstallation files.
  * `doc` directory -- Documentation directory.
  * `examples` directory -- Examples ready to run.
- * `sql-pl` directory -- Directory for all objects: DDL, DML, routines
-     definition.
+ * `sql-pl` directory -- Directory for all objects: DDL, DML, and routine
+     definitions.
    * `00-Prereqs.sql` -- Tests the prerequisites to install the framework.
    * `01-ObjectsAdmin.sql` -- Administrative objects like tablespaces,
        bufferpools and schemas to install the framework.
@@ -167,9 +167,9 @@ These are the files included in the released version:
    * `03-Headers.sql` -- Definition of all public routines.
    * `04-Body.sql` -- Core of the unit framework.
    * `05-Asserts.sql` -- Set of assert procedures to perform tests.
-   * `06-AssertNoMessage.sql` -- Set of assert procedures to perform tests,
-   * `07-Version.sql` -- Version of the framework.
+   * `06-AssertNoMessage.sql` -- Set of assert procedures to perform tests
        without passing messages to the test.
+   * `07-Version.sql` -- Version of the framework.
    * `98-Clean.sql` -- Removes all db2unit objects. Used when uninstalling.
    * `99-CleanAdmin.sql` -- Removes admin objects. Used when uninstalling.
 
