@@ -23,7 +23,8 @@
 SET CURRENT SCHEMA DB2UNIT_1;
 
 /**
- * Creates the objects that require high privileges.
+ * Creates the objects that require high privileges. These objects are
+ * required to run the tests when using max values.
  *
  * Version: 2014-04-30 1
  * Author: Andres Gomez Casanova (AngocA)
